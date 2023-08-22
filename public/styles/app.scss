@@ -29,11 +29,25 @@ body {
 }
  
 /************** Header **************/
-// header {
+header {
+    padding: 15px;
+    .fig-logo {
+        width: 56px;
+        height: 56px;
+        border-radius: 7px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        .logo {
+            width: 70px;
+            height: 70px;
+        }
+    }
 //    nav{
       
 //    }
-// }
+}
  
 /************** Wrapper **************/
 // .wrapper {
