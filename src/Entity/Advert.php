@@ -21,20 +21,12 @@ class Advert
     #[ORM\Column(length: 500)]
     private ?string $description = null;
 
-    #[ORM\Column(length: 50)]
-    private ?string $lodgingType = null;
 
     #[ORM\Column]
     private ?float $price = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $other = null;
-
-    #[ORM\Column(length: 50, nullable: true)]
-    private ?string $keyMethod = null;
-
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $keyMethodInstruction = null;
 
     #[ORM\Column(length: 10)]
     private ?string $cp = null;
@@ -64,6 +56,11 @@ class Advert
     #[ORM\ManyToOne(inversedBy: 'adverts')]
     private ?Category $category = null;
 
+    #[ORM\ManyToOne(inversedBy: 'advert')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Lodge $lodge = null;
+
+    
     public function __construct()
     {
         $this->reservations = new ArrayCollection();
@@ -100,18 +97,6 @@ class Advert
         return $this;
     }
 
-    public function getLodgingType(): ?string
-    {
-        return $this->lodgingType;
-    }
-
-    public function setLodgingType(string $lodgingType): static
-    {
-        $this->lodgingType = $lodgingType;
-
-        return $this;
-    }
-
     public function getPrice(): ?float
     {
         return $this->price;
@@ -132,30 +117,6 @@ class Advert
     public function setOther(?string $other): static
     {
         $this->other = $other;
-
-        return $this;
-    }
-
-    public function getKeyMethod(): ?string
-    {
-        return $this->keyMethod;
-    }
-
-    public function setKeyMethod(?string $keyMethod): static
-    {
-        $this->keyMethod = $keyMethod;
-
-        return $this;
-    }
-
-    public function getKeyMethodInstruction(): ?string
-    {
-        return $this->keyMethodInstruction;
-    }
-
-    public function setKeyMethodInstruction(?string $keyMethodInstruction): static
-    {
-        $this->keyMethodInstruction = $keyMethodInstruction;
 
         return $this;
     }
@@ -319,6 +280,18 @@ class Advert
     public function setCategory(?Category $category): static
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    public function getLodge(): ?Lodge
+    {
+        return $this->lodge;
+    }
+
+    public function setLodge(?Lodge $lodge): static
+    {
+        $this->lodge = $lodge;
 
         return $this;
     }

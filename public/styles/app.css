@@ -27,6 +27,9 @@ body {
 /************** Header **************/
 header {
   padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 header .fig-logo {
   width: 56px;
