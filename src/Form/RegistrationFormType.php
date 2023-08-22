@@ -28,7 +28,7 @@ class RegistrationFormType extends AbstractType
                     'class' => 'form-control'
                 ]
             ])
-            ->add('pseudo', TextType::class, [
+            ->add('username', TextType::class, [
                 'attr' => [
                     'class' => 'form-control'
                 ]

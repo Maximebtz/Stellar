@@ -15,10 +15,21 @@
             <figure class="fig-logo">
                 <img class="logo" src="{{asset('img/logo.png')}}" alt="Stellar" >
             </figure>
+            {% if app.user %}
             <div class="log">
-                <a href="{{ path('app_login') }}"><button class="login">Log In</button></a>
-                <a href="{{ path('app_register') }}"><button class="Signup">Sign Up</button></a>
+                <a href="{{ path('app_logout')}}">Se déconnecter</a>
+                <figure class="profil-picture ">
+                    {# <a href="{{path('app_profil', {'id': app.user.id})}}"> #}
+                        <img class="profil-picture" src="{{asset('img/anonymous.png')}}" alt="">
+                    {# </a> #}
+                </figure>
             </div>
+            {% else %}
+                <div class="log">
+                    <a href="{{ path('app_register') }}"><button class="btn btn-secondary" type="button">SignUp</button></a>
+                    <a href="{{ path('app_login') }}"><button class="btn btn-success" type="button">LogIn</button></a>
+                </div>
+            {% endif %}
         </header>
         <main>
             
