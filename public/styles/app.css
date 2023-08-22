@@ -26,23 +26,28 @@ body {
 
 /************** Header **************/
 header {
-  padding: 15px;
+  padding: 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 header .fig-logo {
-  width: 56px;
-  height: 56px;
+  width: 70px;
+  height: 70px;
   border-radius: 7px;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
 }
 header .fig-logo .logo {
   width: 70px;
   height: 70px;
+}
+header .title {
+  font-family: "Anton", sans-serif;
+  background: -webkit-linear-gradient(110deg, var(--dark-purple) 30%, var(--light-purple) 70%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 /************** Wrapper **************/
