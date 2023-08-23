@@ -11,12 +11,7 @@ class AdvertType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            // Ajout d'un champ 'type' de type TextType (champ texte)
-            ->add('type', TextType::class, [
-                'attr' => [
-                    'class' => 'form-control'
-                ]
-            ])
+            ->add('
             // Ajout d'un bouton de soumission avec le label 'Valider'
             ->add('Valider', SubmitType::class, [
                 'attr' => [

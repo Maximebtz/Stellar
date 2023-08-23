@@ -3,7 +3,7 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
-<div class="wrapper">
+<div class="wrapper-form">
     <div class="">
         {% for flash_error in app.flashes('verify_email_error') %}
             <div class="" role="alert">{{ flash_error }}</div>
@@ -20,7 +20,7 @@
             }) }}
             {{ form_row(registrationForm.agreeTerms) }}
 
-            <button type="submit" class="">Register</button>
+            <button type="submit" class="sub-btn">Register</button>
         {{ form_end(registrationForm) }}
     </div>
 </div>

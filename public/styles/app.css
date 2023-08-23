@@ -24,6 +24,7 @@ body {
   font-family: "Poppins", sans-serif;
   min-height: 100vh;
   background: var(--lightgray);
+  color: var(--black);
 }
 
 /************** Background **************/
@@ -110,9 +111,10 @@ header .log-btn {
   font-size: medium;
   font-weight: 500;
   font-family: poppins, sans-serif;
+  color: var(--dark-purple);
 }
 header .up {
-  background-color: var(--black);
+  background-color: var(--dark-purple);
   color: var(--white);
 }
 
@@ -121,7 +123,16 @@ header .up {
   display: flex;
   padding: 50px;
   width: 100%;
-  min-height: calc(100vh - wrapper);
+  min-height: calc(100vh - 120px);
+}
+
+.wrapper-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: calc(100vh - 120px);
 }
 
 /************** Content **************/
@@ -178,7 +189,11 @@ header .up {
 
 form {
   width: 400px;
-  padding: 20px;
+  padding: 50px 20px;
+  background-color: var(--darkgray);
+  border-radius: 10px;
+  box-shadow: var(--boxshadow) 0 0 40px;
+  color: ghostwhite;
 }
 form .input {
   height: 36px;
@@ -188,6 +203,18 @@ form .input {
   border: none;
   width: 100%;
   padding: 0 10px;
+  margin-bottom: 15px;
+}
+form .sub-btn {
+  width: 100px;
+  height: 42px;
+  border-radius: 10px;
+  border: none;
+  font-size: medium;
+  font-weight: 500;
+  font-family: poppins, sans-serif;
+  color: var(--dark-purple);
+  margin-top: 20px;
 }
 form #registration_form_agreeTerms {
   margin-left: 10px;

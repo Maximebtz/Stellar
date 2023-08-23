@@ -3,7 +3,7 @@
 {% block title %}Log in!{% endblock %}
 
 {% block body %}
-    <div class="wrapper">
+    <div class="wrapper-form">
         <div class="">
             <form method="post">
                 {% if error %}
@@ -26,7 +26,7 @@
                     value="{{ csrf_token('authenticate') }}"
                 >
 
-                <button class="" type="submit">
+                <button class="sub-btn" type="submit">
                     Sign in
                 </button>
             </form>

@@ -11,7 +11,18 @@ class CategoryType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('field_name')
+            // Ajout d'un champ 'type' de type TextType (champ texte)
+            ->add('type', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control'
+                ]
+            ])
+            // Ajout d'un bouton de soumission avec le label 'Valider'
+            ->add('Valider', SubmitType::class, [
+                'attr' => [
+                    'class' => 'btn btn-danger'
+                ]
+            ])
         ;
     }
 
