@@ -97,7 +97,7 @@ header {
         }
         #profil-menu {
             display: none;
-            width: max-content;
+            width: 205px;
             position: absolute;
             background-color: var(--white);
             border-radius: 10px;
@@ -106,6 +106,11 @@ header {
             bottom: -145px;
             right: 0;
             z-index: 2;
+            transition: all 5s ease-in-out;
+            hr {
+                margin: 5px 0;
+                border: 1px lightgray solid;
+            }
             a{
                 color: var(--black);
                 text-decoration: none;
@@ -113,10 +118,10 @@ header {
             li {
                 list-style: none;
                 padding: 2px 5px;
+                &:hover{
+                    font-weight: 500;
+                }
             }
-        }
-        #profil-menu.active {
-            opacity: 1; /* Opacité maximale pour le fondu d'arrivée */
         }
     }
     .log-btn{
