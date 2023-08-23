@@ -18,6 +18,7 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 
+
 class RegistrationFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -25,12 +26,12 @@ class RegistrationFormType extends AbstractType
         $builder
             ->add('email', EmailType::class, [
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'input'
                 ]
             ])
             ->add('username', TextType::class, [
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'input'
                 ]
             ])
             ->add('agreeTerms', CheckboxType::class, [
@@ -43,11 +44,11 @@ class RegistrationFormType extends AbstractType
             ])
             ->add('plainPassword', RepeatedType::class, [
                 'attr' => [
-                    'class' => 'form-control' // Appliquer la classe "form-control" au champ principal
+                    'class' => 'input' 
                 ],
                 'type' => PasswordType::class,
                 'invalid_message' => 'The password fields must match.',
-                'options' => ['attr' => ['class' => 'form-control']],
+                'options' => ['attr' => ['class' => 'input']],
                 'required' => true,
                 'first_options'  => ['label' => 'Password'],
                 'second_options' => ['label' => 'Repeat Password'],
