@@ -2,9 +2,13 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\Advert;
+use App\Form\AdvertType;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AdvertController extends AbstractController
 {
@@ -13,6 +17,43 @@ class AdvertController extends AbstractController
     {
         return $this->render('advert/index.html.twig', [
             'controller_name' => 'AdvertController',
+        ]);
+    }
+
+    // Méthode pour créer une nouvelle advert
+    #[Route('/user/advert/add/new', name: 'new_advert')] // Définition de la route et du nom de la route
+    #[Route('/user/advert/{id}/edit', name: 'edit_advert')] // Définition de la route et du nom de la route
+    public function new_edit(Advert $advert = null, Request $request, EntityManagerInterface $entityManager): Response
+    {
+
+        if(!$advert) {
+            // Création d'une nouvelle instance de l'entité Advert
+            $advert = new Advert();
+        }
+
+        // Création d'un formulaire basé sur AdvertType et associé à l'entité Advert
+        $form = $this->createForm(AdvertType::class, $advert);
+
+        // Traite la requête HTTP entrante avec le formulaire
+        $form->handleRequest($request);
+
+        // Vérifie si le formulaire a été soumis et si les données sont valides
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Récupère les données du formulaire
+            $advert = $form->getData();
+
+            // Persiste les données dans la base de données via l'entityManager
+            $entityManager->persist($advert);
+            $entityManager->flush();
+
+            // Redirige vers une autre page (remplacez 'app_advert' par la route de destination souhaitée)
+            return $this->redirectToRoute('app_home');
+        }
+
+        // Rendu du template 'advert/new.html.twig' en passant le formulaire à afficher
+        return $this->render('advert/new.html.twig', [
+            'formAddAdvert' => $form->createView(),
+            'edit' => $advert->getId()
         ]);
     }
 }

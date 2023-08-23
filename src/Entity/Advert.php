@@ -21,7 +21,6 @@ class Advert
     #[ORM\Column(length: 500)]
     private ?string $description = null;
 
-
     #[ORM\Column]
     private ?float $price = null;
 
