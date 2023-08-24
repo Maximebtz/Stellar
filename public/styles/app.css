@@ -143,6 +143,10 @@ header .log-btn {
   font-weight: 500;
   font-family: poppins, sans-serif;
   color: var(--dark-purple);
+  cursor: pointer;
+}
+header .log-btn:hover {
+  transform: scale(1.02);
 }
 header .up {
   background-color: var(--dark-purple);

@@ -182,6 +182,10 @@ header {
         font-weight: 500;
         font-family: poppins, sans-serif;
         color: var(--dark-purple);
+        cursor: pointer;
+        &:hover {
+            transform: scale(1.02);
+        }
     }
     .up{
         background-color: var(--dark-purple);
