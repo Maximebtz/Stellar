@@ -27,26 +27,26 @@
                         </a>
                     {% endif %} #}
                     {# {{ path('show_formation_by_advert', {'id': advert.id}) }} #}
-                        <a href="{{ path('detail_advert', {'id': advert.id})}}" class="clickable-card">
-                            <div class="advert-card">
-                                <figure>
-                                    <img src="{{asset('img/maxime2854_real_life_4k_purple_and_blue_sky_with_stars_with_a_b_41a00f6c-41a9-4aaf-8acb-51f94bc47b7f.png')}}" alt="{{ advert.title }} image">
-                                </figure>
-                                <div class="card-content">
-                                    <h3 class="card-title">{{ advert.title}}</h3>
-                                    <p class="card-text">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
-                                            <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
-                                        </svg>
-                                        {{ advert.city }}, 
-                                        {{advert.country}}
-                                    </p>
-                                    <p class="card-text">
-                                        <span class="price-card">{{ advert.price }}€</span>/nuit   
-                                    </p>
-                                </div>
-                            </div>
-                        </a>
+                <div class="advert-card">
+                    <a href="{{ path('detail_advert', {'id': advert.id})}}" class="clickable-card">
+                        <figure>
+                            <img src="{{asset('img/maxime2854_real_life_4k_purple_and_blue_sky_with_stars_with_a_b_41a00f6c-41a9-4aaf-8acb-51f94bc47b7f.png')}}" alt="{{ advert.title }} image">
+                        </figure>
+                        <div class="card-content">
+                            <h3 class="card-title">{{ advert.title}}</h3>
+                            <p class="card-text">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                                    <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+                                </svg>
+                                {{ advert.city }}, 
+                                {{advert.country}}
+                            </p>
+                            <p class="card-text">
+                                <span class="price-card">{{ advert.price }}€</span>/nuit   
+                            </p>
+                        </div>
+                    </a>
+                </div>
             {% endfor %}
         </div>
     </div>

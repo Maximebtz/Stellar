@@ -242,43 +242,54 @@ header {
     grid-gap: 20px;
     grid-auto-rows: max-content;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-}
-.advert-card-list {
-    // display: flex;
-    gap: 20px;
     .clickable-card {
         text-decoration: none;
         color: var(--black);
-        .advert-card {
-            overflow: hidden;
-            background: ghostwhite;
-            border-radius: 10px;
-            position: relative;
+    }
+    .advert-card {
+        overflow: hidden;
+        background: ghostwhite;
+        border-radius: 10px;
+        position: relative;
+        width: 100%;
+        max-width: 350px;
+        height: max-content;
+        box-shadow: var(--boxshadow) 0 0 30px;
+        img{
             width: 100%;
-            height: max-content;
-            box-shadow: var(--boxshadow) 0 0 30px;
-            img{
-                width: 100%;
-            }
-            .card-content {
-                padding: 15px 20px 20px;
-                width: 100%;
-            }
-            h3{
-                text-overflow: ellipsis;
-                white-space : nowrap;
-                overflow : hidden;
-            }
-            .card-text {
-                color: var(--darkgray);
-                text-overflow: ellipsis;
-                width: 100%;
-                white-space : nowrap;
-                overflow : hidden;
-            }
-            .price-card {
-                font-weight: 700;
-                font-size: larger;
+        }
+        .card-content {
+            padding: 15px 20px 20px;
+            width: 100%;
+        }
+        h3{
+            text-overflow: ellipsis;
+            white-space : nowrap;
+            overflow : hidden;
+        }
+        .card-text {
+            color: var(--darkgray);
+            text-overflow: ellipsis;
+            width: 100%;
+            white-space : nowrap;
+            overflow : hidden;
+        }
+        .price-card {
+            font-weight: 700;
+            font-size: larger;
+            color: var(--black);
+        }
+        .modif-icons {
+            display: flex;
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            padding: 5px;
+            border-radius: 5px;
+            background: var(--white);
+            z-index: 3;
+            line-height: 0;
+            .modif{
                 color: var(--black);
             }
         }

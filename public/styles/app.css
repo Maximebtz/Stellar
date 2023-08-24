@@ -215,8 +215,8 @@ header .up {
   overflow: hidden;
   background: ghostwhite;
   border-radius: 10px;
-  position: relative;
   width: 100%;
+  max-width: 350px;
   height: -moz-max-content;
   height: max-content;
   box-shadow: var(--boxshadow) 0 0 30px;
@@ -244,6 +244,16 @@ header .up {
   font-weight: 700;
   font-size: larger;
   color: var(--black);
+}
+.advert-card-list .clickable-card .advert-card .modif-icons {
+  display: flex;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  padding: 5px;
+  border-radius: 5px;
+  background: var(--white);
+  z-index: 3;
 }
 
 form {
