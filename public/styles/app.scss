@@ -3,6 +3,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
 
 
+/************** Var **************/
 :root {
     --light-purple: #A682FF;
     --dark-purple: #715AFF;
@@ -13,10 +14,47 @@
     --black: #100F0F;
     --lightgray: lightgray;
     --darkgray: grey;
-    --boxshadow: #100f0f15;
+    --boxshadow: #100f0f2e;
 }
 
 
+/************** Warning & infos **************/
+pre {
+    font-size: larger;
+    font-weight: 500;
+}
+
+.warning {
+    color: red;
+    -webkit-animation: blink-1 5s linear infinite both;
+	        animation: blink-1 5s linear infinite both;
+}
+
+@-webkit-keyframes blink-1 {
+    0%,
+    50%,
+    100% {
+      opacity: 1;
+    }
+    25%,
+    75% {
+      opacity: 0;
+    }
+  }
+  @keyframes blink-1 {
+    0%,
+    50%,
+    100% {
+      opacity: 1;
+    }
+    25%,
+    75% {
+      opacity: 0;
+    }
+  }
+
+  
+/************** All **************/
 * {
     padding: 0;
     margin: 0;
@@ -63,24 +101,30 @@ header {
         justify-content: space-between;
         align-items: end;
         width: 140px;
-        .title {
-            font-family: 'Anton', sans-serif;
+        a {
             color: var(--white);
-            text-align: center;
-            line-height: 25px;
-            letter-spacing: 1px;
-            font-size: x-large;
-        }
-        .fig-logo {
+            text-decoration: none;
             display: flex;
-            align-items: center;
-            flex-direction: column;
-            .icon-logo {
-                width: 45px;
-                height: 45px;
+            align-items: baseline;
+            .title {
+                font-family: 'Anton', sans-serif;
+                color: var(--white);
+                text-align: center;
+                line-height: 25px;
+                letter-spacing: 1px;
+                font-size: xx-large;
+                padding-left: 10px;
+            }
+            .fig-logo {
+                display: flex;
+                align-items: center;
+                flex-direction: column;
+                .icon-logo {
+                    width: 45px;
+                    height: 45px;
+                }
             }
         }
-
     }
     .log {
         display: flex;
@@ -119,8 +163,12 @@ header {
             li {
                 list-style: none;
                 padding: 2px 5px;
+                transition: all .2s ease-in-out;
                 &:hover{
+                    transform: scale(1.01);
                     font-weight: 500;
+                    background-color: var(--lightgray);
+                    border-radius: 5px;
                 }
             }
         }
@@ -157,6 +205,7 @@ header {
     width: 100%;
     min-height: calc(100vh - 120px);
 }
+
 /************** Content **************/
 #grid {
     height: 100%;
@@ -165,7 +214,7 @@ header {
     grid-gap: 20px;
     grid-auto-rows: max-content;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  }
+}
 .advert-card-list {
     // display: flex;
     gap: 20px;
@@ -209,7 +258,7 @@ header {
 }
 
 form {
-    width: 400px;
+    width: 500px;
     padding: 50px 20px;
     background-color: var(--darkgray);
     border-radius: 10px;
@@ -217,12 +266,20 @@ form {
     color: ghostwhite;
     .input {
         height: 36px;
-        width: 250px;
         border-radius: 10px;
         outline: none;
         border: none;
         width: 100%;
         padding: 0 10px;
+        margin-bottom: 15px;
+        box-shadow: var(--boxshadow) 0 0 40px;
+    }
+    .textarea-description {
+        width: 100%;
+        border-radius: 10px;
+        outline: none;
+        border: none;
+        padding: 20px;
         margin-bottom: 15px;
     }
     .sub-btn{
@@ -240,6 +297,10 @@ form {
         margin-left: 10px;
         width: 15px;
         height: 15px;
+    }
+    .dbl-input {
+        display: flex;
+        gap: 10px;
     }
 }
 

@@ -13,10 +13,12 @@
     <body>
         <header>
             <div class="logo">
-                <figure class="fig-logo">
-                    <img class="icon-logo" src="{{asset('img/logo.png')}}" alt="Stellar" >
-                </figure>
-                <h1 class="title">STELLAR.</h1>
+                <a href="{{ path('app_home')}}">
+                    <figure class="fig-logo">
+                        <img class="icon-logo" src="{{asset('img/logo.png')}}" alt="Stellar" >
+                    </figure>
+                    <h1 class="title">STELLAR.</h1>
+                </a>
             </div>
             {% if app.user %}
                 <div class="log">
@@ -40,8 +42,8 @@
                     <a href="{{ path('app_register') }}"><button class="log-btn up" type="button">SignUp</button></a>
                     <a href="{{ path('app_login') }}"><button class="log-btn in" type="button">LogIn</button></a>
                 </div>
-            {% endif %}
-        </header>
+                {% endif %}
+            </header>
         <main>
             
         </main>

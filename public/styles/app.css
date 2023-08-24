@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Anton&display=swap");
+/************** Var **************/
 :root {
   --light-purple: #A682FF;
   --dark-purple: #715AFF;
@@ -10,9 +11,28 @@
   --black: #100F0F;
   --lightgray: lightgray;
   --darkgray: grey;
-  --boxshadow: #100f0f15;
+  --boxshadow: #100f0f2e;
 }
 
+/************** Warning & infos **************/
+pre {
+  font-size: larger;
+  font-weight: 500;
+}
+
+.warning {
+  color: red;
+  animation: blink-1 5s linear infinite both;
+}
+@keyframes blink-1 {
+  0%, 50%, 100% {
+    opacity: 1;
+  }
+  25%, 75% {
+    opacity: 0;
+  }
+}
+/************** All **************/
 * {
   padding: 0;
   margin: 0;
@@ -42,20 +62,27 @@ header .logo {
   align-items: end;
   width: 140px;
 }
-header .logo .title {
+header .logo a {
+  color: var(--white);
+  text-decoration: none;
+  display: flex;
+  align-items: baseline;
+}
+header .logo a .title {
   font-family: "Anton", sans-serif;
   color: var(--white);
   text-align: center;
   line-height: 25px;
   letter-spacing: 1px;
-  font-size: x-large;
+  font-size: xx-large;
+  padding-left: 10px;
 }
-header .logo .fig-logo {
+header .logo a .fig-logo {
   display: flex;
   align-items: center;
   flex-direction: column;
 }
-header .logo .fig-logo .icon-logo {
+header .logo a .fig-logo .icon-logo {
   width: 45px;
   height: 45px;
 }
@@ -99,9 +126,13 @@ header .log #profil-menu a {
 header .log #profil-menu li {
   list-style: none;
   padding: 2px 5px;
+  transition: all 0.2s ease-in-out;
 }
 header .log #profil-menu li:hover {
+  transform: scale(1.01);
   font-weight: 500;
+  background-color: var(--lightgray);
+  border-radius: 5px;
 }
 header .log-btn {
   width: 100px;
@@ -188,7 +219,7 @@ header .up {
 }
 
 form {
-  width: 400px;
+  width: 500px;
   padding: 50px 20px;
   background-color: var(--darkgray);
   border-radius: 10px;
@@ -197,12 +228,20 @@ form {
 }
 form .input {
   height: 36px;
-  width: 250px;
   border-radius: 10px;
   outline: none;
   border: none;
   width: 100%;
   padding: 0 10px;
+  margin-bottom: 15px;
+  box-shadow: var(--boxshadow) 0 0 40px;
+}
+form .textarea-description {
+  width: 100%;
+  border-radius: 10px;
+  outline: none;
+  border: none;
+  padding: 20px;
   margin-bottom: 15px;
 }
 form .sub-btn {
@@ -220,6 +259,10 @@ form #registration_form_agreeTerms {
   margin-left: 10px;
   width: 15px;
   height: 15px;
+}
+form .dbl-input {
+  display: flex;
+  gap: 10px;
 }
 
 /************** Footer *************//*# sourceMappingURL=app.css.map */

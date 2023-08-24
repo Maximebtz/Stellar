@@ -3,8 +3,6 @@
 namespace App\Form;
 
 use App\Entity\Advert;
-use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -14,36 +12,31 @@ use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
+
 class AdvertType extends AbstractType
 {
-
-    private $security;
-
-    public function __construct(Security $security)
-    {
-        $this->security = $security;
-    }
-
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('title', TextType::class, [
-                'label' => 'Title',
+                'label' => 'Titre*',
                 'required' => true,
                 'attr' => [
                     'class' => 'input'
                 ]
             ])
-            ->add('description', TextareaType::class, [
-                'label' => 'Description',
+            ->add('lodge', EntityType::class, [
+                'class' => 'App\Entity\Lodge',
+                'choice_label' => 'type',
+                'label' => 'Type*',
                 'required' => true,
                 'attr' => [
                     'class' => 'input'
                 ]
             ])
             ->add('price', NumberType::class, [
-                'label' => 'Price',
+                'label' => 'Prix*',
                 'required' => true,
                 'scale' => 2,
                 'attr' => [
@@ -53,59 +46,56 @@ class AdvertType extends AbstractType
             ->add('category', EntityType::class, [
                 'class' => 'App\Entity\Category',
                 'choice_label' => 'name',
-                'label' => 'Category',
+                'label' => 'Catégorie',
                 'required' => false,
                 'multiple' => false,
                 'expanded' => false,
                 'attr' => [
-                    'class' => 'input'
-                ]
-            ])
-            ->add('other', TextareaType::class, [
-                'label' => 'Other',
-                'required' => false,
-                'attr' => [
-                    'class' => 'input'
+                    'class' => 'input sm'
                 ]
             ])
             ->add('cp', TextType::class, [
-                'label' => 'Code Postale',
+                'label' => 'Code Postale*',
                 'required' => true,
                 'attr' => [
-                    'class' => 'input'
+                    'class' => 'input sm'
                 ]
               ])
             ->add('address', TextType::class, [
-                'label' => 'Address',
+                'label' => 'Adresse*',
                 'required' => true,
                 'attr' => [
                     'class' => 'input'
                 ]
             ])
             ->add('city', TextType::class, [
-                'label' => 'Ville',
+                'label' => 'Ville*',
                 'required' => true,
                 'attr' => [
-                    'class' => 'input'
+                    'class' => 'input sm'
                 ]
             ])
             ->add('country', TextType::class, [
-                'label' => 'Pays',
+                'label' => 'Pays*',
                 'required' => true,
                 'attr' => [
-                    'class' => 'input'
+                    'class' => 'input sm'
                 ]
             ])
-            ->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) {
-                $data = $event->getData();
-                $user = $this->getUser(); // Obtenir l'utilisateur connecté
-
-                // Vérifier si le user est connecté
-                if ($user) {
-                    $data['user'] = $user->getId(); // Associez l'ID du user qui fait l'annonce
-                    $event->setData($data);
-                }
-            })
+            ->add('description', TextareaType::class, [
+                'label' => 'Description*',
+                'required' => true,
+                'attr' => [
+                    'class' => 'textarea-description',
+                ]
+            ])
+            ->add('other', TextareaType::class, [
+                'label' => 'Autres détails',
+                'required' => false,
+                'attr' => [
+                    'class' => 'textarea-description other'
+                ]
+            ])
             // Ajout d'un bouton de soumission avec le label 'Valider'
             ->add('Valider', SubmitType::class, [
                 'attr' => [
@@ -120,10 +110,5 @@ class AdvertType extends AbstractType
         $resolver->setDefaults([
             'data_class' => Advert::class,
         ]);
-    }
-
-    private function getUser()
-    {
-        return $this->security->getUser();
     }
 }
