@@ -14,7 +14,7 @@
     --black: #100F0F;
     --lightgray: lightgray;
     --darkgray: grey;
-    --boxshadow: #100f0f2e;
+    --boxshadow: rgba(0, 0, 0, 0.10);
 }
 
 
@@ -208,6 +208,30 @@ header {
     align-items: center;
     width: 100%;
     min-height: calc(100vh - 120px);
+}
+
+.wrapper-detail{
+    min-height: 100vh;
+    .img-advert-detail{
+        display: flex;
+        gap: 15px;
+        max-height: 700px;
+        width: auto;
+        img {
+            height: 100%;
+        }
+        .l-img { 
+            height: 100%; 
+            img {
+                max-width: 700px;
+            }
+        }
+        .sm-img {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        } 
+    }
 }
 
 /************** Content **************/

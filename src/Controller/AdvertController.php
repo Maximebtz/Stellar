@@ -13,6 +13,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AdvertController extends AbstractController
 {
+
+    private EntityManagerInterface $entityManager;
+
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
+
     #[Route('/advert', name: 'app_advert')]
     public function index(): Response
     {
@@ -57,6 +66,19 @@ class AdvertController extends AbstractController
         return $this->render('advert/new.html.twig', [
             'formAddAdvert' => $form->createView(),
             'edit' => $advert->getId() // 
+        ]);
+    }
+
+
+    #[Route('/user/advert/detail/{id}', name: 'detail_advert')]
+    #[IsGranted('ROLE_USER')]
+    public function showDetailAdvert($id): Response 
+    {
+        $repository = $this->entityManager->getRepository(Advert::class);
+        $advert = $repository->find($id);
+
+        return $this->render('advert/detail.html.twig', [
+            'advert' => $advert,
         ]);
     }
 }

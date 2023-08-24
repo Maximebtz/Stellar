@@ -11,7 +11,7 @@
   --black: #100F0F;
   --lightgray: lightgray;
   --darkgray: grey;
-  --boxshadow: #100f0f2e;
+  --boxshadow: rgba(0, 0, 0, 0.10);
 }
 
 /************** Warning & infos **************/
@@ -168,6 +168,30 @@ header .up {
   align-items: center;
   width: 100%;
   min-height: calc(100vh - 120px);
+}
+
+.wrapper-detail {
+  min-height: 100vh;
+}
+.wrapper-detail .img-advert-detail {
+  display: flex;
+  gap: 15px;
+  max-height: 700px;
+  width: auto;
+}
+.wrapper-detail .img-advert-detail img {
+  height: 100%;
+}
+.wrapper-detail .img-advert-detail .l-img {
+  height: 100%;
+}
+.wrapper-detail .img-advert-detail .l-img img {
+  max-width: 700px;
+}
+.wrapper-detail .img-advert-detail .sm-img {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
 /************** Content **************/
