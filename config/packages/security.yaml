@@ -38,8 +38,7 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
-        - { path: ^/owner/my-property, roles: ROLE_USER } # Accès aux utilisateurs pour voir leurs bien
-        - { path: ^/owner/add-property, roles: ROLE_USER } # Accès aux utilisateurs pour ajouter un bien
+        - { path: ^/owner, roles: ROLE_USER } # Accès aux utilisateurs pour voir leurs bien
         - { path: ^/profil, roles: ROLE_USER }
 
     role_hierarchy:

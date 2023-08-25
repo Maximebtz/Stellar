@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Advert;
+use App\Repository\AdvertRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -27,9 +28,17 @@ class UserController extends AbstractController
             'controller_name' => 'UserController',
         ]);
     }
+
+    #[Route('/user', name: 'app_user_advert')]
+    public function appMyAdvert(): Response
+    {
+        return $this->render('user/userAdvert.html.twig', [
+            'controller_name' => 'UserController',
+        ]);
+    }
     
 
-    #[Route('/user/myAdverts', name: 'user_adverts')]
+    #[Route('/user/my-property', name: 'user_adverts')]
     #[IsGranted('ROLE_USER')]
     public function userAdverts(): Response
     {
@@ -40,7 +49,7 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/user/myAdverts/detail', name: 'user_advert_detail')]
+    #[Route('/owner/my-property/detail', name: 'user_advert_detail')]
     #[IsGranted('ROLE_USER')]
     public function showDetailSession($id): Response 
     {
@@ -50,5 +59,15 @@ class UserController extends AbstractController
         return $this->render('user/userAdvertDetail.html.twig', [
             'advert' => $advert,
         ]);
+    }
+
+    #[Route('/owner/my-property/{id}/delete', name: 'delete_advert')] // Définition de la route avec un paramètre 'id' et du nom de la route
+    public function delete(AdvertRepository $advertRepository, EntityManagerInterface $entityManager, $id)
+    {   
+        $advert = $advertRepository->find(($id));
+        $entityManager->remove($advert);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('user_adverts');
     }
 }

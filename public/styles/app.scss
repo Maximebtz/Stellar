@@ -148,8 +148,8 @@ header {
             border-radius: 10px;
             padding: 10px;
             box-shadow: var(--boxshadow) 0 0 40px;
-            bottom: -145px;
-            right: 0;
+            top: 0px;
+            right: 110%;
             z-index: 2;
             transition: all 5s ease-in-out;
             hr {
@@ -199,6 +199,8 @@ header {
     padding: 50px;
     width: 100%;
     min-height: calc(100vh - 120px);
+    flex-direction: column;
+    align-items: center;
 }
 
 .wrapper-form {
@@ -212,25 +214,43 @@ header {
 
 .wrapper-detail{
     min-height: 100vh;
-    .img-advert-detail{
-        display: flex;
-        gap: 15px;
-        max-height: 700px;
-        width: auto;
-        img {
+    max-width: max-content;
+    width: 100%;
+    .img-advert-detail {
+        height: 100%;
+        max-height: 600px;
+        max-width: fit-content;
+        width: 100%;
+        display: grid;
+        grid-gap: 10px;
+        grid-auto-rows: max-content;
+        grid-template-columns: minmax(300px, 1fr) 300px;
+        overflow: hidden;
+        border-radius: 12px;
+        figure {
             height: 100%;
         }
-        .l-img { 
-            height: 100%; 
-            img {
-                max-width: 700px;
-            }
+        img {
+            width: 100%;
+            height: -webkit-fill-available;
+            object-fit: cover;
+        }
+        .img {
+            height: calc(100% - 7px);
+            overflow: hidden;
+        }
+        .l-img {
+            height: 600px;
         }
         .sm-img {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        } 
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 5px;
+            @media (max-width: 600px) {
+                grid-template-columns: 1fr; /* Une seule colonne */
+                grid-auto-rows: max-content; /* Ajustement automatique de la hauteur des éléments */
+            }
+        }
     }
 }
 
@@ -242,58 +262,74 @@ header {
     grid-gap: 20px;
     grid-auto-rows: max-content;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    .clickable-card {
-        text-decoration: none;
-        color: var(--black);
-    }
-    .advert-card {
-        overflow: hidden;
-        background: ghostwhite;
-        border-radius: 10px;
-        position: relative;
-        width: 100%;
-        max-width: 350px;
-        height: max-content;
-        box-shadow: var(--boxshadow) 0 0 30px;
-        img{
-            width: 100%;
-        }
-        .card-content {
-            padding: 15px 20px 20px;
-            width: 100%;
-        }
-        h3{
-            text-overflow: ellipsis;
-            white-space : nowrap;
-            overflow : hidden;
-        }
-        .card-text {
-            color: var(--darkgray);
-            text-overflow: ellipsis;
-            width: 100%;
-            white-space : nowrap;
-            overflow : hidden;
-        }
-        .price-card {
-            font-weight: 700;
-            font-size: larger;
-            color: var(--black);
-        }
-        .modif-icons {
-            display: flex;
-            position: absolute;
-            right: 10px;
-            top: 10px;
-            padding: 5px;
-            border-radius: 5px;
-            background: var(--white);
-            z-index: 3;
-            line-height: 0;
-            .modif{
-                color: var(--black);
-            }
-        }
-    }
+}
+
+.clickable-card-parent {
+    position: relative;
+    max-width: 350px;
+}
+
+.clickable-card {
+    text-decoration: none;
+    color: var(--black);
+}
+
+.advert-card {
+    overflow: hidden;
+    background: ghostwhite;
+    border-radius: 10px;
+    position: relative;
+    width: 100%;
+    max-width: 350px;
+    height: max-content;
+    box-shadow: var(--boxshadow) 0 0 30px;
+}
+
+.advert-card img {
+    width: 100%;
+}
+
+.card-content {
+    padding: 15px 20px 20px;
+    width: 100%;
+}
+
+.advert-card h3 {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.card-text {
+    color: var(--darkgray);
+    text-overflow: ellipsis;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.price-card {
+    font-weight: 700;
+    font-size: larger;
+    color: var(--black);
+}
+
+.modif-icons {
+    display: flex;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    padding: 5px;
+    border-radius: 5px;
+    background: var(--white);
+    z-index: 3;
+    line-height: 0;
+}
+
+.modif {
+    color: var(--black);
+    display: flex;
+    align-items: center;
 }
 
 form {
@@ -342,6 +378,9 @@ form {
         gap: 10px;
     }
 }
+
+/************** Detail Page *************/
+
 
 /************** Footer *************/
 // footer {

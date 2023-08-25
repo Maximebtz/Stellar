@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Anton&display=swap");
 /************** Var **************/
@@ -110,8 +111,8 @@ header .log #profil-menu {
   border-radius: 10px;
   padding: 10px;
   box-shadow: var(--boxshadow) 0 0 40px;
-  bottom: -145px;
-  right: 0;
+  top: 0px;
+  right: 110%;
   z-index: 2;
   transition: all 5s ease-in-out;
 }
@@ -159,6 +160,8 @@ header .up {
   padding: 50px;
   width: 100%;
   min-height: calc(100vh - 120px);
+  flex-direction: column;
+  align-items: center;
 }
 
 .wrapper-form {
@@ -172,26 +175,49 @@ header .up {
 
 .wrapper-detail {
   min-height: 100vh;
+  max-width: -moz-max-content;
+  max-width: max-content;
+  width: 100%;
 }
 .wrapper-detail .img-advert-detail {
-  display: flex;
-  gap: 15px;
-  max-height: 700px;
-  width: auto;
+  height: 100%;
+  max-height: 600px;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+  width: 100%;
+  display: grid;
+  grid-gap: 10px;
+  grid-auto-rows: max-content;
+  grid-template-columns: minmax(300px, 1fr) 300px;
+  overflow: hidden;
+  border-radius: 12px;
+}
+.wrapper-detail .img-advert-detail figure {
+  height: 100%;
 }
 .wrapper-detail .img-advert-detail img {
-  height: 100%;
+  width: 100%;
+  height: -webkit-fill-available;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.wrapper-detail .img-advert-detail .img {
+  height: calc(100% - 7px);
+  overflow: hidden;
 }
 .wrapper-detail .img-advert-detail .l-img {
-  height: 100%;
-}
-.wrapper-detail .img-advert-detail .l-img img {
-  max-width: 700px;
+  height: 600px;
 }
 .wrapper-detail .img-advert-detail .sm-img {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 5px;
+}
+@media (max-width: 600px) {
+  .wrapper-detail .img-advert-detail .sm-img {
+    grid-template-columns: 1fr; /* Une seule colonne */
+    grid-auto-rows: max-content; /* Ajustement automatique de la hauteur des éléments */
+  }
 }
 
 /************** Content **************/
@@ -204,48 +230,58 @@ header .up {
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 }
 
-.advert-card-list {
-  gap: 20px;
+.clickable-card-parent {
+  position: relative;
+  max-width: 350px;
 }
-.advert-card-list .clickable-card {
+
+.clickable-card {
   text-decoration: none;
   color: var(--black);
 }
-.advert-card-list .clickable-card .advert-card {
+
+.advert-card {
   overflow: hidden;
   background: ghostwhite;
   border-radius: 10px;
+  position: relative;
   width: 100%;
   max-width: 350px;
   height: -moz-max-content;
   height: max-content;
   box-shadow: var(--boxshadow) 0 0 30px;
 }
-.advert-card-list .clickable-card .advert-card img {
+
+.advert-card img {
   width: 100%;
 }
-.advert-card-list .clickable-card .advert-card .card-content {
+
+.card-content {
   padding: 15px 20px 20px;
   width: 100%;
 }
-.advert-card-list .clickable-card .advert-card h3 {
+
+.advert-card h3 {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
 }
-.advert-card-list .clickable-card .advert-card .card-text {
+
+.card-text {
   color: var(--darkgray);
   text-overflow: ellipsis;
   width: 100%;
   white-space: nowrap;
   overflow: hidden;
 }
-.advert-card-list .clickable-card .advert-card .price-card {
+
+.price-card {
   font-weight: 700;
   font-size: larger;
   color: var(--black);
 }
-.advert-card-list .clickable-card .advert-card .modif-icons {
+
+.modif-icons {
   display: flex;
   position: absolute;
   right: 10px;
@@ -254,6 +290,13 @@ header .up {
   border-radius: 5px;
   background: var(--white);
   z-index: 3;
+  line-height: 0;
+}
+
+.modif {
+  color: var(--black);
+  display: flex;
+  align-items: center;
 }
 
 form {
@@ -303,4 +346,5 @@ form .dbl-input {
   gap: 10px;
 }
 
+/************** Detail Page *************/
 /************** Footer *************//*# sourceMappingURL=app.css.map */

@@ -3,27 +3,30 @@
 {% block title %}{{advert.title}}{% endblock %}
 
 {% block body %}
-    <div class="wrapper-detail">
-        <h1>{{advert.title}}</h1>
-        <div class="img-advert-detail">
-            <div class="l-img">
-                <figure>
-                    <img src="{{ asset('img/maxime2854_real_life_4k_purple_and_blue_sky_with_stars_with_a_b_41a00f6c-41a9-4aaf-8acb-51f94bc47b7f.png')}}" alt="{{advert.title}}">
-                </figure>
+    <div class="wrapper">
+        <div class="wrapper-detail">
+            <div class="img-advert-detail">
+                <div class="l-img">
+                    <figure>
+                        <img src="{{ asset('img/maxime2854_real_life_4k_purple_and_blue_sky_with_stars_with_a_b_41a00f6c-41a9-4aaf-8acb-51f94bc47b7f.png')}}" alt="{{advert.title}}">
+                    </figure>
+                </div>
+                <div class="sm-img">
+                    <div class="img">
+                        <figure>
+                            <img src="{{ asset('img/2ndpics.png')}}" alt="{{advert.title}}">
+                        </figure>
+                    </div>
+                    <div class="img">
+                        <figure>
+                            <img src="{{ asset('img/3rdpics.png')}}" alt="{{advert.title}}">
+                        </figure>
+                    </div>
+                </div>
             </div>
-            <div class="sm-img">
-                <figure>
-                    <img src="{{ asset('img/2ndpics.png')}}" alt="{{advert.title}}">
-                </figure>
-                <figure>
-                    <img src="{{ asset('img/3rdpics.png')}}" alt="{{advert.title}}">
-                </figure>
-            </div>
+            <h1>{{advert.title}}</h1>
+            <p>{{advert.description}}</p>
+            <p><b>{{advert.price}}€</b>/Nuits</p>
         </div>
-        <p>{{advert.description}}</p>
-        <p><b>{{advert.price}}€</b>/Nuits</p>
-        
-
-
     </div>
 {% endblock %}

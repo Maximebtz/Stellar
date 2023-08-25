@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Advert;
 use App\Form\AdvertType;
+use App\Repository\AdvertRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,8 +32,8 @@ class AdvertController extends AbstractController
     }
 
     // Méthode pour créer une nouvelle advert
-    #[Route('/user/advert/add/new', name: 'new_advert')] // Définition de la route et du nom de la route
-    #[Route('/user/advert/{id}/edit', name: 'edit_advert')] // Définition de la route et du nom de la route
+    #[Route('/owner/add-property', name: 'new_advert')] // Définition de la route et du nom de la route
+    #[Route('/owner/edit-property/{id}', name: 'edit_advert')] // Définition de la route et du nom de la route
     #[IsGranted('ROLE_USER')] // Droit aux users uniquement
     public function new_edit(Advert $advert = null, Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -59,7 +60,7 @@ class AdvertController extends AbstractController
             $entityManager->flush();
             
             // Redirige vers une autre page (remplacez 'app_advert' par la route de destination souhaitée)
-            return $this->redirectToRoute('app_home');
+            return $this->redirectToRoute('user_adverts');
         } 
 
         // Rendu du template 'advert/new.html.twig' en passant le formulaire à afficher
