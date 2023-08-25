@@ -1,4 +1,3 @@
-@charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Anton&display=swap");
 /************** Var **************/
@@ -12,7 +11,7 @@
   --black: #100F0F;
   --lightgray: lightgray;
   --darkgray: grey;
-  --boxshadow: rgba(0, 0, 0, 0.10);
+  --boxshadow: rgba(0, 0, 0, 0.025);
 }
 
 /************** Warning & infos **************/
@@ -44,7 +43,7 @@ pre {
 body {
   font-family: "Poppins", sans-serif;
   min-height: 100vh;
-  background: var(--lightgray);
+  background: var(--white);
   color: var(--black);
 }
 
@@ -71,7 +70,7 @@ header .logo a {
 }
 header .logo a .title {
   font-family: "Anton", sans-serif;
-  color: var(--white);
+  color: var(--black);
   text-align: center;
   line-height: 25px;
   letter-spacing: 1px;
@@ -109,12 +108,26 @@ header .log #profil-menu {
   position: absolute;
   background-color: var(--white);
   border-radius: 10px;
-  padding: 10px;
+  padding: 35px 10px 10px;
+  overflow: hidden;
   box-shadow: var(--boxshadow) 0 0 40px;
   top: 0px;
   right: 110%;
   z-index: 2;
-  transition: all 5s ease-in-out;
+  transition: opacity 0.3s ease-in-out, visibility 0s ease-in-out 0.3s;
+}
+header .log #profil-menu h4 {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: var(--dark-blue);
+  color: var(--white);
+  text-align: center;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 header .log #profil-menu hr {
   margin: 5px 0;
@@ -175,18 +188,16 @@ header .up {
 
 .wrapper-detail {
   min-height: 100vh;
-  max-width: -moz-max-content;
-  max-width: max-content;
+  max-width: 1150px;
   width: 100%;
 }
 .wrapper-detail .img-advert-detail {
   height: 100%;
   max-height: 600px;
-  max-width: -moz-fit-content;
-  max-width: fit-content;
+  max-width: 1150px;
   width: 100%;
   display: grid;
-  grid-gap: 10px;
+  gap: 5px;
   grid-auto-rows: max-content;
   grid-template-columns: minmax(300px, 1fr) 300px;
   overflow: hidden;
@@ -202,22 +213,16 @@ header .up {
      object-fit: cover;
 }
 .wrapper-detail .img-advert-detail .img {
-  height: calc(100% - 7px);
   overflow: hidden;
 }
 .wrapper-detail .img-advert-detail .l-img {
   height: 600px;
 }
 .wrapper-detail .img-advert-detail .sm-img {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
+  flex-direction: column;
   gap: 5px;
-}
-@media (max-width: 600px) {
-  .wrapper-detail .img-advert-detail .sm-img {
-    grid-template-columns: 1fr; /* Une seule colonne */
-    grid-auto-rows: max-content; /* Ajustement automatique de la hauteur des éléments */
-  }
+  height: 100%;
 }
 
 /************** Content **************/
@@ -225,6 +230,7 @@ header .up {
   height: 100%;
   width: 100%;
   display: grid;
+  justify-items: center;
   grid-gap: 20px;
   grid-auto-rows: max-content;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -249,7 +255,11 @@ header .up {
   max-width: 350px;
   height: -moz-max-content;
   height: max-content;
-  box-shadow: var(--boxshadow) 0 0 30px;
+  box-shadow: var(--boxshadow) 0 5px 10px;
+  transition: all 0.2s ease-in-out;
+}
+.advert-card:hover {
+  box-shadow: var(--boxshadow) 0 10px 20px;
 }
 
 .advert-card img {
@@ -346,5 +356,27 @@ form .dbl-input {
   gap: 10px;
 }
 
-/************** Detail Page *************/
-/************** Footer *************//*# sourceMappingURL=app.css.map */
+/************** Footer *************/
+/************** Responsive Design *************/
+@media only screen and (max-width: 770px) {
+  .wrapper-detail .img-advert-detail {
+    grid-template-columns: 1fr;
+    grid-template-areas: "l-img" "sm-img";
+    grid-gap: 0;
+    max-height: -moz-max-content;
+    max-height: max-content;
+  }
+  .wrapper-detail .img-advert-detail .l-img {
+    height: auto;
+  }
+  .wrapper-detail .img-advert-detail .sm-img {
+    grid-area: sm-img;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+  }
+  .wrapper-detail .img-advert-detail .sm-img img {
+    max-width: 50%;
+    height: auto;
+  }
+}/*# sourceMappingURL=app.css.map */

@@ -60,7 +60,7 @@ class AdvertController extends AbstractController
             $entityManager->flush();
             
             // Redirige vers une autre page (remplacez 'app_advert' par la route de destination souhaitée)
-            return $this->redirectToRoute('user_adverts');
+            return $this->redirectToRoute('app_home');
         } 
 
         // Rendu du template 'advert/new.html.twig' en passant le formulaire à afficher
