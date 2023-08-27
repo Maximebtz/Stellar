@@ -61,6 +61,10 @@ pre {
     box-sizing: border-box;
 }
 
+*::-webkit-scrollbar {
+    display: none;
+}
+
 /************** Body **************/
 body {
     font-family: 'Poppins', sans-serif;
@@ -404,6 +408,8 @@ form {
 /************** Responsive Design *************/
 
 @media only screen and (max-width: 770px) {
+
+    /************ Wrapper *************/
     .wrapper-detail {
         .img-advert-detail {
             grid-template-columns: 1fr;
@@ -427,6 +433,45 @@ form {
                 }
             }
         }
+    }
+}
+
+
+@media only screen and (max-width: 450px) {
+
+    /************** Body **************/
+    body {
+        padding: 25px;
+    }
+    
+    /************** Header **************/
+    header {
+        padding: 0;
+        height: max-content;
+        .logo {
+            a {
+                .fig-logo {
+                    .icon-logo {
+                        width: 55px;
+                        height: 55px;
+                    }
+                }
+            }
+        }
+        .title {
+            display: none;
+        }
+        .log{
+            #profil-picture {
+                width: 55px;
+                height: 55px;
+            }
+        }
+    }
+
+    /************** wrapper **************/
+    .wrapper {
+        padding: 0;
     }
 }
 

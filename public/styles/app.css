@@ -39,6 +39,10 @@ pre {
   box-sizing: border-box;
 }
 
+*::-webkit-scrollbar {
+  display: none;
+}
+
 /************** Body **************/
 body {
   font-family: "Poppins", sans-serif;
@@ -359,6 +363,7 @@ form .dbl-input {
 /************** Footer *************/
 /************** Responsive Design *************/
 @media only screen and (max-width: 770px) {
+  /************ Wrapper *************/
   .wrapper-detail .img-advert-detail {
     grid-template-columns: 1fr;
     grid-template-areas: "l-img" "sm-img";
@@ -378,5 +383,32 @@ form .dbl-input {
   .wrapper-detail .img-advert-detail .sm-img img {
     max-width: 50%;
     height: auto;
+  }
+}
+@media only screen and (max-width: 450px) {
+  /************** Body **************/
+  body {
+    padding: 25px;
+  }
+  /************** Header **************/
+  header {
+    padding: 0;
+    height: -moz-max-content;
+    height: max-content;
+  }
+  header .logo a .fig-logo .icon-logo {
+    width: 55px;
+    height: 55px;
+  }
+  header .title {
+    display: none;
+  }
+  header .log #profil-picture {
+    width: 55px;
+    height: 55px;
+  }
+  /************** wrapper **************/
+  .wrapper {
+    padding: 0;
   }
 }/*# sourceMappingURL=app.css.map */
