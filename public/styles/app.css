@@ -196,6 +196,21 @@ header .up {
   max-width: 1150px;
   width: 100%;
 }
+.wrapper-detail .grid-wrap .single-img {
+  width: 100%;
+  max-height: 500px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  border-radius: 12px;
+}
+.wrapper-detail .grid-wrap .single-img img {
+  width: 100%;
+  height: -webkit-fill-available;
+  border-radius: 12px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
 .wrapper-detail .img-advert-detail {
   height: 100%;
   max-height: 600px;
@@ -222,12 +237,18 @@ header .up {
 }
 .wrapper-detail .img-advert-detail .l-img {
   height: 600px;
+  position: relative;
 }
 .wrapper-detail .img-advert-detail .sm-img {
   display: flex;
   flex-direction: column;
+  position: relative;
   gap: 5px;
   height: 100%;
+}
+.wrapper-detail .img-advert-detail .ltl-img {
+  height: 50%;
+  position: relative;
 }
 
 /************** Content **************/
@@ -258,17 +279,23 @@ header .up {
   position: relative;
   width: 100%;
   max-width: 350px;
-  height: -moz-max-content;
-  height: max-content;
+  max-height: 350px;
   box-shadow: var(--boxshadow) 0 5px 10px;
   transition: all 0.2s ease-in-out;
 }
 .advert-card:hover {
   box-shadow: var(--boxshadow) 0 10px 20px;
 }
+.advert-card figure {
+  height: 65%;
+  overflow: hidden;
+}
 
 .advert-card img {
   width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .card-content {

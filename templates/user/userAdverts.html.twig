@@ -28,7 +28,9 @@
                 <a class="clickable-card" href="{{ path('detail_advert', {'id': advert.id}) }}" >
                     <div class="advert-card">
                         <figure>
-                            <img src="{{asset('img/maxime2854_real_life_4k_purple_and_blue_sky_with_stars_with_a_b_41a00f6c-41a9-4aaf-8acb-51f94bc47b7f.png')}}" alt="{{ advert.title }} image">
+                            {% if advert.images is not empty %}
+                            <img src="{{ asset('uploads/' ~ advert.images[0].url) }}" alt="{{ advert.title }} image">
+                            {% endif %}
                         </figure>
                         <div class="card-content">
                             <h3 class="card-title">{{ advert.title}}</h3>
