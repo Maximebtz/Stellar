@@ -5,8 +5,10 @@
 {% block body %}
     <div class="wrapper-form">
         {{ form_start(formAddAdvert) }}
+            {{form_row(formAddAdvert.images)}}
             {{ form_row(formAddAdvert.title) }}
             {{ form_row(formAddAdvert.lodge) }}
+            {{ form_row(formAddAdvert.accessory) }}
             <div class="dbl-input">
                 {{ form_row(formAddAdvert.price) }}
                 {{ form_row(formAddAdvert.category) }}

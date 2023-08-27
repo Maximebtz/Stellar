@@ -25,3 +25,29 @@ document.addEventListener('click', function(event) {
         menu.style.display = "none";
     }
 });
+
+
+/****ShowMorePictures****/
+function displayMorePictures() {
+    const showMoreBtn = document.getElementById("showMoreBtn");
+    if (showMoreBtn.style.display === "flex") {
+        showMoreBtn.style.display = "none";
+    } else {
+        showMoreBtn.style.display = "flex";
+    }
+}
+
+// const profilPicture = document.getElementById('profil-picture');
+const showMoreBtn = document.getElementById("showMoreBtn");
+
+// profilPicture.addEventListener('click', function(event) {
+//     event.stopPropagation(); 
+//     displayProfilMenu();
+// });
+
+
+document.addEventListener('click', function(event) {
+    if (showMoreBtn.style.display === "flex" && !showMoreBtn.contains(event.target)) {
+        showMoreBtn.style.display = "none";
+    }
+});

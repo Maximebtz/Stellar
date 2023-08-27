@@ -18,7 +18,7 @@ class Images
 
     #[ORM\ManyToOne(inversedBy: 'images')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Advert $advert = null;
+    private ?Advert $adverts = null;
 
     public function getId(): ?int
     {
@@ -39,12 +39,12 @@ class Images
 
     public function getAdvert(): ?Advert
     {
-        return $this->advert;
+        return $this->adverts;
     }
 
-    public function setAdvert(?Advert $advert): static
+    public function setAdvert(?Advert $adverts): static
     {
-        $this->advert = $advert;
+        $this->adverts = $adverts;
 
         return $this;
     }

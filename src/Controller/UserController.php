@@ -51,11 +51,11 @@ class UserController extends AbstractController
 
     #[Route('/owner/my-property/detail', name: 'user_advert_detail')]
     #[IsGranted('ROLE_USER')]
-    public function showDetailSession($id): Response 
+    public function showDetailProperty($id): Response 
     {
         $repository = $this->entityManager->getRepository(Advert::class);
         $advert = $repository->find($id);
-
+        
         return $this->render('user/userAdvertDetail.html.twig', [
             'advert' => $advert,
         ]);

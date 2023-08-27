@@ -39,7 +39,7 @@ class Advert
     #[ORM\Column(length: 30)]
     private ?string $country = null;
 
-    #[ORM\ManyToOne(inversedBy: 'adverts')]
+    #[ORM\ManyToOne(inversedBy: 'advert')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $owner = null;
 
@@ -49,15 +49,19 @@ class Advert
     #[ORM\OneToMany(mappedBy: 'advert', targetEntity: Notice::class, orphanRemoval: true)]
     private Collection $notices;
 
-    #[ORM\OneToMany(mappedBy: 'advert', targetEntity: Images::class, orphanRemoval: true)]
+    
+    #[ORM\OneToMany(targetEntity: Images::class, mappedBy: "adverts", orphanRemoval: true, cascade: ['persist'])]
     private Collection $images;
 
-    #[ORM\ManyToOne(inversedBy: 'adverts')]
+    #[ORM\ManyToOne(inversedBy: 'advert')]
     private ?Category $category = null;
 
     #[ORM\ManyToOne(inversedBy: 'advert')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Lodge $lodge = null;
+
+    #[ORM\ManyToOne(inversedBy: 'advert')]
+    private ?Accessory $accessory = null;
 
     
     public function __construct()
@@ -291,6 +295,18 @@ class Advert
     public function setLodge(?Lodge $lodge): static
     {
         $this->lodge = $lodge;
+
+        return $this;
+    }
+
+    public function getAccessory(): ?Accessory
+    {
+        return $this->accessory;
+    }
+
+    public function setAccessory(?Accessory $accessory): static
+    {
+        $this->accessory = $accessory;
 
         return $this;
     }

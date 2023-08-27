@@ -59,6 +59,7 @@ pre {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0); 
 }
 
 *::-webkit-scrollbar {
@@ -234,6 +235,22 @@ header {
     min-height: 100vh;
     max-width: 1150px;
     width: 100%;
+    .grid-wrap{
+        .single-img {
+            width: 100%;
+            max-height: 500px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            border-radius: 12px;
+            img {
+                width: 100%;
+                height: -webkit-fill-available;
+                border-radius: 12px;
+                object-fit: cover;
+            }
+        }
+    }
     .img-advert-detail {
         height: 100%;
         max-height: 600px;
@@ -258,10 +275,12 @@ header {
         }
         .l-img {
             height: 600px;
+            position: relative;
         }
         .sm-img {
             display: flex;
             flex-direction: column;
+            position: relative;
             gap: 5px;
             height: 100%;
         }
@@ -471,7 +490,7 @@ form {
 
     /************** wrapper **************/
     .wrapper {
-        padding: 0;
+        padding: 25px 0;
     }
 }
 
