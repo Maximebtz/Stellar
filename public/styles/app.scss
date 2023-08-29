@@ -215,7 +215,7 @@ header {
 /************** Wrapper **************/
 .wrapper{
     display: flex;
-    padding: 10px 50px 50px;
+    padding: 10px 50px;
     width: 100%;
     min-height: calc(100vh - 120px);
     flex-direction: column;
@@ -228,19 +228,24 @@ header {
     height: max-content;
 }
 .map {
-    width: calc(50% - 20px);
-}
-#map {
+    width: calc(50% - 30px);
     margin-left: 20px;
-    border-radius: 10px;
-    width: 100%;
-    min-width: 500px;
-    height: 1088px;
-    img{
+    position: sticky;
+    top: 20px;
+    height: max-content;
+    .leaflet-control-attribution.leaflet-control {
         display: none;
     }
+    #map {
+        border-radius: 10px;
+        width: 100%;
+        min-width: 500px;
+        height: 885px;
+        img{
+            display: none;
+        }
+    }
 }
-
 .wrapper-form {
     display: flex;
     flex-direction: column;
