@@ -222,6 +222,18 @@ header {
     align-items: center;
 }
 
+.wrapper-home {
+    width: 100%;
+    display: flex;
+    height: max-content;
+    #map {
+        margin-left: 20px;
+        img {
+            display: none;
+        }
+    }
+}
+
 .wrapper-form {
     display: flex;
     flex-direction: column;

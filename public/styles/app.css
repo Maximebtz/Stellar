@@ -182,6 +182,19 @@ header .up {
   align-items: center;
 }
 
+.wrapper-home {
+  width: 100%;
+  display: flex;
+  height: -moz-max-content;
+  height: max-content;
+}
+.wrapper-home #map {
+  margin-left: 20px;
+}
+.wrapper-home #map img {
+  display: none;
+}
+
 .wrapper-form {
   display: flex;
   flex-direction: column;
