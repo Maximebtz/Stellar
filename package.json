@@ -28,6 +28,8 @@
     "dependencies": {
         "eslint": "^8.47.0",
         "eslint-plugin-react": "^7.33.2",
+        "leaflet": "^1.9.4",
+        "leaflet-styleeditor": "^0.1.21",
         "prop-types": "^15.8.1"
     }
 }

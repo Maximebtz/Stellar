@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Advert;
+use App\Entity\Accessory;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\All;
@@ -13,6 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
@@ -70,15 +72,18 @@ class AdvertType extends AbstractType
                     'class' => 'input'
                 ]
             ])
-            ->add('accessory', EntityType::class, [
-                'class' => 'App\Entity\Accessory',
-                'choice_label' => 'name',
-                'label' => 'Accessoires',
-               'required' => true,
-                'attr' => [
-                    'class' => 'input'
-                ]
-            ])
+            // ->add('accessory', EntityType::class, [
+            //     'class' => Accessory::class,
+            //     'choice_label' => 'name',
+            //     'label' => 'Accessoires',
+                    // 'attr' => [
+                    //     'class' => 'form-check-input',
+                    //     'role' => 'switch',
+                    // ],
+            //     'multiple' => true, // Permettre la sélection de plusieurs accessoires
+            //     'expanded' => true, // Afficher les cases à cocher au lieu d'un select
+            //     'required' => false, // Peut être facultatif
+            // ])
             ->add('price', NumberType::class, [
                 'label' => 'Prix*',
                 'required' => true,

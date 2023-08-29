@@ -7,6 +7,8 @@
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
             <link rel="stylesheet" href="{{ asset('build/style.css') }}">
+            <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+            <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
         {% endblock %}
 
     </head>
@@ -58,5 +60,6 @@
     {% block javascripts %}
         {{ encore_entry_link_tags('app') }}
         <script src="{{asset('js/app.js')}}"></script>
+        <script src="{{asset('js/map.js')}}"></script>
     {% endblock %}
 </html>

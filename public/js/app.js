@@ -38,7 +38,7 @@ function displayMorePictures() {
 }
 
 // const profilPicture = document.getElementById('profil-picture');
-const showMoreBtn = document.getElementById("showMoreBtn");
+// const showMoreBtn = document.getElementById("showMoreBtn");
 
 // profilPicture.addEventListener('click', function(event) {
 //     event.stopPropagation(); 
