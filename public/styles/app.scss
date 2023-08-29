@@ -215,7 +215,7 @@ header {
 /************** Wrapper **************/
 .wrapper{
     display: flex;
-    padding: 50px;
+    padding: 10px 50px 50px;
     width: 100%;
     min-height: calc(100vh - 120px);
     flex-direction: column;
@@ -226,11 +226,18 @@ header {
     width: 100%;
     display: flex;
     height: max-content;
-    #map {
-        margin-left: 20px;
-        img {
-            display: none;
-        }
+}
+.map {
+    width: calc(50% - 20px);
+}
+#map {
+    margin-left: 20px;
+    border-radius: 10px;
+    width: 100%;
+    min-width: 500px;
+    height: 1088px;
+    img{
+        display: none;
     }
 }
 
@@ -306,7 +313,7 @@ header {
 /************** Content **************/
 #grid {
     height: 100%;
-    width: 100%;
+    width: 50%;
     display: grid;
     justify-items: center;
     grid-gap: 20px;
