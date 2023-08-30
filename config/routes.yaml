@@ -4,7 +4,7 @@ controllers:
         namespace: App\Controller
     type: attribute
 
-delete_image:
-    path: '/delete-image/{id}'
-    controller: 'App\Controller\AdvertController::deleteImage'
+remove_advert_image:
+    path: '/owner/advert/remove-image/{advertId}/{imageId}'
+    controller: 'App\Controller\AdvertController::removeImage'
 

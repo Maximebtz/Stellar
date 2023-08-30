@@ -6,12 +6,11 @@ use App\Entity\Advert;
 use App\Entity\Images;
 use App\Form\AdvertType;
 use App\Service\FileUploader;
-use App\Service\PictureServices;
-use App\Repository\AdvertRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -89,7 +88,31 @@ class AdvertController extends AbstractController
         ]);
     }
 
-    #[Route('/user/advert/remove-image/{advertId}/{imageId}', name: 'remove_advert_image')]
+//     #[Route('/owner/advert/remove-image/{id}', name: 'remove_advert_image')]
+//     #[IsGranted('ROLE_USER')]
+//     public function removeImage(Request $request, Images $images): Response
+//     {
+//         $data = json_decode($request->getContent(), true);
+//         // On verifie si le token est valide
+//         if($this->isCsrfTokenValid('delete'.$images->getId(), $data['_token'])) {
+//             // On recup le nom de l'images 
+//             $nom = $images->getUrl();
+//             // On supprime l'images 
+//             unlink($this->getParameter('images_directory').'/'.$nom);
+            
+//             // On supprime l'images dans la base de données 
+//             $entityManager = $this->getDoctrine()->getManager();
+//             $entityManager->remove($images);
+//             $entityManager->flush();
+
+//             // On répond en json 
+//             return new JsonResponse(['success' => 1]);
+//         } else {
+            
+//             return new JsonResponse(['error' => 'Token invalide'], 400);
+//         }
+//     }
+    #[Route('/owner/advert/remove-image/{advertId}/{imageId}', name: 'remove_advert_image')]
     #[IsGranted('ROLE_USER')]
     public function removeImage(Request $request, $advertId, $imageId): Response
     {
@@ -114,7 +137,9 @@ class AdvertController extends AbstractController
             $this->entityManager->remove($imageToRemove);
             $this->entityManager->flush();
         }
-
+        echo "<pre>";
+        dd($advertId);
+        echo "</pre>";
         // Rediriger vers la page de détails de l'annonce
         return $this->redirectToRoute('detail_advert', ['id' => $advertId]);
     }
