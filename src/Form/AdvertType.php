@@ -29,7 +29,7 @@ class AdvertType extends AbstractType
                 'label' => 'Images*',
                 'multiple' => true,
                 'attr' => [
-                    'class' => 'form-control',  // Class for the input field
+                    'class' => 'image-input',  // Class for the input field
                 ],
                 'label_attr' => [
                     'class' => 'form-label',  // Class for the label
@@ -61,7 +61,10 @@ class AdvertType extends AbstractType
                 'required' => true,
                 'attr' => [
                     'class' => 'input'
-                ]
+                ],
+                'label_attr' => [
+                    'class' => 'label',  // Class for the label
+                ],
             ])
             ->add('lodge', EntityType::class, [
                 'class' => 'App\Entity\Lodge',
@@ -70,7 +73,10 @@ class AdvertType extends AbstractType
                 'required' => true,
                 'attr' => [
                     'class' => 'input'
-                ]
+                ],
+                'label_attr' => [
+                    'class' => 'label',  // Class for the label
+                ],
             ])
             // ->add('accessory', EntityType::class, [
             //     'class' => Accessory::class,
@@ -108,28 +114,40 @@ class AdvertType extends AbstractType
                 'required' => true,
                 'attr' => [
                     'class' => 'input sm'
-                ]
+                ],
+                'label_attr' => [
+                    'class' => 'label',  // Class for the label
+                ],
               ])
             ->add('address', TextType::class, [
                 'label' => 'Adresse*',
                 'required' => true,
                 'attr' => [
                     'class' => 'input'
-                ]
+                ],
+                'label_attr' => [
+                    'class' => 'label',  // Class for the label
+                ],
             ])
             ->add('city', TextType::class, [
                 'label' => 'Ville*',
                 'required' => true,
                 'attr' => [
                     'class' => 'input sm'
-                ]
+                ],
+                'label_attr' => [
+                    'class' => 'label',  // Class for the label
+                ],
             ])
             ->add('country', TextType::class, [
                 'label' => 'Pays*',
                 'required' => true,
                 'attr' => [
                     'class' => 'input sm'
-                ]
+                ],
+                'label_attr' => [
+                    'class' => 'label',  // Class for the label
+                ],
             ])
             ->add('description', TextareaType::class, [
                 'label' => 'Description*',
