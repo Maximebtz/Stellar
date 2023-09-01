@@ -6,6 +6,7 @@ use App\Entity\Advert;
 use App\Entity\Images;
 use App\Form\AdvertType;
 use App\Service\FileUploader;
+use App\Repository\ImagesRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -34,13 +35,16 @@ class AdvertController extends AbstractController
     #[Route('/owner/add-property', name: 'new_advert')]
     #[Route('/owner/edit-property/{id}', name: 'edit_advert')]
     #[IsGranted('ROLE_USER')]
-    public function new_edit(Advert $advert = null, Request $request, FileUploader $fileUploader): Response
+    public function new_edit(Advert $advert = null, Request $request, FileUploader $fileUploader, ImagesRepository $imagesRepository): Response
     {
         if (!$advert) {
             $advert = new Advert();
         }
 
         $form = $this->createForm(AdvertType::class, $advert);
+
+        // Récupérez les images depuis la base de données
+        // $imagesFromDatabase = $imagesRepository->findBy(['advert' => $advert]);
 
         $form->handleRequest($request);
 
@@ -72,7 +76,8 @@ class AdvertController extends AbstractController
 
         return $this->render('advert/new.html.twig', [
             'formAddAdvert' => $form->createView(),
-            'edit' => $advert->getId()
+            'edit' => $advert->getId(),
+            // 'imagesFromDatabase' => $imagesFromDatabase,
         ]);
     }
 

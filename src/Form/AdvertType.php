@@ -27,6 +27,7 @@ class AdvertType extends AbstractType
         $builder
             ->add('images', FileType::class, [
                 'multiple' => true,
+                'label' => false,
                 'attr' => [
                     'class' => 'image-input',  // Class for the input field
                 ],
