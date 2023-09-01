@@ -52,7 +52,6 @@ body {
   color: var(--black);
 }
 
-/************** Background **************/
 /************** Header **************/
 header {
   padding: 25px 50px;
@@ -175,7 +174,7 @@ header .up {
 /************** Wrapper **************/
 .wrapper {
   display: flex;
-  padding: 50px;
+  padding: 20px;
   width: 100%;
   min-height: calc(100vh - 120px);
   flex-direction: column;
@@ -187,11 +186,24 @@ header .up {
   display: flex;
   height: -moz-max-content;
   height: max-content;
+  gap: 20px;
 }
-.wrapper-home #map {
-  margin-left: 20px;
+.wrapper-home .map {
+  width: 50%;
+  position: sticky;
+  top: 20px;
+  height: calc(100vh - 40px);
 }
-.wrapper-home #map img {
+.wrapper-home .map .leaflet-control-attribution.leaflet-control {
+  display: none;
+}
+.wrapper-home .map #map {
+  border-radius: 10px;
+  width: 100%;
+  min-width: 500px;
+  height: 100%;
+}
+.wrapper-home .map #map img {
   display: none;
 }
 
@@ -208,6 +220,7 @@ header .up {
   min-height: 100vh;
   max-width: 1150px;
   width: 100%;
+  /****** Form Content ******/
 }
 .wrapper-detail .grid-wrap .single-img {
   width: 100%;
@@ -263,11 +276,233 @@ header .up {
   height: 50%;
   position: relative;
 }
+.wrapper-detail .input {
+  height: 45px;
+  font-size: x-large;
+  font-weight: 500;
+  font-family: "Poppins", sans-serif;
+  background: var(--white);
+  outline: none;
+  border: none;
+  border-bottom: solid 1px black;
+  width: 100%;
+  padding: 0 10px;
+  margin-bottom: 15px;
+}
+.wrapper-detail .textarea-description {
+  width: 100%;
+  border-radius: 10px;
+  outline: none;
+  border: none;
+  padding: 20px;
+  margin-bottom: 15px;
+}
+.wrapper-detail .sub-btn {
+  width: 100px;
+  height: 42px;
+  border-radius: 10px;
+  border: none;
+  font-size: medium;
+  font-weight: 500;
+  font-family: poppins, sans-serif;
+  color: var(--dark-purple);
+  margin-top: 20px;
+}
+.wrapper-detail #registration_form_agreeTerms {
+  margin-left: 10px;
+  width: 15px;
+  height: 15px;
+}
+.wrapper-detail .dbl-input {
+  display: flex;
+  gap: 10px;
+}
+
+.upload-files-container {
+  width: 100%;
+  height: 500px;
+  padding: 20px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+}
+
+.drag-file-area {
+  border: 2px dashed var(--dark-purple);
+  border-radius: 10px;
+  padding: 30px 50px;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+}
+
+.drag-file-area .upload-icon {
+  font-size: 50px;
+}
+
+.drag-file-area h3 {
+  font-size: 26px;
+  margin: 15px 0;
+}
+.drag-file-area h3 span {
+  font-weight: 500;
+}
+
+.drag-file-area label {
+  font-size: 19px;
+}
+
+.drag-file-area label .browse-files-text {
+  color: var(--dark-purple);
+  font-weight: bolder;
+  cursor: pointer;
+  height: 100%;
+  width: 100%;
+  padding-top: 75px;
+  font-style: italic;
+  font-size: larger;
+  text-decoration: underline;
+}
+
+.browse-files span {
+  position: absolute;
+  display: flex;
+  top: 0;
+  right: 0%;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-input {
+  opacity: 0;
+}
+
+.cannot-upload-message {
+  background-color: #ffc6c4;
+  font-size: 17px;
+  display: flex;
+  align-items: center;
+  margin: 5px 0;
+  padding: 5px 10px 5px 30px;
+  border-radius: 5px;
+  color: #BB0000;
+  display: none;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.cannot-upload-message span, .upload-button-icon {
+  padding-right: 10px;
+}
+
+.cannot-upload-message span:last-child {
+  padding-left: 20px;
+  cursor: pointer;
+}
+
+.file-block {
+  color: #f7fff7;
+  background-color: var(--dark-purple);
+  transition: all 1s;
+  width: -moz-max-content;
+  width: max-content;
+  position: relative;
+  display: none;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0 15px;
+  padding: 10px 20px;
+  border-radius: 25px;
+  cursor: pointer;
+}
+
+.file-info {
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+}
+
+.file-icon {
+  margin-right: 10px;
+}
+
+.file-name, .file-size {
+  padding: 0 3px;
+}
+
+.file-name {
+  max-width: 150px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.remove-file-icon {
+  cursor: pointer;
+  display: flex;
+}
+.remove-file-icon svg {
+  height: 25px;
+  width: 25px;
+}
+
+.progress-bar {
+  display: flex;
+  position: absolute;
+  bottom: 0;
+  left: 4.5%;
+  width: 0;
+  height: 5px;
+  border-radius: 25px;
+  background-color: #4BB543;
+}
+
+.upload-button {
+  font-family: "Montserrat";
+  background-color: var(--dark-purple);
+  color: #f7fff7;
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  border: none;
+  border-radius: 20px;
+  margin: 10px;
+  padding: 7.5px 50px;
+  cursor: pointer;
+}
+
+.wrapper-my-advert {
+  width: 100%;
+  height: 100%;
+}
+.wrapper-my-advert-title {
+  font-size: 3em;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-style: italic;
+  letter-spacing: -4px;
+  padding-bottom: 20px;
+}
 
 /************** Content **************/
 #grid {
   height: 100%;
-  width: 100%;
+  width: 50%;
   display: grid;
   justify-items: center;
   grid-gap: 20px;
@@ -292,7 +527,7 @@ header .up {
   position: relative;
   width: 100%;
   max-width: 350px;
-  max-height: 350px;
+  height: 300px;
   box-shadow: var(--boxshadow) 0 5px 10px;
   transition: all 0.2s ease-in-out;
 }
@@ -300,10 +535,9 @@ header .up {
   box-shadow: var(--boxshadow) 0 10px 20px;
 }
 .advert-card figure {
-  height: 65%;
+  height: 60%;
   overflow: hidden;
 }
-
 .advert-card img {
   width: 100%;
   height: 100%;
@@ -352,53 +586,6 @@ header .up {
   color: var(--black);
   display: flex;
   align-items: center;
-}
-
-form {
-  width: 500px;
-  padding: 50px 20px;
-  background-color: var(--darkgray);
-  border-radius: 10px;
-  box-shadow: var(--boxshadow) 0 0 40px;
-  color: ghostwhite;
-}
-form .input {
-  height: 36px;
-  border-radius: 10px;
-  outline: none;
-  border: none;
-  width: 100%;
-  padding: 0 10px;
-  margin-bottom: 15px;
-  box-shadow: var(--boxshadow) 0 0 40px;
-}
-form .textarea-description {
-  width: 100%;
-  border-radius: 10px;
-  outline: none;
-  border: none;
-  padding: 20px;
-  margin-bottom: 15px;
-}
-form .sub-btn {
-  width: 100px;
-  height: 42px;
-  border-radius: 10px;
-  border: none;
-  font-size: medium;
-  font-weight: 500;
-  font-family: poppins, sans-serif;
-  color: var(--dark-purple);
-  margin-top: 20px;
-}
-form #registration_form_agreeTerms {
-  margin-left: 10px;
-  width: 15px;
-  height: 15px;
-}
-form .dbl-input {
-  display: flex;
-  gap: 10px;
 }
 
 /************** Footer *************/
@@ -451,5 +638,13 @@ form .dbl-input {
   /************** wrapper **************/
   .wrapper {
     padding: 25px 0;
+  }
+}
+@media only screen and (max-width: 1100px) {
+  .map {
+    display: none;
+  }
+  #grid {
+    width: 100%;
   }
 }/*# sourceMappingURL=app.css.map */

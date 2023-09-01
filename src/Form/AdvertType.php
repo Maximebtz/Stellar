@@ -26,19 +26,15 @@ class AdvertType extends AbstractType
     {
         $builder
             ->add('images', FileType::class, [
-                'label' => 'Images*',
                 'multiple' => true,
                 'attr' => [
                     'class' => 'image-input',  // Class for the input field
-                ],
-                'label_attr' => [
-                    'class' => 'form-label',  // Class for the label
                 ],
                 'mapped' => false,
                 // make it optional so you don't have to re-upload the avatar
                 // every time you edit the user's details
                 'required' => true,
-            
+
                 // unmapped fields can't define their validation using annotations
                 // in the associated entity, so you can use the PHP constraint classes
                 'constraints' => [
@@ -57,10 +53,11 @@ class AdvertType extends AbstractType
                 ],
             ])
             ->add('title', TextType::class, [
-                'label' => 'Titre*',
+                'label' => false,
                 'required' => true,
                 'attr' => [
-                    'class' => 'input'
+                    'class' => 'input',
+                    'placeholder' => 'Titre*'
                 ],
                 'label_attr' => [
                     'class' => 'label',  // Class for the label
@@ -68,11 +65,12 @@ class AdvertType extends AbstractType
             ])
             ->add('lodge', EntityType::class, [
                 'class' => 'App\Entity\Lodge',
+                'label' => false,
                 'choice_label' => 'type',
-                'label' => 'Type*',
                 'required' => true,
+                'placeholder' => 'Type *',
                 'attr' => [
-                    'class' => 'input'
+                    'class' => 'input',
                 ],
                 'label_attr' => [
                     'class' => 'label',  // Class for the label
@@ -82,85 +80,93 @@ class AdvertType extends AbstractType
             //     'class' => Accessory::class,
             //     'choice_label' => 'name',
             //     'label' => 'Accessoires',
-                    // 'attr' => [
-                    //     'class' => 'form-check-input',
-                    //     'role' => 'switch',
-                    // ],
+            // 'attr' => [
+            //     'class' => 'form-check-input',
+            //     'role' => 'switch',
+            // ],
             //     'multiple' => true, // Permettre la sélection de plusieurs accessoires
             //     'expanded' => true, // Afficher les cases à cocher au lieu d'un select
             //     'required' => false, // Peut être facultatif
             // ])
             ->add('price', NumberType::class, [
-                'label' => 'Prix*',
+                'label' => false,
                 'required' => true,
                 'scale' => 2,
                 'attr' => [
-                    'class' => 'input'
+                    'class' => 'input',
+                    'placeholder' => 'Prix *',
                 ]
             ])
             ->add('category', EntityType::class, [
                 'class' => 'App\Entity\Category',
+                'label' => false,
                 'choice_label' => 'name',
-                'label' => 'Catégorie',
                 'required' => false,
                 'multiple' => false,
                 'expanded' => false,
+                'placeholder' => 'Catégorie *',
                 'attr' => [
                     'class' => 'input sm'
                 ]
             ])
             ->add('cp', TextType::class, [
-                'label' => 'Code Postale*',
                 'required' => true,
+                'label' => false,
                 'attr' => [
-                    'class' => 'input sm'
+                    'class' => 'input sm',
+                    'placeholder' => 'Code Postale*'
                 ],
                 'label_attr' => [
                     'class' => 'label',  // Class for the label
                 ],
-              ])
+            ])
             ->add('address', TextType::class, [
-                'label' => 'Adresse*',
                 'required' => true,
+                'label' => false,
                 'attr' => [
-                    'class' => 'input'
+                    'class' => 'input',
+                    'placeholder' => 'Adresse *'
                 ],
                 'label_attr' => [
                     'class' => 'label',  // Class for the label
                 ],
             ])
             ->add('city', TextType::class, [
-                'label' => 'Ville*',
                 'required' => true,
+                'label' => false,
                 'attr' => [
-                    'class' => 'input sm'
+                    'class' => 'input sm',
+                    'placeholder' => 'Ville *'
                 ],
                 'label_attr' => [
                     'class' => 'label',  // Class for the label
                 ],
             ])
             ->add('country', TextType::class, [
-                'label' => 'Pays*',
                 'required' => true,
+                'label' => false,
                 'attr' => [
-                    'class' => 'input sm'
+                    'class' => 'input sm',
+                    'placeholder' => 'Pays *'
                 ],
                 'label_attr' => [
                     'class' => 'label',  // Class for the label
                 ],
             ])
             ->add('description', TextareaType::class, [
-                'label' => 'Description*',
                 'required' => true,
+                'label' => false,
                 'attr' => [
                     'class' => 'textarea-description',
+                    'placeholder' => 'Description *'
                 ]
             ])
             ->add('other', TextareaType::class, [
-                'label' => 'Autres détails',
                 'required' => false,
+                'label' => false,
                 'attr' => [
-                    'class' => 'textarea-description other'
+                    'class' => 'textarea-description other',
+                    'placeholder' => 'Autres spécificités'
                 ]
             ])
             // Ajout d'un bouton de soumission avec le label 'Valider'
@@ -168,8 +174,7 @@ class AdvertType extends AbstractType
                 'attr' => [
                     'class' => 'sub-btn'
                 ]
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
