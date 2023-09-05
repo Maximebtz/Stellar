@@ -7,7 +7,7 @@
     <div class="wrapper-home">
         <div id="grid" class="advert-card-list">
             {% for advert in adverts %}
-                <div class="advert-card slide-in-card">
+                <div class="advert-card ">
                     <a href="{{ path('detail_advert', {'id': advert.id})}}" class="clickable-card">
                         <figure>
                             {% if advert.images is not empty %}
