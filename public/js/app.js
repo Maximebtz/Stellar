@@ -49,24 +49,3 @@ document.addEventListener("click", function (event) {
 //     }
 // });
 
-/****Ajax Window Animation Card****/
-
-// Sélectionnez toutes les cartes avec la classe .slide-in-card
-const cards = document.querySelectorAll('.slide-in-card');
-
-// Créez une instance Intersection Observer
-const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            // Si la carte est visible, ajoutez une classe pour déclencher l'animation
-            entry.target.classList.add('slide-in-active');
-            // Arrêtez d'observer cette carte une fois qu'elle a été animée
-            observer.unobserve(entry.target);
-        }
-    });
-});
-
-// Observez chaque carte
-cards.forEach(card => {
-    observer.observe(card);
-});

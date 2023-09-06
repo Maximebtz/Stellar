@@ -1,19 +1,22 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Pacifico&display=swap');
 
 /************** Var **************/
 :root {
-    --light-purple: #a682ff;
-    --dark-purple: #715aff;
+    --light-purple: #A12DB4;
+    --dark-purple: #6424a5;
     --light-blue: #55c1ff;
-    --middle-blue: #5887ff;
-    --dark-blue: #102e4a;
-    --white: ghostwhite;
+    --middle-blue: #1613cd;
+    --dark-blue: #1A1884;
+    --white: #ffffff;
     --black: #100f0f;
     --lightgray: lightgray;
     --darkgray: grey;
     --boxshadow: rgba(0, 0, 0, 0.025);
+    --gradient-p-b: linear-gradient(20deg, var(--light-purple) -15%, var(--dark-blue) 150%);
+    --gradient-b-b: linear-gradient(50deg, var(--dark-blue) 7.56%, #0000ff 61.06%);
 }
 
 /************** Warning & infos **************/
@@ -82,11 +85,15 @@ body {
 
 /************** Header **************/
 header {
-    padding: 25px 50px;
+    padding: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 120px;
+    height: 100px;
+    border-width: 0px 0px 1px 0px;
+    border-style: solid;
+    border-image: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.08) 50%, rgba(0, 0, 0, 0) 100%);
+    border-image-slice: 1;
 
     .logo {
         display: flex;
@@ -101,14 +108,13 @@ header {
             align-items: flex-end;
 
             .title {
-                font-family: 'Dancing Script', cursive;
+                font-family: 'Pacifico', cursive;
                 color: var(--black);
                 text-align: center;
-                line-height: 31px;
                 letter-spacing: 1px;
                 font-size: 2.5em;
+                font-weight: lighter;
                 padding-left: 10px;
-                font-weight: 700;
             }
 
             .fig-logo {
@@ -130,7 +136,6 @@ header {
         position: relative;
 
         a {
-            height: max-content;
             margin-right: 10px;
         }
 
@@ -196,33 +201,34 @@ header {
     }
 
     .login {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         border-radius: 10px;
-        border: 1px solid transparent;
+        border: 1px solid var(--dark-purple);
         width: 100px;
         height: 46px;
         font-size: larger;
         position: relative;
-        text-align: center;
-        line-height: 46px;
-        text-decoration: none;
-        display: inline-block;
-        background: linear-gradient(32.94deg, #a12db4 0%, #2724a5 100%);
-        color: transparent;
-        -webkit-background-clip: text;
-        background-clip: text;
         transition: all .6s ease-in-out;
+        background: var(--gradient-p-b);
+        background-clip: text;
+        text-decoration: none;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        cursor: pointer;
+        transition: all .2s ease-in-out;
+
         &:hover {
-            background: linear-gradient(32.94deg, #a12db4 0%, #2724a5 100%);
-            border-radius: 10px;
-            border: none;
-            position: relative;
-            color: white;
-            font-size: large;
+            transform: scale(1.02);
         }
     }
 
     .signup {
-        background: linear-gradient(32.94deg, #a12db4 0%, #2724a5 100%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: var(--gradient-p-b);
         border-radius: 10px;
         width: 120px;
         height: 46px;
@@ -230,20 +236,12 @@ header {
         position: relative;
         color: white;
         font-size: large;
-        transition: all .6s ease-in-out;
+        text-decoration: none;
+        cursor: pointer;
+        transition: all .2s ease-in-out;
+
         &:hover {
-            background: linear-gradient(32.94deg, #a12db4 0%, #2724a5 100%);
-            border-radius: 10px;
-            border: 1px solid transparent;
-            font-size: larger;
-            position: relative;
-            text-align: center;
-            line-height: 46px;
-            text-decoration: none;
-            display: inline-block;
-            color: transparent;
-            -webkit-background-clip: text;
-            background-clip: text;
+            transform: scale(1.02);
         }
     }
 }
@@ -319,10 +317,105 @@ header {
 .wrapper-form {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
     width: 100%;
+    height: 100vh;
+    padding: 8%;
     min-height: calc(100vh - 120px);
+
+    .log-content {
+        display: flex;
+        flex-direction: column;
+        max-width: 400px;
+
+        &-title {
+            margin-bottom: 35%;
+
+            h1 {
+                font-size: 3em;
+                font-family: 'Pacifico', cursive;
+                background: var(--gradient-b-b);
+                background-clip: text;
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                font-size: 3rem;
+                font-style: normal;
+                font-weight: 400;
+            }
+
+            h2 {
+                font-size: 30px;
+                font-weight: 500;
+                background: linear-gradient(80deg, var(--light-purple) -5%, var(--dark-blue) 55.21%);
+                background-clip: text;
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+        }
+
+        &-form {
+            display: flex;
+            flex-direction: column;
+
+            input {
+                height: 36px;
+                border-width: 0px 0px 1px 0px;
+                border-style: solid;
+                border-color: #705aff56;
+                outline: none;
+                font-size: large;
+                padding: 10px;
+                margin-bottom: 35px;
+
+                &:focus {
+                    border-color: #705aff;
+                }
+            }
+            label {
+                font-size: larger;
+                color: #1A1884;
+            }
+            .sub-btn {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background: var(--gradient-p-b);
+                border-radius: 10px;
+                width: 120px;
+                height: 46px;
+                border: none;
+                position: relative;
+                color: white;
+                font-size: large;
+                text-decoration: none;
+                cursor: pointer;
+                transition: all .2s ease-in-out;
+
+                &:hover {
+                    transform: scale(1.02);
+                }
+            }
+        }
+    }
+
+    .background-under {
+        position: fixed;
+        min-width: 100%;
+        height: 100vh;
+        background-size: contain;
+        top: 0;
+        right: 0;
+        z-index: -1;
+    }
+
+    .background-upper {
+        position: fixed;
+        width: 100%;
+        min-width: 1180px;
+        height: 100vh;
+        top: 0;
+        left: 0;
+        z-index: -1;
+    }
 }
 
 .wrapper-detail {

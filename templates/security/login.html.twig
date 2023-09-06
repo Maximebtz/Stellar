@@ -3,9 +3,18 @@
 {% block title %}Log in!{% endblock %}
 
 {% block body %}
+{% block header %} {% endblock header %}
     <div class="wrapper-form">
-        <div class="">
-            <form method="post">
+        <div class="background">
+            <img class="background-under" src="{{ asset('img/maxime2854_purple_and_blue_sky_with_a_atypical_bright_cabin_in__3df4a4dc-11d1-4535-aa50-a07fa6068bae.png')}}" alt="background-img">
+            <img class="background-upper" src="{{ asset('img/loginpage.png')}}" alt="background-login">
+        </div>
+        <div class="log-content">
+            <div class="log-content-title">
+                <h2>Bienvenue sur</h2>
+                <h1><a href="{{ path('app_home')}}">Stellar</a></h1>
+            </div>
+            <form class="log-content-form" method="post">
                 {% if error %}
                     <div class="">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
                 {% endif %}
@@ -16,10 +25,9 @@
                     </div>
                 {% endif %}
 
-                <h1 class="">Please sign in</h1>
                 <label for="inputEmail">Email</label>
                 <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="input" autocomplete="email" required autofocus>
-                <label for="inputPassword">Password</label>
+                <label for="inputPassword">Mot de passe</label>
                 <input type="password" name="password" id="inputPassword" class="input" autocomplete="current-password" required>
 
                 <input type="hidden" name="_csrf_token"
