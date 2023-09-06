@@ -105,7 +105,7 @@ class AdvertType extends AbstractType
                 'required' => false,
                 'multiple' => false,
                 'expanded' => false,
-                'placeholder' => 'Catégorie *',
+                'placeholder' => 'Catégorie',
                 'attr' => [
                     'class' => 'input sm'
                 ]
@@ -170,7 +170,6 @@ class AdvertType extends AbstractType
                     'placeholder' => 'Autres spécificités'
                 ]
             ])
-            // Ajout d'un bouton de soumission avec le label 'Valider'
             ->add('Valider', SubmitType::class, [
                 'attr' => [
                     'class' => 'sub-btn'

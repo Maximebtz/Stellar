@@ -595,7 +595,7 @@ header {
             text-decoration: underline;
             font-style: italic;
             font-weight: 600;
-            color: var(--dark-purple);
+            color: var(--middle-blue);
         }
 
         .drag-over {
@@ -649,7 +649,7 @@ header {
         height: 20px;
         width: 20px;
         display: flex;
-        color: ghostwhite;
+        color: var(--white);
         border: none;
         border-radius: 5px;
         align-items: center;
@@ -749,7 +749,7 @@ header {
 
 .advert-card {
     overflow: hidden;
-    background: ghostwhite;
+    background: var(--white);
     border-radius: 10px;
     position: relative;
     width: 100%;
