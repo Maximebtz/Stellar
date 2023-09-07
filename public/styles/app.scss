@@ -370,10 +370,13 @@ header {
                     border-color: #705aff;
                 }
             }
+
             label {
+                display: block;
                 font-size: larger;
                 color: #1A1884;
             }
+
             .sub-btn {
                 display: flex;
                 justify-content: center;

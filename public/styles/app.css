@@ -303,6 +303,7 @@ header .signup:hover {
   border-color: #705aff;
 }
 .wrapper-form .log-content-form label {
+  display: block;
   font-size: larger;
   color: #1A1884;
 }

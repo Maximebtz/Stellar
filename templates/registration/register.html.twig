@@ -3,25 +3,36 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
-<div class="wrapper-form">
-    <div class="">
+{% block header %} {% endblock header %}
+
+<div class="wrapper-form" style="padding: 5% 8%;">
+    <div class="background">
+            <img class="background-under" src="{{ asset('img/maxime2854_purple_and_blue_sky_with_a_atypical_bright_cabin_in__3df4a4dc-11d1-4535-aa50-a07fa6068bae.png')}}" alt="background-img">
+            <img class="background-upper" src="{{ asset('img/loginpage.png')}}" alt="background-login">
+    </div>
+    <div class="log-content">
+        <div class="log-content-title" style="margin-bottom: 20%;">
+            <h2>Bienvenue sur</h2>
+            <h1><a href="{{ path('app_home')}}">Stellar</a></h1>
+        </div>
         {% for flash_error in app.flashes('verify_email_error') %}
             <div class="" role="alert">{{ flash_error }}</div>
         {% endfor %}
 
 
         {{ form_errors(registrationForm) }}
-
-        {{ form_start(registrationForm) }}
-            {{ form_row(registrationForm.email) }}
-            {{ form_row(registrationForm.username) }}
-            {{ form_row(registrationForm.plainPassword, {
-                label: 'Password'
-            }) }}
-            {{ form_row(registrationForm.agreeTerms) }}
-
-            <button type="submit" class="sub-btn">Register</button>
-        {{ form_end(registrationForm) }}
+        <div class="log-content-form">
+            {{ form_start(registrationForm) }}
+                {{ form_row(registrationForm.email) }}
+                {{ form_row(registrationForm.username) }}
+                {{ form_row(registrationForm.plainPassword, {
+                    label: 'Password'
+                }) }}
+                {{ form_row(registrationForm.agreeTerms) }}
+    
+                <button type="submit" class="sub-btn">Register</button>
+            {{ form_end(registrationForm) }}
+        </div>
     </div>
 </div>
 {% endblock %}

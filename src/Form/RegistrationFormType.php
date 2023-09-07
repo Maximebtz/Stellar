@@ -34,17 +34,9 @@ class RegistrationFormType extends AbstractType
                     'class' => 'input'
                 ]
             ])
-            ->add('agreeTerms', CheckboxType::class, [
-                'mapped' => false,
-                'constraints' => [
-                    new IsTrue([
-                        'message' => 'You should agree to our terms.',
-                    ]),
-                ],
-            ])
             ->add('plainPassword', RepeatedType::class, [
                 'attr' => [
-                    'class' => 'input' 
+                    'class' => 'input'
                 ],
                 'type' => PasswordType::class,
                 'invalid_message' => 'The password fields must match.',
@@ -52,42 +44,16 @@ class RegistrationFormType extends AbstractType
                 'required' => true,
                 'first_options'  => ['label' => 'Password'],
                 'second_options' => ['label' => 'Repeat Password'],
-                // // instead of being set onto the object directly,
-                // // this is read and encoded in the controller
                 'mapped' => false,
             ])
-            // ->add('avatar', FileType::class, [
-            //     'label' => 'Photo de profil',
-            //     'multiple' => true,
-            //     'attr' => [
-            //         'class' => 'form-control',  // Class for the input field
-            //     ],
-            //     'label_attr' => [
-            //         'class' => 'form-label',  // Class for the label
-            //     ],
-            //     'mapped' => false,
-            //     // make it optional so you don't have to re-upload the avatar
-            //     // every time you edit the user's details
-            //     'required' => false,
-            
-            //     // unmapped fields can't define their validation using annotations
-            //     // in the associated entity, so you can use the PHP constraint classes
-            //     'constraints' => [
-            //         new All([
-            //             new File([
-            //                 // 'maxSize' => '1024k',
-            //                 'mimeTypes' => [
-            //                     'image/jpeg',
-            //                     'image/jpg',
-            //                     'image/png',
-            //                     'image/webp',
-            //                 ],
-            //                 'mimeTypesMessage' => 'Please upload a valid image document',
-            //             ])
-            //         ])
-            //     ],
-            // ])
-        ;
+            ->add('agreeTerms', CheckboxType::class, [
+                'mapped' => false,
+                'constraints' => [
+                    new IsTrue([
+                        'message' => 'You should agree to our terms.',
+                    ]),
+                ],
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
