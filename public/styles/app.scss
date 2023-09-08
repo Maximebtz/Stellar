@@ -89,43 +89,22 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 100px;
+    height: max-content;
     border-width: 0px 0px 1px 0px;
     border-style: solid;
     border-image: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.08) 50%, rgba(0, 0, 0, 0) 100%);
     border-image-slice: 1;
 
     .logo {
-        display: flex;
-        justify-content: space-between;
-        align-items: end;
-        width: 140px;
-
         a {
-            color: var(--white);
             text-decoration: none;
-            display: flex;
-            align-items: flex-end;
-
             .title {
-                font-family: 'Pacifico', cursive;
+                font-family:  'Pacifico', cursive;
                 color: var(--black);
                 text-align: center;
-                letter-spacing: 1px;
-                font-size: 2.5em;
+                font-size: 40px;
                 font-weight: lighter;
-                padding-left: 10px;
-            }
-
-            .fig-logo {
-                display: flex;
-                align-items: center;
-                flex-direction: column;
-
-                .icon-logo {
-                    width: 45px;
-                    height: 45px;
-                }
+                line-height: 40px;
             }
         }
     }
@@ -140,9 +119,9 @@ header {
         }
 
         #profil-picture {
-            width: 60px;
-            height: 60px;
-            border-radius: 10px;
+            width: 45px;
+            height: 45px;
+            border-radius: 50px;
             cursor: pointer;
         }
 
@@ -503,7 +482,7 @@ header {
         cursor: pointer;
     }
 
-    /****** Form Content ******/
+    /****** Form Content For Add Advert ******/
     .input {
         height: 45px;
         font-size: x-large;

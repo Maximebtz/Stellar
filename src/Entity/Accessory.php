@@ -21,6 +21,9 @@ class Accessory
     #[ORM\OneToMany(mappedBy: 'accessory', targetEntity: Advert::class)]
     private Collection $advert;
 
+    #[ORM\Column(length: 255)]
+    private ?string $icon = null;
+
     public function __construct()
     {
         $this->advert = new ArrayCollection();
@@ -69,6 +72,18 @@ class Accessory
                 $advert->setAccessory(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getIcon(): ?string
+    {
+        return $this->icon;
+    }
+
+    public function setIcon(string $icon): static
+    {
+        $this->icon = $icon;
 
         return $this;
     }
