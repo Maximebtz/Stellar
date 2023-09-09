@@ -31,7 +31,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[ORM\Column]
     private ?string $password = null;
-    
+
     #[ORM\Column(length: 20, unique: true)]
     private ?string $username = null;
 
@@ -185,65 +185,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @return Collection<int, Message>
-     */
-    public function getSendMessages(): Collection
-    {
-        return $this->sendMessages;
-    }
-
-    public function addSendMessage(Message $sendMessage): static
-    {
-        if (!$this->sendMessages->contains($sendMessage)) {
-            $this->sendMessages->add($sendMessage);
-            $sendMessage->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeSendMessage(Message $sendMessage): static
-    {
-        if ($this->sendMessages->removeElement($sendMessage)) {
-            // set the owning side to null (unless already changed)
-            if ($sendMessage->getUser() === $this) {
-                $sendMessage->setUser(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Message>
-     */
-    public function getReceivedMessages(): Collection
-    {
-        return $this->receivedMessages;
-    }
-
-    public function addReceivedMessage(Message $receivedMessage): static
-    {
-        if (!$this->receivedMessages->contains($receivedMessage)) {
-            $this->receivedMessages->add($receivedMessage);
-            $receivedMessage->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeReceivedMessage(Message $receivedMessage): static
-    {
-        if ($this->receivedMessages->removeElement($receivedMessage)) {
-            // set the owning side to null (unless already changed)
-            if ($receivedMessage->getUser() === $this) {
-                $receivedMessage->setUser(null);
-            }
-        }
-
-        return $this;
-    }
+    
 
     /**
      * @return Collection<int, Notice>
