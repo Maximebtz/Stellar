@@ -21,6 +21,9 @@ class Lodge
     #[ORM\OneToMany(mappedBy: 'lodge', targetEntity: Advert::class, orphanRemoval: true)]
     private Collection $advert;
 
+    #[ORM\Column(length: 255)]
+    private ?string $icon = null;
+
     public function __construct()
     {
         $this->advert = new ArrayCollection();
@@ -70,6 +73,18 @@ class Lodge
                 $advert->setLodge(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getIcon(): ?string
+    {
+        return $this->icon;
+    }
+
+    public function setIcon(string $icon): static
+    {
+        $this->icon = $icon;
 
         return $this;
     }

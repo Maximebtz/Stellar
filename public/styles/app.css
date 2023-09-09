@@ -2,7 +2,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Anton&family=Pacifico&display=swap");
-/************** Var **************/
 :root {
   --light-purple: #A12DB4;
   --dark-purple: #6424a5;
@@ -10,15 +9,15 @@
   --middle-blue: #1613cd;
   --dark-blue: #1A1884;
   --white: #ffffff;
-  --black: #100f0f;
-  --lightgray: lightgray;
-  --darkgray: grey;
+  --black: #333333;
+  --darkgray: #4D4D4D;
+  --middlegray: #999999;
+  --lightgray: #CCCCCC;
   --boxshadow: rgba(0, 0, 0, 0.025);
   --gradient-p-b: linear-gradient(20deg, var(--light-purple) -15%, var(--dark-blue) 150%);
   --gradient-b-b: linear-gradient(50deg, var(--dark-blue) 7.56%, #0000ff 61.06%);
 }
 
-/************** Warning & infos **************/
 pre {
   font-size: larger;
   font-weight: 500;
@@ -36,7 +35,6 @@ pre {
     opacity: 0;
   }
 }
-/************** All **************/
 * {
   padding: 0;
   margin: 0;
@@ -52,7 +50,6 @@ input:-webkit-autofill {
   background-color: red !important;
 }
 
-/************** Body **************/
 body {
   font-family: "Roboto", sans-serif;
   min-height: 100vh;
@@ -60,48 +57,29 @@ body {
   color: var(--black);
 }
 
-/************** Header **************/
 header {
   padding: 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 100px;
+  height: -moz-max-content;
+  height: max-content;
   border-width: 0px 0px 1px 0px;
   border-style: solid;
-  -o-border-image: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.08) 50%, rgba(0, 0, 0, 0) 100%);
-     border-image: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.08) 50%, rgba(0, 0, 0, 0) 100%);
+  -o-border-image: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.1) 50%, rgba(0, 0, 0, 0) 100%);
+     border-image: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.1) 50%, rgba(0, 0, 0, 0) 100%);
   border-image-slice: 1;
 }
-header .logo {
-  display: flex;
-  justify-content: space-between;
-  align-items: end;
-  width: 140px;
-}
 header .logo a {
-  color: var(--white);
   text-decoration: none;
-  display: flex;
-  align-items: flex-end;
 }
 header .logo a .title {
   font-family: "Pacifico", cursive;
   color: var(--black);
   text-align: center;
-  letter-spacing: 1px;
-  font-size: 2.5em;
+  font-size: 40px;
   font-weight: lighter;
-  padding-left: 10px;
-}
-header .logo a .fig-logo {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-}
-header .logo a .fig-logo .icon-logo {
-  width: 45px;
-  height: 45px;
+  line-height: 40px;
 }
 header .log {
   display: flex;
@@ -112,9 +90,9 @@ header .log a {
   margin-right: 10px;
 }
 header .log #profil-picture {
-  width: 60px;
-  height: 60px;
-  border-radius: 10px;
+  width: 45px;
+  height: 45px;
+  border-radius: 50px;
   cursor: pointer;
 }
 header .log #profil-menu {
@@ -214,7 +192,6 @@ header .signup:hover {
     opacity: 1;
   }
 }
-/************** Wrapper **************/
 .wrapper {
   display: flex;
   padding: 20px;
@@ -349,7 +326,6 @@ header .signup:hover {
   min-height: 100vh;
   max-width: 1150px;
   width: 100%;
-  /****** Form Content ******/
 }
 .wrapper-detail .grid-wrap .single-img {
   width: 100%;
@@ -419,6 +395,7 @@ header .signup:hover {
   font-size: larger;
   cursor: pointer;
 }
+
 .wrapper-detail .input {
   height: 45px;
   font-size: x-large;
@@ -575,17 +552,16 @@ header .signup:hover {
     opacity: 1;
   }
 }
-.info-add-property {
+.wrapper-detail .info-add-property {
   display: flex;
 }
-
-.input-title {
+.wrapper-detail .input-title {
   width: 100%;
   display: flex;
   justify-content: center;
   margin: 25px 0;
 }
-.input-title input {
+.wrapper-detail .input-title input {
   text-align: center;
 }
 
@@ -602,7 +578,6 @@ header .signup:hover {
   padding-bottom: 20px;
 }
 
-/************** Content **************/
 #grid {
   height: 100%;
   width: 50%;
@@ -703,10 +678,7 @@ header .signup:hover {
   align-items: center;
 }
 
-/************** Footer *************/
-/************** Responsive Design *************/
 @media only screen and (max-width: 770px) {
-  /************ Wrapper *************/
   .wrapper-detail .img-advert-detail {
     grid-template-columns: 1fr;
     grid-template-areas: "l-img" "sm-img";
@@ -729,11 +701,9 @@ header .signup:hover {
   }
 }
 @media only screen and (max-width: 450px) {
-  /************** Body **************/
   body {
     padding: 25px;
   }
-  /************** Header **************/
   header {
     padding: 0;
     height: -moz-max-content;
@@ -750,7 +720,6 @@ header .signup:hover {
     width: 55px;
     height: 55px;
   }
-  /************** wrapper **************/
   .wrapper {
     padding: 25px 0;
   }
