@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <title>{% block title %}Welcome!{% endblock %}</title>
-    <link rel="icon" href="{{ asset('img/logo.png') }}" />
+    <link rel="icon" href="{{ asset('img/icons/logo.png') }}" />
     {% block stylesheets %}
     {{
       encore_entry_link_tags("app")
@@ -77,5 +77,6 @@
   <script src="{{ asset('js/app.js') }}"></script>
   <script src="{{ asset('js/map.js') }}"></script>
   <script src="{{ asset('js/upload.js') }}"></script>
+  <script src="{{ asset('js/calendar.js') }}"></script>
   {% endblock %}
 </html>
