@@ -98,17 +98,15 @@ class AdvertType extends AbstractType
                     'placeholder' => 'Prix *',
                 ]
             ])
-            ->add('category', EntityType::class, [
+            ->add('categories', EntityType::class, [
                 'class' => 'App\Entity\Category',
                 'label' => false,
                 'choice_label' => 'name',
-                'required' => false,
-                'multiple' => false,
-                'expanded' => false,
-                'placeholder' => 'Catégorie',
-                'attr' => [
-                    'class' => 'input sm'
-                ]
+                'expanded' => true,
+                'multiple' => true, 
+                "attr" => [
+                    "class" => 'checkbox-input',    
+                ],
             ])
             ->add('cp', TextType::class, [
                 'required' => true,

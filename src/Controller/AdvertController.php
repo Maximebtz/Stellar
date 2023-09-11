@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Advert;
 use App\Entity\Images;
 use App\Form\AdvertType;
+use App\Repository\CategoryRepository;
 use App\Service\FileUploader;
 use App\Repository\ImagesRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -35,16 +36,16 @@ class AdvertController extends AbstractController
     #[Route('/owner/add-property', name: 'new_advert')]
     #[Route('/owner/edit-property/{id}', name: 'edit_advert')]
     #[IsGranted('ROLE_USER')]
-    public function new_edit(Advert $advert = null, Request $request, FileUploader $fileUploader, ImagesRepository $imagesRepository): Response
+    public function new_edit(Advert $advert = null, Request $request, FileUploader $fileUploader, CategoryRepository $categoryRepository): Response
     {
         if (!$advert) {
             $advert = new Advert();
         }
 
-        $form = $this->createForm(AdvertType::class, $advert);
+        //Récupérer les catégories
+        $categories = $categoryRepository->findAll();
 
-        // Récupérez les images depuis la base de données
-        // $imagesFromDatabase = $imagesRepository->findBy(['advert' => $advert]);
+        $form = $this->createForm(AdvertType::class, $advert);
 
         $form->handleRequest($request);
 
@@ -66,6 +67,11 @@ class AdvertController extends AbstractController
                 }
             }
 
+            $selectedCategories = $form->get('categories')->getData();
+            foreach ($selectedCategories as $category) {
+                $advert->addCategory($category);
+            }
+
             $advert->setOwner($this->getUser());
 
             $this->entityManager->persist($advert);
@@ -77,19 +83,22 @@ class AdvertController extends AbstractController
         return $this->render('advert/new.html.twig', [
             'formAddAdvert' => $form->createView(),
             'edit' => $advert->getId(),
-            // 'imagesFromDatabase' => $imagesFromDatabase,
+            'categories' => $categories,
         ]);
     }
 
     #[Route('/user/advert/detail/{id}', name: 'detail_advert')]
     #[IsGranted('ROLE_USER')]
-    public function showDetailAdvert($id): Response
+    public function showDetailAdvert($id, CategoryRepository $categoryRepository): Response
     {
         $repository = $this->entityManager->getRepository(Advert::class);
         $advert = $repository->find($id);
+        $categories = $categoryRepository->findAll();
+        
 
         return $this->render('advert/detail.html.twig', [
             'advert' => $advert,
+            'categories' => $categories
         ]);
     }
 

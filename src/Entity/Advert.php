@@ -53,15 +53,17 @@ class Advert
     #[ORM\OneToMany(targetEntity: Images::class, mappedBy: "adverts", orphanRemoval: true, cascade: ['persist'])]
     private Collection $images;
 
-    #[ORM\ManyToOne(inversedBy: 'advert')]
-    private ?Category $category = null;
+    
 
     #[ORM\ManyToOne(inversedBy: 'advert')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Lodge $lodge = null;
 
-    #[ORM\ManyToOne(inversedBy: 'advert')]
-    private ?Accessory $accessory = null;
+    #[ORM\ManyToMany(targetEntity: Category::class, inversedBy: 'adverts')]
+    private Collection $categories;
+
+    #[ORM\ManyToMany(targetEntity: Accessory::class, inversedBy: 'adverts')]
+    private Collection $accessories;
 
     
     public function __construct()
@@ -69,6 +71,8 @@ class Advert
         $this->reservations = new ArrayCollection();
         $this->notices = new ArrayCollection();
         $this->images = new ArrayCollection();
+        $this->categories = new ArrayCollection();
+        $this->accessories = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -275,17 +279,6 @@ class Advert
         return $this;
     }
 
-    public function getCategory(): ?Category
-    {
-        return $this->category;
-    }
-
-    public function setCategory(?Category $category): static
-    {
-        $this->category = $category;
-
-        return $this;
-    }
 
     public function getLodge(): ?Lodge
     {
@@ -299,14 +292,50 @@ class Advert
         return $this;
     }
 
-    public function getAccessory(): ?Accessory
+    /**
+     * @return Collection<int, Category>
+     */
+    public function getCategories(): Collection
     {
-        return $this->accessory;
+        return $this->categories;
     }
 
-    public function setAccessory(?Accessory $accessory): static
+    public function addCategory(Category $category): static
     {
-        $this->accessory = $accessory;
+        if (!$this->categories->contains($category)) {
+            $this->categories->add($category);
+        }
+
+        return $this;
+    }
+
+    public function removeCategory(Category $category): static
+    {
+        $this->categories->removeElement($category);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Accessory>
+     */
+    public function getAccessories(): Collection
+    {
+        return $this->accessories;
+    }
+
+    public function addAccessory(Accessory $accessory): static
+    {
+        if (!$this->accessories->contains($accessory)) {
+            $this->accessories->add($accessory);
+        }
+
+        return $this;
+    }
+
+    public function removeAccessory(Accessory $accessory): static
+    {
+        $this->accessories->removeElement($accessory);
 
         return $this;
     }

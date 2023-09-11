@@ -18,11 +18,12 @@ class Category
     #[ORM\Column(length: 25)]
     private ?string $name = null;
 
-    #[ORM\OneToMany(mappedBy: 'category', targetEntity: Advert::class)]
-    private Collection $adverts;
 
     #[ORM\Column(length: 255)]
     private ?string $icon = null;
+
+    #[ORM\ManyToMany(targetEntity: Advert::class, mappedBy: 'categories')]
+    private Collection $adverts;
 
     public function __construct()
     {
@@ -46,6 +47,18 @@ class Category
         return $this;
     }
 
+    public function getIcon(): ?string
+    {
+        return $this->icon;
+    }
+
+    public function setIcon(string $icon): static
+    {
+        $this->icon = $icon;
+
+        return $this;
+    }
+
     /**
      * @return Collection<int, Advert>
      */
@@ -58,7 +71,7 @@ class Category
     {
         if (!$this->adverts->contains($advert)) {
             $this->adverts->add($advert);
-            $advert->setCategory($this);
+            $advert->addCategory($this);
         }
 
         return $this;
@@ -67,23 +80,8 @@ class Category
     public function removeAdvert(Advert $advert): static
     {
         if ($this->adverts->removeElement($advert)) {
-            // set the owning side to null (unless already changed)
-            if ($advert->getCategory() === $this) {
-                $advert->setCategory(null);
-            }
+            $advert->removeCategory($this);
         }
-
-        return $this;
-    }
-
-    public function getIcon(): ?string
-    {
-        return $this->icon;
-    }
-
-    public function setIcon(string $icon): static
-    {
-        $this->icon = $icon;
 
         return $this;
     }

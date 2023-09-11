@@ -1,100 +1,174 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}{{advert.title}}{% endblock %}
-
+{% extends 'base.html.twig' %} {% block title %}{{ advert.title }}{% endblock %}
 {% block body %}
-    <div class="wrapper">
-        <div class="wrapper-detail">
-            <div class="grid-wrap">
-                {% if advert.images | length > 1 %}
-                    <div class="img-advert-detail">
-                        <div class="l-img">
-                            {% if advert.images | length > 0 %}
-                                {% if app.user is same as advert.owner %}
-                                    <div class="modif-icons">
-                                        {# <a class="modif" href="{{ path('remove_advert_image', {'id': advert.images}) }}"> #}
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
-                                                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 
-                                                8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
-                                            </svg>
-                                        {# </a> #}
-                                    </div>
-                                {% endif %}
-                                <img src="{{ asset('uploads/' ~ advert.images[0].url) }}" alt="{{ advert.title }}">
-                            {% endif %}
-                        </div>
-                        <div class="sm-img">
-                            {% if advert.images | length > 1 %}
-                                {% for i in 1..(advert.images | length - 1) %}
-                                    <div class="ltl-img">
-                                        {% if app.user is same as advert.owner %}
-                                            <div class="modif-icons">
-                                                <a class="modif" href="{{ path('remove_advert_image', {'advertId': advert.id, 'imageId': advert.images[i].id}) }}">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
-                                                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 
-                                                        8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
-                                                    </svg>
-                                                </a>
-                                            </div>
-                                        {% endif %}
-                                        <img src="{{ asset('uploads/' ~ advert.images[i].url) }}" alt="{{ advert.title }}">
-                                    </div>
-                                {% endfor %}
-                                {% if advert.images | length > 3 %}
-                                    <button id="showMoreBtn">Afficher plus</button>
-                                {% endif %}
-                            {% endif %}
-                        </div>
-                    </div>
-                {% else %}
-                    <div class="single-img">
-                        {% if advert.images | length > 0 %}
-                            <img src="{{ asset('uploads/' ~ advert.images[0].url) }}" alt="{{ advert.title }}">
-                        {% endif %}
-                    </div>
-                {% endif %}
-            </div>
-            <script>
-                
-            </script>
-            <h1>{{advert.title}}</h1>
-            <p><b>{{advert.price}}€</b>/Nuits</p>
-            <p>
-                {# {{advert.description}} #}
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corporis, ducimus culpa? Ipsum nesciunt, excepturi reprehenderit odio laborum aut deleniti architecto repellat sed dicta eveniet placeat? Ex doloremque commodi dignissimos nemo?
-            </p>
-            {# {% for image in advert.images %}
-                <img src="{{ asset('uploads/' ~ image.url) }}" alt="Image">
-            {% endfor %} #}
-            <div class="calendar-wrapper">
-                <div class="calendar-header">
-                  <p class="current-date"></p>
-                  <div class="icons">
-                    <span id="prev" class="material-symbols-rounded">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
-                        </svg>
-                    </span>
-                    <span id="next" class="material-symbols-rounded">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
-                        </svg>
-                    </span>
-                  </div>
-                </div>
-                <div class="calendar">
-                  <ul class="weeks">
-                    <li>Sun</li>
-                    <li>Mon</li>
-                    <li>Tue</li>
-                    <li>Wed</li>
-                    <li>Thu</li>
-                    <li>Fri</li>
-                    <li>Sat</li>
-                  </ul>
-                  <ul class="days"></ul>
-                </div>
-              </div>
+<div class="wrapper">
+  <div class="wrapper-detail">
+    <div class="grid-wrap">
+      {% if advert.images | length > 1 %}
+      <div class="img-advert-detail">
+        <div class="l-img">
+          {% if advert.images | length > 0 %} {% if app.user is same as
+          advert.owner %}
+          <div class="modif-icons">
+            {#
+            <a
+              class="modif"
+              href="{{ path('remove_advert_image', { id: advert.images }) }}"
+            >
+              #}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="19"
+                height="19"
+                fill="currentColor"
+                class="bi bi-x"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 
+                                                8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"
+                />
+              </svg>
+              {#
+            </a>
+            #}
+          </div>
+          {% endif %}
+          <img
+            src="{{ asset('uploads/' ~ advert.images[0].url) }}"
+            alt="{{ advert.title }}"
+          />
+          {% endif %}
         </div>
+        <div class="sm-img">
+          {% if advert.images | length > 1 %} {% for i in 1..(advert.images |
+          length - 1) %}
+          <div class="ltl-img">
+            {% if app.user is same as advert.owner %}
+            <div class="modif-icons">
+              <a
+                class="modif"
+                href="{{
+                  path('remove_advert_image', {
+                    advertId: advert.id,
+                    imageId: advert.images[i].id
+                  })
+                }}"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="19"
+                  height="19"
+                  fill="currentColor"
+                  class="bi bi-x"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 
+                                                        8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"
+                  />
+                </svg>
+              </a>
+            </div>
+            {% endif %}
+            <img
+              src="{{ asset('uploads/' ~ advert.images[i].url) }}"
+              alt="{{ advert.title }}"
+            />
+          </div>
+          {% endfor %} {% if advert.images | length > 3 %}
+          <button id="showMoreBtn">Afficher plus</button>
+          {% endif %} {% endif %}
+        </div>
+      </div>
+      {% else %}
+      <div class="single-img">
+        {% if advert.images | length > 0 %}
+        <img
+          src="{{ asset('uploads/' ~ advert.images[0].url) }}"
+          alt="{{ advert.title }}"
+        />
+        {% endif %}
+      </div>
+      {% endif %}
     </div>
+    <script></script>
+    <h1>{{ advert.title }}</h1>
+    <p>
+      <b>{{ advert.price }}€</b>/Nuits
+    </p>
+    <div class="checkbox-wrapper-16">
+      {% for category in advert.categories %}
+      <div class="checkbox-wrapper">
+        <span class="checkbox-tile">
+          <span class="checkbox-icon">
+            <img
+              src="{{ asset('img/icons/categories/' ~ category.icon)}}"
+              alt="{{ category.name }}"
+            />
+          </span>
+          <span class="checkbox-label">{{ category.name }}</span>
+        </span>
+    </div>
+      {% endfor %} {# {{ form_row(formAddAdvert.accessory) }} #}
+    </div>
+    <p>
+      {# {{ advert.description }} #} Lorem ipsum, dolor sit amet consectetur
+      adipisicing elit. Corporis, ducimus culpa? Ipsum nesciunt, excepturi
+      reprehenderit odio laborum aut deleniti architecto repellat sed dicta
+      eveniet placeat? Ex doloremque commodi dignissimos nemo?
+    </p>
+    {# {% for image in advert.images %}
+    <img src="{{ asset('uploads/' ~ image.url) }}" alt="Image" />
+    {% endfor %} #}
+    <div class="calendar-wrapper">
+      <div class="calendar-header">
+        <p class="current-date"></p>
+        <div class="icons">
+          <span id="prev" class="material-symbols-rounded">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-chevron-left"
+              viewBox="0 0 16 16"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"
+              />
+            </svg>
+          </span>
+          <span id="next" class="material-symbols-rounded">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-chevron-right"
+              viewBox="0 0 16 16"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"
+              />
+            </svg>
+          </span>
+        </div>
+      </div>
+      <div class="calendar">
+        <ul class="weeks">
+          <li>Sun</li>
+          <li>Mon</li>
+          <li>Tue</li>
+          <li>Wed</li>
+          <li>Thu</li>
+          <li>Fri</li>
+          <li>Sat</li>
+        </ul>
+        <ul class="days"></ul>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}

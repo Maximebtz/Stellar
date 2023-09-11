@@ -507,115 +507,226 @@ header {
 
 //****** Calendar ******//
 
-.calendar-wrapper {
-    width: 450px;
-    background: var(--white);
-    border-radius: 10px;
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.10);
+.wrapper-detail {
+    .calendar-wrapper {
+        width: 450px;
+        background: var(--white);
+        border-radius: 10px;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.10);
 
-    .calendar-header {
-        display: flex;
-        align-items: center;
-        padding: 25px 30px 10px;
-        justify-content: space-between;
-
-        .icons {
+        .calendar-header {
             display: flex;
+            align-items: center;
+            padding: 25px 30px 10px;
+            justify-content: space-between;
 
-            span {
-                height: 38px;
-                width: 38px;
-                margin: 0 1px;
-                cursor: pointer;
-                color: var(--darkgray);
-                text-align: center;
-                line-height: 38px;
-                font-size: 1.9rem;
-                user-select: none;
-                border-radius: 50%;
+            .icons {
                 display: flex;
-                align-items: center;
-                justify-content: center;
+
+                span {
+                    height: 38px;
+                    width: 38px;
+                    margin: 0 1px;
+                    cursor: pointer;
+                    color: var(--darkgray);
+                    text-align: center;
+                    line-height: 38px;
+                    font-size: 1.9rem;
+                    user-select: none;
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+
+                span:last-child {
+                    margin-right: -10px;
+                }
+
+                span:hover {
+                    background: var(--lightgray);
+                }
+
+                .current-date {
+                    font-size: 1.45rem;
+                    font-weight: 500;
+                }
+            }
+        }
+
+        .calendar {
+            padding: 20px;
+
+            ul {
+                display: flex;
+                flex-wrap: wrap;
+                list-style: none;
+                text-align: center;
             }
 
-            span:last-child {
-                margin-right: -10px;
+            .days {
+                margin-bottom: 20px;
+
+                li {
+                    z-index: 1;
+                    cursor: pointer;
+                    position: relative;
+                    margin-top: 30px;
+                }
+
+                li.inactive {
+                    color: var(--middlegray);
+                }
+
+                li.active {
+                    color: var(--white);
+                }
+
+                li::before {
+                    position: absolute;
+                    content: "";
+                    left: 50%;
+                    top: 50%;
+                    height: 40px;
+                    width: 40px;
+                    z-index: -1;
+                    border-radius: 50%;
+                    transform: translate(-50%, -50%);
+                }
+
+                li.active::before {
+                    background: var(--light-purple);
+                }
+
+                li:not(.active):hover::before {
+                    background: var(--lightgray);
+                }
             }
 
-            span:hover {
-                background: var(--lightgray);
+            li {
+                color: var(--black);
+                width: calc(100% / 7);
+                font-size: 1.07rem;
             }
 
-            .current-date {
-                font-size: 1.45rem;
-                font-weight: 500;
+            .weeks {
+                li {
+                    font-weight: 500;
+                    cursor: default;
+                }
             }
+        }
+
+    }
+}
+
+//****** Form Content For Add Advert ******//
+
+.wrapper-detail {
+    .checkbox-wrapper-16 {
+        display: flex;
+        gap: 7px;
+        
+        .checkbox-input {
+            clip: rect(0 0 0 0);
+            -webkit-clip-path: inset(100%);
+            clip-path: inset(100%);
+            height: 1px;
+            overflow: hidden;
+            position: absolute;
+            white-space: nowrap;
+            width: 1px;
+        }
+
+        .checkbox-input:checked+.checkbox-tile {
+            border-color: var(--light-purple);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            color: var(--light-purple);
+        }
+
+        .checkbox-input:checked+.checkbox-tile:before {
+            transform: scale(1);
+            opacity: 1;
+            background-color: var(--light-purple);
+            border-color: var(--light-purple);
         }
     }
 
-    .calendar {
-        padding: 20px;
-
-        ul {
-            display: flex;
-            flex-wrap: wrap;
-            list-style: none;
-            text-align: center;
-        }
-
-        .days {
-            margin-bottom: 20px;
-
-            li {
-                z-index: 1;
-                cursor: pointer;
-                position: relative;
-                margin-top: 30px;
-            }
-
-            li.inactive {
-                color: var(--middlegray);
-            }
-
-            li.active {
-                color: var(--white);
-            }
-
-            li::before {
-                position: absolute;
-                content: "";
-                left: 50%;
-                top: 50%;
-                height: 40px;
-                width: 40px;
-                z-index: -1;
-                border-radius: 50%;
-                transform: translate(-50%, -50%);
-            }
-
-            li.active::before {
-                background: var(--light-purple);
-            }
-
-            li:not(.active):hover::before {
-                background: var(--lightgray);
-            }
-        }
-
-        li {
-            color: var(--black);
-            width: calc(100% / 7);
-            font-size: 1.07rem;
-        }
-
-        .weeks {
-            li {
-                font-weight: 500;
-                cursor: default;
-            }
-        }
+    .checkbox-wrapper-16 .checkbox-input:checked+.checkbox-tile .checkbox-icon,
+    .checkbox-wrapper-16 .checkbox-input:checked+.checkbox-tile .checkbox-label {
+        color: var(--light-purple);
     }
 
+    .checkbox-wrapper-16 .checkbox-input:focus+.checkbox-tile {
+        border-color: var(--light-purple);
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1), 0 0 0 4px #b5c9fc;
+    }
+
+    .checkbox-wrapper-16 .checkbox-input:focus+.checkbox-tile:before {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    .checkbox-wrapper-16 .checkbox-tile {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 7rem;
+        min-height: 7rem;
+        border-radius: 0.5rem;
+        border: 2px solid var(--lightgray);
+        background-color: var(--white);
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        transition: 0.15s ease;
+        cursor: pointer;
+        position: relative;
+    }
+
+    // .checkbox-wrapper-16 .checkbox-tile:before {
+    //     content: "";
+    //     position: absolute;
+    //     display: block;
+    //     width: 1.25rem;
+    //     height: 1.25rem;
+    //     border: 2px solid var(--lightgray);
+    //     background-color: var(--white);
+    //     border-radius: 50%;
+    //     top: 0.25rem;
+    //     left: 0.25rem;
+    //     opacity: 0;
+    //     transform: scale(0);
+    //     transition: 0.25s ease;
+    //     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='192' height='192' fill='%23FFFFFF' viewBox='0 0 256 256'%3E%3Crect width='256' height='256' fill='none'%3E%3C/rect%3E%3Cpolyline points='216 72.005 104 184 48 128.005' fill='none' stroke='%23FFFFFF' stroke-linecap='round' stroke-linejoin='round' stroke-width='32'%3E%3C/polyline%3E%3C/svg%3E");
+    //     background-size: 12px;
+    //     background-repeat: no-repeat;
+    //     background-position: 50% 50%;
+    // }
+
+    .checkbox-wrapper-16 .checkbox-tile:hover {
+        border-color: var(--light-purple);
+    }
+
+    .checkbox-wrapper-16 .checkbox-tile:hover:before {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    .checkbox-wrapper-16 .checkbox-icon {
+        transition: 0.375s ease;
+        color: #494949;
+    }
+
+    .checkbox-wrapper-16 .checkbox-icon svg {
+        width: 3rem;
+        height: 3rem;
+    }
+
+    .checkbox-wrapper-16 .checkbox-label {
+        color: #707070;
+        transition: 0.375s ease;
+        text-align: center;
+    }
 }
 
 //****** Form Content For Add Advert ******//

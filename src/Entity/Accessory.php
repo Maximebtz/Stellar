@@ -18,15 +18,16 @@ class Accessory
     #[ORM\Column(length: 50)]
     private ?string $name = null;
 
-    #[ORM\OneToMany(mappedBy: 'accessory', targetEntity: Advert::class)]
-    private Collection $advert;
 
     #[ORM\Column(length: 255)]
     private ?string $icon = null;
 
+    #[ORM\ManyToMany(targetEntity: Advert::class, mappedBy: 'accessories')]
+    private Collection $adverts;
+
     public function __construct()
     {
-        $this->advert = new ArrayCollection();
+        $this->adverts = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -46,36 +47,6 @@ class Accessory
         return $this;
     }
 
-    /**
-     * @return Collection<int, Advert>
-     */
-    public function getAdvert(): Collection
-    {
-        return $this->advert;
-    }
-
-    public function addAdvert(Advert $advert): static
-    {
-        if (!$this->advert->contains($advert)) {
-            $this->advert->add($advert);
-            $advert->setAccessory($this);
-        }
-
-        return $this;
-    }
-
-    public function removeAdvert(Advert $advert): static
-    {
-        if ($this->advert->removeElement($advert)) {
-            // set the owning side to null (unless already changed)
-            if ($advert->getAccessory() === $this) {
-                $advert->setAccessory(null);
-            }
-        }
-
-        return $this;
-    }
-
     public function getIcon(): ?string
     {
         return $this->icon;
@@ -84,6 +55,33 @@ class Accessory
     public function setIcon(string $icon): static
     {
         $this->icon = $icon;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Advert>
+     */
+    public function getAdverts(): Collection
+    {
+        return $this->adverts;
+    }
+
+    public function addAdvert(Advert $advert): static
+    {
+        if (!$this->adverts->contains($advert)) {
+            $this->adverts->add($advert);
+            $advert->addAccessory($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAdvert(Advert $advert): static
+    {
+        if ($this->adverts->removeElement($advert)) {
+            $advert->removeAccessory($this);
+        }
 
         return $this;
     }
