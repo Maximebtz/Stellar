@@ -37,13 +37,48 @@
       </div>
     </div>
     {{ form_row(formAddAdvert.price) }}
-    {{ form_row(formAddAdvert.lodge) }}
+    
+    <div class="checkbox-wrapper-16">
+      {% for lodge in formAddAdvert.lodge %}
+          <label class="checkbox-wrapper">
+              {{ form_widget(lodge, { 'attr': { 'class': 'checkbox-input' } }) }}
+              <span class="checkbox-tile">
+                  <span class="checkbox-icon">
+                      <img src="{{ asset('img/icons/types/' ~ lodge.vars.value.icon) }}" alt="{{ lodge.vars.value.name }}" />
+                  </span>
+                  <span class="checkbox-label">{{ lodge.vars.value.name }}</span>
+              </span>
+          </label>
+      {% endfor %}
+  </div>  
+    <div class="checkbox-wrapper-16">
+      {% for accessory in accessories %}
+      <label class="checkbox-wrapper">
+        {{
+          form_widget(formAddAdvert.accessories[accessory.id], {
+            attr: { class: "checkbox-input" }
+          })
+        }}
+        <span class="checkbox-tile">
+          <span class="checkbox-icon">
+            <img
+              src="{{ asset('img/icons/accessories/' ~ accessory.icon) }}"
+              alt="{{ accessory.name }}"
+            />
+          </span>
+          <span class="checkbox-label">{{ accessory.name }}</span>
+        </span>
+      </label>
+      {% endfor %}
+    </div>
     <div class="checkbox-wrapper-16">
       {% for category in categories %}
       <label class="checkbox-wrapper">
-        {{ form_widget(formAddAdvert.categories[category.id], {
-          'attr': {'class': 'checkbox-input'}
-      }) }}
+        {{
+          form_widget(formAddAdvert.categories[category.id], {
+            attr: { class: "checkbox-input" }
+          })
+        }}
         <span class="checkbox-tile">
           <span class="checkbox-icon">
             <img
@@ -56,7 +91,6 @@
       </label>
       {% endfor %}
     </div>
-    {# {{ form_row(formAddAdvert.accessory) }} #}
     {{ form_row(formAddAdvert.description) }}
     {{ form_row(formAddAdvert.other) }}
     {{ form_end(formAddAdvert) }}

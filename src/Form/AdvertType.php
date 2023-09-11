@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Advert;
 use App\Entity\Accessory;
+use PhpParser\Parser\Multiple;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\All;
@@ -64,31 +65,8 @@ class AdvertType extends AbstractType
                     'class' => 'label',  // Class for the label
                 ],
             ])
-            ->add('lodge', EntityType::class, [
-                'class' => 'App\Entity\Lodge',
-                'label' => false,
-                'choice_label' => 'type',
-                'required' => true,
-                'placeholder' => 'Type *',
-                'attr' => [
-                    'class' => 'input',
-                ],
-                'label_attr' => [
-                    'class' => 'label',  // Class for the label
-                ],
-            ])
-            // ->add('accessory', EntityType::class, [
-            //     'class' => Accessory::class,
-            //     'choice_label' => 'name',
-            //     'label' => 'Accessoires',
-            // 'attr' => [
-            //     'class' => 'form-check-input',
-            //     'role' => 'switch',
-            // ],
-            //     'multiple' => true, // Permettre la sélection de plusieurs accessoires
-            //     'expanded' => true, // Afficher les cases à cocher au lieu d'un select
-            //     'required' => false, // Peut être facultatif
-            // ])
+            
+            
             ->add('price', NumberType::class, [
                 'label' => false,
                 'required' => true,
@@ -97,6 +75,23 @@ class AdvertType extends AbstractType
                     'class' => 'input',
                     'placeholder' => 'Prix *',
                 ]
+            ])
+            ->add('lodge', EntityType::class, [
+                'class' => 'App\Entity\Lodge', 
+                'label' => false,
+                'choice_label' => 'type', 
+                'required' => true,
+                'multiple' => false,
+            ])
+            ->add('accessories', EntityType::class, [
+                'class' => 'App\Entity\Accessory',
+                'label' => false,
+                'choice_label' => 'name',
+                'expanded' => true,
+                'multiple' => true, 
+                "attr" => [
+                    "class" => 'checkbox-input',    
+                ],
             ])
             ->add('categories', EntityType::class, [
                 'class' => 'App\Entity\Category',
