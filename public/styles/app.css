@@ -11,8 +11,8 @@
   --white: #ffffff;
   --black: #333333;
   --darkgray: #4D4D4D;
-  --middlegray: #999999;
-  --lightgray: #CCCCCC;
+  --middlegray: #aaaaaa;
+  --lightgray: #eeeeee;
   --boxshadow: rgba(0, 0, 0, 0.025);
   --gradient-p-b: linear-gradient(20deg, var(--light-purple) -15%, var(--dark-blue) 150%);
   --gradient-b-b: linear-gradient(50deg, var(--dark-blue) 7.56%, #0000ff 61.06%);
@@ -394,6 +394,99 @@ header .signup:hover {
   color: var(--white);
   font-size: larger;
   cursor: pointer;
+}
+
+.calendar-wrapper {
+  width: 450px;
+  background: var(--white);
+  border-radius: 10px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+}
+.calendar-wrapper .calendar-header {
+  display: flex;
+  align-items: center;
+  padding: 25px 30px 10px;
+  justify-content: space-between;
+}
+.calendar-wrapper .calendar-header .icons {
+  display: flex;
+}
+.calendar-wrapper .calendar-header .icons span {
+  height: 38px;
+  width: 38px;
+  margin: 0 1px;
+  cursor: pointer;
+  color: var(--darkgray);
+  text-align: center;
+  line-height: 38px;
+  font-size: 1.9rem;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.calendar-wrapper .calendar-header .icons span:last-child {
+  margin-right: -10px;
+}
+.calendar-wrapper .calendar-header .icons span:hover {
+  background: var(--lightgray);
+}
+.calendar-wrapper .calendar-header .icons .current-date {
+  font-size: 1.45rem;
+  font-weight: 500;
+}
+.calendar-wrapper .calendar {
+  padding: 20px;
+}
+.calendar-wrapper .calendar ul {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  text-align: center;
+}
+.calendar-wrapper .calendar .days {
+  margin-bottom: 20px;
+}
+.calendar-wrapper .calendar .days li {
+  z-index: 1;
+  cursor: pointer;
+  position: relative;
+  margin-top: 30px;
+}
+.calendar-wrapper .calendar .days li.inactive {
+  color: var(--middlegray);
+}
+.calendar-wrapper .calendar .days li.active {
+  color: var(--white);
+}
+.calendar-wrapper .calendar .days li::before {
+  position: absolute;
+  content: "";
+  left: 50%;
+  top: 50%;
+  height: 40px;
+  width: 40px;
+  z-index: -1;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+.calendar-wrapper .calendar .days li.active::before {
+  background: var(--light-purple);
+}
+.calendar-wrapper .calendar .days li:not(.active):hover::before {
+  background: var(--lightgray);
+}
+.calendar-wrapper .calendar li {
+  color: var(--black);
+  width: 14.2857142857%;
+  font-size: 1.07rem;
+}
+.calendar-wrapper .calendar .weeks li {
+  font-weight: 500;
+  cursor: default;
 }
 
 .wrapper-detail .input {
