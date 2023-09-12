@@ -3,6 +3,17 @@
 <div class="wrapper">
   <div class="wrapper-detail">
     {{ form_start(formAddAdvert) }}
+    <div class="input-title">
+      {{ form_row(formAddAdvert.title) }}
+    </div>
+    <div class="info-add-property">
+      <div class="info-part">
+        {{ form_row(formAddAdvert.address) }}
+        {{ form_row(formAddAdvert.city) }}
+        {{ form_row(formAddAdvert.cp) }}
+        {{ form_row(formAddAdvert.country) }}
+      </div>
+    </div>
     <div class="image-upload-wrapper" draggable="true">
       <div class="image-upload-card" id="drop-area">
         <label for="advert_images" class="custom-file-upload">
@@ -25,32 +36,28 @@
         </div>
       </div>
     </div>
-    <div class="input-title">
-      {{ form_row(formAddAdvert.title) }}
-    </div>
-    <div class="info-add-property">
-      <div class="info-part">
-        {{ form_row(formAddAdvert.address) }}
-        {{ form_row(formAddAdvert.city) }}
-        {{ form_row(formAddAdvert.cp) }}
-        {{ form_row(formAddAdvert.country) }}
-      </div>
-    </div>
+
     {{ form_row(formAddAdvert.price) }}
-    
     <div class="checkbox-wrapper-16">
-      {% for lodge in formAddAdvert.lodge %}
-          <label class="checkbox-wrapper">
-              {{ form_widget(lodge, { 'attr': { 'class': 'checkbox-input' } }) }}
-              <span class="checkbox-tile">
-                  <span class="checkbox-icon">
-                      <img src="{{ asset('img/icons/types/' ~ lodge.vars.value.icon) }}" alt="{{ lodge.vars.value.name }}" />
-                  </span>
-                  <span class="checkbox-label">{{ lodge.vars.value.name }}</span>
-              </span>
-          </label>
+      {% for lodge in lodges %}
+      <label class="checkbox-wrapper">
+        {{
+          form_widget(formAddAdvert.lodge[lodge.id], {
+            attr: { class: "checkbox-input" }
+          })
+        }}
+        <span class="checkbox-tile">
+          <span class="checkbox-icon">
+            <img
+              src="{{ asset('img/icons/types/' ~ lodge.icon) }}"
+              alt="{{ lodge.type }}"
+            />
+          </span>
+          <span class="checkbox-label">{{ lodge.type }}</span>
+        </span>
+      </label>
       {% endfor %}
-  </div>  
+    </div>
     <div class="checkbox-wrapper-16">
       {% for accessory in accessories %}
       <label class="checkbox-wrapper">

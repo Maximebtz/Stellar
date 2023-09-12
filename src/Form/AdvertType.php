@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\Lodge;
 use App\Entity\Advert;
 use App\Entity\Accessory;
 use PhpParser\Parser\Multiple;
@@ -77,11 +78,15 @@ class AdvertType extends AbstractType
                 ]
             ])
             ->add('lodge', EntityType::class, [
-                'class' => 'App\Entity\Lodge', 
+                'class' => Lodge::class,
                 'label' => false,
-                'choice_label' => 'type', 
-                'required' => true,
-                'multiple' => false,
+                'choice_label' => 'type',
+                'expanded' => true, // Afficher les types de logements sous forme de cases à cocher
+                'multiple' => false, // Autoriser la sélection de plusieurs types de logements
+                'required' => true, // Facultatif, si vous le souhaitez
+                'attr' => [
+                    'class' => 'checkbox-input', // Ajoutez des classes CSS personnalisées si nécessaire
+                ],
             ])
             ->add('accessories', EntityType::class, [
                 'class' => 'App\Entity\Accessory',

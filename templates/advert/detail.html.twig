@@ -97,6 +97,21 @@
       <b>{{ advert.price }}€</b>/Nuits
     </p>
     <div class="checkbox-wrapper-16">
+      {% if advert.lodge %}
+      <div class="checkbox-wrapper">
+        <span class="checkbox-tile">
+          <span class="checkbox-icon">
+            <img
+              src="{{ asset('img/icons/types/' ~ advert.lodge.icon) }}"
+              alt="{{ advert.lodge.type }}"
+            />
+          </span>
+          <span class="checkbox-label">{{ advert.lodge.type }}</span>
+        </span>
+      </div>
+      {% endif %}
+    </div>
+    <div class="checkbox-wrapper-16">
       {% for category in advert.categories %}
       <div class="checkbox-wrapper">
         <span class="checkbox-tile">
@@ -108,8 +123,23 @@
           </span>
           <span class="checkbox-label">{{ category.name }}</span>
         </span>
+      </div>
+      {% endfor %}
     </div>
-      {% endfor %} {# {{ form_row(formAddAdvert.accessory) }} #}
+    <div class="checkbox-wrapper-16">
+      {% for accessory in advert.accessories %}
+      <div class="checkbox-wrapper">
+        <span class="checkbox-tile">
+          <span class="checkbox-icon">
+            <img
+              src="{{ asset('img/icons/accessories/' ~ accessory.icon)}}"
+              alt="{{ accessory.name }}"
+            />
+          </span>
+          <span class="checkbox-label">{{ accessory.name }}</span>
+        </span>
+      </div>
+      {% endfor %}
     </div>
     <p>
       {# {{ advert.description }} #} Lorem ipsum, dolor sit amet consectetur

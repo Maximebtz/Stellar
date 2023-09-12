@@ -44,13 +44,15 @@ class AdvertController extends AbstractController
             $advert = new Advert();
         }
 
+
+
+        $form = $this->createForm(AdvertType::class, $advert);
+
         //Récupérer les catégories
         $categories = $categoryRepository->findAll();
         $accessories = $accessoryRepository->findAll();
         $categories = $categoryRepository->findAll();
         $lodges = $lodgeRepository->findAll();
-
-        $form = $this->createForm(AdvertType::class, $advert);
 
         $form->handleRequest($request);
 
@@ -101,16 +103,20 @@ class AdvertController extends AbstractController
 
     #[Route('/user/advert/detail/{id}', name: 'detail_advert')]
     #[IsGranted('ROLE_USER')]
-    public function showDetailAdvert($id, CategoryRepository $categoryRepository): Response
+    public function showDetailAdvert($id, CategoryRepository $categoryRepository, AccessoryRepository $accessoryRepository, LodgeRepository $lodgeRepository): Response
     {
         $repository = $this->entityManager->getRepository(Advert::class);
         $advert = $repository->find($id);
         $categories = $categoryRepository->findAll();
+        $accessories = $accessoryRepository->findAll();
+        $lodges = $lodgeRepository->findAll();
 
 
         return $this->render('advert/detail.html.twig', [
             'advert' => $advert,
-            'categories' => $categories
+            'categories' => $categories,
+            'accessories' => $accessories,
+            'lodges' => $lodges,
         ]);
     }
 

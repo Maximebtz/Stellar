@@ -509,7 +509,7 @@ header {
 
 .wrapper-detail {
     .calendar-wrapper {
-        width: 450px;
+        width: 350px;
         background: var(--white);
         border-radius: 10px;
         box-shadow: 0 15px 40px rgba(0, 0, 0, 0.10);
@@ -626,7 +626,7 @@ header {
     .checkbox-wrapper-16 {
         display: flex;
         gap: 7px;
-        
+
         .checkbox-input {
             clip: rect(0 0 0 0);
             -webkit-clip-path: inset(100%);
@@ -931,16 +931,10 @@ header {
         display: flex;
     }
 
-    .input-title {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        margin: 25px 0;
-
-        input {
-            text-align: center;
-        }
-    }
+    // .input-title {
+    //     // input {
+    //     // }
+    // }
 }
 
 

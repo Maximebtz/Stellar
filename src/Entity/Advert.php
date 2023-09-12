@@ -48,12 +48,9 @@ class Advert
 
     #[ORM\OneToMany(mappedBy: 'advert', targetEntity: Notice::class, orphanRemoval: true)]
     private Collection $notices;
-
     
     #[ORM\OneToMany(targetEntity: Images::class, mappedBy: "adverts", orphanRemoval: true, cascade: ['persist'])]
     private Collection $images;
-
-    
 
     #[ORM\ManyToOne(inversedBy: 'advert')]
     #[ORM\JoinColumn(nullable: false)]

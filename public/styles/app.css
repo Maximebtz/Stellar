@@ -396,22 +396,22 @@ header .signup:hover {
   cursor: pointer;
 }
 
-.calendar-wrapper {
-  width: 450px;
+.wrapper-detail .calendar-wrapper {
+  width: 350px;
   background: var(--white);
   border-radius: 10px;
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
 }
-.calendar-wrapper .calendar-header {
+.wrapper-detail .calendar-wrapper .calendar-header {
   display: flex;
   align-items: center;
   padding: 25px 30px 10px;
   justify-content: space-between;
 }
-.calendar-wrapper .calendar-header .icons {
+.wrapper-detail .calendar-wrapper .calendar-header .icons {
   display: flex;
 }
-.calendar-wrapper .calendar-header .icons span {
+.wrapper-detail .calendar-wrapper .calendar-header .icons span {
   height: 38px;
   width: 38px;
   margin: 0 1px;
@@ -428,41 +428,41 @@ header .signup:hover {
   align-items: center;
   justify-content: center;
 }
-.calendar-wrapper .calendar-header .icons span:last-child {
+.wrapper-detail .calendar-wrapper .calendar-header .icons span:last-child {
   margin-right: -10px;
 }
-.calendar-wrapper .calendar-header .icons span:hover {
+.wrapper-detail .calendar-wrapper .calendar-header .icons span:hover {
   background: var(--lightgray);
 }
-.calendar-wrapper .calendar-header .icons .current-date {
+.wrapper-detail .calendar-wrapper .calendar-header .icons .current-date {
   font-size: 1.45rem;
   font-weight: 500;
 }
-.calendar-wrapper .calendar {
+.wrapper-detail .calendar-wrapper .calendar {
   padding: 20px;
 }
-.calendar-wrapper .calendar ul {
+.wrapper-detail .calendar-wrapper .calendar ul {
   display: flex;
   flex-wrap: wrap;
   list-style: none;
   text-align: center;
 }
-.calendar-wrapper .calendar .days {
+.wrapper-detail .calendar-wrapper .calendar .days {
   margin-bottom: 20px;
 }
-.calendar-wrapper .calendar .days li {
+.wrapper-detail .calendar-wrapper .calendar .days li {
   z-index: 1;
   cursor: pointer;
   position: relative;
   margin-top: 30px;
 }
-.calendar-wrapper .calendar .days li.inactive {
+.wrapper-detail .calendar-wrapper .calendar .days li.inactive {
   color: var(--middlegray);
 }
-.calendar-wrapper .calendar .days li.active {
+.wrapper-detail .calendar-wrapper .calendar .days li.active {
   color: var(--white);
 }
-.calendar-wrapper .calendar .days li::before {
+.wrapper-detail .calendar-wrapper .calendar .days li::before {
   position: absolute;
   content: "";
   left: 50%;
@@ -473,20 +473,93 @@ header .signup:hover {
   border-radius: 50%;
   transform: translate(-50%, -50%);
 }
-.calendar-wrapper .calendar .days li.active::before {
+.wrapper-detail .calendar-wrapper .calendar .days li.active::before {
   background: var(--light-purple);
 }
-.calendar-wrapper .calendar .days li:not(.active):hover::before {
+.wrapper-detail .calendar-wrapper .calendar .days li:not(.active):hover::before {
   background: var(--lightgray);
 }
-.calendar-wrapper .calendar li {
+.wrapper-detail .calendar-wrapper .calendar li {
   color: var(--black);
   width: 14.2857142857%;
   font-size: 1.07rem;
 }
-.calendar-wrapper .calendar .weeks li {
+.wrapper-detail .calendar-wrapper .calendar .weeks li {
   font-weight: 500;
   cursor: default;
+}
+
+.wrapper-detail .checkbox-wrapper-16 {
+  display: flex;
+  gap: 7px;
+}
+.wrapper-detail .checkbox-wrapper-16 .checkbox-input {
+  clip: rect(0 0 0 0);
+  -webkit-clip-path: inset(100%);
+  clip-path: inset(100%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+.wrapper-detail .checkbox-wrapper-16 .checkbox-input:checked + .checkbox-tile {
+  border-color: var(--light-purple);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  color: var(--light-purple);
+}
+.wrapper-detail .checkbox-wrapper-16 .checkbox-input:checked + .checkbox-tile:before {
+  transform: scale(1);
+  opacity: 1;
+  background-color: var(--light-purple);
+  border-color: var(--light-purple);
+}
+.wrapper-detail .checkbox-wrapper-16 .checkbox-input:checked + .checkbox-tile .checkbox-icon,
+.wrapper-detail .checkbox-wrapper-16 .checkbox-input:checked + .checkbox-tile .checkbox-label {
+  color: var(--light-purple);
+}
+.wrapper-detail .checkbox-wrapper-16 .checkbox-input:focus + .checkbox-tile {
+  border-color: var(--light-purple);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1), 0 0 0 4px #b5c9fc;
+}
+.wrapper-detail .checkbox-wrapper-16 .checkbox-input:focus + .checkbox-tile:before {
+  transform: scale(1);
+  opacity: 1;
+}
+.wrapper-detail .checkbox-wrapper-16 .checkbox-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 7rem;
+  min-height: 7rem;
+  border-radius: 0.5rem;
+  border: 2px solid var(--lightgray);
+  background-color: var(--white);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  transition: 0.15s ease;
+  cursor: pointer;
+  position: relative;
+}
+.wrapper-detail .checkbox-wrapper-16 .checkbox-tile:hover {
+  border-color: var(--light-purple);
+}
+.wrapper-detail .checkbox-wrapper-16 .checkbox-tile:hover:before {
+  transform: scale(1);
+  opacity: 1;
+}
+.wrapper-detail .checkbox-wrapper-16 .checkbox-icon {
+  transition: 0.375s ease;
+  color: #494949;
+}
+.wrapper-detail .checkbox-wrapper-16 .checkbox-icon svg {
+  width: 3rem;
+  height: 3rem;
+}
+.wrapper-detail .checkbox-wrapper-16 .checkbox-label {
+  color: #707070;
+  transition: 0.375s ease;
+  text-align: center;
 }
 
 .wrapper-detail .input {
@@ -647,15 +720,6 @@ header .signup:hover {
 }
 .wrapper-detail .info-add-property {
   display: flex;
-}
-.wrapper-detail .input-title {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  margin: 25px 0;
-}
-.wrapper-detail .input-title input {
-  text-align: center;
 }
 
 .wrapper-my-advert {
