@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Anton&family=Pacifico&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
 :root {
   --light-purple: #A12DB4;
   --dark-purple: #6424a5;
@@ -51,7 +51,7 @@ input:-webkit-autofill {
 }
 
 body {
-  font-family: "Roboto", sans-serif;
+  font-family: "Poppins", sans-serif;
   min-height: 100vh;
   background: var(--white);
   color: var(--black);
@@ -199,6 +199,24 @@ header .signup:hover {
   min-height: calc(100vh - 120px);
   flex-direction: column;
   align-items: center;
+  position: relative;
+}
+.wrapper .return-home {
+  border: 1px solid var(--middlegray);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--lightgray) 0 0 15px;
+  position: absolute;
+  left: 4.5%;
+  top: 30px;
+  transition: all 0.2s ease-in-out;
+}
+.wrapper .return-home:hover {
+  transform: scale(1.05);
 }
 
 .wrapper-home {
@@ -326,6 +344,28 @@ header .signup:hover {
   min-height: 100vh;
   max-width: 1150px;
   width: 100%;
+  padding-top: 80px;
+}
+.wrapper-detail-title {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+.wrapper-detail-title h1 {
+  font-size: 2.5em;
+  line-height: 32px;
+}
+.wrapper-detail-title p {
+  font-family: "Inter", sans-serif;
+  color: var(--middlegray);
+  font-weight: 400;
+  font-size: 1.02em;
+}
+.wrapper-detail-title .address-wrap {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 20px 0 55px 0;
 }
 .wrapper-detail .grid-wrap .single-img {
   width: 100%;
@@ -342,7 +382,7 @@ header .signup:hover {
   -o-object-fit: cover;
      object-fit: cover;
 }
-.wrapper-detail .img-advert-detail {
+.wrapper-detail-grid-img {
   height: 100%;
   max-height: 600px;
   max-width: 1150px;
@@ -350,34 +390,35 @@ header .signup:hover {
   display: grid;
   gap: 5px;
   grid-auto-rows: max-content;
-  grid-template-columns: minmax(300px, 1fr) 300px;
+  grid-template-columns: minmax(300px, 1fr) 450px;
   overflow: hidden;
   border-radius: 12px;
 }
-.wrapper-detail .img-advert-detail figure {
+.wrapper-detail-grid-img figure {
   height: 100%;
 }
-.wrapper-detail .img-advert-detail img {
+.wrapper-detail-grid-img img {
   width: 100%;
   height: -webkit-fill-available;
   -o-object-fit: cover;
      object-fit: cover;
+  border-radius: 10px;
 }
-.wrapper-detail .img-advert-detail .img {
+.wrapper-detail-grid-img .img {
   overflow: hidden;
 }
-.wrapper-detail .img-advert-detail .l-img {
+.wrapper-detail-grid-img .l-img {
   height: 600px;
   position: relative;
 }
-.wrapper-detail .img-advert-detail .sm-img {
+.wrapper-detail-grid-img .sm-img {
   display: flex;
   flex-direction: column;
   position: relative;
   gap: 5px;
-  height: 100%;
+  max-height: 595px;
 }
-.wrapper-detail .img-advert-detail .ltl-img {
+.wrapper-detail-grid-img .ltl-img {
   height: 50%;
   position: relative;
 }
@@ -394,6 +435,51 @@ header .signup:hover {
   color: var(--white);
   font-size: larger;
   cursor: pointer;
+}
+.wrapper-detail-main {
+  display: flex;
+  gap: 60px;
+  padding-top: 55px;
+}
+.wrapper-detail-owner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 0;
+}
+.wrapper-detail-owner-info {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.wrapper-detail-owner-info p {
+  color: var(--middlegray);
+  font-size: 1.02rem;
+}
+.wrapper-detail-owner-info .profil-picture {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+.wrapper-detail-owner-info span {
+  text-decoration: underline;
+  font-weight: 600;
+}
+.wrapper-detail-owner-contact {
+  width: 100px;
+  height: 36px;
+  background-color: var(--black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: var(--white);
+  border-radius: 7px;
+  transition: all 0.2s ease-in-out;
+  box-shadow: var(--boxshadow) 0 0 10px;
+}
+.wrapper-detail-owner-contact:hover {
+  transform: scale(1.02);
 }
 
 .wrapper-detail .calendar-wrapper {

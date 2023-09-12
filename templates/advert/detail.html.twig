@@ -1,42 +1,53 @@
 {% extends 'base.html.twig' %} {% block title %}{{ advert.title }}{% endblock %}
 {% block body %}
 <div class="wrapper">
+  <a href="{{ path("app_home") }}" class="return-home">
+    <img src="{{ asset('img/icons/Left Arrow.svg') }}" alt="Icon return home">
+  </a>
   <div class="wrapper-detail">
+    <div class="wrapper-detail-title">
+      <div class="detail-title-left">
+        <h1>{{ advert.title }}</h1>
+        <div class="address-wrap">
+          <svg width="18" height="24" viewBox="0 0 18 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink">
+            <rect width="18" height="24" fill="url(#pattern0)" />
+            <defs>
+              <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
+                <use xlink:href="#image0_57_25" transform="matrix(0.01 0 0 0.0075 0 0.125)" />
+              </pattern>
+              <image id="image0_57_25" width="100" height="100"
+                xlink:href="data:image/png;base64,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" />
+            </defs>
+          </svg>
+          <p>{{advert.city}}, {{advert.country}}</p>
+        </div>
+      </div>
+      <div class="detail-title-right">
+        <p>{{advert.createdAtString}}</p>
+      </div>
+    </div>
     <div class="grid-wrap">
       {% if advert.images | length > 1 %}
-      <div class="img-advert-detail">
+      <div class="wrapper-detail-grid-img">
         <div class="l-img">
           {% if advert.images | length > 0 %} {% if app.user is same as
           advert.owner %}
           <div class="modif-icons">
             {#
-            <a
-              class="modif"
-              href="{{ path('remove_advert_image', { id: advert.images }) }}"
-            >
+            <a class="modif" href="{{ path('remove_advert_image', { id: advert.images }) }}">
               #}
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="19"
-                height="19"
-                fill="currentColor"
-                class="bi bi-x"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 
-                                                8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"
-                />
+              <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor" class="bi bi-x"
+                viewBox="0 0 16 16">
+                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 
+                   8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
               </svg>
               {#
             </a>
             #}
           </div>
           {% endif %}
-          <img
-            src="{{ asset('uploads/' ~ advert.images[0].url) }}"
-            alt="{{ advert.title }}"
-          />
+          <img src="{{ asset('uploads/' ~ advert.images[0].url) }}" alt="{{ advert.title }}" />
           {% endif %}
         </div>
         <div class="sm-img">
@@ -45,35 +56,21 @@
           <div class="ltl-img">
             {% if app.user is same as advert.owner %}
             <div class="modif-icons">
-              <a
-                class="modif"
-                href="{{
+              <a class="modif" href="{{
                   path('remove_advert_image', {
                     advertId: advert.id,
                     imageId: advert.images[i].id
                   })
-                }}"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="19"
-                  height="19"
-                  fill="currentColor"
-                  class="bi bi-x"
-                  viewBox="0 0 16 16"
-                >
-                  <path
-                    d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 
-                                                        8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"
-                  />
+                }}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor" class="bi bi-x"
+                  viewBox="0 0 16 16">
+                  <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 
+                    8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
                 </svg>
               </a>
             </div>
             {% endif %}
-            <img
-              src="{{ asset('uploads/' ~ advert.images[i].url) }}"
-              alt="{{ advert.title }}"
-            />
+            <img src="{{ asset('uploads/' ~ advert.images[i].url) }}" alt="{{ advert.title }}" />
           </div>
           {% endfor %} {% if advert.images | length > 3 %}
           <button id="showMoreBtn">Afficher plus</button>
@@ -83,120 +80,105 @@
       {% else %}
       <div class="single-img">
         {% if advert.images | length > 0 %}
-        <img
-          src="{{ asset('uploads/' ~ advert.images[0].url) }}"
-          alt="{{ advert.title }}"
-        />
+        <img src="{{ asset('uploads/' ~ advert.images[0].url) }}" alt="{{ advert.title }}" />
         {% endif %}
       </div>
       {% endif %}
     </div>
-    <script></script>
-    <h1>{{ advert.title }}</h1>
-    <p>
-      <b>{{ advert.price }}€</b>/Nuits
-    </p>
-    <div class="checkbox-wrapper-16">
-      {% if advert.lodge %}
-      <div class="checkbox-wrapper">
-        <span class="checkbox-tile">
-          <span class="checkbox-icon">
-            <img
-              src="{{ asset('img/icons/types/' ~ advert.lodge.icon) }}"
-              alt="{{ advert.lodge.type }}"
-            />
-          </span>
-          <span class="checkbox-label">{{ advert.lodge.type }}</span>
-        </span>
-      </div>
-      {% endif %}
-    </div>
-    <div class="checkbox-wrapper-16">
-      {% for category in advert.categories %}
-      <div class="checkbox-wrapper">
-        <span class="checkbox-tile">
-          <span class="checkbox-icon">
-            <img
-              src="{{ asset('img/icons/categories/' ~ category.icon)}}"
-              alt="{{ category.name }}"
-            />
-          </span>
-          <span class="checkbox-label">{{ category.name }}</span>
-        </span>
-      </div>
-      {% endfor %}
-    </div>
-    <div class="checkbox-wrapper-16">
-      {% for accessory in advert.accessories %}
-      <div class="checkbox-wrapper">
-        <span class="checkbox-tile">
-          <span class="checkbox-icon">
-            <img
-              src="{{ asset('img/icons/accessories/' ~ accessory.icon)}}"
-              alt="{{ accessory.name }}"
-            />
-          </span>
-          <span class="checkbox-label">{{ accessory.name }}</span>
-        </span>
-      </div>
-      {% endfor %}
-    </div>
-    <p>
-      {# {{ advert.description }} #} Lorem ipsum, dolor sit amet consectetur
-      adipisicing elit. Corporis, ducimus culpa? Ipsum nesciunt, excepturi
-      reprehenderit odio laborum aut deleniti architecto repellat sed dicta
-      eveniet placeat? Ex doloremque commodi dignissimos nemo?
-    </p>
-    {# {% for image in advert.images %}
-    <img src="{{ asset('uploads/' ~ image.url) }}" alt="Image" />
-    {% endfor %} #}
-    <div class="calendar-wrapper">
-      <div class="calendar-header">
-        <p class="current-date"></p>
-        <div class="icons">
-          <span id="prev" class="material-symbols-rounded">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              fill="currentColor"
-              class="bi bi-chevron-left"
-              viewBox="0 0 16 16"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"
-              />
-            </svg>
-          </span>
-          <span id="next" class="material-symbols-rounded">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              fill="currentColor"
-              class="bi bi-chevron-right"
-              viewBox="0 0 16 16"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"
-              />
-            </svg>
-          </span>
+    <div class="wrapper-detail-main">
+      <div class="wrapper-detail-left">
+        <div class="checkbox-wrapper-16">
+          {% if advert.lodge %}
+          <div class="checkbox-wrapper">
+            <span class="checkbox-tile">
+              <span class="checkbox-icon">
+                <img src="{{ asset('img/icons/types/' ~ advert.lodge.icon) }}" alt="{{ advert.lodge.type }}" />
+              </span>
+              <span class="checkbox-label">{{ advert.lodge.type }}</span>
+            </span>
+          </div>
+          {% endif %}
         </div>
+        <div class="checkbox-wrapper-16">
+          {% for category in advert.categories %}
+          <div class="checkbox-wrapper">
+            <span class="checkbox-tile">
+              <span class="checkbox-icon">
+                <img src="{{ asset('img/icons/categories/' ~ category.icon)}}" alt="{{ category.name }}" />
+              </span>
+              <span class="checkbox-label">{{ category.name }}</span>
+            </span>
+          </div>
+          {% endfor %}
+        </div>
+        <div class="checkbox-wrapper-16">
+          {% for accessory in advert.accessories %}
+          <div class="checkbox-wrapper">
+            <span class="checkbox-tile">
+              <span class="checkbox-icon">
+                <img src="{{ asset('img/icons/accessories/' ~ accessory.icon)}}" alt="{{ accessory.name }}" />
+              </span>
+              <span class="checkbox-label">{{ accessory.name }}</span>
+            </span>
+          </div>
+          {% endfor %}
+        </div>
+        <div class="wrapper-detail-owner">
+          <div class="wrapper-detail-owner-info">
+            {% if advert.owner.avatar is not null %}
+              <p>Propriétaire - </p><img class="profil-picture" src="{{ asset('uploads/avatars/' ~ advert.owner.avatar)}}" alt=""><span>{{advert.owner.username}}</span>
+              {% else %}
+              <p>Propriétaire - <span class="profil-picture"></span><span>{{advert.owner.username}}</span></p>
+            {% endif %}
+          </div>
+          <a href="#" class="wrapper-detail-owner-contact">
+            Contacter
+          </a>
+        </div>
+        <p>
+          {# {{ advert.description }} #} Lorem ipsum, dolor sit amet consectetur
+          adipisicing elit. Corporis, ducimus culpa? Ipsum nesciunt, excepturi
+          reprehenderit odio laborum aut deleniti architecto repellat sed dicta
+          eveniet placeat? Ex doloremque commodi dignissimos nemo?
+        </p>
       </div>
-      <div class="calendar">
-        <ul class="weeks">
-          <li>Sun</li>
-          <li>Mon</li>
-          <li>Tue</li>
-          <li>Wed</li>
-          <li>Thu</li>
-          <li>Fri</li>
-          <li>Sat</li>
-        </ul>
-        <ul class="days"></ul>
+      <div class="wrapper-detail-right">
+        <p>
+          <b>{{ advert.price }}€</b>/Nuits
+        </p>
+        <div class="calendar-wrapper">
+          <div class="calendar-header">
+            <p class="current-date"></p>
+            <div class="icons">
+              <span id="prev" class="material-symbols-rounded">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                  class="bi bi-chevron-left" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd"
+                    d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
+                </svg>
+              </span>
+              <span id="next" class="material-symbols-rounded">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                  class="bi bi-chevron-right" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd"
+                    d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
+                </svg>
+              </span>
+            </div>
+          </div>
+          <div class="calendar">
+            <ul class="weeks">
+              <li>Sun</li>
+              <li>Mon</li>
+              <li>Tue</li>
+              <li>Wed</li>
+              <li>Thu</li>
+              <li>Fri</li>
+              <li>Sat</li>
+            </ul>
+            <ul class="days"></ul>
+          </div>
+        </div>
       </div>
     </div>
   </div>

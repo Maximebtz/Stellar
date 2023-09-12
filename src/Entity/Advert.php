@@ -62,6 +62,9 @@ class Advert
     #[ORM\ManyToMany(targetEntity: Accessory::class, inversedBy: 'adverts')]
     private Collection $accessories;
 
+    #[ORM\Column]
+    private ?\DateTimeImmutable $createdAt = null;
+
     
     public function __construct()
     {
@@ -336,4 +339,22 @@ class Advert
 
         return $this;
     }
+
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeImmutable $createdAt): static
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getCreatedAtString(): ?string
+    {
+        return $this->createdAt->format('d-m-Y');
+    }
+
 }
