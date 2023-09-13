@@ -1,7 +1,7 @@
 # Stellar
 ![image 1](https://github.com/Maximebtz/Stellar/assets/120190748/bc7fc26c-5566-45f6-9430-fc07c7cf5899)
 
-Stellar est mon projet de fin d'année.
+Stellar est mon projet de fin d'année, le projet n'étant pas terminé, les images suivantes sont provisoires.
 
 L'application consistera à louer des hébergements de vacances atypiques, type cabanes, yourt etc.
 
