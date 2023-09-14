@@ -82,10 +82,10 @@ class AdvertType extends AbstractType
                 'label' => false,
                 'choice_label' => 'type',
                 'expanded' => true, // Afficher les types de logements sous forme de cases à cocher
-                'multiple' => false, // Autoriser la sélection de plusieurs types de logements
-                'required' => true, // Facultatif, si vous le souhaitez
+                'multiple' => false, 
+                'required' => true, 
                 'attr' => [
-                    'class' => 'checkbox-input', // Ajoutez des classes CSS personnalisées si nécessaire
+                    'class' => 'checkbox-input', 
                 ],
             ])
             ->add('accessories', EntityType::class, [

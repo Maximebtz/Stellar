@@ -69,14 +69,19 @@
       {% endif %}
     </header>
     {% endblock header %}
-    <main>{% block body %}</main>
-    <footer></footer>
+    <main>
+    {% block body %}
     {% endblock %}
+    </main>
+    <footer>
+
+    </footer>
   </body>
   {% block javascripts %}
   <script src="{{ asset('js/app.js') }}"></script>
   <script src="{{ asset('js/map.js') }}"></script>
   <script src="{{ asset('js/upload.js') }}"></script>
   <script src="{{ asset('js/calendar.js') }}"></script>
+  <script src="{{ asset('js/animations.js') }}"></script>
   {% endblock %}
 </html>

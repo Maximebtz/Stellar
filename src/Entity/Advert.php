@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\AdvertRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: AdvertRepository::class)]
@@ -18,13 +19,13 @@ class Advert
     #[ORM\Column(length: 100)]
     private ?string $title = null;
 
-    #[ORM\Column(length: 500)]
+    #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
     #[ORM\Column]
     private ?float $price = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 500, nullable: true)]
     private ?string $other = null;
 
     #[ORM\Column(length: 10)]
@@ -356,5 +357,4 @@ class Advert
     {
         return $this->createdAt->format('d-m-Y');
     }
-
 }

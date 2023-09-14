@@ -87,65 +87,82 @@
     </div>
     <div class="wrapper-detail-main">
       <div class="wrapper-detail-left">
-        <div class="checkbox-wrapper-16">
-          {% if advert.lodge %}
-          <div class="checkbox-wrapper">
-            <span class="checkbox-tile">
-              <span class="checkbox-icon">
-                <img src="{{ asset('img/icons/types/' ~ advert.lodge.icon) }}" alt="{{ advert.lodge.type }}" />
+        <div class="wrapper-detail-category">
+          <div class="checkbox-wrapper-16">
+            {% if advert.lodge %}
+            <div class="checkbox-wrapper">
+              <span class="checkbox-tile">
+                <span class="checkbox-icon">
+                  <img src="{{ asset('img/icons/types/' ~ advert.lodge.icon) }}" alt="{{ advert.lodge.type }}" />
+                </span>
+                <span class="checkbox-label">{{ advert.lodge.type }}</span>
               </span>
-              <span class="checkbox-label">{{ advert.lodge.type }}</span>
-            </span>
+            </div>
+            {% endif %}
           </div>
-          {% endif %}
-        </div>
-        <div class="checkbox-wrapper-16">
-          {% for category in advert.categories %}
-          <div class="checkbox-wrapper">
-            <span class="checkbox-tile">
-              <span class="checkbox-icon">
-                <img src="{{ asset('img/icons/categories/' ~ category.icon)}}" alt="{{ category.name }}" />
+          <div class="checkbox-wrapper-16">
+            {% for category in advert.categories %}
+            <div class="checkbox-wrapper">
+              <span class="checkbox-tile">
+                <span class="checkbox-icon">
+                  <img src="{{ asset('img/icons/categories/' ~ category.icon)}}" alt="{{ category.name }}" />
+                </span>
+                <span class="checkbox-label">{{ category.name }}</span>
               </span>
-              <span class="checkbox-label">{{ category.name }}</span>
-            </span>
+            </div>
+            {% endfor %}
           </div>
-          {% endfor %}
-        </div>
-        <div class="checkbox-wrapper-16">
-          {% for accessory in advert.accessories %}
-          <div class="checkbox-wrapper">
-            <span class="checkbox-tile">
-              <span class="checkbox-icon">
-                <img src="{{ asset('img/icons/accessories/' ~ accessory.icon)}}" alt="{{ accessory.name }}" />
-              </span>
-              <span class="checkbox-label">{{ accessory.name }}</span>
-            </span>
-          </div>
-          {% endfor %}
         </div>
         <div class="wrapper-detail-owner">
           <div class="wrapper-detail-owner-info">
             {% if advert.owner.avatar is not null %}
-              <p>Propriétaire - </p><img class="profil-picture" src="{{ asset('uploads/avatars/' ~ advert.owner.avatar)}}" alt=""><span>{{advert.owner.username}}</span>
-              {% else %}
-              <p>Propriétaire - <span class="profil-picture"></span><span>{{advert.owner.username}}</span></p>
+            <p>Propriétaire - </p><img class="profil-picture" src="{{ asset('uploads/avatars/' ~ advert.owner.avatar)}}"
+              alt=""><span>{{advert.owner.username}}</span>
+            {% else %}
+            <p>Propriétaire - <span class="profil-picture"></span><span>{{advert.owner.username}}</span></p>
             {% endif %}
           </div>
           <a href="#" class="wrapper-detail-owner-contact">
             Contacter
           </a>
         </div>
-        <p>
-          {# {{ advert.description }} #} Lorem ipsum, dolor sit amet consectetur
-          adipisicing elit. Corporis, ducimus culpa? Ipsum nesciunt, excepturi
-          reprehenderit odio laborum aut deleniti architecto repellat sed dicta
-          eveniet placeat? Ex doloremque commodi dignissimos nemo?
-        </p>
+        <div class="wrapper-detail-description">
+          <p>
+            {{ advert.description|nl2br|raw }}
+          </p>
+        </div>
+        <div class="wrapper-detail-commodite">
+          <h2>Commodités</h2>
+          <div class="checkbox-wrapper-16">
+            {% for accessory in advert.accessories %}
+            <div class="checkbox-wrapper">
+              <span class="checkbox-tile-fit">
+                <span class="checkbox-icon">
+                  <img src="{{ asset('img/icons/accessories/' ~ accessory.icon)}}" alt="{{ accessory.name }}" />
+                </span>
+                <span class="checkbox-label">{{ accessory.name }}</span>
+              </span>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
       </div>
       <div class="wrapper-detail-right">
         <p>
           <b>{{ advert.price }}€</b>/Nuits
         </p>
+
+
+        <div>
+          <label for="arrivalDate">Date d'arrivée :</label>
+          <input type="date" id="arrivalDate" name="arrivalDate">
+        </div>
+        <div>
+            <label for="departureDate">Date de départ :</label>
+            <input type="date" id="departureDate" name="departureDate">
+        </div>
+
+
         <div class="calendar-wrapper">
           <div class="calendar-header">
             <p class="current-date"></p>
@@ -166,6 +183,9 @@
               </span>
             </div>
           </div>
+
+          // Pouvoir cliquer sur un date de d'arrivée et de fin ici pour recupérer en haut la date d'arrivée et de départ
+
           <div class="calendar">
             <ul class="weeks">
               <li>Sun</li>
@@ -177,6 +197,17 @@
               <li>Sat</li>
             </ul>
             <ul class="days"></ul>
+          </div>
+        </div>
+        <div class="wrapper-detail-price">
+          <p><span id="pricePerNight">100€</span> x <span id="numNights">0</span> nuits <span id="totalPrice">0€</span></p>
+          <p>Stellar fees 5% <span id="stellarFees">0€</span></p>
+
+
+          <div class="wrapper-detail-price-total">
+
+              // Afficher ici le prix total
+
           </div>
         </div>
       </div>
