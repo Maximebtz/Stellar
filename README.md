@@ -19,4 +19,4 @@ L'application consistera à louer des hébergements de vacances atypiques, type 
 ![Advert-Detail](https://github.com/Maximebtz/Stellar/assets/120190748/59df6037-47fe-43fe-b075-678e3b993cbe)
 
 # Advert-Add
-![Advert-Add](https://github.com/Maximebtz/Stellar/assets/120190748/cfb70d30-0925-457c-81e7-0fdb87c0adbd)
+![Advert-Add](https://github.com/Maximebtz/Stellar/assets/120190748/9460a534-8270-4c08-9200-f2816c4505d8)
