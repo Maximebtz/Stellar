@@ -565,10 +565,51 @@ header .signup:hover {
   position: relative;
 }
 
+.wrapper-detail .datepicker .datepicker-switch:hover, .wrapper-detail .datepicker tfoot tr th:hover {
+  background: transparent !important;
+}
+.wrapper-detail .datepicker-switch {
+  width: -moz-max-content !important;
+  width: max-content !important;
+}
+.wrapper-detail .datepicker th.prev,
+.wrapper-detail .datepicker th.next {
+  border: none;
+  color: transparent;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.wrapper-detail .datepicker th.prev:hover,
+.wrapper-detail .datepicker th.next:hover {
+  background-color: var(--lightgray);
+}
+.wrapper-detail .datepicker th.prev:before {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  background: url("../img/icons/chevron-left-solid.svg") no-repeat center;
+}
+.wrapper-detail .datepicker th.next:before {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  background: url("../img/icons/chevron-right-solid.svg") no-repeat center;
+}
 .wrapper-detail .range .day {
   background-color: var(--lightgray);
   cursor: not-allowed;
   border-radius: 4px;
+}
+.wrapper-detail table {
+  font-family: "Inter", sans-serif;
+}
+.wrapper-detail td {
+  font-size: large;
+  font-weight: 500;
 }
 .wrapper-detail #calendar {
   width: 300px;
@@ -654,6 +695,17 @@ header .signup:hover {
 .wrapper-detail .datepicker table tr td.active:hover.active,
 .wrapper-detail .datepicker table tr td.active:hover:active {
   border-radius: 4px !important;
+}
+.wrapper-detail .datepicker table tr td.disabled,
+.wrapper-detail .datepicker table tr td.disabled:hover {
+  background: transparent !important;
+  color: var(--middlegray) !important;
+  opacity: 50%;
+  cursor: default;
+}
+.wrapper-detail .datepicker table tr td.new,
+.wrapper-detail .datepicker table tr td.old {
+  opacity: 50% !important;
 }
 
 .wrapper-detail .checkbox-wrapper-16 {
