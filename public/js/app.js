@@ -1,3 +1,4 @@
+
 /****ProfilMenu****/
 function displayProfilMenu() {
   const menu = document.getElementById("profil-menu");

@@ -1,87 +1,79 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>{% block title %}Welcome!{% endblock %}</title>
-    <link rel="icon" href="{{ asset('img/icons/logo.png') }}" />
-    {% block stylesheets %}
-    {{
-      encore_entry_link_tags("app")
-    }}
-    <link rel="stylesheet" href="{{ asset('build/style.css') }}" />
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    />
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="https://cdn.maptiler.com/maptiler-sdk-js/v1.1.1/maptiler-sdk.umd.js"></script>
-    <link
-      href="https://cdn.maptiler.com/maptiler-sdk-js/v1.1.1/maptiler-sdk.css"
-      rel="stylesheet"
-    />
-    <script src="https://cdn.maptiler.com/leaflet-maptilersdk/v1.0.0/leaflet-maptilersdk.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/intersection-observer/2.0.4/intersection-observer.min.js"></script>
-    {% endblock %}
-  </head>
-  <body>
-    {% block header %}
-    <header>
-      <div class="logo">
-        <a href="{{ path('app_home') }}">
-          <h1 class="title">Stellar</h1>
-        </a>
+
+<head>
+  <meta charset="UTF-8" />
+  <title>{% block title %}Welcome!{% endblock %}</title>
+  <link rel="icon" href="{{ asset('img/icons/logo.png') }}" />
+  {% block stylesheets %}
+  <link rel="stylesheet" href="{{ asset('build/style.css') }}" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link href="https://cdn.maptiler.com/maptiler-sdk-js/v1.1.1/maptiler-sdk.css" rel="stylesheet" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://cdn.maptiler.com/maptiler-sdk-js/v1.1.1/maptiler-sdk.umd.js"></script>
+  <script src="https://cdn.maptiler.com/leaflet-maptilersdk/v1.0.0/leaflet-maptilersdk.js"></script>
+  {% endblock %}
+</head>
+
+<body>
+  {% block header %}
+  <header>
+    <div class="logo">
+      <a href="{{ path('app_home') }}">
+        <h1 class="title">Stellar</h1>
+      </a>
+    </div>
+    {% if app.user %}
+    <div class="log">
+      <img id="profil-picture" src="{{ asset('img/unnamed.jpg') }}" alt="" />
+      <div id="profil-menu" class="active">
+        <ul>
+          <h4>Hi, {{ app.user.username }}</h4>
+          <li><a href="">Mon profil</a></li>
+          {#
+          {{
+          path("app_profil")
+          }}
+          #}
+          <li><a href="">Modifier mon profil</a></li>
+          {#
+          {{
+          path("app_profil_edit")
+          }}
+          #}
+          <li><a href="{{ path('new_advert') }}">Créer mon annonce</a></li>
+          {% if app.user.adverts is not empty %} {# si mon user a des annonces
+          #}
+          <li><a href="{{ path('user_adverts') }}">Mes annonces</a></li>
+          {% endif %}
+          <hr />
+          <li>
+            <b><a href="{{ path('app_logout') }}">Se déconnecter</a></b>
+          </li>
+        </ul>
       </div>
-      {% if app.user %}
-      <div class="log">
-        <img id="profil-picture" src="{{ asset('img/unnamed.jpg') }}" alt="" />
-        <div id="profil-menu" class="active">
-          <ul>
-            <h4>Hi, {{ app.user.username }}</h4>
-            <li><a href="">Mon profil</a></li>
-            {#
-            {{
-              path("app_profil")
-            }}
-            #}
-            <li><a href="">Modifier mon profil</a></li>
-            {#
-            {{
-              path("app_profil_edit")
-            }}
-            #}
-            <li><a href="{{ path('new_advert') }}">Créer mon annonce</a></li>
-            {% if app.user.adverts is not empty %} {# si mon user a des annonces
-            #}
-            <li><a href="{{ path('user_adverts') }}">Mes annonces</a></li>
-            {% endif %}
-            <hr />
-            <li>
-              <b><a href="{{ path('app_logout') }}">Se déconnecter</a></b>
-            </li>
-          </ul>
-        </div>
-      </div>
-      {% else %}
-      <div class="log">
-        <a href="{{ path('app_register') }}" class="signup">Sign Up</a>
-        <a href="{{ path('app_login') }}" class="login">Log In</a>
-      </div>
-      {% endif %}
-    </header>
-    {% endblock header %}
-    <main>
+    </div>
+    {% else %}
+    <div class="log">
+      <a href="{{ path('app_register') }}" class="signup">Sign Up</a>
+      <a href="{{ path('app_login') }}" class="login">Log In</a>
+    </div>
+    {% endif %}
+  </header>
+  {% endblock header %}
+  <main>
     {% block body %}
     {% endblock %}
-    </main>
-    <footer>
+  </main>
+  <footer>
 
-    </footer>
-  </body>
-  {% block javascripts %}
-  <script src="{{ asset('js/app.js') }}"></script>
-  <script src="{{ asset('js/map.js') }}"></script>
-  <script src="{{ asset('js/upload.js') }}"></script>
-  <script src="{{ asset('js/calendar.js') }}"></script>
-  <script src="{{ asset('js/animations.js') }}"></script>
-  {% endblock %}
+  </footer>
+</body>
+{% block javascripts %}
+<script src="{{ asset('js/app.js') }}"></script>
+<script src="{{ asset('js/map.js') }}"></script>
+<script src="{{ asset('js/upload.js') }}"></script>
+<script src="{{ asset('js/animations.js') }}"></script>
+{% endblock %}
+
 </html>

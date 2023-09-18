@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Anton&family=Pacifico&display=swap");
@@ -565,97 +566,97 @@ header .signup:hover {
   position: relative;
 }
 
-.wrapper-detail .calendar-wrapper {
-  width: 350px;
-  background: var(--white);
-  border-radius: 10px;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+.wrapper-detail .range .day {
+  background-color: var(--lightgray);
+  /* Couleur de fond pour les dates intermédiaires */
+  cursor: not-allowed;
+  /* Curseur non autorisé pour les dates intermédiaires */
+  border-radius: 4px;
 }
-.wrapper-detail .calendar-wrapper .calendar-header {
-  display: flex;
-  align-items: center;
-  padding: 25px 30px 10px;
-  justify-content: space-between;
+.wrapper-detail #calendar {
+  width: 300px;
+  height: 300px;
 }
-.wrapper-detail .calendar-wrapper .calendar-header .icons {
-  display: flex;
+.wrapper-detail .datepicker-inline {
+  width: 100% !important;
+  height: 100%;
 }
-.wrapper-detail .calendar-wrapper .calendar-header .icons span {
-  height: 38px;
-  width: 38px;
-  margin: 0 1px;
-  cursor: pointer;
-  color: var(--darkgray);
+.wrapper-detail .datepicker-days {
+  width: 100%;
+  height: 100%;
+}
+.wrapper-detail table.table-condensed {
+  width: 100%;
+  height: 100%;
+}
+.wrapper-detail td.active.day.range {
+  border-radius: 4px;
+}
+.wrapper-detail .datepicker td,
+.wrapper-detail .datepicker th {
   text-align: center;
-  line-height: 38px;
-  font-size: 1.9rem;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-          user-select: none;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 30px !important;
+  height: 30px !important;
+  border-radius: 4px;
+  border: none;
 }
-.wrapper-detail .calendar-wrapper .calendar-header .icons span:last-child {
-  margin-right: -10px;
+.wrapper-detail .datepicker table tr td.highlighted {
+  background: transparent !important;
+  border-radius: 4px;
+  color: var(--light-purple);
 }
-.wrapper-detail .calendar-wrapper .calendar-header .icons span:hover {
+.wrapper-detail .datepicker table tr td.highlighted:hover {
+  border-radius: 4px;
+  background-color: var(--lightgray) !important;
+}
+.wrapper-detail .datepicker table tr td.range,
+.wrapper-detail .datepicker table tr td.range.disabled,
+.wrapper-detail .datepicker table tr td.range.disabled:hover {
+  background: var(--lightgray) !important;
+  border-radius: 4px;
+}
+.wrapper-detail .datepicker table tr td.active,
+.wrapper-detail .datepicker table tr td.active.disabled,
+.wrapper-detail .datepicker table tr td.active.disabled:hover,
+.wrapper-detail .datepicker table tr td.active:hover {
+  background-color: var(--black) !important;
+  background-repeat: repeat-x;
+  color: #fff;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+}
+.wrapper-detail .datepicker table tr td.range,
+.wrapper-detail .datepicker table tr td.range.disabled,
+.wrapper-detail .datepicker table tr td.range.disabled:hover,
+.wrapper-detail .datepicker table tr td.range:hover {
   background: var(--lightgray);
+  border-radius: 4px !important;
 }
-.wrapper-detail .calendar-wrapper .calendar-header .icons .current-date {
-  font-size: 1.45rem;
-  font-weight: 500;
+.wrapper-detail .datepicker table tr td.active,
+.wrapper-detail .datepicker table tr td.active.disabled,
+.wrapper-detail .datepicker table tr td.active.disabled:hover,
+.wrapper-detail .datepicker table tr td.active:hover {
+  background-color: var(--black);
+  background-image: none !important;
+  background-image: none !important;
+  background-image: none !important;
+  background-image: none !important;
+  background-image: none !important;
+  background-image: none !important;
+  background-repeat: repeat-x;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+  color: #fff;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
-.wrapper-detail .calendar-wrapper .calendar {
-  padding: 20px;
-}
-.wrapper-detail .calendar-wrapper .calendar ul {
-  display: flex;
-  flex-wrap: wrap;
-  list-style: none;
-  text-align: center;
-}
-.wrapper-detail .calendar-wrapper .calendar .days {
-  margin-bottom: 20px;
-}
-.wrapper-detail .calendar-wrapper .calendar .days li {
-  z-index: 1;
-  cursor: pointer;
-  position: relative;
-  margin-top: 30px;
-}
-.wrapper-detail .calendar-wrapper .calendar .days li.inactive {
-  color: var(--middlegray);
-}
-.wrapper-detail .calendar-wrapper .calendar .days li.active {
-  color: var(--white);
-}
-.wrapper-detail .calendar-wrapper .calendar .days li::before {
-  position: absolute;
-  content: "";
-  left: 50%;
-  top: 50%;
-  height: 40px;
-  width: 40px;
-  z-index: -1;
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-}
-.wrapper-detail .calendar-wrapper .calendar .days li.active::before {
-  background: var(--light-purple);
-}
-.wrapper-detail .calendar-wrapper .calendar .days li:not(.active):hover::before {
-  background: var(--lightgray);
-}
-.wrapper-detail .calendar-wrapper .calendar li {
-  color: var(--black);
-  width: 14.2857142857%;
-  font-size: 1.07rem;
-}
-.wrapper-detail .calendar-wrapper .calendar .weeks li {
-  font-weight: 500;
-  cursor: default;
+.wrapper-detail .datepicker table tr td.active.active,
+.wrapper-detail .datepicker table tr td.active.disabled.active,
+.wrapper-detail .datepicker table tr td.active.disabled:active,
+.wrapper-detail .datepicker table tr td.active.disabled:hover.active,
+.wrapper-detail .datepicker table tr td.active.disabled:hover:active,
+.wrapper-detail .datepicker table tr td.active:active,
+.wrapper-detail .datepicker table tr td.active:hover.active,
+.wrapper-detail .datepicker table tr td.active:hover:active {
+  border-radius: 4px !important;
 }
 
 .wrapper-detail .checkbox-wrapper-16 {

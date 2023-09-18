@@ -726,126 +726,130 @@ header {
     }
 }
 
+
+
 //****** Calendar ******//
 
 .wrapper-detail {
-    .calendar-wrapper {
-        width: 350px;
-        background: var(--white);
-        border-radius: 10px;
-        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.10);
+    .range .day {
+        background-color: var(--lightgray);
+        /* Couleur de fond pour les dates intermédiaires */
+        cursor: not-allowed;
+        /* Curseur non autorisé pour les dates intermédiaires */
+        border-radius: 4px;
 
-        .calendar-header {
-            display: flex;
-            align-items: center;
-            padding: 25px 30px 10px;
-            justify-content: space-between;
+    }
 
-            .icons {
-                display: flex;
+    #calendar {
+        width: 300px;
+        height: 300px;
+    }
 
-                span {
-                    height: 38px;
-                    width: 38px;
-                    margin: 0 1px;
-                    cursor: pointer;
-                    color: var(--darkgray);
-                    text-align: center;
-                    line-height: 38px;
-                    font-size: 1.9rem;
-                    user-select: none;
-                    border-radius: 50%;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                }
+    .datepicker-inline {
+        width: 100% !important;
+        height: 100%;
+    }
 
-                span:last-child {
-                    margin-right: -10px;
-                }
+    .datepicker-days {
+        width: 100%;
+        height: 100%;
+    }
 
-                span:hover {
-                    background: var(--lightgray);
-                }
+    table.table-condensed {
+        width: 100%;
+        height: 100%;
+    }
 
-                .current-date {
-                    font-size: 1.45rem;
-                    font-weight: 500;
-                }
-            }
+    td.active.day.range {
+        border-radius: 4px;
+    }
+
+    .datepicker td,
+    .datepicker th {
+        text-align: center;
+        width: 30px !important;
+        height: 30px !important;
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        border-radius: 4px;
+        border: none;
+    }
+
+    .datepicker table tr td.highlighted {
+        background: transparent !important;
+        border-radius: 4px;
+        color: var(--light-purple);
+
+        &:hover {
+            border-radius: 4px;
+            background-color: var(--lightgray) !important;
         }
-        .calendars {
-            // display: flex;
-        }
-        .calendar {
-            padding: 20px;
+    }
 
-            ul {
-                display: flex;
-                flex-wrap: wrap;
-                list-style: none;
-                text-align: center;
-            }
+    .datepicker table tr td.range,
+    .datepicker table tr td.range.disabled,
+    .datepicker table tr td.range.disabled:hover {
+        background: var(--lightgray) !important;
+        -webkit-border-radius: 0;
+        -moz-border-radius: 0;
+        border-radius: 4px;
+    }
 
-            .days {
-                margin-bottom: 20px;
+    .datepicker table tr td.active,
+    .datepicker table tr td.active.disabled,
+    .datepicker table tr td.active.disabled:hover,
+    .datepicker table tr td.active:hover {
+        background-color: var(--black) !important;
+        background-repeat: repeat-x;
+        color: #fff;
+        text-shadow: 0 -1px 0 rgba(0, 0, 0, .25);
+    }
 
-                li {
-                    z-index: 1;
-                    cursor: pointer;
-                    position: relative;
-                    margin-top: 30px;
-                }
+    .datepicker table tr td.range,
+    .datepicker table tr td.range.disabled,
+    .datepicker table tr td.range.disabled:hover,
+    .datepicker table tr td.range:hover {
+        background: var(--lightgray);
+        -webkit-border-radius: 0;
+        -moz-border-radius: 0;
+        border-radius: 4px !important;
+    }
 
-                li.inactive {
-                    color: var(--middlegray);
-                }
+    .datepicker table tr td.active,
+    .datepicker table tr td.active.disabled,
+    .datepicker table tr td.active.disabled:hover,
+    .datepicker table tr td.active:hover {
+        background-color: var(--black);
+        background-image: none !important;
+        background-image: none !important;
+        background-image: none !important;
+        background-image: none !important;
+        background-image: none !important;
+        background-image: none !important;
+        background-repeat: repeat-x;
+        border-color: rgba(0, 0, 0, .1) rgba(0, 0, 0, .1) rgba(0, 0, 0, .25);
+        filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+        color: #fff;
+        text-shadow: 0 -1px 0 rgba(0, 0, 0, .25);
+    }
 
-                li.active {
-                    color: var(--white);
-                }
 
-                li::before {
-                    position: absolute;
-                    content: "";
-                    left: 50%;
-                    top: 50%;
-                    height: 40px;
-                    width: 40px;
-                    z-index: -1;
-                    border-radius: 50%;
-                    transform: translate(-50%, -50%);
-                }
-
-                li.active::before {
-                    background: var(--light-purple);
-                }
-
-                li:not(.active):hover::before {
-                    background: var(--lightgray);
-                }
-            }
-
-            li {
-                color: var(--black);
-                width: calc(100% / 7);
-                font-size: 1.07rem;
-            }
-
-            .weeks {
-                li {
-                    font-weight: 500;
-                    cursor: default;
-                }
-            }
-        }
-
+    .datepicker table tr td.active.active,
+    .datepicker table tr td.active.disabled.active,
+    .datepicker table tr td.active.disabled:active,
+    .datepicker table tr td.active.disabled:hover.active,
+    .datepicker table tr td.active.disabled:hover:active,
+    .datepicker table tr td.active:active,
+    .datepicker table tr td.active:hover.active,
+    .datepicker table tr td.active:hover:active {
+        border-radius: 4px !important;
     }
 }
 
 //****** Form Content For Add Advert ******//
 
 .wrapper-detail {
+
     .checkbox-wrapper-16 {
         display: flex;
         gap: 7px;

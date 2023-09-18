@@ -28,8 +28,11 @@
     "dependencies": {
         "eslint": "^8.47.0",
         "eslint-plugin-react": "^7.33.2",
+        "fullcalendar": "^6.1.8",
+        "jquery": "^3.7.1",
         "leaflet": "^1.9.4",
         "leaflet-styleeditor": "^0.1.21",
+        "pikaday": "^1.8.2",
         "prop-types": "^15.8.1"
     }
 }
