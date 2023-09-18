@@ -733,9 +733,7 @@ header {
 .wrapper-detail {
     .range .day {
         background-color: var(--lightgray);
-        /* Couleur de fond pour les dates intermédiaires */
         cursor: not-allowed;
-        /* Curseur non autorisé pour les dates intermédiaires */
         border-radius: 4px;
 
     }
