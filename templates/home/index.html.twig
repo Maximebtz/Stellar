@@ -29,6 +29,36 @@
                         </div>
                     </a>
                 </div>
+                <script>
+                    // Use the address from your Advert entity
+                    var address = "{{ advert.address }}, {{ advert.city }}, {{ advert.country }}";
+
+                    // Create a function to geocode the address using Google Maps Geocoding API
+                    function geocodeAddress(address, callback) {
+                        var geocoder = new google.maps.Geocoder();
+
+                        geocoder.geocode({ 'address': address }, function(results, status) {
+                            if (status === 'OK' && results.length > 0) {
+                                var location = results[0].geometry.location;
+                                var lat = location.lat();
+                                var lng = location.lng();
+                                callback([lat, lng]);
+                            } else {
+                                console.error('Geocoding failed for address: ' + address);
+                            }
+                        });
+                    }
+
+                    // Call the geocodeAddress function
+                    geocodeAddress("{{ advert.address }}, {{ advert.city }}, {{ advert.country }}", function(coords) {
+                        var lat = coords[0];
+                        var lng = coords[1];
+
+                        var marker = L.marker([lat, lng])
+                            .bindPopup("<strong>{{ advert.title }}</strong><br>{{ advert.address }}, {{ advert.city }}, {{ advert.country }}");
+                        map.addLayer(marker);
+                    });
+                </script>
             {% endfor %}
         </div>
         <div class="map">

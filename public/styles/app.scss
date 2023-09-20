@@ -1281,7 +1281,30 @@ header {
     transform: translateY(0);
     filter: blur(0);
 }
-
+.text-editor {
+    border: 1px solid #ccc;
+    padding: 10px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .toolbar {
+    margin-bottom: 5px;
+  }
+  
+  button {
+    font-weight: bold;
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+  
+  #editor {
+    border: 1px solid #ccc;
+    min-height: 100px;
+    padding: 5px;
+  }
+  
 .card-content {
     padding: 15px 20px 20px;
     width: 100%;
