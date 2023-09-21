@@ -15,7 +15,7 @@
     --white: #ffffff;
     --black: #333333;
     --darkgray: #4D4D4D;
-    --middlegray: #aaaaaa;
+    --middlegray: #CCCCCC;
     --lightgray: #eeeeee;
     --boxshadow: rgba(0, 0, 0, 0.025);
     --gradient-p-b: linear-gradient(20deg, var(--light-purple) -15%, var(--dark-blue) 150%);
@@ -624,8 +624,8 @@ header {
             justify-content: space-between;
             padding: 20px 0;
             margin: 20px 0 0;
-            border-bottom: 1px solid var(--lightgray);
-            border-top: 1px solid var(--lightgray);
+            border-bottom: 1px solid var(--middlegray);
+            border-top: 1px solid var(--middlegray);
 
             &-info {
                 display: flex;
@@ -633,7 +633,7 @@ header {
                 gap: 7px;
 
                 p {
-                    color: var(--middlegray);
+                    color: var(--darkgray);
                     font-size: 1.02rem;
                 }
 
@@ -670,7 +670,7 @@ header {
 
         &-description {
             width: 100%;
-            border-bottom: 1px solid var(--lightgray);
+            border-bottom: 1px solid var(--middlegray);
 
             p {
                 font-family: 'Inter', sans-serif;
@@ -747,17 +747,45 @@ header {
         flex-direction: column;
         box-shadow: var(--boxshadow) 0 0 20px;
 
-        .date {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .night-price {
+            border-bottom: 1px solid var(--middlegray);
+            padding-bottom: 10px;
+            margin: 0 0 20px 0;
 
-            p {
-                font-size: larger;
-                font-weight: 500;
-                color: var(--darkgray);
+            b {
+                font-size: xx-large;
             }
         }
+
+        .dates {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+
+            .date {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                gap: 7px;
+
+                p {
+                    font-size: larger;
+                    font-weight: 500;
+                    color: var(--darkgray);
+                }
+
+                .date-span {
+                    width: 100%;
+                    border: 1px solid var(--middlegray);
+                    padding: 5px 10px;
+                    border-radius: 7px;
+                    color: var(--middlegray);
+                    height: 37px;
+                    transition: all .2s ease-in-out;
+                }
+            }
+        }
+
 
         .datepicker .datepicker-switch:hover,
         .datepicker tfoot tr th:hover {
