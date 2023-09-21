@@ -452,21 +452,23 @@ header .signup:hover {
   font-size: larger;
   cursor: pointer;
 }
+
 .wrapper-detail-main {
-  display: grid;
+  display: flex;
   gap: 60px;
-  grid-auto-rows: max-content;
-  grid-template-columns: minmax(300px, 1fr) 450px;
   padding-top: 55px;
   max-width: 100%;
   position: relative;
 }
-.wrapper-detail-category {
+.wrapper-detail .wrapper-detail-left {
+  min-width: 600px;
+}
+.wrapper-detail .wrapper-detail-left-category {
   gap: 7px;
   display: flex;
   flex-direction: column;
 }
-.wrapper-detail-owner {
+.wrapper-detail .wrapper-detail-left-owner {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -475,25 +477,25 @@ header .signup:hover {
   border-bottom: 1px solid var(--lightgray);
   border-top: 1px solid var(--lightgray);
 }
-.wrapper-detail-owner-info {
+.wrapper-detail .wrapper-detail-left-owner-info {
   display: flex;
   align-items: center;
   gap: 7px;
 }
-.wrapper-detail-owner-info p {
+.wrapper-detail .wrapper-detail-left-owner-info p {
   color: var(--middlegray);
   font-size: 1.02rem;
 }
-.wrapper-detail-owner-info .profil-picture {
+.wrapper-detail .wrapper-detail-left-owner-info .profil-picture {
   width: 32px;
   height: 32px;
   border-radius: 50%;
 }
-.wrapper-detail-owner-info span {
+.wrapper-detail .wrapper-detail-left-owner-info span {
   text-decoration: underline;
   font-weight: 600;
 }
-.wrapper-detail-owner-contact {
+.wrapper-detail .wrapper-detail-left-owner-contact {
   width: 100px;
   height: 36px;
   background-color: var(--black);
@@ -506,28 +508,28 @@ header .signup:hover {
   transition: all 0.2s ease-in-out;
   box-shadow: var(--boxshadow) 0 0 10px;
 }
-.wrapper-detail-owner-contact:hover {
+.wrapper-detail .wrapper-detail-left-owner-contact:hover {
   transform: scale(1.02);
 }
-.wrapper-detail-description {
+.wrapper-detail .wrapper-detail-left-description {
   width: 100%;
   border-bottom: 1px solid var(--lightgray);
 }
-.wrapper-detail-description p {
+.wrapper-detail .wrapper-detail-left-description p {
   font-family: "Inter", sans-serif;
   font-weight: 500;
   line-height: 27px;
   color: var(--darkgray);
   padding: 20px 10px;
 }
-.wrapper-detail-commodite h2 {
+.wrapper-detail .wrapper-detail-left-commodite h2 {
   font-size: 2em;
   padding: 20px 0 10px;
 }
-.wrapper-detail-commodite .checkbox-wrapper-16 {
+.wrapper-detail .wrapper-detail-left-commodite .checkbox-wrapper-16 {
   gap: 10px;
 }
-.wrapper-detail-commodite .checkbox-wrapper-16 .checkbox-tile-fit {
+.wrapper-detail .wrapper-detail-left-commodite .checkbox-wrapper-16 .checkbox-tile-fit {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -545,7 +547,7 @@ header .signup:hover {
   cursor: pointer;
   position: relative;
 }
-.wrapper-detail-commodite .checkbox-wrapper-16 .checkbox-tile-advert {
+.wrapper-detail .wrapper-detail-left-commodite .checkbox-wrapper-16 .checkbox-tile-advert {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -564,16 +566,41 @@ header .signup:hover {
   cursor: pointer;
   position: relative;
 }
-
-.wrapper-detail .datepicker .datepicker-switch:hover, .wrapper-detail .datepicker tfoot tr th:hover {
+.wrapper-detail .wrapper-detail-right {
+  position: sticky;
+  top: 25px;
+  padding: 25px;
+  border: 1px solid var(--lightgray);
+  border-radius: 10px;
+  max-width: 400px;
+  width: 100%;
+  min-width: 350px;
+  height: -moz-max-content;
+  height: max-content;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--boxshadow) 0 0 20px;
+}
+.wrapper-detail .wrapper-detail-right .date {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.wrapper-detail .wrapper-detail-right .date p {
+  font-size: larger;
+  font-weight: 500;
+  color: var(--darkgray);
+}
+.wrapper-detail .wrapper-detail-right .datepicker .datepicker-switch:hover,
+.wrapper-detail .wrapper-detail-right .datepicker tfoot tr th:hover {
   background: transparent !important;
 }
-.wrapper-detail .datepicker-switch {
+.wrapper-detail .wrapper-detail-right .datepicker-switch {
   width: -moz-max-content !important;
   width: max-content !important;
 }
-.wrapper-detail .datepicker th.prev,
-.wrapper-detail .datepicker th.next {
+.wrapper-detail .wrapper-detail-right .datepicker th.prev,
+.wrapper-detail .wrapper-detail-right .datepicker th.next {
   border: none;
   color: transparent;
   position: relative;
@@ -581,98 +608,126 @@ header .signup:hover {
   align-items: center;
   justify-content: center;
 }
-.wrapper-detail .datepicker th.prev:hover,
-.wrapper-detail .datepicker th.next:hover {
+.wrapper-detail .wrapper-detail-right .datepicker th.prev:hover,
+.wrapper-detail .wrapper-detail-right .datepicker th.next:hover {
   background-color: var(--lightgray);
 }
-.wrapper-detail .datepicker th.prev:before {
+.wrapper-detail .wrapper-detail-right .datepicker th.prev:before {
   content: "";
   position: absolute;
   width: 16px;
   height: 16px;
   background: url("../img/icons/chevron-left-solid.svg") no-repeat center;
 }
-.wrapper-detail .datepicker th.next:before {
+.wrapper-detail .wrapper-detail-right .datepicker th.next:before {
   content: "";
   position: absolute;
   width: 16px;
   height: 16px;
   background: url("../img/icons/chevron-right-solid.svg") no-repeat center;
 }
-.wrapper-detail .range .day {
+.wrapper-detail .wrapper-detail-right .range .day {
   background-color: var(--lightgray);
   cursor: not-allowed;
   border-radius: 4px;
 }
-.wrapper-detail table {
+.wrapper-detail .wrapper-detail-right table {
   font-family: "Inter", sans-serif;
 }
-.wrapper-detail td {
+.wrapper-detail .wrapper-detail-right td {
   font-size: large;
   font-weight: 500;
 }
-.wrapper-detail #calendar {
-  width: 300px;
-  height: 300px;
+.wrapper-detail .wrapper-detail-right #calendar {
+  width: 100%;
+  height: -moz-max-content;
+  height: max-content;
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
 }
-.wrapper-detail .datepicker-inline {
+.wrapper-detail .wrapper-detail-right .datepicker-inline {
   width: 100% !important;
   height: 100%;
+  border: 1px solid var(--lightgray);
+  box-shadow: var(--boxshadow) 0 0 10px;
+  border-radius: 7px;
+  padding: 15px;
+  transition: all 0.2s ease-in-out;
 }
-.wrapper-detail .datepicker-days {
+.wrapper-detail .wrapper-detail-right .datepicker-inline:hover {
+  transform: scale(1.01);
+  box-shadow: var(--boxshadow) 0 0 15px;
+}
+.wrapper-detail .wrapper-detail-right .datepicker-days {
   width: 100%;
   height: 100%;
 }
-.wrapper-detail table.table-condensed {
+.wrapper-detail .wrapper-detail-right table.table-condensed {
   width: 100%;
   height: 100%;
 }
-.wrapper-detail td.active.day.range {
+.wrapper-detail .wrapper-detail-right td.active.day.range {
   border-radius: 4px;
 }
-.wrapper-detail .datepicker td,
-.wrapper-detail .datepicker th {
+.wrapper-detail .wrapper-detail-right .datepicker td,
+.wrapper-detail .wrapper-detail-right .datepicker th {
   text-align: center;
   width: 30px !important;
-  height: 30px !important;
+  max-height: 40px !important;
+  min-height: auto;
+  height: 40px;
   border-radius: 4px;
   border: none;
 }
-.wrapper-detail .datepicker table tr td.highlighted {
+.wrapper-detail .wrapper-detail-right .datepicker table tr td.today,
+.wrapper-detail .wrapper-detail-right .datepicker table tr td.today.disabled,
+.wrapper-detail .wrapper-detail-right .datepicker table tr td.today.disabled:hover,
+.wrapper-detail .wrapper-detail-right .datepicker table tr td.today:hover {
+  background-color: var(--white);
+  border: var(--black) 2px dashed;
+  background-image: none !important;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#fdd49a", endColorstr="#fdf59a", GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+  color: #000;
+  border-radius: 7px;
+  box-shadow: var(--boxshadow) 0 0 10px;
+}
+.wrapper-detail .wrapper-detail-right .datepicker table tr td.highlighted {
   background: transparent !important;
   border-radius: 4px;
   color: var(--light-purple);
 }
-.wrapper-detail .datepicker table tr td.highlighted:hover {
+.wrapper-detail .wrapper-detail-right .datepicker table tr td.highlighted:hover {
   border-radius: 4px;
   background-color: var(--lightgray) !important;
 }
-.wrapper-detail .datepicker table tr td.range,
-.wrapper-detail .datepicker table tr td.range.disabled,
-.wrapper-detail .datepicker table tr td.range.disabled:hover {
+.wrapper-detail .wrapper-detail-right .datepicker table tr td.range,
+.wrapper-detail .wrapper-detail-right .datepicker table tr td.range.disabled,
+.wrapper-detail .wrapper-detail-right .datepicker table tr td.range.disabled:hover {
   background: var(--lightgray) !important;
   border-radius: 4px;
 }
-.wrapper-detail .datepicker table tr td.active,
-.wrapper-detail .datepicker table tr td.active.disabled,
-.wrapper-detail .datepicker table tr td.active.disabled:hover,
-.wrapper-detail .datepicker table tr td.active:hover {
+.wrapper-detail .wrapper-detail-right .datepicker table tr td.active,
+.wrapper-detail .wrapper-detail-right .datepicker table tr td.active.disabled,
+.wrapper-detail .wrapper-detail-right .datepicker table tr td.active.disabled:hover,
+.wrapper-detail .wrapper-detail-right .datepicker table tr td.active:hover {
   background-color: var(--black) !important;
   background-repeat: repeat-x;
   color: #fff;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
-.wrapper-detail .datepicker table tr td.range,
-.wrapper-detail .datepicker table tr td.range.disabled,
-.wrapper-detail .datepicker table tr td.range.disabled:hover,
-.wrapper-detail .datepicker table tr td.range:hover {
+.wrapper-detail .wrapper-detail-right .datepicker table tr td.range,
+.wrapper-detail .wrapper-detail-right .datepicker table tr td.range.disabled,
+.wrapper-detail .wrapper-detail-right .datepicker table tr td.range.disabled:hover,
+.wrapper-detail .wrapper-detail-right .datepicker table tr td.range:hover {
   background: var(--lightgray);
   border-radius: 4px !important;
 }
-.wrapper-detail .datepicker table tr td.active,
-.wrapper-detail .datepicker table tr td.active.disabled,
-.wrapper-detail .datepicker table tr td.active.disabled:hover,
-.wrapper-detail .datepicker table tr td.active:hover {
+.wrapper-detail .wrapper-detail-right .datepicker table tr td.active,
+.wrapper-detail .wrapper-detail-right .datepicker table tr td.active.disabled,
+.wrapper-detail .wrapper-detail-right .datepicker table tr td.active.disabled:hover,
+.wrapper-detail .wrapper-detail-right .datepicker table tr td.active:hover {
   background-color: var(--black);
   background-image: none !important;
   background-image: none !important;
@@ -686,26 +741,78 @@ header .signup:hover {
   color: #fff;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
-.wrapper-detail .datepicker table tr td.active.active,
-.wrapper-detail .datepicker table tr td.active.disabled.active,
-.wrapper-detail .datepicker table tr td.active.disabled:active,
-.wrapper-detail .datepicker table tr td.active.disabled:hover.active,
-.wrapper-detail .datepicker table tr td.active.disabled:hover:active,
-.wrapper-detail .datepicker table tr td.active:active,
-.wrapper-detail .datepicker table tr td.active:hover.active,
-.wrapper-detail .datepicker table tr td.active:hover:active {
+.wrapper-detail .wrapper-detail-right .datepicker table tr td.active.active,
+.wrapper-detail .wrapper-detail-right .datepicker table tr td.active.disabled.active,
+.wrapper-detail .wrapper-detail-right .datepicker table tr td.active.disabled:active,
+.wrapper-detail .wrapper-detail-right .datepicker table tr td.active.disabled:hover.active,
+.wrapper-detail .wrapper-detail-right .datepicker table tr td.active.disabled:hover:active,
+.wrapper-detail .wrapper-detail-right .datepicker table tr td.active:active,
+.wrapper-detail .wrapper-detail-right .datepicker table tr td.active:hover.active,
+.wrapper-detail .wrapper-detail-right .datepicker table tr td.active:hover:active {
   border-radius: 4px !important;
 }
-.wrapper-detail .datepicker table tr td.disabled,
-.wrapper-detail .datepicker table tr td.disabled:hover {
+.wrapper-detail .wrapper-detail-right .datepicker table tr td.disabled,
+.wrapper-detail .wrapper-detail-right .datepicker table tr td.disabled:hover {
   background: transparent !important;
   color: var(--middlegray) !important;
   opacity: 50%;
   cursor: default;
 }
-.wrapper-detail .datepicker table tr td.new,
-.wrapper-detail .datepicker table tr td.old {
+.wrapper-detail .wrapper-detail-right .datepicker table tr td.new,
+.wrapper-detail .wrapper-detail-right .datepicker table tr td.old {
   opacity: 50% !important;
+}
+.wrapper-detail .wrapper-detail-right .l-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--gradient-p-b);
+  border-radius: 10px;
+  width: 100%;
+  height: 46px;
+  border: none;
+  position: relative;
+  color: white;
+  font-size: large;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+.wrapper-detail .wrapper-detail-right .l-btn:hover {
+  transform: scale(1.02);
+}
+.wrapper-detail .wrapper-detail-right .price-details {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.wrapper-detail .wrapper-detail-right .price-details .price:nth-child(2) {
+  border-bottom: var(--middlegray) 1px solid;
+  padding: 0 0 10px 0;
+}
+.wrapper-detail .wrapper-detail-right .price-details .price:nth-child(3) {
+  margin-bottom: 15px;
+}
+.wrapper-detail .wrapper-detail-right .price-details .price:nth-child(3) p {
+  font-size: x-large;
+}
+.wrapper-detail .wrapper-detail-right .price-details .price:nth-child(3) .total-span {
+  font-size: x-large;
+  font-weight: 600;
+}
+.wrapper-detail .wrapper-detail-right .price-details .price {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.wrapper-detail .wrapper-detail-right .price-details .price p {
+  font-size: large;
+  color: var(--dark-purple);
+  font-weight: 500;
+}
+.wrapper-detail .wrapper-detail-right .price-details .price .total-span {
+  font-size: large;
+  font-weight: 600;
 }
 
 .wrapper-detail .checkbox-wrapper-16 {
@@ -1008,6 +1115,30 @@ header .signup:hover {
   opacity: 1;
   transform: translateY(0);
   filter: blur(0);
+}
+
+.text-editor {
+  border: 1px solid #ccc;
+  padding: 10px;
+  font-family: Arial, sans-serif;
+}
+
+.toolbar {
+  margin-bottom: 5px;
+}
+
+button {
+  font-weight: bold;
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+#editor {
+  border: 1px solid #ccc;
+  min-height: 100px;
+  padding: 5px;
 }
 
 .card-content {

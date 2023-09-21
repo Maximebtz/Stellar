@@ -101,7 +101,7 @@
     </div>
     <div class="wrapper-detail-main">
       <div class="wrapper-detail-left">
-        <div class="wrapper-detail-category">
+        <div class="wrapper-detail-left-category">
           <div class="checkbox-wrapper-16">
             {% if advert.lodge %}
             <div class="checkbox-wrapper">
@@ -127,8 +127,8 @@
             {% endfor %}
           </div>
         </div>
-        <div class="wrapper-detail-owner">
-          <div class="wrapper-detail-owner-info">
+        <div class="wrapper-detail-left-owner">
+          <div class="wrapper-detail-left-owner-info">
             {% if advert.owner.avatar is not null %}
             <p>Propriétaire - </p><img class="profil-picture" src="{{ asset('uploads/avatars/' ~ advert.owner.avatar)}}"
               alt=""><span>{{advert.owner.username}}</span>
@@ -136,16 +136,16 @@
             <p>Propriétaire - <span class="profil-picture"></span><span>{{advert.owner.username}}</span></p>
             {% endif %}
           </div>
-          <a href="#" class="wrapper-detail-owner-contact">
+          <a href="#" class="wrapper-detail-left-owner-contact">
             Contacter
           </a>
         </div>
-        <div class="wrapper-detail-description">
+        <div class="wrapper-detail-left-description">
           <p>
             {{ advert.description|nl2br|raw }}
           </p>
         </div>
-        <div class="wrapper-detail-commodite">
+        <div class="wrapper-detail-left-commodite">
           <h2>Commodités</h2>
           <div class="checkbox-wrapper-16">
             {% for accessory in advert.accessories %}
@@ -167,19 +167,20 @@
         </p>
 
         <div class="dates">
-          <p>Date de d'arrivé : <span id="date-arrivee"></span></p>
-          <p>Date de départ : <span id="date-depart"></span></p>
+          <div class="date"><p>Arrivée :</p> <span  id="date-arrivee"></span></div>
+          <div class="date"><p>Départ :</p> <span id="date-depart"></span></div>
         </div>
 
         <div id="calendar"></div>
 
         <div class="price-details">
-          <p><span id="pricePerNight">{{advert.price}}</span> x <span id="numNights">0</span> nuits = <span
-              id="totalNightPrice">0€</span></p>
-          <p>Frais Stellar 5%: <span id="stellarFees">0€</span></p>
-          <p>Total: <span id="totalPrice">0€</span></p>
+          <div class="price"><p><span id="pricePerNight">{{advert.price}}</span> x <span id="numNights">0</span> nuits = </p><span class="total-span" id="totalNightPrice">0€</span></div>
+          <div class="price"><p>Frais Stellar 5%:</p><span class="total-span" id="stellarFees">0€</span></div>
+          <div class="price"><p>Total:</p><span class="total-span" id="totalPrice">0€</span></div>
         </div>
-
+        <div class="log">
+          <a href="{{ path('app_register') }}" class="l-btn">Réservation</a>
+        </div>
       </div>
     </div>
   </div>
@@ -200,7 +201,8 @@
       language: "fr",
       multidate: 2,
       daysOfWeekHighlighted: "0,6",
-      startDate: 'today'
+      startDate: 'today',
+      todayHighlight: true
     });
 
     $('#calendar').on('changeDate', function (e) {

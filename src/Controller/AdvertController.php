@@ -17,6 +17,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+
 
 class AdvertController extends AbstractController
 {
@@ -120,30 +122,6 @@ class AdvertController extends AbstractController
         ]);
     }
 
-    //     #[Route('/owner/advert/remove-image/{id}', name: 'remove_advert_image')]
-    //     #[IsGranted('ROLE_USER')]
-    //     public function removeImage(Request $request, Images $images): Response
-    //     {
-    //         $data = json_decode($request->getContent(), true);
-    //         // On verifie si le token est valide
-    //         if($this->isCsrfTokenValid('delete'.$images->getId(), $data['_token'])) {
-    //             // On recup le nom de l'images 
-    //             $nom = $images->getUrl();
-    //             // On supprime l'images 
-    //             unlink($this->getParameter('images_directory').'/'.$nom);
-
-    //             // On supprime l'images dans la base de données 
-    //             $entityManager = $this->getDoctrine()->getManager();
-    //             $entityManager->remove($images);
-    //             $entityManager->flush();
-
-    //             // On répond en json 
-    //             return new JsonResponse(['success' => 1]);
-    //         } else {
-
-    //             return new JsonResponse(['error' => 'Token invalide'], 400);
-    //         }
-    //     }
     #[Route('/owner/advert/remove-image/{advertId}/{imageId}', name: 'remove_advert_image')]
     #[IsGranted('ROLE_USER')]
     public function removeImage(Request $request, $advertId, $imageId): Response
@@ -174,5 +152,37 @@ class AdvertController extends AbstractController
         echo "</pre>";
         // Rediriger vers la page de détails de l'annonce
         return $this->redirectToRoute('detail_advert', ['id' => $advertId]);
+    }
+
+
+    
+    #[Route('/get-adverts-json', name: 'get-adverts-json')]
+    public function getAdvertsJson(EntityManagerInterface $entityManager)
+    {
+        // Remplacez ceci par votre logique pour récupérer les annonces depuis la base de données
+        $adverts = $entityManager->getRepository(YourAdvertEntity::class)->findAll();
+
+        // Transformez les annonces en format JSON
+        $jsonAdverts = $this->serializeAdverts($adverts);
+
+        // Retournez une réponse JSON
+        return new JsonResponse($jsonAdverts);
+    }
+
+    private function serializeAdverts(array $adverts)
+    {
+        // Vous pouvez personnaliser la sérialisation ici en fonction de vos besoins
+        // Par exemple, utilisez la bibliothèque Symfony Serializer
+
+        $data = [];
+        foreach ($adverts as $advert) {
+            $data[] = [
+                'id' => $advert->getId(),
+                'title' => $advert->getTitle(),
+                // Ajoutez d'autres propriétés d'annonce ici
+            ];
+        }
+
+        return $data;
     }
 }

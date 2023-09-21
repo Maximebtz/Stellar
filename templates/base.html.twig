@@ -7,11 +7,22 @@
   <link rel="icon" href="{{ asset('img/icons/logo.png') }}" />
   {% block stylesheets %}
   <link rel="stylesheet" href="{{ asset('build/style.css') }}" />
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <link href="https://cdn.maptiler.com/maptiler-sdk-js/v1.1.1/maptiler-sdk.css" rel="stylesheet" />
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script src="https://cdn.maptiler.com/maptiler-sdk-js/v1.1.1/maptiler-sdk.umd.js"></script>
-  <script src="https://cdn.maptiler.com/leaflet-maptilersdk/v1.0.0/leaflet-maptilersdk.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBwRdXofYPItKiTcLb5T2j7ABGrRnbhhyc&callback=initMap"></script>
+    <script>
+        function initMap() {
+            // Coordonnées du centre de la carte
+            var center = {lat: 48.8588443, lng: 2.2943506};
+
+            // Options de la carte
+            var mapOptions = {
+                center: center,
+                zoom: 14 // Niveau de zoom
+            };
+
+            // Créez une nouvelle carte Google Maps
+            var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+        }
+    </script>
   {% endblock %}
 </head>
 
