@@ -179,7 +179,7 @@
           <div class="price"><p>Total:</p><span class="total-span" id="totalPrice">0€</span></div>
         </div>
         <div class="log">
-          <a href="{{ path('app_register') }}" class="l-btn">Réservation</a>
+          <a href="{{ path('app_reservation', {'id': advert.id}) }}" class="l-btn">Réservation</a>
         </div>
       </div>
     </div>
@@ -251,6 +251,12 @@
         $('#stellarFees').text('0€');
         $('#totalPrice').text('0€');
       }
+
+      localStorage.setItem('arrivalDate', formatDate(dateArrivee));
+      localStorage.setItem('departureDate', formatDate(dateDepart));
+      localStorage.setItem('totalNightPrice', totalNightPrice);
+      localStorage.setItem('stellarFees', stellarFees);
+      localStorage.setItem('totalPrice', totalPrice);
     });
 
     function formatDate(date) {

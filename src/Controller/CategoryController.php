@@ -14,6 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class CategoryController extends AbstractController
 {
     
+    
     #[Route('/admin/category', name: 'app_category')]
     public function index(): Response
     {

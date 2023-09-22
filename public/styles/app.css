@@ -455,12 +455,15 @@ header .signup:hover {
 
 .wrapper-detail-main {
   display: flex;
-  gap: 60px;
   padding-top: 55px;
   max-width: 100%;
   position: relative;
 }
 .wrapper-detail .wrapper-detail-left {
+  max-width: 700px;
+  min-width: 460px;
+  width: 100%;
+  padding: 0 60px 0 0;
   min-width: 600px;
 }
 .wrapper-detail .wrapper-detail-left-category {
@@ -572,7 +575,7 @@ header .signup:hover {
   padding: 25px;
   border: 1px solid var(--lightgray);
   border-radius: 10px;
-  max-width: 400px;
+  max-width: 450px;
   width: 100%;
   min-width: 350px;
   height: -moz-max-content;
@@ -675,7 +678,7 @@ header .signup:hover {
   border: 1px solid var(--lightgray);
   box-shadow: var(--boxshadow) 0 0 10px;
   border-radius: 7px;
-  padding: 15px;
+  padding: 15px 20px;
   transition: all 0.2s ease-in-out;
 }
 .wrapper-detail .wrapper-detail-right .datepicker-inline:hover {

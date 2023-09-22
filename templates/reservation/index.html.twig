@@ -1,20 +1,63 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ReservationController!{% endblock %}
+{% block title %}Réservation{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+<h1>Nouvelle Réservation</h1>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+{{ form_start(formAddReservation) }}
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/laragon/www/Stellar/Stellar/src/Controller/ReservationController.php'|file_link(0) }}">src/Controller/ReservationController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/laragon/www/Stellar/Stellar/templates/reservation/index.html.twig'|file_link(0) }}">templates/reservation/index.html.twig</a></code></li>
-    </ul>
+
+
+<div class="price-details">
+    <div class="price">
+        <p><span id="pricePerNight">{{advert.price}}</span> x <span id="numNights">0</span> nuits = </p><span
+            class="total-span" id="totalNightPrice">0€</span>
+    </div>
+    <div class="price">
+        <p>Frais Stellar 5%:</p><span class="total-span" id="stellarFees">0€</span>
+    </div>
+    <div class="price">
+        <p>Total:</p><span class="total-span" id="totalPrice">0€</span>
+    </div>
 </div>
+
+{{ form_row(formAddReservation.arrivalDate, {'attr': {'id': 'arrivalDate'}}) }}
+{{ form_row(formAddReservation.departureDate, {'attr': {'id': 'departureDate'}}) }}
+
+{{ form_row(formAddReservation.firstname) }}
+{{ form_row(formAddReservation.surname) }}
+{{ form_row(formAddReservation.dateOfBirth) }}
+{{ form_row(formAddReservation.address) }}
+{{ form_row(formAddReservation.cp) }}
+{{ form_row(formAddReservation.city) }}
+{{ form_row(formAddReservation.country) }}
+
+<button type="submit" class="btn btn-primary">Réserver</button>
+{{ form_end(formAddReservation) }}
 {% endblock %}
+{% block javascripts %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // Récupérez les données de localStorage
+        let arrivalDate = localStorage.getItem('arrivalDate');
+        let departureDate = localStorage.getItem('departureDate');
+        let totalPrice = localStorage.getItem('totalPrice');
+        let stellarFees = localStorage.getItem('stellarFees');
+        let totalNightPrice = localStorage.getItem('totalNightPrice');
+
+        // Vérifiez si les dates sont correctes
+        console.log("Arrival Date:", arrivalDate);
+        console.log("Departure Date:", departureDate);
+        console.log("Total Price:", totalPrice);
+
+        // Insérez les données dans les balises <p>
+        $('#arrivalDate').text(arrivalDate);
+        $('#departureDate').text(departureDate);
+        $('#pricePerNight').text(pricePerNight);
+        $('#stellarFees').text(stellarFees);
+        $('#totalPrice').text(totalPrice);
+    });
+</script>
+{% endblock javascripts %}
