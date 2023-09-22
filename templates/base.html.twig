@@ -7,22 +7,7 @@
   <link rel="icon" href="{{ asset('img/icons/logo.png') }}" />
   {% block stylesheets %}
   <link rel="stylesheet" href="{{ asset('build/style.css') }}" />
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBwRdXofYPItKiTcLb5T2j7ABGrRnbhhyc&callback=initMap"></script>
-    <script>
-        function initMap() {
-            // Coordonnées du centre de la carte
-            var center = {lat: 48.8588443, lng: 2.2943506};
-
-            // Options de la carte
-            var mapOptions = {
-                center: center,
-                zoom: 14 // Niveau de zoom
-            };
-
-            // Créez une nouvelle carte Google Maps
-            var map = new google.maps.Map(document.getElementById('map'), mapOptions);
-        }
-    </script>
+  
   {% endblock %}
 </head>
 

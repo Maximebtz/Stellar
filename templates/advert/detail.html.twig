@@ -167,16 +167,30 @@
         </p>
 
         <div class="dates">
-          <div class="date"><p>Arrivée :</p> <div class="date-span"><span  id="date-arrivee"></span></div></div>
-          <div class="date"><p>Départ :</p> <div class="date-span"><span id="date-depart"></span></div></div>
+          <div class="date">
+            <p>Arrivée :</p>
+            <div class="date-span"><span id="arrivalDate"></span></div>
+          </div>
+          <div class="date">
+            <p>Départ :</p>
+            {# <div class="date-span"><span id="departureDate"></span></div> #}
+            <div class="date-span"><input type="date"  id="departureDate"/></div>
+          </div>
         </div>
 
         <div id="calendar"></div>
 
         <div class="price-details">
-          <div class="price"><p><span id="pricePerNight">{{advert.price}}</span> x <span id="numNights">0</span> nuits = </p><span class="total-span" id="totalNightPrice">0€</span></div>
-          <div class="price"><p>Frais Stellar 5%:</p><span class="total-span" id="stellarFees">0€</span></div>
-          <div class="price"><p>Total:</p><span class="total-span" id="totalPrice">0€</span></div>
+          <div class="price">
+            <p><span id="pricePerNight">{{advert.price}}</span> x <span id="numNights">0</span> nuits = </p><span
+              class="total-span" id="totalNightPrice">0€</span>
+          </div>
+          <div class="price">
+            <p>Frais Stellar 5%:</p><span class="total-span" id="stellarFees">0€</span>
+          </div>
+          <div class="price">
+            <p>Total:</p><span class="total-span" id="totalPrice">0€</span>
+          </div>
         </div>
         <div class="log">
           <a href="{{ path('app_reservation', {'id': advert.id}) }}" class="l-btn">Réservation</a>
@@ -212,8 +226,10 @@
         dateArrivee = selectedDates[0];
         dateDepart = selectedDates[1];
 
-        $('#date-arrivee').text(formatDate(dateArrivee));
-        $('#date-depart').text(formatDate(dateDepart));
+        $('#arrivalDate').text(formatDate(dateArrivee));
+        $('#departureDate').text(formatDate(dateDepart));
+
+        // Chercher comment mettre une value dans un input*
 
         $('#calendar').find('.day').each(function () {
           let currentDate = new Date($(this).data('date'));
@@ -244,8 +260,8 @@
         dateArrivee = null;
         dateDepart = null;
         $('#calendar').find('.day').removeClass('range');
-        $('#date-arrivee').text('');
-        $('#date-depart').text('');
+        $('#arrivalDate').text('');
+        $('#departureDate').text('');
         $('#numNights').text('0');
         $('#totalNightPrice').text('0€');
         $('#stellarFees').text('0€');
@@ -254,9 +270,9 @@
 
       localStorage.setItem('arrivalDate', formatDate(dateArrivee));
       localStorage.setItem('departureDate', formatDate(dateDepart));
-      localStorage.setItem('totalNightPrice', totalNightPrice);
-      localStorage.setItem('stellarFees', stellarFees);
-      localStorage.setItem('totalPrice', totalPrice);
+      localStorage.setItem('totalPrice', totalPrice.toString());
+      localStorage.setItem('stellarFees', stellarFees.toString());
+      localStorage.setItem('totalNightPrice', totalNightPrice.toString());
     });
 
     function formatDate(date) {
