@@ -15,7 +15,7 @@
 
 {% block body %}
 <div class="wrapper">
-  <a href="{{ path("app_home") }}" class="return-home">
+  <a href="{{ path(" app_home") }}" class="return-home">
     <img src="{{ asset('img/icons/Left Arrow.svg') }}" alt="Icon return home">
   </a>
   <div class="wrapper-detail">
@@ -169,12 +169,11 @@
         <div class="dates">
           <div class="date">
             <p>Arrivée :</p>
-            <div class="date-span"><span id="arrivalDate"></span></div>
+            <input class="date-span" type="date" id="arrivalDate" disabled />
           </div>
           <div class="date">
             <p>Départ :</p>
-            {# <div class="date-span"><span id="departureDate"></span></div> #}
-            <div class="date-span"><input type="date"  id="departureDate"/></div>
+            <input class="date-span" type="date" id="departureDate" disabled />
           </div>
         </div>
 
@@ -207,8 +206,8 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
   $(document).ready(function () {
-    let dateArrivee;
-    let dateDepart;
+    let arrivalDate;
+    let departureDate;
 
     $('#calendar').datepicker({
       maxViewMode: 0,
@@ -223,17 +222,25 @@
       let selectedDates = e.dates;
 
       if (selectedDates.length === 2) {
-        dateArrivee = selectedDates[0];
-        dateDepart = selectedDates[1];
+        arrivalDate = selectedDates[0];
+        departureDate = selectedDates[1];
 
-        $('#arrivalDate').text(formatDate(dateArrivee));
-        $('#departureDate').text(formatDate(dateDepart));
-
-        // Chercher comment mettre une value dans un input*
+        // Vérifiez si arrivalDate est définie avant de l'utiliser
+        if (arrivalDate) {
+          // Formatage de la date au format "yyyy-MM-dd"
+          let formattedDate = arrivalDate.getFullYear() + '-' + (arrivalDate.getMonth() + 1).toString().padStart(2, '0') + '-' + arrivalDate.getDate().toString().padStart(2, '0');
+          $('#arrivalDate').val(formattedDate);
+        }
+        // Vérifiez si departureDate est définie avant de l'utiliser
+        if (departureDate) {
+          // Formatage de la date au format "yyyy-MM-dd"
+          let formattedDate = departureDate.getFullYear() + '-' + (departureDate.getMonth() + 1).toString().padStart(2, '0') + '-' + departureDate.getDate().toString().padStart(2, '0');
+          $('#departureDate').val(formattedDate);
+        }
 
         $('#calendar').find('.day').each(function () {
           let currentDate = new Date($(this).data('date'));
-          if (currentDate > dateArrivee && currentDate < dateDepart) {
+          if (currentDate > arrivalDate && currentDate < departureDate) {
             $(this).addClass('range');
           } else {
             $(this).removeClass('range');
@@ -241,7 +248,7 @@
         });
 
         // Calcul du nombre de nuits
-        let numNights = Math.floor((dateDepart - dateArrivee) / (1000 * 60 * 60 * 24));
+        let numNights = Math.floor((departureDate - arrivalDate) / (1000 * 60 * 60 * 24));
         $('#numNights').text(numNights);
 
         // Calcul du montant total des nuits
@@ -257,8 +264,8 @@
         let totalPrice = (parseFloat(totalNightPrice) + parseFloat(stellarFees)).toFixed(2);
         $('#totalPrice').text(totalPrice + '€');
       } else {
-        dateArrivee = null;
-        dateDepart = null;
+        arrivalDate = null;
+        departureDate = null;
         $('#calendar').find('.day').removeClass('range');
         $('#arrivalDate').text('');
         $('#departureDate').text('');
@@ -268,8 +275,8 @@
         $('#totalPrice').text('0€');
       }
 
-      localStorage.setItem('arrivalDate', formatDate(dateArrivee));
-      localStorage.setItem('departureDate', formatDate(dateDepart));
+      localStorage.setItem('arrivalDate', formatDate(arrivalDate));
+      localStorage.setItem('departureDate', formatDate(departureDate));
       localStorage.setItem('totalPrice', totalPrice.toString());
       localStorage.setItem('stellarFees', stellarFees.toString());
       localStorage.setItem('totalNightPrice', totalNightPrice.toString());

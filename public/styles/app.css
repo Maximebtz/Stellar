@@ -616,6 +616,7 @@ header .signup:hover {
   color: var(--middlegray);
   height: 37px;
   transition: all 0.2s ease-in-out;
+  font-size: large;
 }
 .wrapper-detail .wrapper-detail-right .datepicker .datepicker-switch:hover,
 .wrapper-detail .wrapper-detail-right .datepicker tfoot tr th:hover {
