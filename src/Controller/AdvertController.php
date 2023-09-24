@@ -147,9 +147,7 @@ class AdvertController extends AbstractController
             $this->entityManager->remove($imageToRemove);
             $this->entityManager->flush();
         }
-        echo "<pre>";
-        dd($advertId);
-        echo "</pre>";
+        
         // Rediriger vers la page de détails de l'annonce
         return $this->redirectToRoute('detail_advert', ['id' => $advertId]);
     }

@@ -15,13 +15,13 @@
 
 {% block body %}
 <div class="wrapper">
-  <a href="{{ path(" app_home") }}" class="return-home">
+  <a href="{{ path("app_home") }}" class="return-home">
     <img src="{{ asset('img/icons/Left Arrow.svg') }}" alt="Icon return home">
   </a>
   <div class="wrapper-detail">
     <div class="wrapper-detail-title">
       <div class="detail-title-left">
-        <h1>{{ advert.title }}</h1>
+        <h1 class="advert-title">{{ advert.title }}</h1>
         <div class="address-wrap">
           <svg width="18" height="24" viewBox="0 0 18 24" fill="none" xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -34,11 +34,11 @@
                 xlink:href="data:image/png;base64,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" />
             </defs>
           </svg>
-          <p>{{advert.city}}, {{advert.country}}</p>
+          <p class="location">{{advert.city}}, {{advert.country}}</p>
         </div>
       </div>
       <div class="detail-title-right">
-        <p>{{advert.createdAtString}}</p>
+        <p class="location">{{advert.createdAtString}}</p>
       </div>
     </div>
     <div class="grid-wrap">
@@ -147,7 +147,7 @@
         </div>
         <div class="wrapper-detail-left-commodite">
           <h2>Commodités</h2>
-          <div class="checkbox-wrapper-16">
+          <div class="checkbox-wrapper-17">
             {% for accessory in advert.accessories %}
             <div class="checkbox-wrapper">
               <span class="checkbox-tile-fit">
@@ -225,27 +225,13 @@
         arrivalDate = selectedDates[0];
         departureDate = selectedDates[1];
 
-        // Vérifiez si arrivalDate est définie avant de l'utiliser
-        if (arrivalDate) {
-          // Formatage de la date au format "yyyy-MM-dd"
-          let formattedDate = arrivalDate.getFullYear() + '-' + (arrivalDate.getMonth() + 1).toString().padStart(2, '0') + '-' + arrivalDate.getDate().toString().padStart(2, '0');
-          $('#arrivalDate').val(formattedDate);
-        }
-        // Vérifiez si departureDate est définie avant de l'utiliser
-        if (departureDate) {
-          // Formatage de la date au format "yyyy-MM-dd"
-          let formattedDate = departureDate.getFullYear() + '-' + (departureDate.getMonth() + 1).toString().padStart(2, '0') + '-' + departureDate.getDate().toString().padStart(2, '0');
-          $('#departureDate').val(formattedDate);
-        }
+        // Formatage des dates au format "yyyy-MM-dd"
+        let formattedArrivalDate = formatDate(arrivalDate);
+        let formattedDepartureDate = formatDate(departureDate);
 
-        $('#calendar').find('.day').each(function () {
-          let currentDate = new Date($(this).data('date'));
-          if (currentDate > arrivalDate && currentDate < departureDate) {
-            $(this).addClass('range');
-          } else {
-            $(this).removeClass('range');
-          }
-        });
+        // Mettre à jour les champs d'entrée date sur la page
+        $('#arrivalDate').val(formattedArrivalDate);
+        $('#departureDate').val(formattedDepartureDate);
 
         // Calcul du nombre de nuits
         let numNights = Math.floor((departureDate - arrivalDate) / (1000 * 60 * 60 * 24));
@@ -263,25 +249,27 @@
         // Calcul du total (nuits + frais)
         let totalPrice = (parseFloat(totalNightPrice) + parseFloat(stellarFees)).toFixed(2);
         $('#totalPrice').text(totalPrice + '€');
+
+        // Enregistrer les dates sélectionnées dans le stockage local
+        localStorage.setItem('arrivalDate', formattedArrivalDate);
+        localStorage.setItem('departureDate', formattedDepartureDate);
       } else {
         arrivalDate = null;
         departureDate = null;
-        $('#calendar').find('.day').removeClass('range');
-        $('#arrivalDate').text('');
-        $('#departureDate').text('');
+        $('#arrivalDate').val('');
+        $('#departureDate').val('');
         $('#numNights').text('0');
         $('#totalNightPrice').text('0€');
         $('#stellarFees').text('0€');
         $('#totalPrice').text('0€');
-      }
 
-      localStorage.setItem('arrivalDate', formatDate(arrivalDate));
-      localStorage.setItem('departureDate', formatDate(departureDate));
-      localStorage.setItem('totalPrice', totalPrice.toString());
-      localStorage.setItem('stellarFees', stellarFees.toString());
-      localStorage.setItem('totalNightPrice', totalNightPrice.toString());
+        // Supprimer les dates du stockage local
+        localStorage.removeItem('arrivalDate');
+        localStorage.removeItem('departureDate');
+      }
     });
 
+    // Fonction utilitaire pour formater une date au format "yyyy-MM-dd"
     function formatDate(date) {
       let day = date.getDate();
       let month = date.getMonth() + 1;
@@ -294,7 +282,7 @@
         month = '0' + month;
       }
 
-      return day + '/' + month + '/' + year;
+      return year + '-' + month + '-' + day;
     }
   });
 </script>

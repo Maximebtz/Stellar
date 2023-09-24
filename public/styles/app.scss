@@ -14,9 +14,9 @@
     --dark-blue: #1A1884;
     --white: #ffffff;
     --black: #333333;
-    --darkgray: #4D4D4D;
-    --middlegray: #CCCCCC;
-    --lightgray: #eeeeee;
+    --darkgray: #A9A9A9;
+    --middlegray: #C0C0C0;
+    --lightgray: #DCDCDC;
     --boxshadow: rgba(0, 0, 0, 0.025);
     --gradient-p-b: linear-gradient(20deg, var(--light-purple) -15%, var(--dark-blue) 150%);
     --gradient-b-b: linear-gradient(50deg, var(--dark-blue) 7.56%, #0000ff 61.06%);
@@ -498,16 +498,36 @@ header {
         width: 100%;
         justify-content: space-between;
 
-        h1 {
+        .advert-title {
             font-size: 2.5em;
             line-height: 32px;
+            width: 450px;
+
+            input {
+                font-size: 40px;
+                line-height: 32px;
+                border-bottom: var(--darkgray) 1px solid;
+            }
         }
 
-        p {
+        .location {
             font-family: 'Inter', sans-serif;
             color: var(--middlegray);
             font-weight: 400;
             font-size: 1.02em;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+
+            input {
+                max-width: 200px;
+                min-width: 150px;
+                border-bottom: var(--darkgray) 1px solid;
+                padding: 0 10px;
+                font-size: medium;
+                height: 36px;
+                text-align: center;
+            }
         }
 
         .address-wrap {
@@ -515,6 +535,15 @@ header {
             align-items: center;
             gap: 5px;
             padding: 20px 0 55px 0;
+        }
+
+        .shadow-emp {
+            background-color: var(--middlegray);
+            max-width: 100px;
+            width: 100%;
+            min-width: 30px;
+            height: 18px;
+            border-radius: 5px;
         }
     }
 
@@ -614,11 +643,119 @@ header {
         min-width: 460px;
         width: 100%;
         padding: 0 60px 0 0;
+        overflow: hidden;
 
         &-category {
             gap: 7px;
             display: flex;
             flex-direction: column;
+            position: relative;
+            &::after {
+                content: "";
+                height: 100%;
+                width: 20px;
+                background-image: linear-gradient(to right, rgba(255, 0, 0, 0), var(--white));
+                position: absolute;
+                right: 0;
+            }
+        
+            &::before {
+                content: "";
+                height: 100%;
+                width: 20px;
+                background-image: linear-gradient(to left, rgba(255, 0, 0, 0), var(--white));
+                position: absolute;
+                left: 0;
+                z-index: 1;
+            }
+
+            .checkbox-wrapper-16 {
+                display: flex;
+                gap: 7px;
+                max-width: 640px;
+                min-width: 460px;
+                overflow: scroll;
+                padding: 0 20px;
+        
+                .checkbox-input {
+                    clip: rect(0 0 0 0);
+                    -webkit-clip-path: inset(100%);
+                    clip-path: inset(100%);
+                    height: 1px;
+                    overflow: hidden;
+                    position: absolute;
+                    white-space: nowrap;
+                    width: 1px;
+                }
+        
+                .checkbox-input:checked+.checkbox-tile {
+                    border-color: var(--light-purple);
+                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
+                    color: var(--light-purple);
+                }
+        
+                .checkbox-input:checked+.checkbox-tile:before {
+                    transform: scale(1);
+                    opacity: 1;
+                    background-color: var(--light-purple);
+                    border-color: var(--light-purple);
+                }
+            }
+        
+            .checkbox-wrapper-16 .checkbox-input:checked+.checkbox-tile .checkbox-icon,
+            .checkbox-wrapper-16 .checkbox-input:checked+.checkbox-tile .checkbox-label {
+                color: var(--light-purple);
+            }
+        
+            .checkbox-wrapper-16 .checkbox-input:focus+.checkbox-tile {
+                border-color: var(--light-purple);
+            }
+        
+            .checkbox-wrapper-16 .checkbox-input:focus+.checkbox-tile:before {
+                transform: scale(1);
+                opacity: 1;
+            }
+        
+            .checkbox-wrapper-16 .checkbox-tile {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                width: 7rem;
+                min-height: 7rem;
+                border-radius: 0.5rem;
+                border: 2px solid var(--lightgray);
+                background-color: var(--white);
+                box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
+                transition: 0.15s ease;
+                cursor: pointer;
+                position: relative;
+            }
+        
+            .checkbox-wrapper-16 .checkbox-tile:hover {
+                border-color: var(--light-purple);
+            }
+        
+            .checkbox-wrapper-16 .checkbox-tile:hover:before {
+                transform: scale(1);
+                opacity: 1;
+            }
+        
+            .checkbox-wrapper-16 .checkbox-icon {
+                transition: 0.375s ease;
+                color: #494949;
+            }
+        
+            .checkbox-wrapper-16 .checkbox-icon svg {
+                width: 3rem;
+                height: 3rem;
+            }
+        
+            .checkbox-wrapper-16 .checkbox-label {
+                color: #707070;
+                transition: 0.375s ease;
+                text-align: center;
+            }
         }
 
         &-owner {
@@ -690,17 +827,24 @@ header {
                 padding: 20px 0 10px;
             }
 
-            .checkbox-wrapper-16 {
-                gap: 10px;
+            .checkbox-wrapper-17 {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px 20px;
+                max-width: 640px;
+                min-width: 460px;
+                max-height: 300px;
+                overflow-y: scroll;
+                position: relative;
 
                 .checkbox-tile-fit {
                     display: flex;
                     flex-direction: column;
                     align-items: center;
                     justify-content: center;
-                    width: max-content;
-                    min-width: 80px;
-                    min-height: 80px;
+                    max-width: max-content !important;
+                    min-width: 7rem !important;
                     padding: 10px;
                     border-radius: 0.5rem;
                     border: 2px solid var(--lightgray);
@@ -729,424 +873,391 @@ header {
                     cursor: pointer;
                     position: relative;
                 }
-            }
-        }
 
-        min-width: 600px;
-    }
-
-    //****** Wrapper-detail-right ******//
-    .wrapper-detail-right {
-        position: sticky;
-        top: 25px;
-        padding: 25px;
-        border: 1px solid var(--lightgray);
-        border-radius: 10px;
-        max-width: 450px;
-        width: 100%;
-        min-width: 350px;
-        height: max-content;
-        display: flex;
-        flex-direction: column;
-        box-shadow: var(--boxshadow) 0 0 20px;
-
-        .night-price {
-            border-bottom: 1px solid var(--middlegray);
-            padding-bottom: 10px;
-            margin: 0 0 20px 0;
-
-            b {
-                font-size: xx-large;
-            }
-        }
-
-        .dates {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-
-            .date {
-                display: flex;
-                flex-direction: column;
-                justify-content: space-between;
-                gap: 7px;
-
-                p {
-                    font-size: larger;
-                    font-weight: 500;
-                    color: var(--darkgray);
+                .checkbox-label {
+                    color: #707070;
+                    transition: 0.375s ease;
+                    text-align: center;
+                    width: max-content;
                 }
 
-                .date-span {
+                .checkbox-input {
+                    clip: rect(0 0 0 0);
+                    -webkit-clip-path: inset(100%);
+                    clip-path: inset(100%);
+                    height: 1px;
+                    overflow: hidden;
+                    position: absolute;
+                    white-space: nowrap;
+                    width: 1px;
+                }
+
+                .checkbox-input:checked+.checkbox-tile {
+                    border-color: var(--light-purple);
+                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
+                    color: var(--light-purple);
+                }
+
+                .checkbox-input:checked+.checkbox-tile:before {
+                    transform: scale(1);
+                    opacity: 1;
+                    background-color: var(--light-purple);
+                    border-color: var(--light-purple);
+                }
+                
+                &::after {
+                    content: "";
                     width: 100%;
-                    border: 1px solid var(--middlegray);
-                    padding: 5px 10px;
-                    border-radius: 7px;
-                    color: var(--middlegray);
-                    height: 37px;
-                    transition: all .2s ease-in-out;
-                    font-size: large;
+                    background-image: linear-gradient(180deg, rgba(255, 0, 0, 0), var(--white));
+                    height: 32px;
+                    position: sticky;
+                    bottom: 0;
                 }
-            }
-        }
-
-
-        .datepicker .datepicker-switch:hover,
-        .datepicker tfoot tr th:hover {
-            background: transparent !important;
-        }
-
-        .datepicker-switch {
-            width: max-content !important;
-        }
-
-        .datepicker th.prev,
-        .datepicker th.next {
-            border: none;
-            color: transparent;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .datepicker th.prev:hover,
-        .datepicker th.next:hover {
-            background-color: var(--lightgray);
-        }
-
-        .datepicker th.prev:before {
-            content: "";
-            position: absolute;
-            width: 16px;
-            height: 16px;
-            background: url('../img/icons/chevron-left-solid.svg') no-repeat center;
-        }
-
-        .datepicker th.next:before {
-            content: "";
-            position: absolute;
-            width: 16px;
-            height: 16px;
-            background: url('../img/icons/chevron-right-solid.svg') no-repeat center;
-        }
-
-        .range .day {
-            background-color: var(--lightgray);
-            cursor: not-allowed;
-            border-radius: 4px;
-
-        }
-
-        table {
-            font-family: 'Inter', sans-serif;
-        }
-
-        td {
-            font-size: large;
-            font-weight: 500;
-        }
-
-        #calendar {
-            width: 100%;
-            height: max-content;
-            display: flex;
-            justify-content: center;
-            margin: 20px 0;
-        }
-
-        .datepicker-inline {
-            width: 100% !important;
-            height: 100%;
-            border: 1px solid var(--lightgray);
-            box-shadow: var(--boxshadow) 0 0 10px;
-            border-radius: 7px;
-            padding: 15px 20px;
-            transition: all .2s ease-in-out;
-
-            &:hover {
-                transform: scale(1.01);
-                box-shadow: var(--boxshadow) 0 0 15px;
-            }
-        }
-
-        .datepicker-days {
-            width: 100%;
-            height: 100%;
-        }
-
-        table.table-condensed {
-            width: 100%;
-            height: 100%;
-        }
-
-        td.active.day.range {
-            border-radius: 4px;
-        }
-
-        .datepicker td,
-        .datepicker th {
-            text-align: center;
-            width: 30px !important;
-            max-height: 40px !important;
-            min-height: auto;
-            height: 40px;
-            -webkit-border-radius: 4px;
-            -moz-border-radius: 4px;
-            border-radius: 4px;
-            border: none;
-        }
-
-        .datepicker table tr td.today,
-        .datepicker table tr td.today.disabled,
-        .datepicker table tr td.today.disabled:hover,
-        .datepicker table tr td.today:hover {
-            background-color: var(--white);
-            border: var(--black) 2px dashed;
-            background-image: none !important;
-            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fdd49a', endColorstr='#fdf59a', GradientType=0);
-            filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
-            color: #000;
-            border-radius: 7px;
-            box-shadow: var(--boxshadow) 0 0 10px;
-        }
-
-        .datepicker table tr td.highlighted {
-            background: transparent !important;
-            border-radius: 4px;
-            color: var(--light-purple);
-
-            &:hover {
-                border-radius: 4px;
-                background-color: var(--lightgray) !important;
-            }
-        }
-
-        .datepicker table tr td.range,
-        .datepicker table tr td.range.disabled,
-        .datepicker table tr td.range.disabled:hover {
-            background: var(--lightgray) !important;
-            -webkit-border-radius: 0;
-            -moz-border-radius: 0;
-            border-radius: 4px;
-        }
-
-        .datepicker table tr td.active,
-        .datepicker table tr td.active.disabled,
-        .datepicker table tr td.active.disabled:hover,
-        .datepicker table tr td.active:hover {
-            background-color: var(--black) !important;
-            background-repeat: repeat-x;
-            color: #fff;
-            text-shadow: 0 -1px 0 rgba(0, 0, 0, .25);
-        }
-
-        .datepicker table tr td.range,
-        .datepicker table tr td.range.disabled,
-        .datepicker table tr td.range.disabled:hover,
-        .datepicker table tr td.range:hover {
-            background: var(--lightgray);
-            -webkit-border-radius: 0;
-            -moz-border-radius: 0;
-            border-radius: 4px !important;
-        }
-
-        .datepicker table tr td.active,
-        .datepicker table tr td.active.disabled,
-        .datepicker table tr td.active.disabled:hover,
-        .datepicker table tr td.active:hover {
-            background-color: var(--black);
-            background-image: none !important;
-            background-image: none !important;
-            background-image: none !important;
-            background-image: none !important;
-            background-image: none !important;
-            background-image: none !important;
-            background-repeat: repeat-x;
-            border-color: rgba(0, 0, 0, .1) rgba(0, 0, 0, .1) rgba(0, 0, 0, .25);
-            filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
-            color: #fff;
-            text-shadow: 0 -1px 0 rgba(0, 0, 0, .25);
-        }
-
-
-        .datepicker table tr td.active.active,
-        .datepicker table tr td.active.disabled.active,
-        .datepicker table tr td.active.disabled:active,
-        .datepicker table tr td.active.disabled:hover.active,
-        .datepicker table tr td.active.disabled:hover:active,
-        .datepicker table tr td.active:active,
-        .datepicker table tr td.active:hover.active,
-        .datepicker table tr td.active:hover:active {
-            border-radius: 4px !important;
-        }
-
-        .datepicker table tr td.disabled,
-        .datepicker table tr td.disabled:hover {
-            background: transparent !important;
-            color: var(--middlegray) !important;
-            opacity: 50%;
-            cursor: default;
-        }
-
-        .datepicker table tr td.new,
-        .datepicker table tr td.old {
-            opacity: 50% !important;
-        }
-
-        .l-btn {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: var(--gradient-p-b);
-            border-radius: 10px;
-            width: 100%;
-            height: 46px;
-            border: none;
-            position: relative;
-            color: white;
-            font-size: large;
-            text-decoration: none;
-            cursor: pointer;
-            transition: all .2s ease-in-out;
-
-            &:hover {
-                transform: scale(1.02);
-            }
-        }
-
-        //****** Price ******//
-        .price-details {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-
-            .price:nth-child(2) {
-                border-bottom: var(--middlegray) 1px solid;
-                padding: 0 0 10px 0;
-            }
-
-            .price:nth-child(3) {
-                margin-bottom: 15px;
-
-                p {
-                    font-size: x-large;
-                }
-
-                .total-span {
-                    font-size: x-large;
-                    font-weight: 600;
-                }
-            }
-
-            .price {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-
-                p {
-                    font-size: large;
-                    color: var(--dark-purple);
-                    font-weight: 500;
-                }
-
-                .total-span {
-                    font-size: large;
-                    font-weight: 600;
+    
+                &::before {
+                    content: "";
+                    width: 100%;
+                    background-image: linear-gradient(0deg, rgba(255, 0, 0, 0), #ffffff);
+                    height: 20px;
+                    position: sticky;
+                    z-index: 1;
+                    top: 0;
                 }
             }
         }
     }
 }
 
-//****** Form Content For Add Advert ******//
+//****** Wrapper-detail-right ******//
+.wrapper-detail-right {
+    position: sticky;
+    top: 25px;
+    padding: 25px;
+    border: 1px solid var(--lightgray);
+    border-radius: 10px;
+    max-width: 450px;
+    width: 100%;
+    min-width: 350px;
+    height: max-content;
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--boxshadow) 0 0 20px;
 
-.wrapper-detail {
+    
+    .night-price {
+        border-bottom: 1px solid var(--middlegray);
+        padding-bottom: 10px;
+        margin: 0 0 20px 0;
 
-    .checkbox-wrapper-16 {
-        display: flex;
-        gap: 7px;
-
-        .checkbox-input {
-            clip: rect(0 0 0 0);
-            -webkit-clip-path: inset(100%);
-            clip-path: inset(100%);
-            height: 1px;
-            overflow: hidden;
-            position: absolute;
-            white-space: nowrap;
-            width: 1px;
-        }
-
-        .checkbox-input:checked+.checkbox-tile {
-            border-color: var(--light-purple);
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
-            color: var(--light-purple);
-        }
-
-        .checkbox-input:checked+.checkbox-tile:before {
-            transform: scale(1);
-            opacity: 1;
-            background-color: var(--light-purple);
-            border-color: var(--light-purple);
+        b {
+            font-size: xx-large;
         }
     }
 
-    .checkbox-wrapper-16 .checkbox-input:checked+.checkbox-tile .checkbox-icon,
-    .checkbox-wrapper-16 .checkbox-input:checked+.checkbox-tile .checkbox-label {
-        color: var(--light-purple);
-    }
-
-    .checkbox-wrapper-16 .checkbox-input:focus+.checkbox-tile {
-        border-color: var(--light-purple);
-    }
-
-    .checkbox-wrapper-16 .checkbox-input:focus+.checkbox-tile:before {
-        transform: scale(1);
-        opacity: 1;
-    }
-
-    .checkbox-wrapper-16 .checkbox-tile {
+    .dates {
         display: flex;
         flex-direction: column;
+        gap: 15px;
+
+        .date {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 7px;
+
+            p {
+                font-size: larger;
+                font-weight: 500;
+                color: var(--darkgray);
+            }
+
+            .date-span {
+                width: 100%;
+                border: 1px solid var(--middlegray);
+                padding: 5px 10px;
+                border-radius: 7px;
+                color: var(--middlegray);
+                height: 37px;
+                transition: all .2s ease-in-out;
+                font-size: large;
+                position: relative;
+
+                &::after {
+                    content: url(../img/icons/Calendar.png);
+                    height: 20px;
+                }
+            }
+        }
+    }
+
+
+    .datepicker .datepicker-switch:hover,
+    .datepicker tfoot tr th:hover {
+        background: transparent !important;
+    }
+
+    .datepicker-switch {
+        width: max-content !important;
+    }
+
+    .datepicker th.prev,
+    .datepicker th.next {
+        border: none;
+        color: transparent;
+        position: relative;
+        display: flex;
         align-items: center;
         justify-content: center;
-        width: 7rem;
-        min-height: 7rem;
-        border-radius: 0.5rem;
-        border: 2px solid var(--lightgray);
-        background-color: var(--white);
-        box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
-        transition: 0.15s ease;
-        cursor: pointer;
-        position: relative;
     }
 
-    .checkbox-wrapper-16 .checkbox-tile:hover {
-        border-color: var(--light-purple);
+    .datepicker th.prev:hover,
+    .datepicker th.next:hover {
+        background-color: var(--lightgray);
     }
 
-    .checkbox-wrapper-16 .checkbox-tile:hover:before {
-        transform: scale(1);
-        opacity: 1;
+    .datepicker th.prev:before {
+        content: "";
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        background: url('../img/icons/chevron-left-solid.svg') no-repeat center;
     }
 
-    .checkbox-wrapper-16 .checkbox-icon {
-        transition: 0.375s ease;
-        color: #494949;
+    .datepicker th.next:before {
+        content: "";
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        background: url('../img/icons/chevron-right-solid.svg') no-repeat center;
     }
 
-    .checkbox-wrapper-16 .checkbox-icon svg {
-        width: 3rem;
-        height: 3rem;
+    .range .day {
+        background-color: var(--lightgray);
+        cursor: not-allowed;
+        border-radius: 4px;
+
     }
 
-    .checkbox-wrapper-16 .checkbox-label {
-        color: #707070;
-        transition: 0.375s ease;
+    table {
+        font-family: 'Inter', sans-serif;
+    }
+
+    td {
+        font-size: large;
+        font-weight: 500;
+    }
+
+    #calendar {
+        width: 100%;
+        height: max-content;
+        display: flex;
+        justify-content: center;
+        margin: 20px 0;
+    }
+
+    .datepicker-inline {
+        width: 100% !important;
+        height: 100%;
+        border: 1px solid var(--lightgray);
+        box-shadow: var(--boxshadow) 0 0 10px;
+        border-radius: 7px;
+        padding: 15px 20px;
+        transition: all .2s ease-in-out;
+
+        &:hover {
+            transform: scale(1.01);
+            box-shadow: var(--boxshadow) 0 0 15px;
+        }
+    }
+
+    .datepicker-days {
+        width: 100%;
+        height: 100%;
+    }
+
+    table.table-condensed {
+        width: 100%;
+        height: 100%;
+    }
+
+    td.active.day.range {
+        border-radius: 4px;
+    }
+
+    .datepicker td,
+    .datepicker th {
         text-align: center;
+        width: 30px !important;
+        max-height: 40px !important;
+        min-height: auto;
+        height: 40px;
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        border-radius: 4px;
+        border: none;
+    }
+
+    .datepicker table tr td.today,
+    .datepicker table tr td.today.disabled,
+    .datepicker table tr td.today.disabled:hover,
+    .datepicker table tr td.today:hover {
+        background-color: var(--white);
+        border: var(--black) 2px dashed;
+        background-image: none !important;
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fdd49a', endColorstr='#fdf59a', GradientType=0);
+        filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+        color: #000;
+        border-radius: 7px;
+        box-shadow: var(--boxshadow) 0 0 10px;
+    }
+
+    .datepicker table tr td.highlighted {
+        background: transparent !important;
+        border-radius: 4px;
+        color: var(--light-purple);
+
+        &:hover {
+            border-radius: 4px;
+            background-color: var(--lightgray) !important;
+        }
+    }
+
+    .datepicker table tr td.range,
+    .datepicker table tr td.range.disabled,
+    .datepicker table tr td.range.disabled:hover {
+        background: var(--lightgray) !important;
+        -webkit-border-radius: 0;
+        -moz-border-radius: 0;
+        border-radius: 4px;
+    }
+
+    .datepicker table tr td.active,
+    .datepicker table tr td.active.disabled,
+    .datepicker table tr td.active.disabled:hover,
+    .datepicker table tr td.active:hover {
+        background-color: var(--black) !important;
+        background-repeat: repeat-x;
+        color: #fff;
+        text-shadow: 0 -1px 0 rgba(0, 0, 0, .25);
+    }
+
+    .datepicker table tr td.range,
+    .datepicker table tr td.range.disabled,
+    .datepicker table tr td.range.disabled:hover,
+    .datepicker table tr td.range:hover {
+        background: var(--lightgray);
+        -webkit-border-radius: 0;
+        -moz-border-radius: 0;
+        border-radius: 4px !important;
+    }
+
+    .datepicker table tr td.active,
+    .datepicker table tr td.active.disabled,
+    .datepicker table tr td.active.disabled:hover,
+    .datepicker table tr td.active:hover {
+        background-color: var(--black);
+        background-image: none !important;
+        background-image: none !important;
+        background-image: none !important;
+        background-image: none !important;
+        background-image: none !important;
+        background-image: none !important;
+        background-repeat: repeat-x;
+        border-color: rgba(0, 0, 0, .1) rgba(0, 0, 0, .1) rgba(0, 0, 0, .25);
+        filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+        color: #fff;
+        text-shadow: 0 -1px 0 rgba(0, 0, 0, .25);
+    }
+
+
+    .datepicker table tr td.active.active,
+    .datepicker table tr td.active.disabled.active,
+    .datepicker table tr td.active.disabled:active,
+    .datepicker table tr td.active.disabled:hover.active,
+    .datepicker table tr td.active.disabled:hover:active,
+    .datepicker table tr td.active:active,
+    .datepicker table tr td.active:hover.active,
+    .datepicker table tr td.active:hover:active {
+        border-radius: 4px !important;
+    }
+
+    .datepicker table tr td.disabled,
+    .datepicker table tr td.disabled:hover {
+        background: transparent !important;
+        color: var(--middlegray) !important;
+        opacity: 50%;
+        cursor: default;
+    }
+
+    .datepicker table tr td.new,
+    .datepicker table tr td.old {
+        opacity: 50% !important;
+    }
+
+    .l-btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: var(--gradient-p-b);
+        border-radius: 10px;
+        width: 100%;
+        height: 46px;
+        border: none;
+        position: relative;
+        color: white;
+        font-size: large;
+        text-decoration: none;
+        cursor: pointer;
+        transition: all .2s ease-in-out;
+
+        &:hover {
+            transform: scale(1.02);
+        }
+    }
+
+    //****** Price ******//
+    .price-details {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        .price:nth-child(2) {
+            border-bottom: var(--middlegray) 1px solid;
+            padding: 0 0 10px 0;
+        }
+
+        .price:nth-child(3) {
+            margin-bottom: 15px;
+
+            p {
+                font-size: x-large;
+            }
+
+            .total-span {
+                font-size: x-large;
+                font-weight: 600;
+            }
+        }
+
+        .price {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            p {
+                font-size: large;
+                color: var(--dark-purple);
+                font-weight: 500;
+            }
+
+            .total-span {
+                font-size: large;
+                font-weight: 600;
+            }
+        }
     }
 }
+
 
 //****** Form Content For Add Advert ******//
 
@@ -1159,7 +1270,7 @@ header {
         background: var(--white);
         outline: none;
         border: none;
-        border-bottom: solid 1px black;
+        border-bottom: solid 1px var(--darkgray);
         width: 100%;
         padding: 0 10px;
         margin-bottom: 15px;
@@ -1175,26 +1286,24 @@ header {
     }
 
     .sub-btn {
-        width: 100px;
-        height: 42px;
-        border-radius: 10px;
-        border: none;
-        font-size: medium;
-        font-weight: 500;
-        font-family: poppins, sans-serif;
-        color: var(--dark-purple);
-        margin-top: 20px;
-    }
-
-    #registration_form_agreeTerms {
-        margin-left: 10px;
-        width: 15px;
-        height: 15px;
-    }
-
-    .dbl-input {
         display: flex;
-        gap: 10px;
+        justify-content: center;
+        align-items: center;
+        background: var(--gradient-p-b);
+        border-radius: 10px;
+        width: 120px;
+        height: 46px;
+        border: none;
+        position: relative;
+        color: white;
+        font-size: large;
+        text-decoration: none;
+        cursor: pointer;
+        transition: all .2s ease-in-out;
+
+        &:hover {
+            transform: scale(1.02);
+        }
     }
 
     input#advert_images {
@@ -1345,15 +1454,6 @@ header {
             opacity: 1;
         }
     }
-
-    .info-add-property {
-        display: flex;
-    }
-
-    // .input-title {
-    //     // input {
-    //     // }
-    // }
 }
 
 
