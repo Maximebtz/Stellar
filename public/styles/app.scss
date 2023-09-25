@@ -275,7 +275,7 @@ header {
     flex-direction: column;
     align-items: center;
     position: relative;
-
+    overflow: hidden;
     .return-home {
         border: 1px solid var(--middlegray);
         width: 40px;
@@ -642,8 +642,8 @@ header {
         max-width: 700px;
         min-width: 460px;
         width: 100%;
-        padding: 0 60px 0 0;
-        overflow: hidden;
+        margin: 0 60px 0 0;
+        // overflow: hidden;
 
         &-category {
             gap: 7px;
@@ -676,6 +676,7 @@ header {
                 min-width: 460px;
                 overflow: scroll;
                 padding: 0 20px;
+                user-select: none;
         
                 .checkbox-input {
                     clip: rect(0 0 0 0);
@@ -767,6 +768,15 @@ header {
             border-bottom: 1px solid var(--middlegray);
             border-top: 1px solid var(--middlegray);
 
+            .shadow-emp {
+                background-color: var(--middlegray);
+                max-width: 100px;
+                width: 100%;
+                min-width: 100px;
+                height: 18px;
+                border-radius: 5px;
+            }
+
             &-info {
                 display: flex;
                 align-items: center;
@@ -837,6 +847,7 @@ header {
                 max-height: 300px;
                 overflow-y: scroll;
                 position: relative;
+                transition: scroll-behavior 0.5s;
 
                 .checkbox-tile-fit {
                     display: flex;
@@ -948,9 +959,23 @@ header {
         border-bottom: 1px solid var(--middlegray);
         padding-bottom: 10px;
         margin: 0 0 20px 0;
-
+        display: flex;
+        align-items: baseline;
         b {
             font-size: xx-large;
+        }
+
+        input {
+            font-size: xx-large;
+            width: 100px;
+            font-weight: 600;
+        }
+        .span{
+            span{
+                font-size: xx-large;
+                font-weight: 600;   
+            }
+            color: var(--darkgray);
         }
     }
 
@@ -958,6 +983,14 @@ header {
         display: flex;
         flex-direction: column;
         gap: 15px;
+
+        .shadow-emp {
+            background-color: var(--middlegray);
+            width: 100%;
+            min-width: 30px;
+            height: 30px;
+            border-radius: 5px;
+        }
 
         .date {
             display: flex;
@@ -1053,6 +1086,15 @@ header {
         display: flex;
         justify-content: center;
         margin: 20px 0;
+    }
+
+    .shadow-emp-cal {
+        background-color: var(--middlegray);
+        margin-top: 20px;
+        width: 100%;
+        min-width: 30px;
+        height: 300px;
+        border-radius: 5px;
     }
 
     .datepicker-inline {
@@ -1220,6 +1262,26 @@ header {
         display: flex;
         flex-direction: column;
         gap: 10px;
+
+        .shadow-emp {
+            background-color: var(--middlegray);
+            max-width: 30px;
+            margin-top: 20px;
+            width: 100%;
+            min-width: 50px;
+            height: 18px;
+            border-radius: 5px;
+        }
+
+        .shadow-emp-p {
+            background-color: var(--middlegray);
+            max-width: 150px;
+            margin-top: 20px;
+            width: 100%;
+            min-width: 30px;
+            height: 18px;
+            border-radius: 5px;
+        }
 
         .price:nth-child(2) {
             border-bottom: var(--middlegray) 1px solid;

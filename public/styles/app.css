@@ -200,6 +200,7 @@ header .signup:hover {
   flex-direction: column;
   align-items: center;
   position: relative;
+  overflow: hidden;
 }
 .wrapper .return-home {
   border: 1px solid var(--middlegray);
@@ -489,8 +490,7 @@ header .signup:hover {
   max-width: 700px;
   min-width: 460px;
   width: 100%;
-  padding: 0 60px 0 0;
-  overflow: hidden;
+  margin: 0 60px 0 0;
 }
 .wrapper-detail .wrapper-detail-left-category {
   gap: 7px;
@@ -522,6 +522,9 @@ header .signup:hover {
   min-width: 460px;
   overflow: scroll;
   padding: 0 20px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
 }
 .wrapper-detail .wrapper-detail-left-category .checkbox-wrapper-16 .checkbox-input {
   clip: rect(0 0 0 0);
@@ -599,6 +602,14 @@ header .signup:hover {
   border-bottom: 1px solid var(--middlegray);
   border-top: 1px solid var(--middlegray);
 }
+.wrapper-detail .wrapper-detail-left-owner .shadow-emp {
+  background-color: var(--middlegray);
+  max-width: 100px;
+  width: 100%;
+  min-width: 100px;
+  height: 18px;
+  border-radius: 5px;
+}
 .wrapper-detail .wrapper-detail-left-owner-info {
   display: flex;
   align-items: center;
@@ -658,6 +669,7 @@ header .signup:hover {
   max-height: 300px;
   overflow-y: scroll;
   position: relative;
+  transition: scroll-behavior 0.5s;
 }
 .wrapper-detail .wrapper-detail-left-commodite .checkbox-wrapper-17 .checkbox-tile-fit {
   display: flex;
@@ -760,14 +772,35 @@ header .signup:hover {
   border-bottom: 1px solid var(--middlegray);
   padding-bottom: 10px;
   margin: 0 0 20px 0;
+  display: flex;
+  align-items: baseline;
 }
 .wrapper-detail-right .night-price b {
   font-size: xx-large;
+}
+.wrapper-detail-right .night-price input {
+  font-size: xx-large;
+  width: 100px;
+  font-weight: 600;
+}
+.wrapper-detail-right .night-price .span {
+  color: var(--darkgray);
+}
+.wrapper-detail-right .night-price .span span {
+  font-size: xx-large;
+  font-weight: 600;
 }
 .wrapper-detail-right .dates {
   display: flex;
   flex-direction: column;
   gap: 15px;
+}
+.wrapper-detail-right .dates .shadow-emp {
+  background-color: var(--middlegray);
+  width: 100%;
+  min-width: 30px;
+  height: 30px;
+  border-radius: 5px;
 }
 .wrapper-detail-right .dates .date {
   display: flex;
@@ -849,6 +882,14 @@ header .signup:hover {
   display: flex;
   justify-content: center;
   margin: 20px 0;
+}
+.wrapper-detail-right .shadow-emp-cal {
+  background-color: var(--middlegray);
+  margin-top: 20px;
+  width: 100%;
+  min-width: 30px;
+  height: 300px;
+  border-radius: 5px;
 }
 .wrapper-detail-right .datepicker-inline {
   width: 100% !important;
@@ -989,6 +1030,24 @@ header .signup:hover {
   display: flex;
   flex-direction: column;
   gap: 10px;
+}
+.wrapper-detail-right .price-details .shadow-emp {
+  background-color: var(--middlegray);
+  max-width: 30px;
+  margin-top: 20px;
+  width: 100%;
+  min-width: 50px;
+  height: 18px;
+  border-radius: 5px;
+}
+.wrapper-detail-right .price-details .shadow-emp-p {
+  background-color: var(--middlegray);
+  max-width: 150px;
+  margin-top: 20px;
+  width: 100%;
+  min-width: 30px;
+  height: 18px;
+  border-radius: 5px;
 }
 .wrapper-detail-right .price-details .price:nth-child(2) {
   border-bottom: var(--middlegray) 1px solid;
