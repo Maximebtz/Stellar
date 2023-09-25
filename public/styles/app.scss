@@ -643,8 +643,12 @@ header {
         min-width: 460px;
         width: 100%;
         margin: 0 60px 0 0;
-        // overflow: hidden;
-
+        
+        h2 {
+            font-size: 2em;
+            padding: 20px 0 10px;
+            z-index: 1;
+        }
         &-category {
             gap: 7px;
             display: flex;
@@ -758,7 +762,7 @@ header {
                 text-align: center;
             }
         }
-
+        
         &-owner {
             display: flex;
             align-items: center;
@@ -830,12 +834,9 @@ header {
                 padding: 20px 10px;
             }
         }
+        
 
         &-commodite {
-            h2 {
-                font-size: 2em;
-                padding: 20px 0 10px;
-            }
 
             .checkbox-wrapper-17 {
                 display: flex;

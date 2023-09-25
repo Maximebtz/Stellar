@@ -1,4 +1,3 @@
-
 /****ProfilMenu****/
 function displayProfilMenu() {
   const menu = document.getElementById("profil-menu");
@@ -50,3 +49,61 @@ document.addEventListener("click", function (event) {
 //     }
 // });
 
+/****Checkboxs Slide****/
+
+const checkboxContainers = document.querySelectorAll(".checkbox-wrapper-16");
+
+checkboxContainers.forEach((container) => {
+  let isMouseDown = false;
+  let startX;
+  let scrollLeft;
+
+  container.addEventListener("mousedown", (e) => {
+    isMouseDown = true;
+    startX = e.pageX - container.offsetLeft;
+    scrollLeft = container.scrollLeft;
+  });
+
+  container.addEventListener("mouseup", () => {
+    isMouseDown = false;
+  });
+
+  container.addEventListener("mouseleave", () => {
+    isMouseDown = false;
+  });
+
+  container.addEventListener("mousemove", (e) => {
+    if (!isMouseDown) return;
+    e.preventDefault();
+    const x = e.pageX - container.offsetLeft;
+    const walk = (x - startX) * 1.5;
+    container.scrollLeft = scrollLeft - walk;
+  });
+});
+
+const container = document.querySelector(".checkbox-wrapper-17");
+let isMouseDown = false;
+let startY;
+let scrollTop;
+
+container.addEventListener("mousedown", (e) => {
+  isMouseDown = true;
+  startY = e.pageY - container.offsetTop;
+  scrollTop = container.scrollTop;
+});
+
+container.addEventListener("mouseup", () => {
+  isMouseDown = false;
+});
+
+container.addEventListener("mouseleave", () => {
+  isMouseDown = false;
+});
+
+container.addEventListener("mousemove", (e) => {
+  if (!isMouseDown) return;
+  e.preventDefault();
+  const y = e.pageY - container.offsetTop;
+  const walk = (y - startY) * 1.5;
+  container.scrollTop = scrollTop - walk;
+});

@@ -492,6 +492,11 @@ header .signup:hover {
   width: 100%;
   margin: 0 60px 0 0;
 }
+.wrapper-detail .wrapper-detail-left h2 {
+  font-size: 2em;
+  padding: 20px 0 10px;
+  z-index: 1;
+}
 .wrapper-detail .wrapper-detail-left-category {
   gap: 7px;
   display: flex;
@@ -654,10 +659,6 @@ header .signup:hover {
   line-height: 27px;
   color: var(--darkgray);
   padding: 20px 10px;
-}
-.wrapper-detail .wrapper-detail-left-commodite h2 {
-  font-size: 2em;
-  padding: 20px 0 10px;
 }
 .wrapper-detail .wrapper-detail-left-commodite .checkbox-wrapper-17 {
   display: flex;
