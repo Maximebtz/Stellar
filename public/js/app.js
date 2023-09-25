@@ -49,7 +49,7 @@ document.addEventListener("click", function (event) {
 //     }
 // });
 
-/****Checkboxs Slide****/
+/****Checkbox Slide****/
 
 const checkboxContainers = document.querySelectorAll(".checkbox-wrapper-16");
 

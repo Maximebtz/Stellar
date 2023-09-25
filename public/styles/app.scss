@@ -1030,6 +1030,10 @@ header {
         background: transparent !important;
     }
 
+    td.today.day:hover {
+        background-color: transparent !important;
+    }
+
     .datepicker-switch {
         width: max-content !important;
     }

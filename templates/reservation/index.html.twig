@@ -22,8 +22,8 @@
     </div>
 </div>
 
-{{ form_row(formAddReservation.arrivalDate, {'attr': {'id': 'arrivalDate'}}) }}
-{{ form_row(formAddReservation.departureDate, {'attr': {'id': 'departureDate'}}) }}
+{{ form_widget(formAddReservation.arrivalDate, {'attr': {'id': 'arrivalDate'}}) }}
+{{ form_widget(formAddReservation.departureDate, {'attr': {'id': 'departureDate'}}) }}
 
 {{ form_row(formAddReservation.firstname) }}
 {{ form_row(formAddReservation.surname) }}
@@ -37,7 +37,6 @@
 {{ form_end(formAddReservation) }}
 {% endblock %}
 {% block javascripts %}
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function () {
       // Récupérez les données de localStorage
@@ -48,6 +47,14 @@
       let totalNightPrice = localStorage.getItem('totalNightPrice');
       let numNights = localStorage.getItem('numNights');
   
+
+        console.log(arrivalDate)
+        console.log(departureDate)
+        console.log(totalPrice)
+        console.log(totalNightPrice)
+        console.log(numNights)
+        console.log(stellarFees)
+
       // Mettre à jour les champs d'entrée date sur la page de réservation
       $('#arrivalDate').val(arrivalDate);
       $('#departureDate').val(departureDate);

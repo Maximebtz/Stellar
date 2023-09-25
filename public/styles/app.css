@@ -833,6 +833,9 @@ header .signup:hover {
 .wrapper-detail-right .datepicker tfoot tr th:hover {
   background: transparent !important;
 }
+.wrapper-detail-right td.today.day:hover {
+  background-color: transparent !important;
+}
 .wrapper-detail-right .datepicker-switch {
   width: -moz-max-content !important;
   width: max-content !important;
