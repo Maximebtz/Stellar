@@ -50,8 +50,7 @@
           }}
           #}
           <li><a href="{{ path('new_advert') }}">Créer mon annonce</a></li>
-          {% if app.user.adverts is not empty %} {# si mon user a des annonces
-          #}
+          {% if app.user.adverts is not empty %} {# si mon user a des annonces #}
           <li><a href="{{ path('user_adverts') }}">Mes annonces</a></li>
           {% endif %}
           <hr />

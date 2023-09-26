@@ -135,15 +135,16 @@
           <div class="dates">
             <div class="date">
               <p>Arrivée :</p>
-              <input class="date-span" type="date" id="arrivalDate" disabled />
+              <input class="date-span" type="date" id="arrivalDate" name="reservation[arrivalDate]" disabled />
             </div>
             <div class="date">
               <p>Départ :</p>
-              <input class="date-span" type="date" id="departureDate" disabled />
+              <input class="date-span" type="date" id="departureDate" name="reservation[departureDate]" disabled />
             </div>
           </div>
 
-          <div id="calendar" data-advert-id="{{ advert.id }}" data-advert-id="{{ advert.id }}" data-reserved-dates="{{ reservedDates|json_encode|e('html_attr') }}"></div>
+          <div id="calendar" data-advert-id="{{ advert.id }}" data-advert-id="{{ advert.id }}"
+            data-reserved-dates="{{ reservedDates|json_encode|e('html_attr') }}"></div>
 
           <div class="price-details">
             <div class="price">
@@ -164,8 +165,8 @@
         <div id="reservation-form-container">
           {{ form_start(formAddReservation) }}
 
-          {{ form_widget(formAddReservation.arrivalDate, {'attr': {'id': 'arrivalDate'}}) }}
-          {{ form_widget(formAddReservation.departureDate, {'attr': {'id': 'departureDate'}}) }}
+          {{ form_widget(formAddReservation.arrivalDate) }}
+          {{ form_widget(formAddReservation.departureDate) }}
 
           {{ form_row(formAddReservation.firstname) }}
           {{ form_row(formAddReservation.surname) }}
@@ -180,7 +181,7 @@
         </div>
       </div>
 
-      {# Faire le formulaire sur la meme page avec un changement de right #}
+      {# Faire le formulaire sur la meme page avec un changement #}
 
     </div>
   </div>
@@ -195,42 +196,43 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
   $(document).ready(function () {
-    var arrivalDate = null;
-    var departureDate = null;
+    
+    var arrivalDateInput = $('[name="reservation[arrivalDate]"]');
+    var departureDateInput = $('[name="reservation[departureDate]"]');
     var advertId = $('#calendar').data('advert-id');
     var reservedDates = $('#calendar').data('reserved-dates');
 
     $('#calendar').datepicker({
-        maxViewMode: 0,
-        language: "fr",
-        multidate: 2,
-        daysOfWeekHighlighted: "0,6",
-        startDate: 'today',
-        todayHighlight: true,
-        beforeShowDay: function (date) {
-          var formattedDate = $.datepicker.formatDate('yy-mm-dd', date);
-    
-          // Parcourez les dates réservées pour l'annonce
-          for (var i = 0; i < reservedDates.length; i++) {
-            var reservedStartDate = reservedDates[i][0];
-            var reservedEndDate = reservedDates[i][1];
-    
-            // Comparez la date actuelle avec les dates réservées
-            if (formattedDate >= reservedStartDate && formattedDate <= reservedEndDate) {
-              // Rendez la date non cliquable (désactivée) et grisez-la
-              return {
-                enabled: false,
-                classes: 'disabled-date'
-              };
-            }
+      maxViewMode: 0,
+      language: "fr",
+      multidate: 2,
+      daysOfWeekHighlighted: "0,6",
+      startDate: 'today',
+      todayHighlight: true,
+      beforeShowDay: function (date) {
+        var formattedDate = $.datepicker.formatDate('yy-mm-dd', date);
+
+        // Parcourir les dates réservées pour l'annonce
+        for (var i = 0; i < reservedDates.length; i++) {
+          var reservedStartDate = reservedDates[i][0];
+          var reservedEndDate = reservedDates[i][1];
+
+          // Comparer la date actuelle avec les dates réservées
+          if (formattedDate >= reservedStartDate && formattedDate <= reservedEndDate) {
+            // Render la date non cliquable (désactivée) la griser
+            return {
+              enabled: false,
+              classes: 'disabled-date'
+            };
           }
-    
-          // Les dates non réservées resteront activées et ne seront pas grises
-          return {
-            enabled: true,
-            classes: ''
-          };
         }
+
+        // Les dates non réservées resteront activées et ne seront pas grises
+        return {
+          enabled: true,
+          classes: ''
+        };
+      }
     });
 
 
@@ -238,25 +240,25 @@
       let selectedDates = e.dates;
 
       if (selectedDates.length === 2) {
-        arrivalDate = selectedDates[0];
-        departureDate = selectedDates[1];
+        arrivalDateInput = selectedDates[0];
+        departureDateInput = selectedDates[1];
 
-        // Vérifiez si arrivalDate est définie avant de l'utiliser
-        if (arrivalDate) {
+        // Vérifier si arrivalDate est définie avant de l'utiliser
+        if (arrivalDateInput) {
           // Formatage de la date au format "yyyy-MM-dd"
-          let formattedDate = arrivalDate.getFullYear() + '-' + (arrivalDate.getMonth() + 1).toString().padStart(2, '0') + '-' + arrivalDate.getDate().toString().padStart(2, '0');
-          $('#arrivalDate').val(formattedDate);
+          let formattedDate = arrivalDateInput.getFullYear() + '-' + (arrivalDateInput.getMonth() + 1).toString().padStart(2, '0') + '-' + arrivalDateInput.getDate().toString().padStart(2, '0');
+          $('[name="reservation[arrivalDate]"]').val(formattedDate); // Mettez à jour la valeur du champ d'arrivée
         }
-        // Vérifiez si departureDate est définie avant de l'utiliser
-        if (departureDate) {
+        // Vérifier si departureDate est définie avant de l'utiliser
+        if (departureDateInput) {
           // Formatage de la date au format "yyyy-MM-dd"
-          let formattedDate = departureDate.getFullYear() + '-' + (departureDate.getMonth() + 1).toString().padStart(2, '0') + '-' + departureDate.getDate().toString().padStart(2, '0');
-          $('#departureDate').val(formattedDate);
+          let formattedDate = departureDateInput.getFullYear() + '-' + (departureDateInput.getMonth() + 1).toString().padStart(2, '0') + '-' + departureDateInput.getDate().toString().padStart(2, '0');
+          $('[name="reservation[departureDate]"]').val(formattedDate); // Mettez à jour la valeur du champ de départ
         }
 
         $('#calendar').find('.day').each(function () {
           let currentDate = new Date($(this).data('date'));
-          if (currentDate > arrivalDate && currentDate < departureDate) {
+          if (currentDate > arrivalDateInput && currentDate < departureDateInput) {
             $(this).addClass('range');
           } else {
             $(this).removeClass('range');
@@ -264,7 +266,7 @@
         });
 
         // Calcul du nombre de nuits
-        let numNights = Math.floor((departureDate - arrivalDate) / (1000 * 60 * 60 * 24));
+        let numNights = Math.floor((departureDateInput - arrivalDateInput) / (1000 * 60 * 60 * 24));
         $('#numNights').text(numNights);
 
         // Calcul du montant total des nuits
@@ -280,22 +282,16 @@
         let totalPrice = (parseFloat(totalNightPrice) + parseFloat(stellarFees)).toFixed(2);
         $('#totalPrice').text(totalPrice + '€');
       } else {
-        arrivalDate = null;
-        departureDate = null;
+        arrivalDateInput = null;
+        departureDateInput = null;
         $('#calendar').find('.day').removeClass('range');
-        $('#arrivalDate').text('');
-        $('#departureDate').text('');
+        $('[name="reservation[arrivalDate]"]').val('');
+        $('[name="reservation[departureDate]"]').val('');
         $('#numNights').text('0');
         $('#totalNightPrice').text('0€');
         $('#stellarFees').text('0€');
         $('#totalPrice').text('0€');
       }
-
-      localStorage.setItem('arrivalDate', formatDate(arrivalDate));
-      localStorage.setItem('departureDate', formatDate(departureDate));
-      localStorage.setItem('totalPrice', totalPrice.toString());
-      localStorage.setItem('stellarFees', stellarFees.toString());
-      localStorage.setItem('totalNightPrice', totalNightPrice.toString());
     });
 
     function formatDate(date) {

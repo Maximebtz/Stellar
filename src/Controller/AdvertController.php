@@ -113,62 +113,62 @@ class AdvertController extends AbstractController
 
     #[Route('/user/advert/detail/{id}', name: 'detail_advert')]
     #[IsGranted('ROLE_USER')]
-    public function showDetailAdvert($id, CategoryRepository $categoryRepository, EntityManagerInterface $entityManager, AccessoryRepository $accessoryRepository, LodgeRepository $lodgeRepository, Request $request,ReservationRepository $reservationRepository, Security $security): Response
-{
-    // Récupérer l'annonce à partir de l'ID dans l'URL
-    $repository = $this->entityManager->getRepository(Advert::class);
-    $userRepository = $this->entityManager->getRepository(User::class);
-    $advert = $repository->find($id);
-    $user = $userRepository->find($id);
+    public function showDetailAdvert($id, CategoryRepository $categoryRepository, EntityManagerInterface $entityManager, AccessoryRepository $accessoryRepository, LodgeRepository $lodgeRepository, Request $request, ReservationRepository $reservationRepository, Security $security): Response
+    {
+        // Récupérer l'annonce à partir de l'ID dans l'URL
+        $repository = $this->entityManager->getRepository(Advert::class);
+        $userRepository = $this->entityManager->getRepository(User::class);
+        $advert = $repository->find($id);
+        $user = $userRepository->find($id);
 
-    
-    
-    // Create a new Reservation associated with the Advert
-    $reservation = new Reservation();
-    $reservation->setAdvert($advert); // Associate the reservation with the advert
-    
-    // Create the form using the Reservation entity
-    $reservationForm = $this->createForm(ReservationType::class, $reservation);
-    
-    // Vérifier si l'annonce existe
-    if (!$advert) {
-        throw $this->createNotFoundException('L\'annonce n\'existe pas.');
+
+
+        // Create a new Reservation associated with the Advert
+        $reservation = new Reservation();
+        $reservation->setAdvert($advert); // Associate the reservation with the advert
+
+        // Create the form using the Reservation entity
+        $reservationForm = $this->createForm(ReservationType::class, $reservation);
+
+        // Vérifier si l'annonce existe
+        if (!$advert) {
+            throw $this->createNotFoundException('L\'annonce n\'existe pas.');
+        }
+
+        $user = $security->getUser();
+        if (!$user) {
+            throw new \RuntimeException('L\'utilisateur n\'est pas connecté.');
+        }
+        $reservation->setUser($user);
+
+        // Gérez la soumission du formulaire de réservation
+        $reservationForm->handleRequest($request);
+
+        if ($reservationForm->isSubmitted() && $reservationForm->isValid()) {
+            // Enregistrer la réservation en base de données
+            $entityManager->persist($reservation);
+            $entityManager->flush();
+
+            // Rediriger l'utilisateur vers une page de confirmation ou ailleurs si nécessaire
+            return $this->redirectToRoute('app_home');
+        }
+        $reservedDates = $reservationRepository->findReservedDatesForAdvert($advert->getId());
+
+
+        // Récupérer les catégories, les accessoires et les lodges
+        $categories = $categoryRepository->findAll();
+        $accessories = $accessoryRepository->findAll();
+        $lodges = $lodgeRepository->findAll();
+
+        return $this->render('advert/detail.html.twig', [
+            'advert' => $advert,
+            'categories' => $categories,
+            'accessories' => $accessories,
+            'lodges' => $lodges,
+            'formAddReservation' => $reservationForm->createView(),
+            'reservedDates' => $reservedDates,
+        ]);
     }
-
-    $user = $security->getUser();
-    if (!$user) {
-        throw new \RuntimeException('L\'utilisateur n\'est pas connecté.');
-    }
-    $reservation->setUser($user);
-    
-    // Gérez la soumission du formulaire de réservation
-    $reservationForm->handleRequest($request);
-
-    if ($reservationForm->isSubmitted() && $reservationForm->isValid()) {
-        // Enregistrer la réservation en base de données
-        $entityManager->persist($reservation);
-        $entityManager->flush();
-
-        // Rediriger l'utilisateur vers une page de confirmation ou ailleurs si nécessaire
-        return $this->redirectToRoute('app_home');
-    }
-    $reservedDates = $reservationRepository->findReservedDatesForAdvert($advert->getId());
-
-    
-    // Récupérer les catégories, les accessoires et les lodges
-    $categories = $categoryRepository->findAll();
-    $accessories = $accessoryRepository->findAll();
-    $lodges = $lodgeRepository->findAll();
-
-    return $this->render('advert/detail.html.twig', [
-        'advert' => $advert,
-        'categories' => $categories,
-        'accessories' => $accessories,
-        'lodges' => $lodges,
-        'formAddReservation' => $reservationForm->createView(),
-        'reservedDates' => $reservedDates,
-    ]);
-}
 
 
     #[Route('/get-adverts-json', name: 'get-adverts-json')]

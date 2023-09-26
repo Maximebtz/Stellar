@@ -19,12 +19,18 @@ class ReservationType extends AbstractType
     {
         $builder
             ->add('arrivalDate', DateType::class, [
-                'label' => 'Date d\'arrivée',
                 'widget' => 'single_text',
+                'attr' => [
+                    'name' => 'reservation[arrivalDate]',
+                    'style' => 'display:none;'
+                ],
             ])
             ->add('departureDate', DateType::class, [
-                'label' => 'Date de départ',
                 'widget' => 'single_text',
+                'attr' => [
+                    'name' => 'reservation[departureDate]',
+                    'style' => 'display:none;'
+                ],
             ])
             ->add('firstname', TextType::class, [
                 'label' => 'Prénom',
@@ -52,26 +58,22 @@ class ReservationType extends AbstractType
                 'label' => false,
             ]);
 
-            $builder->add('advert', EntityType::class, [
-                'class' => Advert::class, // Remplacez par la classe de votre annonce
-                'choice_label' => 'id', // Remplacez 'id' par le champ qui représente l'identifiant de l'annonce
-                'label' => false, // Vous pouvez définir le libellé sur false pour masquer le label
-                'attr' => ['style' => 'display:none;'], // Ajoutez ceci pour masquer le champ dans le formulaire
-            ]);
+        $builder->add('advert', EntityType::class, [
+            'class' => Advert::class,
+            'choice_label' => 'id',
+            'label' => false,
+            'attr' => ['style' => 'display:none;'],
+        ]);
 
-            $builder->add('user_id', HiddenType::class, [
-                'mapped' => false, // Assurez-vous que le champ ne soit pas mappé à l'entité Reservation
-            ]);
+        $builder->add('user_id', HiddenType::class, [
+            'mapped' => false,
+        ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-                'data_class' => Reservation::class,
+            'data_class' => Reservation::class,
         ]);
     }
 }
-
-
-
-
