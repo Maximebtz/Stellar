@@ -43,7 +43,6 @@ class AdvertType extends AbstractType
                 'constraints' => [
                     new All([
                         new File([
-                            // 'maxSize' => '1024k',
                             'mimeTypes' => [
                                 'image/jpeg',
                                 'image/jpg',

@@ -15,10 +15,12 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class ReservationType extends AbstractType
 {
+    
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('arrivalDate', DateType::class, [
+                'label' => false,
                 'widget' => 'single_text',
                 'attr' => [
                     'name' => 'reservation[arrivalDate]',
@@ -26,6 +28,7 @@ class ReservationType extends AbstractType
                 ],
             ])
             ->add('departureDate', DateType::class, [
+                'label' => false,
                 'widget' => 'single_text',
                 'attr' => [
                     'name' => 'reservation[departureDate]',
