@@ -14,6 +14,7 @@ use App\Repository\LodgeRepository;
 use App\Repository\ImagesRepository;
 use App\Repository\CategoryRepository;
 use App\Repository\AccessoryRepository;
+use App\Repository\ReservationRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Security;
@@ -28,10 +29,12 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 class AdvertController extends AbstractController
 {
     private EntityManagerInterface $entityManager;
+    private ReservationRepository $reservationRepository;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(EntityManagerInterface $entityManager, ReservationRepository $reservationRepository)
     {
         $this->entityManager = $entityManager;
+        $this->reservationRepository = $reservationRepository;
     }
 
     #[Route('/advert', name: 'app_advert')]
@@ -110,7 +113,7 @@ class AdvertController extends AbstractController
 
     #[Route('/user/advert/detail/{id}', name: 'detail_advert')]
     #[IsGranted('ROLE_USER')]
-    public function showDetailAdvert($id, CategoryRepository $categoryRepository, EntityManagerInterface $entityManager, AccessoryRepository $accessoryRepository, LodgeRepository $lodgeRepository, Request $request, Security $security): Response
+    public function showDetailAdvert($id, CategoryRepository $categoryRepository, EntityManagerInterface $entityManager, AccessoryRepository $accessoryRepository, LodgeRepository $lodgeRepository, Request $request,ReservationRepository $reservationRepository, Security $security): Response
 {
     // Récupérer l'annonce à partir de l'ID dans l'URL
     $repository = $this->entityManager->getRepository(Advert::class);
@@ -149,7 +152,9 @@ class AdvertController extends AbstractController
         // Rediriger l'utilisateur vers une page de confirmation ou ailleurs si nécessaire
         return $this->redirectToRoute('app_home');
     }
+    $reservedDates = $reservationRepository->findReservedDatesForAdvert($advert->getId());
 
+    
     // Récupérer les catégories, les accessoires et les lodges
     $categories = $categoryRepository->findAll();
     $accessories = $accessoryRepository->findAll();
@@ -161,6 +166,7 @@ class AdvertController extends AbstractController
         'accessories' => $accessories,
         'lodges' => $lodges,
         'formAddReservation' => $reservationForm->createView(),
+        'reservedDates' => $reservedDates,
     ]);
 }
 

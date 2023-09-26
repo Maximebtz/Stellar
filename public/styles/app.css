@@ -929,6 +929,10 @@ header .signup:hover {
   border-radius: 4px;
   border: none;
 }
+.wrapper-detail-right .disabled-date {
+  cursor: not-allowed;
+  text-decoration: line-through !important;
+}
 .wrapper-detail-right .datepicker table tr td.today,
 .wrapper-detail-right .datepicker table tr td.today.disabled,
 .wrapper-detail-right .datepicker table tr td.today.disabled:hover,

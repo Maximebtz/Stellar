@@ -21,28 +21,32 @@ class ReservationRepository extends ServiceEntityRepository
         parent::__construct($registry, Reservation::class);
     }
 
-//    /**
-//     * @return Reservation[] Returns an array of Reservation objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('r')
-//            ->andWhere('r.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('r.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    /** 
+     * Récupère les dates réservées pour une annonce spécifique
+     *
+     * @param int $advertId L'ID de l'annonce
+     * @return array Les dates réservées sous forme de tableau
+     */
+    public function findReservedDatesForAdvert(int $advertId): array
+    {
+        $qb = $this->createQueryBuilder('r')
+            ->select('r.arrivalDate', 'r.departureDate')
+            ->where('r.advert = :advertId')
+            ->setParameter('advertId', $advertId)
+            ->getQuery();
 
-//    public function findOneBySomeField($value): ?Reservation
-//    {
-//        return $this->createQueryBuilder('r')
-//            ->andWhere('r.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+        $result = $qb->getResult();
+
+        $reservedDates = [];
+
+        foreach ($result as $reservation) {
+            $arrivalDate = $reservation['arrivalDate']->format('Y-m-d');
+            $departureDate = $reservation['departureDate']->format('Y-m-d');
+
+            // Ajoutez ces dates dans le tableau des dates réservées
+            $reservedDates[] = [$arrivalDate, $departureDate];
+        }
+
+        return $reservedDates;
+    }
 }
