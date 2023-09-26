@@ -83,7 +83,7 @@ class Reservation
         return $this->advert;
     }
 
-    public function setAdvert(?Advert $advert): static
+    public function setAdvert(?Advert $advert): self
     {
         $this->advert = $advert;
 
@@ -95,7 +95,7 @@ class Reservation
         return $this->user;
     }
 
-    public function setUser(?User $user): static
+    public function setUser(?User $user): self
     {
         $this->user = $user;
 

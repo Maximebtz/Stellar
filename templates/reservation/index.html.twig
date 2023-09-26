@@ -7,21 +7,6 @@
 
 {{ form_start(formAddReservation) }}
 
-
-
-<div class="price-details">
-    <div class="price">
-        <p><span id="pricePerNight">{{advert.price}}</span> x <span id="numNights">0</span> nuits = </p><span
-            class="total-span" id="totalNightPrice">0€</span>
-    </div>
-    <div class="price">
-        <p>Frais Stellar 5%:</p><span class="total-span" id="stellarFees">0€</span>
-    </div>
-    <div class="price">
-        <p>Total:</p><span class="total-span" id="totalPrice">0€</span>
-    </div>
-</div>
-
 {{ form_widget(formAddReservation.arrivalDate, {'attr': {'id': 'arrivalDate'}}) }}
 {{ form_widget(formAddReservation.departureDate, {'attr': {'id': 'departureDate'}}) }}
 

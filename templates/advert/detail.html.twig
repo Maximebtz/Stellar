@@ -42,19 +42,6 @@
         <div class="l-img">
           {% if advert.images | length > 0 %} {% if app.user is same as
           advert.owner %}
-          <div class="modif-icons">
-            {#
-            <a class="modif" href="{{ path('remove_advert_image', { id: advert.images }) }}">
-              #}
-              <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor" class="bi bi-x"
-                viewBox="0 0 16 16">
-                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 
-                   8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
-              </svg>
-              {#
-            </a>
-            #}
-          </div>
           {% endif %}
           <img src="{{ asset('uploads/' ~ advert.images[0].url) }}" alt="{{ advert.title }}" />
           {% endif %}
@@ -63,22 +50,6 @@
           {% if advert.images | length > 1 %} {% for i in 1..(advert.images |
           length - 1) %}
           <div class="ltl-img">
-            {% if app.user is same as advert.owner %}
-            <div class="modif-icons">
-              <a class="modif" href="{{
-                  path('remove_advert_image', {
-                    advertId: advert.id,
-                    imageId: advert.images[i].id
-                  })
-                }}">
-                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor" class="bi bi-x"
-                  viewBox="0 0 16 16">
-                  <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 
-                    8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
-                </svg>
-              </a>
-            </div>
-            {% endif %}
             <img src="{{ asset('uploads/' ~ advert.images[i].url) }}" alt="{{ advert.title }}" />
           </div>
           {% endfor %} {% if advert.images | length > 3 %}
@@ -157,39 +128,60 @@
         </div>
       </div>
       <div class="wrapper-detail-right">
-        <p class="night-price">
-          <b>{{ advert.price }}€</b>/Nuits
-        </p>
-
-        <div class="dates">
-          <div class="date">
-            <p>Arrivée :</p>
-            <input class="date-span" type="date" id="arrivalDate" disabled />
+        <div id="calendar-and-detail">
+          <p class="night-price">
+            <b>{{ advert.price }}€</b>/Nuits
+          </p>
+          <div class="dates">
+            <div class="date">
+              <p>Arrivée :</p>
+              <input class="date-span" type="date" id="arrivalDate" disabled />
+            </div>
+            <div class="date">
+              <p>Départ :</p>
+              <input class="date-span" type="date" id="departureDate" disabled />
+            </div>
           </div>
-          <div class="date">
-            <p>Départ :</p>
-            <input class="date-span" type="date" id="departureDate" disabled />
+
+          <div id="calendar"></div>
+
+          <div class="price-details">
+            <div class="price">
+              <p><span id="pricePerNight">{{advert.price}}</span> x <span id="numNights">0</span> nuits = </p><span
+                class="total-span" id="totalNightPrice">0€</span>
+            </div>
+            <div class="price">
+              <p>Frais Stellar 5%:</p><span class="total-span" id="stellarFees">0€</span>
+            </div>
+            <div class="price">
+              <p>Total:</p><span class="total-span" id="totalPrice">0€</span>
+            </div>
+          </div>
+          <div class="log">
+            <a href="#" class="l-btn">Réservation</a>
           </div>
         </div>
+        <div id="reservation-form-container">
+          {{ form_start(formAddReservation) }}
 
-        <div id="calendar"></div>
+          {{ form_widget(formAddReservation.arrivalDate) }}
+          {{ form_widget(formAddReservation.departureDate) }}
 
-        <div class="price-details">
-          <div class="price">
-            <p><span id="pricePerNight">{{advert.price}}</span> x <span id="numNights">0</span> nuits = </p><span
-              class="total-span" id="totalNightPrice">0€</span>
-          </div>
-          <div class="price">
-            <p>Frais Stellar 5%:</p><span class="total-span" id="stellarFees">0€</span>
-          </div>
-          <div class="price">
-            <p>Total:</p><span class="total-span" id="totalPrice">0€</span>
-          </div>
-        </div>
-        <div class="log">
-          <a href="{{ path('app_reservation', {'id': advert.id}) }}" class="l-btn">Réservation</a>
+          {{ form_row(formAddReservation.firstname) }}
+          {{ form_row(formAddReservation.surname) }}
+          {{ form_row(formAddReservation.dateOfBirth) }}
+          {{ form_row(formAddReservation.address) }}
+          {{ form_row(formAddReservation.cp) }}
+          {{ form_row(formAddReservation.city) }}
+          {{ form_row(formAddReservation.country) }}
+
+          <button type="submit" class="btn btn-primary">Réserver</button>
+          {{ form_end(formAddReservation) }}
         </div>
       </div>
+
+      {# Faire le formulaire sur la meme page avec un changement de right #}
+
     </div>
   </div>
 </div>

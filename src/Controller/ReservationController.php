@@ -23,32 +23,37 @@ class ReservationController extends AbstractController
     }
 
 
-    #[Route('/reservation/advert/{id}', name: 'app_reservation')]
-    #[IsGranted('ROLE_USER')]
-    public function index($id, Request $request, EntityManagerInterface $entityManager): Response
-    {
-        $repository = $this->entityManager->getRepository(Advert::class);
-        $advert = $repository->find($id);
-        $reservation = new Reservation();
-        $form = $this->createForm(ReservationType::class, $reservation);
-        $form->handleRequest($request);
+    // #[Route('/advert/detail/{id}', name: 'app_reservation')]
+    // #[IsGranted('ROLE_USER')]
+    // public function index($id, Request $request, EntityManagerInterface $entityManager): Response
+    // {
+    //     $repository = $this->entityManager->getRepository(Advert::class);
+    //     $advert = $repository->find($id);
+    //     $reservation = new Reservation();
+    //     $form = $this->createForm(ReservationType::class, $reservation);
+    //     $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            // Enregistrez la réservation en base de données
-            $reservation = $form->getData();
+    //     $reservationConfirmed = false;
 
-            $entityManager->persist($reservation);
-            $entityManager->flush();
+    //     if ($form->isSubmitted() && $form->isValid()) {
+    //         // Enregistrez la réservation en base de données
+    //         $reservation = $form->getData();
 
-            // Redirigez l'utilisateur vers une page de confirmation, par exemple
-            return $this->redirectToRoute('reservation_confirmation');
-        }
+    //         $entityManager->persist($reservation);
+    //         $entityManager->flush();
 
-        return $this->render('reservation/index.html.twig', [
-            'formAddReservation' => $form->createView(),
-            'advert' => $advert,
-        ]);
-    }
+    //         $reservationConfirmed = true;
+
+    //         // Redirigez l'utilisateur vers une page de confirmation, par exemple
+    //         return $this->redirectToRoute('reservation_confirmation');
+    //     }
+
+    //     return $this->render('advert/detail.html.twig', [
+    //         'formAddReservation' => $form->createView(),
+    //         'advert' => $advert,
+    //         'reservationConfirmed' => $reservationConfirmed
+    //     ]);
+    // }
 
     #[Route('/reservation/confirmation', name: 'reservation_confirmation')]
     public function confirmation(): Response

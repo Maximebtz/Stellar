@@ -2,16 +2,21 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Entity\Advert;
 use App\Entity\Images;
 use App\Form\AdvertType;
-use App\Repository\AccessoryRepository;
-use App\Repository\CategoryRepository;
+use App\Entity\Reservation;
+use App\Form\ReservationType;
 use App\Service\FileUploader;
-use App\Repository\ImagesRepository;
+use App\Repository\UserRepository;
 use App\Repository\LodgeRepository;
+use App\Repository\ImagesRepository;
+use App\Repository\CategoryRepository;
+use App\Repository\AccessoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -105,55 +110,61 @@ class AdvertController extends AbstractController
 
     #[Route('/user/advert/detail/{id}', name: 'detail_advert')]
     #[IsGranted('ROLE_USER')]
-    public function showDetailAdvert($id, CategoryRepository $categoryRepository, AccessoryRepository $accessoryRepository, LodgeRepository $lodgeRepository): Response
-    {
-        $repository = $this->entityManager->getRepository(Advert::class);
-        $advert = $repository->find($id);
-        $categories = $categoryRepository->findAll();
-        $accessories = $accessoryRepository->findAll();
-        $lodges = $lodgeRepository->findAll();
-
-
-        return $this->render('advert/detail.html.twig', [
-            'advert' => $advert,
-            'categories' => $categories,
-            'accessories' => $accessories,
-            'lodges' => $lodges,
-        ]);
-    }
-
-    #[Route('/owner/advert/remove-image/{advertId}/{imageId}', name: 'remove_advert_image')]
-    #[IsGranted('ROLE_USER')]
-    public function removeImage(Request $request, $advertId, $imageId): Response
-    {
-        $advert = $this->entityManager->getRepository(Advert::class)->find($advertId);
-
-        if (!$advert) {
-            throw $this->createNotFoundException('Annonce non trouvée');
-        }
-
-        $imageToRemove = null;
-
-        foreach ($advert->getImages() as $image) {
-            if ($image->getId() === $imageId) {
-                $imageToRemove = $image;
-                break;
-            }
-        }
-
-        if ($imageToRemove) {
-            // Supprimer l'image de l'annonce
-            $advert->removeImage($imageToRemove);
-            $this->entityManager->remove($imageToRemove);
-            $this->entityManager->flush();
-        }
-        
-        // Rediriger vers la page de détails de l'annonce
-        return $this->redirectToRoute('detail_advert', ['id' => $advertId]);
-    }
-
+    public function showDetailAdvert($id, CategoryRepository $categoryRepository, EntityManagerInterface $entityManager, AccessoryRepository $accessoryRepository, LodgeRepository $lodgeRepository, Request $request, Security $security): Response
+{
+    // Récupérer l'annonce à partir de l'ID dans l'URL
+    $repository = $this->entityManager->getRepository(Advert::class);
+    $userRepository = $this->entityManager->getRepository(User::class);
+    $advert = $repository->find($id);
+    $user = $userRepository->find($id);
 
     
+    
+    // Create a new Reservation associated with the Advert
+    $reservation = new Reservation();
+    $reservation->setAdvert($advert); // Associate the reservation with the advert
+    
+    // Create the form using the Reservation entity
+    $reservationForm = $this->createForm(ReservationType::class, $reservation);
+    
+    // Vérifier si l'annonce existe
+    if (!$advert) {
+        throw $this->createNotFoundException('L\'annonce n\'existe pas.');
+    }
+
+    $user = $security->getUser();
+    if (!$user) {
+        throw new \RuntimeException('L\'utilisateur n\'est pas connecté.');
+    }
+    $reservation->setUser($user);
+    
+    // Gérez la soumission du formulaire de réservation
+    $reservationForm->handleRequest($request);
+
+    if ($reservationForm->isSubmitted() && $reservationForm->isValid()) {
+        // Enregistrer la réservation en base de données
+        $entityManager->persist($reservation);
+        $entityManager->flush();
+
+        // Rediriger l'utilisateur vers une page de confirmation ou ailleurs si nécessaire
+        return $this->redirectToRoute('app_home');
+    }
+
+    // Récupérer les catégories, les accessoires et les lodges
+    $categories = $categoryRepository->findAll();
+    $accessories = $accessoryRepository->findAll();
+    $lodges = $lodgeRepository->findAll();
+
+    return $this->render('advert/detail.html.twig', [
+        'advert' => $advert,
+        'categories' => $categories,
+        'accessories' => $accessories,
+        'lodges' => $lodges,
+        'formAddReservation' => $reservationForm->createView(),
+    ]);
+}
+
+
     #[Route('/get-adverts-json', name: 'get-adverts-json')]
     public function getAdvertsJson(EntityManagerInterface $entityManager)
     {
