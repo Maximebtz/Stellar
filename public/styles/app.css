@@ -141,6 +141,16 @@ header .log #profil-menu li:hover {
   background-color: var(--lightgray);
   border-radius: 5px;
 }
+@keyframes fade-in-top {
+  0% {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
 header .login {
   display: flex;
   justify-content: center;
@@ -182,16 +192,7 @@ header .signup {
 header .signup:hover {
   transform: scale(1.02);
 }
-@keyframes fade-in-top {
-  0% {
-    transform: translateY(-20px);
-    opacity: 0;
-  }
-  100% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
+
 .wrapper {
   display: flex;
   padding: 20px;
@@ -479,31 +480,30 @@ header .signup:hover {
   font-size: larger;
   cursor: pointer;
 }
-
 .wrapper-detail-main {
   display: flex;
   padding-top: 55px;
   max-width: 100%;
   position: relative;
 }
-.wrapper-detail .wrapper-detail-left {
+.wrapper-detail-main .wrapper-detail-left {
   max-width: 700px;
   min-width: 460px;
   width: 100%;
   margin: 0 60px 0 0;
 }
-.wrapper-detail .wrapper-detail-left h2 {
+.wrapper-detail-main .wrapper-detail-left h2 {
   font-size: 2em;
   padding: 20px 0 10px;
   z-index: 1;
 }
-.wrapper-detail .wrapper-detail-left-category {
+.wrapper-detail-main .wrapper-detail-left-category {
   gap: 7px;
   display: flex;
   flex-direction: column;
   position: relative;
 }
-.wrapper-detail .wrapper-detail-left-category::after {
+.wrapper-detail-main .wrapper-detail-left-category::after {
   content: "";
   height: 100%;
   width: 20px;
@@ -511,7 +511,7 @@ header .signup:hover {
   position: absolute;
   right: 0;
 }
-.wrapper-detail .wrapper-detail-left-category::before {
+.wrapper-detail-main .wrapper-detail-left-category::before {
   content: "";
   height: 100%;
   width: 20px;
@@ -520,7 +520,7 @@ header .signup:hover {
   left: 0;
   z-index: 1;
 }
-.wrapper-detail .wrapper-detail-left-category .checkbox-wrapper-16 {
+.wrapper-detail-main .wrapper-detail-left-category .checkbox-wrapper-16 {
   display: flex;
   gap: 7px;
   max-width: 640px;
@@ -531,7 +531,7 @@ header .signup:hover {
      -moz-user-select: none;
           user-select: none;
 }
-.wrapper-detail .wrapper-detail-left-category .checkbox-wrapper-16 .checkbox-input {
+.wrapper-detail-main .wrapper-detail-left-category .checkbox-wrapper-16 .checkbox-input {
   clip: rect(0 0 0 0);
   -webkit-clip-path: inset(100%);
   clip-path: inset(100%);
@@ -541,29 +541,29 @@ header .signup:hover {
   white-space: nowrap;
   width: 1px;
 }
-.wrapper-detail .wrapper-detail-left-category .checkbox-wrapper-16 .checkbox-input:checked + .checkbox-tile {
+.wrapper-detail-main .wrapper-detail-left-category .checkbox-wrapper-16 .checkbox-input:checked + .checkbox-tile {
   border-color: var(--light-purple);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
   color: var(--light-purple);
 }
-.wrapper-detail .wrapper-detail-left-category .checkbox-wrapper-16 .checkbox-input:checked + .checkbox-tile:before {
+.wrapper-detail-main .wrapper-detail-left-category .checkbox-wrapper-16 .checkbox-input:checked + .checkbox-tile:before {
   transform: scale(1);
   opacity: 1;
   background-color: var(--light-purple);
   border-color: var(--light-purple);
 }
-.wrapper-detail .wrapper-detail-left-category .checkbox-wrapper-16 .checkbox-input:checked + .checkbox-tile .checkbox-icon,
-.wrapper-detail .wrapper-detail-left-category .checkbox-wrapper-16 .checkbox-input:checked + .checkbox-tile .checkbox-label {
+.wrapper-detail-main .wrapper-detail-left-category .checkbox-wrapper-16 .checkbox-input:checked + .checkbox-tile .checkbox-icon,
+.wrapper-detail-main .wrapper-detail-left-category .checkbox-wrapper-16 .checkbox-input:checked + .checkbox-tile .checkbox-label {
   color: var(--light-purple);
 }
-.wrapper-detail .wrapper-detail-left-category .checkbox-wrapper-16 .checkbox-input:focus + .checkbox-tile {
+.wrapper-detail-main .wrapper-detail-left-category .checkbox-wrapper-16 .checkbox-input:focus + .checkbox-tile {
   border-color: var(--light-purple);
 }
-.wrapper-detail .wrapper-detail-left-category .checkbox-wrapper-16 .checkbox-input:focus + .checkbox-tile:before {
+.wrapper-detail-main .wrapper-detail-left-category .checkbox-wrapper-16 .checkbox-input:focus + .checkbox-tile:before {
   transform: scale(1);
   opacity: 1;
 }
-.wrapper-detail .wrapper-detail-left-category .checkbox-wrapper-16 .checkbox-tile {
+.wrapper-detail-main .wrapper-detail-left-category .checkbox-wrapper-16 .checkbox-tile {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -578,27 +578,27 @@ header .signup:hover {
   cursor: pointer;
   position: relative;
 }
-.wrapper-detail .wrapper-detail-left-category .checkbox-wrapper-16 .checkbox-tile:hover {
+.wrapper-detail-main .wrapper-detail-left-category .checkbox-wrapper-16 .checkbox-tile:hover {
   border-color: var(--light-purple);
 }
-.wrapper-detail .wrapper-detail-left-category .checkbox-wrapper-16 .checkbox-tile:hover:before {
+.wrapper-detail-main .wrapper-detail-left-category .checkbox-wrapper-16 .checkbox-tile:hover:before {
   transform: scale(1);
   opacity: 1;
 }
-.wrapper-detail .wrapper-detail-left-category .checkbox-wrapper-16 .checkbox-icon {
+.wrapper-detail-main .wrapper-detail-left-category .checkbox-wrapper-16 .checkbox-icon {
   transition: 0.375s ease;
   color: #494949;
 }
-.wrapper-detail .wrapper-detail-left-category .checkbox-wrapper-16 .checkbox-icon svg {
+.wrapper-detail-main .wrapper-detail-left-category .checkbox-wrapper-16 .checkbox-icon svg {
   width: 3rem;
   height: 3rem;
 }
-.wrapper-detail .wrapper-detail-left-category .checkbox-wrapper-16 .checkbox-label {
+.wrapper-detail-main .wrapper-detail-left-category .checkbox-wrapper-16 .checkbox-label {
   color: #707070;
   transition: 0.375s ease;
   text-align: center;
 }
-.wrapper-detail .wrapper-detail-left-owner {
+.wrapper-detail-main .wrapper-detail-left-owner {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -607,7 +607,7 @@ header .signup:hover {
   border-bottom: 1px solid var(--middlegray);
   border-top: 1px solid var(--middlegray);
 }
-.wrapper-detail .wrapper-detail-left-owner .shadow-emp {
+.wrapper-detail-main .wrapper-detail-left-owner .shadow-emp {
   background-color: var(--middlegray);
   max-width: 100px;
   width: 100%;
@@ -615,25 +615,25 @@ header .signup:hover {
   height: 18px;
   border-radius: 5px;
 }
-.wrapper-detail .wrapper-detail-left-owner-info {
+.wrapper-detail-main .wrapper-detail-left-owner-info {
   display: flex;
   align-items: center;
   gap: 7px;
 }
-.wrapper-detail .wrapper-detail-left-owner-info p {
+.wrapper-detail-main .wrapper-detail-left-owner-info p {
   color: var(--darkgray);
   font-size: 1.02rem;
 }
-.wrapper-detail .wrapper-detail-left-owner-info .profil-picture {
+.wrapper-detail-main .wrapper-detail-left-owner-info .profil-picture {
   width: 32px;
   height: 32px;
   border-radius: 50%;
 }
-.wrapper-detail .wrapper-detail-left-owner-info span {
+.wrapper-detail-main .wrapper-detail-left-owner-info span {
   text-decoration: underline;
   font-weight: 600;
 }
-.wrapper-detail .wrapper-detail-left-owner-contact {
+.wrapper-detail-main .wrapper-detail-left-owner-contact {
   width: 100px;
   height: 36px;
   background-color: var(--black);
@@ -646,21 +646,21 @@ header .signup:hover {
   transition: all 0.2s ease-in-out;
   box-shadow: var(--boxshadow) 0 0 10px;
 }
-.wrapper-detail .wrapper-detail-left-owner-contact:hover {
+.wrapper-detail-main .wrapper-detail-left-owner-contact:hover {
   transform: scale(1.02);
 }
-.wrapper-detail .wrapper-detail-left-description {
+.wrapper-detail-main .wrapper-detail-left-description {
   width: 100%;
   border-bottom: 1px solid var(--middlegray);
 }
-.wrapper-detail .wrapper-detail-left-description p {
+.wrapper-detail-main .wrapper-detail-left-description p {
   font-family: "Inter", sans-serif;
   font-weight: 500;
   line-height: 27px;
   color: var(--darkgray);
   padding: 20px 10px;
 }
-.wrapper-detail .wrapper-detail-left-commodite .checkbox-wrapper-17 {
+.wrapper-detail-main .wrapper-detail-left-commodite .checkbox-wrapper-17 {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -672,7 +672,7 @@ header .signup:hover {
   position: relative;
   transition: scroll-behavior 0.5s;
 }
-.wrapper-detail .wrapper-detail-left-commodite .checkbox-wrapper-17 .checkbox-tile-fit {
+.wrapper-detail-main .wrapper-detail-left-commodite .checkbox-wrapper-17 .checkbox-tile-fit {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -689,7 +689,7 @@ header .signup:hover {
   cursor: pointer;
   position: relative;
 }
-.wrapper-detail .wrapper-detail-left-commodite .checkbox-wrapper-17 .checkbox-tile-advert {
+.wrapper-detail-main .wrapper-detail-left-commodite .checkbox-wrapper-17 .checkbox-tile-advert {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -708,14 +708,14 @@ header .signup:hover {
   cursor: pointer;
   position: relative;
 }
-.wrapper-detail .wrapper-detail-left-commodite .checkbox-wrapper-17 .checkbox-label {
+.wrapper-detail-main .wrapper-detail-left-commodite .checkbox-wrapper-17 .checkbox-label {
   color: #707070;
   transition: 0.375s ease;
   text-align: center;
   width: -moz-max-content;
   width: max-content;
 }
-.wrapper-detail .wrapper-detail-left-commodite .checkbox-wrapper-17 .checkbox-input {
+.wrapper-detail-main .wrapper-detail-left-commodite .checkbox-wrapper-17 .checkbox-input {
   clip: rect(0 0 0 0);
   -webkit-clip-path: inset(100%);
   clip-path: inset(100%);
@@ -725,18 +725,18 @@ header .signup:hover {
   white-space: nowrap;
   width: 1px;
 }
-.wrapper-detail .wrapper-detail-left-commodite .checkbox-wrapper-17 .checkbox-input:checked + .checkbox-tile {
+.wrapper-detail-main .wrapper-detail-left-commodite .checkbox-wrapper-17 .checkbox-input:checked + .checkbox-tile {
   border-color: var(--light-purple);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
   color: var(--light-purple);
 }
-.wrapper-detail .wrapper-detail-left-commodite .checkbox-wrapper-17 .checkbox-input:checked + .checkbox-tile:before {
+.wrapper-detail-main .wrapper-detail-left-commodite .checkbox-wrapper-17 .checkbox-input:checked + .checkbox-tile:before {
   transform: scale(1);
   opacity: 1;
   background-color: var(--light-purple);
   border-color: var(--light-purple);
 }
-.wrapper-detail .wrapper-detail-left-commodite .checkbox-wrapper-17::after {
+.wrapper-detail-main .wrapper-detail-left-commodite .checkbox-wrapper-17::after {
   content: "";
   width: 100%;
   background-image: linear-gradient(180deg, rgba(255, 0, 0, 0), var(--white));
@@ -744,7 +744,7 @@ header .signup:hover {
   position: sticky;
   bottom: 0;
 }
-.wrapper-detail .wrapper-detail-left-commodite .checkbox-wrapper-17::before {
+.wrapper-detail-main .wrapper-detail-left-commodite .checkbox-wrapper-17::before {
   content: "";
   width: 100%;
   background-image: linear-gradient(0deg, rgba(255, 0, 0, 0), #ffffff);
@@ -753,10 +753,9 @@ header .signup:hover {
   z-index: 1;
   top: 0;
 }
-
-.wrapper-detail-right {
-  position: sticky;
-  top: 25px;
+.wrapper-detail-main .wrapper-detail-right {
+  position: sticky !important;
+  top: 25px !important;
   padding: 25px;
   border: 1px solid var(--lightgray);
   border-radius: 10px;
@@ -769,52 +768,52 @@ header .signup:hover {
   flex-direction: column;
   box-shadow: var(--boxshadow) 0 0 20px;
 }
-.wrapper-detail-right .night-price {
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail .night-price {
   border-bottom: 1px solid var(--middlegray);
   padding-bottom: 10px;
   margin: 0 0 20px 0;
   display: flex;
   align-items: baseline;
 }
-.wrapper-detail-right .night-price b {
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail .night-price b {
   font-size: xx-large;
 }
-.wrapper-detail-right .night-price input {
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail .night-price input {
   font-size: xx-large;
   width: 100px;
   font-weight: 600;
 }
-.wrapper-detail-right .night-price .span {
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail .night-price .span {
   color: var(--darkgray);
 }
-.wrapper-detail-right .night-price .span span {
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail .night-price .span span {
   font-size: xx-large;
   font-weight: 600;
 }
-.wrapper-detail-right .dates {
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail .dates {
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
-.wrapper-detail-right .dates .shadow-emp {
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail .dates .shadow-emp {
   background-color: var(--middlegray);
   width: 100%;
   min-width: 30px;
   height: 30px;
   border-radius: 5px;
 }
-.wrapper-detail-right .dates .date {
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail .dates .date {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   gap: 7px;
 }
-.wrapper-detail-right .dates .date p {
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail .dates .date p {
   font-size: larger;
   font-weight: 500;
   color: var(--darkgray);
 }
-.wrapper-detail-right .dates .date .date-span {
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail .dates .date .date-span {
   width: 100%;
   border: 1px solid var(--middlegray);
   padding: 5px 10px;
@@ -825,61 +824,11 @@ header .signup:hover {
   font-size: large;
   position: relative;
 }
-.wrapper-detail-right .dates .date .date-span::after {
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail .dates .date .date-span::after {
   content: url(../img/icons/Calendar.png);
   height: 20px;
 }
-.wrapper-detail-right .datepicker .datepicker-switch:hover,
-.wrapper-detail-right .datepicker tfoot tr th:hover {
-  background: transparent !important;
-}
-.wrapper-detail-right td.today.day:hover {
-  background-color: transparent !important;
-}
-.wrapper-detail-right .datepicker-switch {
-  width: -moz-max-content !important;
-  width: max-content !important;
-}
-.wrapper-detail-right .datepicker th.prev,
-.wrapper-detail-right .datepicker th.next {
-  border: none;
-  color: transparent;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.wrapper-detail-right .datepicker th.prev:hover,
-.wrapper-detail-right .datepicker th.next:hover {
-  background-color: var(--lightgray);
-}
-.wrapper-detail-right .datepicker th.prev:before {
-  content: "";
-  position: absolute;
-  width: 16px;
-  height: 16px;
-  background: url("../img/icons/chevron-left-solid.svg") no-repeat center;
-}
-.wrapper-detail-right .datepicker th.next:before {
-  content: "";
-  position: absolute;
-  width: 16px;
-  height: 16px;
-  background: url("../img/icons/chevron-right-solid.svg") no-repeat center;
-}
-.wrapper-detail-right .range .day {
-  background-color: var(--lightgray);
-  cursor: not-allowed;
-  border-radius: 4px;
-}
-.wrapper-detail-right table {
-  font-family: "Inter", sans-serif;
-}
-.wrapper-detail-right td {
-  font-size: large;
-  font-weight: 500;
-}
-.wrapper-detail-right #calendar {
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail #calendar {
   width: 100%;
   height: -moz-max-content;
   height: max-content;
@@ -887,15 +836,57 @@ header .signup:hover {
   justify-content: center;
   margin: 20px 0;
 }
-.wrapper-detail-right .shadow-emp-cal {
-  background-color: var(--middlegray);
-  margin-top: 20px;
-  width: 100%;
-  min-width: 30px;
-  height: 300px;
-  border-radius: 5px;
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail #calendar .datepicker .datepicker-switch:hover,
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail #calendar .datepicker tfoot tr th:hover {
+  background: transparent !important;
 }
-.wrapper-detail-right .datepicker-inline {
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail #calendar td.today.day:hover {
+  background-color: transparent !important;
+}
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail #calendar .datepicker-switch {
+  width: -moz-max-content !important;
+  width: max-content !important;
+}
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail #calendar .datepicker th.prev,
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail #calendar .datepicker th.next {
+  border: none;
+  color: transparent;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail #calendar .datepicker th.prev:hover,
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail #calendar .datepicker th.next:hover {
+  background-color: var(--lightgray);
+}
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail #calendar .datepicker th.prev:before {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  background: url("../img/icons/chevron-left-solid.svg") no-repeat center;
+}
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail #calendar .datepicker th.next:before {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  background: url("../img/icons/chevron-right-solid.svg") no-repeat center;
+}
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail #calendar .range .day {
+  background-color: var(--lightgray);
+  cursor: not-allowed;
+  border-radius: 4px;
+}
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail #calendar table {
+  font-family: "Inter", sans-serif;
+}
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail #calendar td {
+  font-size: large;
+  font-weight: 500;
+}
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail #calendar .datepicker-inline {
   width: 100% !important;
   height: 100%;
   border: 1px solid var(--lightgray);
@@ -904,23 +895,23 @@ header .signup:hover {
   padding: 15px 20px;
   transition: all 0.2s ease-in-out;
 }
-.wrapper-detail-right .datepicker-inline:hover {
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail #calendar .datepicker-inline:hover {
   transform: scale(1.01);
   box-shadow: var(--boxshadow) 0 0 15px;
 }
-.wrapper-detail-right .datepicker-days {
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail #calendar .datepicker-days {
   width: 100%;
   height: 100%;
 }
-.wrapper-detail-right table.table-condensed {
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail #calendar table.table-condensed {
   width: 100%;
   height: 100%;
 }
-.wrapper-detail-right td.active.day.range {
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail #calendar td.active.day.range {
   border-radius: 4px;
 }
-.wrapper-detail-right .datepicker td,
-.wrapper-detail-right .datepicker th {
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail #calendar .datepicker td,
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail #calendar .datepicker th {
   text-align: center;
   width: 30px !important;
   max-height: 40px !important;
@@ -929,14 +920,14 @@ header .signup:hover {
   border-radius: 4px;
   border: none;
 }
-.wrapper-detail-right .disabled-date {
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail #calendar .disabled-date {
   cursor: not-allowed;
   text-decoration: line-through !important;
 }
-.wrapper-detail-right .datepicker table tr td.today,
-.wrapper-detail-right .datepicker table tr td.today.disabled,
-.wrapper-detail-right .datepicker table tr td.today.disabled:hover,
-.wrapper-detail-right .datepicker table tr td.today:hover {
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail #calendar .datepicker table tr td.today,
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail #calendar .datepicker table tr td.today.disabled,
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail #calendar .datepicker table tr td.today.disabled:hover,
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail #calendar .datepicker table tr td.today:hover {
   background-color: var(--white);
   border: var(--black) 2px dashed;
   background-image: none !important;
@@ -946,41 +937,41 @@ header .signup:hover {
   border-radius: 7px;
   box-shadow: var(--boxshadow) 0 0 10px;
 }
-.wrapper-detail-right .datepicker table tr td.highlighted {
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail #calendar .datepicker table tr td.highlighted {
   background: transparent !important;
   border-radius: 4px;
   color: var(--light-purple);
 }
-.wrapper-detail-right .datepicker table tr td.highlighted:hover {
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail #calendar .datepicker table tr td.highlighted:hover {
   border-radius: 4px;
   background-color: var(--lightgray) !important;
 }
-.wrapper-detail-right .datepicker table tr td.range,
-.wrapper-detail-right .datepicker table tr td.range.disabled,
-.wrapper-detail-right .datepicker table tr td.range.disabled:hover {
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail #calendar .datepicker table tr td.range,
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail #calendar .datepicker table tr td.range.disabled,
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail #calendar .datepicker table tr td.range.disabled:hover {
   background: var(--lightgray) !important;
   border-radius: 4px;
 }
-.wrapper-detail-right .datepicker table tr td.active,
-.wrapper-detail-right .datepicker table tr td.active.disabled,
-.wrapper-detail-right .datepicker table tr td.active.disabled:hover,
-.wrapper-detail-right .datepicker table tr td.active:hover {
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail #calendar .datepicker table tr td.active,
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail #calendar .datepicker table tr td.active.disabled,
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail #calendar .datepicker table tr td.active.disabled:hover,
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail #calendar .datepicker table tr td.active:hover {
   background-color: var(--black) !important;
   background-repeat: repeat-x;
   color: #fff;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
-.wrapper-detail-right .datepicker table tr td.range,
-.wrapper-detail-right .datepicker table tr td.range.disabled,
-.wrapper-detail-right .datepicker table tr td.range.disabled:hover,
-.wrapper-detail-right .datepicker table tr td.range:hover {
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail #calendar .datepicker table tr td.range,
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail #calendar .datepicker table tr td.range.disabled,
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail #calendar .datepicker table tr td.range.disabled:hover,
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail #calendar .datepicker table tr td.range:hover {
   background: var(--lightgray);
   border-radius: 4px !important;
 }
-.wrapper-detail-right .datepicker table tr td.active,
-.wrapper-detail-right .datepicker table tr td.active.disabled,
-.wrapper-detail-right .datepicker table tr td.active.disabled:hover,
-.wrapper-detail-right .datepicker table tr td.active:hover {
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail #calendar .datepicker table tr td.active,
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail #calendar .datepicker table tr td.active.disabled,
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail #calendar .datepicker table tr td.active.disabled:hover,
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail #calendar .datepicker table tr td.active:hover {
   background-color: var(--black);
   background-image: none !important;
   background-image: none !important;
@@ -994,28 +985,36 @@ header .signup:hover {
   color: #fff;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
-.wrapper-detail-right .datepicker table tr td.active.active,
-.wrapper-detail-right .datepicker table tr td.active.disabled.active,
-.wrapper-detail-right .datepicker table tr td.active.disabled:active,
-.wrapper-detail-right .datepicker table tr td.active.disabled:hover.active,
-.wrapper-detail-right .datepicker table tr td.active.disabled:hover:active,
-.wrapper-detail-right .datepicker table tr td.active:active,
-.wrapper-detail-right .datepicker table tr td.active:hover.active,
-.wrapper-detail-right .datepicker table tr td.active:hover:active {
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail #calendar .datepicker table tr td.active.active,
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail #calendar .datepicker table tr td.active.disabled.active,
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail #calendar .datepicker table tr td.active.disabled:active,
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail #calendar .datepicker table tr td.active.disabled:hover.active,
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail #calendar .datepicker table tr td.active.disabled:hover:active,
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail #calendar .datepicker table tr td.active:active,
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail #calendar .datepicker table tr td.active:hover.active,
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail #calendar .datepicker table tr td.active:hover:active {
   border-radius: 4px !important;
 }
-.wrapper-detail-right .datepicker table tr td.disabled,
-.wrapper-detail-right .datepicker table tr td.disabled:hover {
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail #calendar .datepicker table tr td.disabled,
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail #calendar .datepicker table tr td.disabled:hover {
   background: transparent !important;
   color: var(--middlegray) !important;
   opacity: 50%;
   cursor: default;
 }
-.wrapper-detail-right .datepicker table tr td.new,
-.wrapper-detail-right .datepicker table tr td.old {
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail #calendar .datepicker table tr td.new,
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail #calendar .datepicker table tr td.old {
   opacity: 50% !important;
 }
-.wrapper-detail-right .l-btn {
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail .shadow-emp-cal {
+  background-color: var(--middlegray);
+  margin-top: 20px;
+  width: 100%;
+  min-width: 30px;
+  height: 300px;
+  border-radius: 5px;
+}
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail .l-btn {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1031,15 +1030,24 @@ header .signup:hover {
   cursor: pointer;
   transition: all 0.2s ease-in-out;
 }
-.wrapper-detail-right .l-btn:hover {
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail .l-btn:hover {
   transform: scale(1.02);
 }
-.wrapper-detail-right .price-details {
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail .l-btn[disabled] {
+  transition: all 0.2s ease-in-out;
+  background: var(--middlegray);
+  color: var(--white);
+  cursor: default;
+}
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail .l-btn[disabled]:hover {
+  transform: scale(1);
+}
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail .price-details {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
-.wrapper-detail-right .price-details .shadow-emp {
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail .price-details .shadow-emp {
   background-color: var(--middlegray);
   max-width: 30px;
   margin-top: 20px;
@@ -1048,7 +1056,7 @@ header .signup:hover {
   height: 18px;
   border-radius: 5px;
 }
-.wrapper-detail-right .price-details .shadow-emp-p {
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail .price-details .shadow-emp-p {
   background-color: var(--middlegray);
   max-width: 150px;
   margin-top: 20px;
@@ -1057,33 +1065,95 @@ header .signup:hover {
   height: 18px;
   border-radius: 5px;
 }
-.wrapper-detail-right .price-details .price:nth-child(2) {
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail .price-details .price:nth-child(2) {
   border-bottom: var(--middlegray) 1px solid;
   padding: 0 0 10px 0;
 }
-.wrapper-detail-right .price-details .price:nth-child(3) {
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail .price-details .price:nth-child(3) {
   margin-bottom: 15px;
 }
-.wrapper-detail-right .price-details .price:nth-child(3) p {
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail .price-details .price:nth-child(3) p {
   font-size: x-large;
 }
-.wrapper-detail-right .price-details .price:nth-child(3) .total-span {
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail .price-details .price:nth-child(3) .total-span {
   font-size: x-large;
   font-weight: 600;
 }
-.wrapper-detail-right .price-details .price {
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail .price-details .price {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.wrapper-detail-right .price-details .price p {
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail .price-details .price p {
   font-size: large;
   color: var(--dark-purple);
   font-weight: 500;
 }
-.wrapper-detail-right .price-details .price .total-span {
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail .price-details .price .total-span {
   font-size: large;
   font-weight: 600;
+}
+.wrapper-detail-main .wrapper-detail-right #reservation-form-container .direction-btn {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+.wrapper-detail-main .wrapper-detail-right #reservation-form-container .direction-btn span {
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+.wrapper-detail-main .wrapper-detail-right #reservation-form-container .direction-btn span img {
+  height: 36px;
+  width: 36px;
+}
+.wrapper-detail-main .wrapper-detail-right #reservation-form-container .res-infos {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin: 0 0 25px 0;
+}
+.wrapper-detail-main .wrapper-detail-right #reservation-form-container .res-infos .res-info {
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+}
+.wrapper-detail-main .wrapper-detail-right #reservation-form-container .res-infos .res-info input {
+  height: 36px;
+  border-width: 0px 0px 1px 0px;
+  border-style: solid;
+  border-color: rgba(112, 90, 255, 0.337254902);
+  outline: none;
+  font-size: large;
+  padding: 10px;
+  margin-bottom: 35px;
+}
+.wrapper-detail-main .wrapper-detail-right #reservation-form-container .res-infos .res-info input:focus {
+  border-color: #705aff;
+}
+.wrapper-detail-main .wrapper-detail-right #reservation-form-container .res-infos .res-info label {
+  display: block;
+  font-size: larger;
+  color: #1A1884;
+}
+.wrapper-detail-main .wrapper-detail-right #reservation-form-container #step-4 .l-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--gradient-p-b);
+  border-radius: 10px;
+  width: 100%;
+  height: 46px;
+  border: none;
+  position: relative;
+  color: white;
+  font-size: large;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+.wrapper-detail-main .wrapper-detail-right #reservation-form-container #step-4 .l-btn:hover {
+  transform: scale(1.02);
 }
 
 .wrapper-detail .input {
@@ -1242,6 +1312,95 @@ header .signup:hover {
   }
 }
 
+#grid {
+  height: 100%;
+  width: 50%;
+  display: grid;
+  justify-items: center;
+  grid-gap: 20px;
+  grid-auto-rows: max-content;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+#grid .clickable-card-parent {
+  position: relative;
+  max-width: 350px;
+}
+#grid .clickable-card {
+  text-decoration: none;
+  color: var(--black);
+}
+#grid .advert-card {
+  overflow: hidden;
+  background: var(--white);
+  border-radius: 10px;
+  position: relative;
+  width: 100%;
+  max-width: 350px;
+  height: 350px;
+}
+#grid .advert-card:hover {
+  box-shadow: var(--boxshadow) 0 10px 20px;
+}
+#grid .advert-card figure {
+  height: 70%;
+  overflow: hidden;
+}
+#grid .advert-card img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 5px;
+}
+#grid .slide-in {
+  opacity: 0;
+  transform: translateY(25px);
+  filter: blur(4px);
+  transition: all 0.4s ease-in-out;
+}
+#grid .slide-in-active {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+#grid .card-content {
+  padding: 15px 20px 20px;
+  width: 100%;
+}
+#grid .advert-card h3 {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+#grid .card-text {
+  color: var(--darkgray);
+  text-overflow: ellipsis;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+}
+#grid .price-card {
+  font-weight: 700;
+  font-size: larger;
+  color: var(--black);
+}
+#grid .modif-icons {
+  display: flex;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  padding: 5px;
+  border-radius: 5px;
+  background: var(--white);
+  z-index: 3;
+  line-height: 0;
+}
+#grid .modif {
+  color: var(--black);
+  display: flex;
+  align-items: center;
+}
+
 .wrapper-my-advert {
   width: 100%;
   height: 100%;
@@ -1253,130 +1412,6 @@ header .signup:hover {
   font-style: italic;
   letter-spacing: -4px;
   padding-bottom: 20px;
-}
-
-#grid {
-  height: 100%;
-  width: 50%;
-  display: grid;
-  justify-items: center;
-  grid-gap: 20px;
-  grid-auto-rows: max-content;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-}
-
-.clickable-card-parent {
-  position: relative;
-  max-width: 350px;
-}
-
-.clickable-card {
-  text-decoration: none;
-  color: var(--black);
-}
-
-.advert-card {
-  overflow: hidden;
-  background: var(--white);
-  border-radius: 10px;
-  position: relative;
-  width: 100%;
-  max-width: 350px;
-  height: 350px;
-}
-.advert-card:hover {
-  box-shadow: var(--boxshadow) 0 10px 20px;
-}
-.advert-card figure {
-  height: 70%;
-  overflow: hidden;
-}
-.advert-card img {
-  width: 100%;
-  height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
-  border-radius: 5px;
-}
-
-.slide-in {
-  opacity: 0;
-  transform: translateY(25px);
-  filter: blur(4px);
-  transition: all 0.4s ease-in-out;
-}
-
-.slide-in-active {
-  opacity: 1;
-  transform: translateY(0);
-  filter: blur(0);
-}
-
-.text-editor {
-  border: 1px solid #ccc;
-  padding: 10px;
-  font-family: Arial, sans-serif;
-}
-
-.toolbar {
-  margin-bottom: 5px;
-}
-
-button {
-  font-weight: bold;
-  background: none;
-  border: none;
-  cursor: pointer;
-  margin-right: 10px;
-}
-
-#editor {
-  border: 1px solid #ccc;
-  min-height: 100px;
-  padding: 5px;
-}
-
-.card-content {
-  padding: 15px 20px 20px;
-  width: 100%;
-}
-
-.advert-card h3 {
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-}
-
-.card-text {
-  color: var(--darkgray);
-  text-overflow: ellipsis;
-  width: 100%;
-  white-space: nowrap;
-  overflow: hidden;
-}
-
-.price-card {
-  font-weight: 700;
-  font-size: larger;
-  color: var(--black);
-}
-
-.modif-icons {
-  display: flex;
-  position: absolute;
-  right: 10px;
-  top: 10px;
-  padding: 5px;
-  border-radius: 5px;
-  background: var(--white);
-  z-index: 3;
-  line-height: 0;
-}
-
-.modif {
-  color: var(--black);
-  display: flex;
-  align-items: center;
 }
 
 @media only screen and (max-width: 770px) {

@@ -10,7 +10,7 @@
 
 {% block body %}
 <div class="wrapper">
-  <a href="{{ path(" app_home") }}" class="return-home">
+  <a href="{{ path("app_home") }}" class="return-home">
     <img src="{{ asset('img/icons/Left Arrow.svg') }}" alt="Icon return home">
   </a>
   <div class="wrapper-detail">
@@ -129,7 +129,7 @@
       </div>
       <div class="wrapper-detail-right">
         <div id="calendar-and-detail">
-          <div id="etape1">
+          <div id="step-1">
 
             <p class="night-price">
               <b>{{ advert.price }}€</b>/Nuits
@@ -161,39 +161,66 @@
               </div>
             </div>
             <div class="log">
-              <button class="l-btn" id="start-button">Réservation</button>
-            </div>
+              <button class="l-btn" id="start-button" disabled>Réservation</button>            </div>
           </div>
         </div>
         <div id="reservation-form-container">
           {{ form_start(formAddReservation) }}
-          <div id="etape2" style="display: none;">
-            {{ form_row(formAddReservation.firstname) }}
-            {{ form_row(formAddReservation.surname) }}
-            {{ form_row(formAddReservation.dateOfBirth) }}
+          <div id="step-2" style="display: none;">
+            <div class="res-infos">
+
+              <div class="res-info">
+                <label for="firstname">Nom</label>
+                {{ form_widget(formAddReservation.firstname) }}
+              </div>
+              <div class="res-info">
+                <label for="surname">Prénom</label>
+                {{ form_widget(formAddReservation.surname) }}
+              </div>
+              <div class="res-info">
+                <label for="dateOfBirth">Date de naissance</label>
+                {{ form_widget(formAddReservation.dateOfBirth) }}
+              </div>
+            </div>
             <div class="direction-btn">
-              <a href="#" id="prev-button"><img src="{{ asset('img/icons/chevron-left-solid.svg')}}"
-                  alt="icone retour"></a>
-              <a href="#" id="next-button"><img src="{{ asset('img/icons/chevron-right-solid.svg')}}"
-                  alt="icone suivant"></a>
+              <span id="prev-button-step-2"><img src="{{ asset('img/icons/chevron-left-solid.svg')}}"
+                  alt="icone retour"></span>
+              <span id="next-button-step-2"><img src="{{ asset('img/icons/chevron-right-solid.svg')}}"
+                  alt="icone suivant"></span>
             </div>
           </div>
-          <div id="etape3" style="display: none;">
-            {{ form_row(formAddReservation.address) }}
-            {{ form_row(formAddReservation.cp) }}
-            {{ form_row(formAddReservation.city) }}
-            {{ form_row(formAddReservation.country) }}
+          <div id="step-3" style="display: none;">
+            <div class="res-infos">
+
+              <div class="res-info">
+                <label for="address">Adresse</label>
+                {{ form_widget(formAddReservation.address) }}
+              </div>
+              <div class="res-info">
+                <label for="cp">Code Postal</label>
+                {{ form_widget(formAddReservation.cp) }}
+              </div>
+              <div class="res-info">
+                <label for="city">Ville</label>
+                {{ form_widget(formAddReservation.city) }}
+              </div>
+              <div class="res-info">
+                <label for="country">Pays</label>
+                {{ form_widget(formAddReservation.country) }}
+              </div>
+            </div>
             <div class="direction-btn">
-              <a href="#" id="prev-button"><img src="{{ asset('img/icons/chevron-left-solid.svg')}}"
-                  alt="icone retour"></a>
-              <a href="#" id="next-button"><img src="{{ asset('img/icons/chevron-right-solid.svg')}}"
-                  alt="icone suivant"></a>
+              <span id="prev-button-step-3"><img src="{{ asset('img/icons/chevron-left-solid.svg')}}"
+                  alt="icone retour"></span>
+              <span id="next-button-step-3"><img src="{{ asset('img/icons/chevron-right-solid.svg')}}"
+                  alt="icone suivant"></span>
             </div>
           </div>
-          <div id="etape4" style="display: none;">
-            <a href="#" id="prev-button"><img src="{{ asset('img/icons/chevron-left-solid.svg')}}"
-                alt="icone retour"></a>
-            <button type="submit" class="btn btn-primary">Réserver</button>
+          <div id="step-4" style="display: none;">
+            <div class="direction-btn last-dir-btn">
+              <span id="prev-button-step-4"><img src="{{ asset('img/icons/chevron-left-solid.svg')}}"
+                  alt="icone retour"></span>
+            </div>
             {{ form_end(formAddReservation) }}
           </div>
         </div>
@@ -252,6 +279,14 @@
       }
     });
 
+    // Fonction pour mettre à jour l'état du bouton de réservation
+  function updateReservationButton() {
+    if (arrivalDateInput && departureDateInput) {
+      $('#start-button').prop('disabled', false); // Activer le bouton de réservation
+    } else {
+      $('#start-button').prop('disabled', true); // Désactiver le bouton de réservation
+    }
+  }
 
     $('#calendar').on('changeDate', function (e) {
       let selectedDates = e.dates;
@@ -298,6 +333,8 @@
         // Calcul du total (nuits + frais)
         let totalPrice = (parseFloat(totalNightPrice) + parseFloat(stellarFees)).toFixed(2);
         $('#totalPrice').text(totalPrice + '€');
+
+        updateReservationButton();
       } else {
         arrivalDateInput = null;
         departureDateInput = null;
@@ -309,6 +346,8 @@
         $('#stellarFees').text('0€');
         $('#totalPrice').text('0€');
       }
+
+      updateReservationButton();
     });
 
     function formatDate(date) {
@@ -351,18 +390,18 @@
 
   // Function to update the display based on the current step
   function updateStepDisplay() {
-    // Hide all steps
+    // Masquer toutes les étapes
     for (let i = 1; i <= totalSteps; i++) {
-      document.getElementById('etape' + i).style.display = 'none';
+      $(`#step-${i}`).hide(); // Masquer l'étape
     }
 
-    // Show the current step
-    document.getElementById('etape' + currentStep).style.display = 'block';
-  }
+    // Afficher la nouvelle étape avec une animation de fondu enchaîné
+    $(`#step-${currentStep}`).fadeOut(800); // Vous pouvez ajuster la durée de l'animation ici (300 ms dans cet exemple)
+    $(`#step-${currentStep}`).fadeIn(800); // Vous pouvez ajuster la durée de l'animation ici (300 ms dans cet exemple)
+    $(`#step-${currentStep}`).show(); // Vous pouvez ajuster la durée de l'animation ici (300 ms dans cet exemple)
 
-  // Event listeners for the Next and Previous buttons
-  document.getElementById('next-button').addEventListener('click', showNextStep);
-  document.getElementById('prev-button').addEventListener('click', showPreviousStep);
+    // Pour afficher un élément
+  }
 
   // Event listener for the "start-button" element (Step 1)
   document.getElementById('start-button').addEventListener('click', function (event) {
@@ -370,7 +409,17 @@
     showNextStep(); // Transition to the next step
   });
 
+  // Event listeners for the Next and Previous buttons
+  document.getElementById('next-button-step-2').addEventListener('click', showNextStep);
+  document.getElementById('prev-button-step-2').addEventListener('click', showPreviousStep);
+
+  document.getElementById('next-button-step-3').addEventListener('click', showNextStep);
+  document.getElementById('prev-button-step-3').addEventListener('click', showPreviousStep);
+
+  document.getElementById('prev-button-step-4').addEventListener('click', showPreviousStep);
+
   // Initialize the display to the first step
   updateStepDisplay();
+
 </script>
 {% endblock javascripts %}

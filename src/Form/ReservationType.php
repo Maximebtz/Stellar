@@ -57,8 +57,10 @@ class ReservationType extends AbstractType
             ->add('country', TextType::class, [
                 'label' => 'Pays',
             ])
-            ->add('submit', SubmitType::class, [
-                'label' => false,
+            ->add('Reserver', SubmitType::class, [
+                'attr' => [
+                    'class' => 'l-btn'
+                ]
             ]);
 
         $builder->add('advert', EntityType::class, [

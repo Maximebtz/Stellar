@@ -188,6 +188,34 @@ header {
                 }
             }
         }
+
+        @-webkit-keyframes fade-in-top {
+            0% {
+                -webkit-transform: translateY(-20px);
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+
+            100% {
+                -webkit-transform: translateY(0);
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fade-in-top {
+            0% {
+                -webkit-transform: translateY(-20px);
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+
+            100% {
+                -webkit-transform: translateY(0);
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
     }
 
     .login {
@@ -236,37 +264,8 @@ header {
     }
 }
 
-@-webkit-keyframes fade-in-top {
-    0% {
-        -webkit-transform: translateY(-20px);
-        transform: translateY(-20px);
-        opacity: 0;
-    }
-
-    100% {
-        -webkit-transform: translateY(0);
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
-@keyframes fade-in-top {
-    0% {
-        -webkit-transform: translateY(-20px);
-        transform: translateY(-20px);
-        opacity: 0;
-    }
-
-    100% {
-        -webkit-transform: translateY(0);
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
 
 //************** Wrapper **************//
-
 .wrapper {
     display: flex;
     padding: 20px;
@@ -298,8 +297,7 @@ header {
 }
 
 
-//******** Home ********//
-
+//******** Wrapper Home ********//
 .wrapper-home {
     width: 100%;
     display: flex;
@@ -376,8 +374,7 @@ header {
 }
 
 
-//******** Form ********//
-
+//******** Wrapper Form ********//
 .wrapper-form {
     display: flex;
     flex-direction: column;
@@ -486,8 +483,7 @@ header {
 }
 
 
-//******* Détail ********//
-
+//******* Wrapper Détail ********//
 .wrapper-detail {
     min-height: 100vh;
     max-width: 1150px;
@@ -626,241 +622,106 @@ header {
         font-size: larger;
         cursor: pointer;
     }
-}
 
-
-//****** Wrapper-detail left&right ******//
-.wrapper-detail {
     &-main {
         display: flex;
         padding-top: 55px;
         max-width: 100%;
         position: relative;
-    }
 
-    //****** Wrapper-detail-left ******//
-    .wrapper-detail-left {
-        max-width: 700px;
-        min-width: 460px;
-        width: 100%;
-        margin: 0 60px 0 0;
+        //****** Wrapper-detail-left ******//
+        .wrapper-detail-left {
+            max-width: 700px;
+            min-width: 460px;
+            width: 100%;
+            margin: 0 60px 0 0;
 
-        h2 {
-            font-size: 2em;
-            padding: 20px 0 10px;
-            z-index: 1;
-        }
-
-        &-category {
-            gap: 7px;
-            display: flex;
-            flex-direction: column;
-            position: relative;
-
-            &::after {
-                content: "";
-                height: 100%;
-                width: 20px;
-                background-image: linear-gradient(to right, rgba(255, 0, 0, 0), var(--white));
-                position: absolute;
-                right: 0;
-            }
-
-            &::before {
-                content: "";
-                height: 100%;
-                width: 20px;
-                background-image: linear-gradient(to left, rgba(255, 0, 0, 0), var(--white));
-                position: absolute;
-                left: 0;
+            h2 {
+                font-size: 2em;
+                padding: 20px 0 10px;
                 z-index: 1;
             }
 
-            .checkbox-wrapper-16 {
-                display: flex;
+            &-category {
                 gap: 7px;
-                max-width: 640px;
-                min-width: 460px;
-                overflow: scroll;
-                padding: 0 20px;
-                user-select: none;
+                display: flex;
+                flex-direction: column;
+                position: relative;
 
-                .checkbox-input {
-                    clip: rect(0 0 0 0);
-                    -webkit-clip-path: inset(100%);
-                    clip-path: inset(100%);
-                    height: 1px;
-                    overflow: hidden;
+                &::after {
+                    content: "";
+                    height: 100%;
+                    width: 20px;
+                    background-image: linear-gradient(to right, rgba(255, 0, 0, 0), var(--white));
                     position: absolute;
-                    white-space: nowrap;
-                    width: 1px;
+                    right: 0;
                 }
 
-                .checkbox-input:checked+.checkbox-tile {
-                    border-color: var(--light-purple);
-                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
+                &::before {
+                    content: "";
+                    height: 100%;
+                    width: 20px;
+                    background-image: linear-gradient(to left, rgba(255, 0, 0, 0), var(--white));
+                    position: absolute;
+                    left: 0;
+                    z-index: 1;
+                }
+
+                .checkbox-wrapper-16 {
+                    display: flex;
+                    gap: 7px;
+                    max-width: 640px;
+                    min-width: 460px;
+                    overflow: scroll;
+                    padding: 0 20px;
+                    user-select: none;
+
+                    .checkbox-input {
+                        clip: rect(0 0 0 0);
+                        -webkit-clip-path: inset(100%);
+                        clip-path: inset(100%);
+                        height: 1px;
+                        overflow: hidden;
+                        position: absolute;
+                        white-space: nowrap;
+                        width: 1px;
+                    }
+
+                    .checkbox-input:checked+.checkbox-tile {
+                        border-color: var(--light-purple);
+                        box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
+                        color: var(--light-purple);
+                    }
+
+                    .checkbox-input:checked+.checkbox-tile:before {
+                        transform: scale(1);
+                        opacity: 1;
+                        background-color: var(--light-purple);
+                        border-color: var(--light-purple);
+                    }
+                }
+
+                .checkbox-wrapper-16 .checkbox-input:checked+.checkbox-tile .checkbox-icon,
+                .checkbox-wrapper-16 .checkbox-input:checked+.checkbox-tile .checkbox-label {
                     color: var(--light-purple);
                 }
 
-                .checkbox-input:checked+.checkbox-tile:before {
-                    transform: scale(1);
-                    opacity: 1;
-                    background-color: var(--light-purple);
+                .checkbox-wrapper-16 .checkbox-input:focus+.checkbox-tile {
                     border-color: var(--light-purple);
                 }
-            }
 
-            .checkbox-wrapper-16 .checkbox-input:checked+.checkbox-tile .checkbox-icon,
-            .checkbox-wrapper-16 .checkbox-input:checked+.checkbox-tile .checkbox-label {
-                color: var(--light-purple);
-            }
-
-            .checkbox-wrapper-16 .checkbox-input:focus+.checkbox-tile {
-                border-color: var(--light-purple);
-            }
-
-            .checkbox-wrapper-16 .checkbox-input:focus+.checkbox-tile:before {
-                transform: scale(1);
-                opacity: 1;
-            }
-
-            .checkbox-wrapper-16 .checkbox-tile {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                width: 7rem;
-                min-height: 7rem;
-                border-radius: 0.5rem;
-                border: 2px solid var(--lightgray);
-                background-color: var(--white);
-                box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
-                transition: 0.15s ease;
-                cursor: pointer;
-                position: relative;
-            }
-
-            .checkbox-wrapper-16 .checkbox-tile:hover {
-                border-color: var(--light-purple);
-            }
-
-            .checkbox-wrapper-16 .checkbox-tile:hover:before {
-                transform: scale(1);
-                opacity: 1;
-            }
-
-            .checkbox-wrapper-16 .checkbox-icon {
-                transition: 0.375s ease;
-                color: #494949;
-            }
-
-            .checkbox-wrapper-16 .checkbox-icon svg {
-                width: 3rem;
-                height: 3rem;
-            }
-
-            .checkbox-wrapper-16 .checkbox-label {
-                color: #707070;
-                transition: 0.375s ease;
-                text-align: center;
-            }
-        }
-
-        &-owner {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 20px 0;
-            margin: 20px 0 0;
-            border-bottom: 1px solid var(--middlegray);
-            border-top: 1px solid var(--middlegray);
-
-            .shadow-emp {
-                background-color: var(--middlegray);
-                max-width: 100px;
-                width: 100%;
-                min-width: 100px;
-                height: 18px;
-                border-radius: 5px;
-            }
-
-            &-info {
-                display: flex;
-                align-items: center;
-                gap: 7px;
-
-                p {
-                    color: var(--darkgray);
-                    font-size: 1.02rem;
+                .checkbox-wrapper-16 .checkbox-input:focus+.checkbox-tile:before {
+                    transform: scale(1);
+                    opacity: 1;
                 }
 
-                .profil-picture {
-                    width: 32px;
-                    height: 32px;
-                    border-radius: 50%;
-                }
-
-                span {
-                    text-decoration: underline;
-                    font-weight: 600;
-                }
-            }
-
-            &-contact {
-                width: 100px;
-                height: 36px;
-                background-color: var(--black);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                text-decoration: none;
-                color: var(--white);
-                border-radius: 7px;
-                transition: all .2s ease-in-out;
-                box-shadow: var(--boxshadow) 0 0 10px;
-
-                &:hover {
-                    transform: scale(1.02);
-                }
-            }
-        }
-
-        &-description {
-            width: 100%;
-            border-bottom: 1px solid var(--middlegray);
-
-            p {
-                font-family: 'Inter', sans-serif;
-                font-weight: 500;
-                line-height: 27px;
-                color: var(--darkgray);
-                padding: 20px 10px;
-            }
-        }
-
-
-        &-commodite {
-
-            .checkbox-wrapper-17 {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 10px 20px;
-                max-width: 640px;
-                min-width: 460px;
-                max-height: 300px;
-                overflow-y: scroll;
-                position: relative;
-                transition: scroll-behavior 0.5s;
-
-                .checkbox-tile-fit {
+                .checkbox-wrapper-16 .checkbox-tile {
                     display: flex;
                     flex-direction: column;
                     align-items: center;
                     justify-content: center;
-                    max-width: max-content !important;
-                    min-width: 7rem !important;
-                    padding: 10px;
+                    width: 7rem;
+                    min-height: 7rem;
                     border-radius: 0.5rem;
                     border: 2px solid var(--lightgray);
                     background-color: var(--white);
@@ -870,475 +731,712 @@ header {
                     position: relative;
                 }
 
-                .checkbox-tile-advert {
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    justify-content: center;
-                    width: max-content;
-                    min-width: 80px;
-                    min-height: 80px;
-                    padding: 10px;
-                    border-radius: 0.5rem;
-                    border: 2px solid var(--darkgray);
-                    color: var(--darkgray);
-                    background-color: var(--white);
-                    box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
-                    transition: 0.15s ease;
-                    cursor: pointer;
-                    position: relative;
+                .checkbox-wrapper-16 .checkbox-tile:hover {
+                    border-color: var(--light-purple);
                 }
 
-                .checkbox-label {
+                .checkbox-wrapper-16 .checkbox-tile:hover:before {
+                    transform: scale(1);
+                    opacity: 1;
+                }
+
+                .checkbox-wrapper-16 .checkbox-icon {
+                    transition: 0.375s ease;
+                    color: #494949;
+                }
+
+                .checkbox-wrapper-16 .checkbox-icon svg {
+                    width: 3rem;
+                    height: 3rem;
+                }
+
+                .checkbox-wrapper-16 .checkbox-label {
                     color: #707070;
                     transition: 0.375s ease;
                     text-align: center;
-                    width: max-content;
                 }
+            }
 
-                .checkbox-input {
-                    clip: rect(0 0 0 0);
-                    -webkit-clip-path: inset(100%);
-                    clip-path: inset(100%);
-                    height: 1px;
-                    overflow: hidden;
-                    position: absolute;
-                    white-space: nowrap;
-                    width: 1px;
-                }
+            &-owner {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 20px 0;
+                margin: 20px 0 0;
+                border-bottom: 1px solid var(--middlegray);
+                border-top: 1px solid var(--middlegray);
 
-                .checkbox-input:checked+.checkbox-tile {
-                    border-color: var(--light-purple);
-                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
-                    color: var(--light-purple);
-                }
-
-                .checkbox-input:checked+.checkbox-tile:before {
-                    transform: scale(1);
-                    opacity: 1;
-                    background-color: var(--light-purple);
-                    border-color: var(--light-purple);
-                }
-
-                &::after {
-                    content: "";
+                .shadow-emp {
+                    background-color: var(--middlegray);
+                    max-width: 100px;
                     width: 100%;
-                    background-image: linear-gradient(180deg, rgba(255, 0, 0, 0), var(--white));
-                    height: 32px;
-                    position: sticky;
-                    bottom: 0;
+                    min-width: 100px;
+                    height: 18px;
+                    border-radius: 5px;
                 }
 
-                &::before {
-                    content: "";
-                    width: 100%;
-                    background-image: linear-gradient(0deg, rgba(255, 0, 0, 0), #ffffff);
-                    height: 20px;
-                    position: sticky;
-                    z-index: 1;
-                    top: 0;
+                &-info {
+                    display: flex;
+                    align-items: center;
+                    gap: 7px;
+
+                    p {
+                        color: var(--darkgray);
+                        font-size: 1.02rem;
+                    }
+
+                    .profil-picture {
+                        width: 32px;
+                        height: 32px;
+                        border-radius: 50%;
+                    }
+
+                    span {
+                        text-decoration: underline;
+                        font-weight: 600;
+                    }
+                }
+
+                &-contact {
+                    width: 100px;
+                    height: 36px;
+                    background-color: var(--black);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    text-decoration: none;
+                    color: var(--white);
+                    border-radius: 7px;
+                    transition: all .2s ease-in-out;
+                    box-shadow: var(--boxshadow) 0 0 10px;
+
+                    &:hover {
+                        transform: scale(1.02);
+                    }
+                }
+            }
+
+            &-description {
+                width: 100%;
+                border-bottom: 1px solid var(--middlegray);
+
+                p {
+                    font-family: 'Inter', sans-serif;
+                    font-weight: 500;
+                    line-height: 27px;
+                    color: var(--darkgray);
+                    padding: 20px 10px;
+                }
+            }
+
+
+            &-commodite {
+
+                .checkbox-wrapper-17 {
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: center;
+                    gap: 10px 20px;
+                    max-width: 640px;
+                    min-width: 460px;
+                    max-height: 300px;
+                    overflow-y: scroll;
+                    position: relative;
+                    transition: scroll-behavior 0.5s;
+
+                    .checkbox-tile-fit {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        justify-content: center;
+                        max-width: max-content !important;
+                        min-width: 7rem !important;
+                        padding: 10px;
+                        border-radius: 0.5rem;
+                        border: 2px solid var(--lightgray);
+                        background-color: var(--white);
+                        box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
+                        transition: 0.15s ease;
+                        cursor: pointer;
+                        position: relative;
+                    }
+
+                    .checkbox-tile-advert {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        justify-content: center;
+                        width: max-content;
+                        min-width: 80px;
+                        min-height: 80px;
+                        padding: 10px;
+                        border-radius: 0.5rem;
+                        border: 2px solid var(--darkgray);
+                        color: var(--darkgray);
+                        background-color: var(--white);
+                        box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
+                        transition: 0.15s ease;
+                        cursor: pointer;
+                        position: relative;
+                    }
+
+                    .checkbox-label {
+                        color: #707070;
+                        transition: 0.375s ease;
+                        text-align: center;
+                        width: max-content;
+                    }
+
+                    .checkbox-input {
+                        clip: rect(0 0 0 0);
+                        -webkit-clip-path: inset(100%);
+                        clip-path: inset(100%);
+                        height: 1px;
+                        overflow: hidden;
+                        position: absolute;
+                        white-space: nowrap;
+                        width: 1px;
+                    }
+
+                    .checkbox-input:checked+.checkbox-tile {
+                        border-color: var(--light-purple);
+                        box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
+                        color: var(--light-purple);
+                    }
+
+                    .checkbox-input:checked+.checkbox-tile:before {
+                        transform: scale(1);
+                        opacity: 1;
+                        background-color: var(--light-purple);
+                        border-color: var(--light-purple);
+                    }
+
+                    &::after {
+                        content: "";
+                        width: 100%;
+                        background-image: linear-gradient(180deg, rgba(255, 0, 0, 0), var(--white));
+                        height: 32px;
+                        position: sticky;
+                        bottom: 0;
+                    }
+
+                    &::before {
+                        content: "";
+                        width: 100%;
+                        background-image: linear-gradient(0deg, rgba(255, 0, 0, 0), #ffffff);
+                        height: 20px;
+                        position: sticky;
+                        z-index: 1;
+                        top: 0;
+                    }
                 }
             }
         }
-    }
-}
 
-//****** Wrapper-detail-right ******//
-.wrapper-detail-right {
-    position: sticky;
-    top: 25px;
-    padding: 25px;
-    border: 1px solid var(--lightgray);
-    border-radius: 10px;
-    max-width: 450px;
-    width: 100%;
-    min-width: 350px;
-    height: max-content;
-    display: flex;
-    flex-direction: column;
-    box-shadow: var(--boxshadow) 0 0 20px;
-
-
-    .night-price {
-        border-bottom: 1px solid var(--middlegray);
-        padding-bottom: 10px;
-        margin: 0 0 20px 0;
-        display: flex;
-        align-items: baseline;
-
-        b {
-            font-size: xx-large;
-        }
-
-        input {
-            font-size: xx-large;
-            width: 100px;
-            font-weight: 600;
-        }
-
-        .span {
-            span {
-                font-size: xx-large;
-                font-weight: 600;
-            }
-
-            color: var(--darkgray);
-        }
-    }
-
-    .dates {
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-
-        .shadow-emp {
-            background-color: var(--middlegray);
+        //****** Wrapper-detail-right ******//
+        .wrapper-detail-right {
+            position: sticky !important;
+            top: 25px !important;
+            padding: 25px;
+            border: 1px solid var(--lightgray);
+            border-radius: 10px;
+            max-width: 450px;
             width: 100%;
-            min-width: 30px;
-            height: 30px;
-            border-radius: 5px;
-        }
-
-        .date {
+            min-width: 350px;
+            height: max-content;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
-            gap: 7px;
+            box-shadow: var(--boxshadow) 0 0 20px;
 
-            p {
-                font-size: larger;
-                font-weight: 500;
-                color: var(--darkgray);
+            //** First Step Reservation **//
+            #calendar-and-detail {
+
+                //** Night Price **//
+                .night-price {
+                    border-bottom: 1px solid var(--middlegray);
+                    padding-bottom: 10px;
+                    margin: 0 0 20px 0;
+                    display: flex;
+                    align-items: baseline;
+
+                    b {
+                        font-size: xx-large;
+                    }
+
+                    input {
+                        font-size: xx-large;
+                        width: 100px;
+                        font-weight: 600;
+                    }
+
+                    .span {
+                        span {
+                            font-size: xx-large;
+                            font-weight: 600;
+                        }
+
+                        color: var(--darkgray);
+                    }
+                }
+
+                //** Dates **//
+                .dates {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 15px;
+
+                    .shadow-emp {
+                        background-color: var(--middlegray);
+                        width: 100%;
+                        min-width: 30px;
+                        height: 30px;
+                        border-radius: 5px;
+                    }
+
+                    .date {
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: space-between;
+                        gap: 7px;
+
+                        p {
+                            font-size: larger;
+                            font-weight: 500;
+                            color: var(--darkgray);
+                        }
+
+                        .date-span {
+                            width: 100%;
+                            border: 1px solid var(--middlegray);
+                            padding: 5px 10px;
+                            border-radius: 7px;
+                            color: var(--middlegray);
+                            height: 37px;
+                            transition: all .2s ease-in-out;
+                            font-size: large;
+                            position: relative;
+
+                            &::after {
+                                content: url(../img/icons/Calendar.png);
+                                height: 20px;
+                            }
+                        }
+                    }
+                }
+
+                //** Calendar **//
+                #calendar {
+                    width: 100%;
+                    height: max-content;
+                    display: flex;
+                    justify-content: center;
+                    margin: 20px 0;
+
+                    .datepicker .datepicker-switch:hover,
+                    .datepicker tfoot tr th:hover {
+                        background: transparent !important;
+                    }
+
+                    td.today.day:hover {
+                        background-color: transparent !important;
+                    }
+
+                    .datepicker-switch {
+                        width: max-content !important;
+                    }
+
+                    .datepicker th.prev,
+                    .datepicker th.next {
+                        border: none;
+                        color: transparent;
+                        position: relative;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    }
+
+                    .datepicker th.prev:hover,
+                    .datepicker th.next:hover {
+                        background-color: var(--lightgray);
+                    }
+
+                    .datepicker th.prev:before {
+                        content: "";
+                        position: absolute;
+                        width: 16px;
+                        height: 16px;
+                        background: url('../img/icons/chevron-left-solid.svg') no-repeat center;
+                    }
+
+                    .datepicker th.next:before {
+                        content: "";
+                        position: absolute;
+                        width: 16px;
+                        height: 16px;
+                        background: url('../img/icons/chevron-right-solid.svg') no-repeat center;
+                    }
+
+                    .range .day {
+                        background-color: var(--lightgray);
+                        cursor: not-allowed;
+                        border-radius: 4px;
+
+                    }
+
+                    table {
+                        font-family: 'Inter', sans-serif;
+                    }
+
+                    td {
+                        font-size: large;
+                        font-weight: 500;
+                    }
+
+                    .datepicker-inline {
+                        width: 100% !important;
+                        height: 100%;
+                        border: 1px solid var(--lightgray);
+                        box-shadow: var(--boxshadow) 0 0 10px;
+                        border-radius: 7px;
+                        padding: 15px 20px;
+                        transition: all .2s ease-in-out;
+
+                        &:hover {
+                            transform: scale(1.01);
+                            box-shadow: var(--boxshadow) 0 0 15px;
+                        }
+                    }
+
+                    .datepicker-days {
+                        width: 100%;
+                        height: 100%;
+                    }
+
+                    table.table-condensed {
+                        width: 100%;
+                        height: 100%;
+                    }
+
+                    td.active.day.range {
+                        border-radius: 4px;
+                    }
+
+                    .datepicker td,
+                    .datepicker th {
+                        text-align: center;
+                        width: 30px !important;
+                        max-height: 40px !important;
+                        min-height: auto;
+                        height: 40px;
+                        -webkit-border-radius: 4px;
+                        -moz-border-radius: 4px;
+                        border-radius: 4px;
+                        border: none;
+                    }
+
+                    .disabled-date {
+                        cursor: not-allowed;
+                        text-decoration: line-through !important;
+                    }
+
+                    .datepicker table tr td.today,
+                    .datepicker table tr td.today.disabled,
+                    .datepicker table tr td.today.disabled:hover,
+                    .datepicker table tr td.today:hover {
+                        background-color: var(--white);
+                        border: var(--black) 2px dashed;
+                        background-image: none !important;
+                        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fdd49a', endColorstr='#fdf59a', GradientType=0);
+                        filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+                        color: #000;
+                        border-radius: 7px;
+                        box-shadow: var(--boxshadow) 0 0 10px;
+                    }
+
+                    .datepicker table tr td.highlighted {
+                        background: transparent !important;
+                        border-radius: 4px;
+                        color: var(--light-purple);
+
+                        &:hover {
+                            border-radius: 4px;
+                            background-color: var(--lightgray) !important;
+                        }
+                    }
+
+                    .datepicker table tr td.range,
+                    .datepicker table tr td.range.disabled,
+                    .datepicker table tr td.range.disabled:hover {
+                        background: var(--lightgray) !important;
+                        -webkit-border-radius: 0;
+                        -moz-border-radius: 0;
+                        border-radius: 4px;
+                    }
+
+                    .datepicker table tr td.active,
+                    .datepicker table tr td.active.disabled,
+                    .datepicker table tr td.active.disabled:hover,
+                    .datepicker table tr td.active:hover {
+                        background-color: var(--black) !important;
+                        background-repeat: repeat-x;
+                        color: #fff;
+                        text-shadow: 0 -1px 0 rgba(0, 0, 0, .25);
+                    }
+
+                    .datepicker table tr td.range,
+                    .datepicker table tr td.range.disabled,
+                    .datepicker table tr td.range.disabled:hover,
+                    .datepicker table tr td.range:hover {
+                        background: var(--lightgray);
+                        -webkit-border-radius: 0;
+                        -moz-border-radius: 0;
+                        border-radius: 4px !important;
+                    }
+
+                    .datepicker table tr td.active,
+                    .datepicker table tr td.active.disabled,
+                    .datepicker table tr td.active.disabled:hover,
+                    .datepicker table tr td.active:hover {
+                        background-color: var(--black);
+                        background-image: none !important;
+                        background-image: none !important;
+                        background-image: none !important;
+                        background-image: none !important;
+                        background-image: none !important;
+                        background-image: none !important;
+                        background-repeat: repeat-x;
+                        border-color: rgba(0, 0, 0, .1) rgba(0, 0, 0, .1) rgba(0, 0, 0, .25);
+                        filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+                        color: #fff;
+                        text-shadow: 0 -1px 0 rgba(0, 0, 0, .25);
+                    }
+
+
+                    .datepicker table tr td.active.active,
+                    .datepicker table tr td.active.disabled.active,
+                    .datepicker table tr td.active.disabled:active,
+                    .datepicker table tr td.active.disabled:hover.active,
+                    .datepicker table tr td.active.disabled:hover:active,
+                    .datepicker table tr td.active:active,
+                    .datepicker table tr td.active:hover.active,
+                    .datepicker table tr td.active:hover:active {
+                        border-radius: 4px !important;
+                    }
+
+                    .datepicker table tr td.disabled,
+                    .datepicker table tr td.disabled:hover {
+                        background: transparent !important;
+                        color: var(--middlegray) !important;
+                        opacity: 50%;
+                        cursor: default;
+                    }
+
+                    .datepicker table tr td.new,
+                    .datepicker table tr td.old {
+                        opacity: 50% !important;
+                    }
+                }
+
+                //** Shadow emplacement calendar **//
+                .shadow-emp-cal {
+                    background-color: var(--middlegray);
+                    margin-top: 20px;
+                    width: 100%;
+                    min-width: 30px;
+                    height: 300px;
+                    border-radius: 5px;
+                }
+
+                //** Reservation btn **//
+                .l-btn {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    background: var(--gradient-p-b);
+                    border-radius: 10px;
+                    width: 100%;
+                    height: 46px;
+                    border: none;
+                    position: relative;
+                    color: white;
+                    font-size: large;
+                    text-decoration: none;
+                    cursor: pointer;
+                    transition: all .2s ease-in-out;
+
+                    &:hover {
+                        transform: scale(1.02);
+                    }
+                }
+
+                .l-btn[disabled] {
+                    transition: all .2s ease-in-out;
+                    background: var(--middlegray);
+                    color: var(--white);
+                    cursor:default;
+                    &:hover {
+                        transform: scale(1);
+                    }
+                }
+
+                //** Prices **//
+                .price-details {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 10px;
+
+                    .shadow-emp {
+                        background-color: var(--middlegray);
+                        max-width: 30px;
+                        margin-top: 20px;
+                        width: 100%;
+                        min-width: 50px;
+                        height: 18px;
+                        border-radius: 5px;
+                    }
+
+                    .shadow-emp-p {
+                        background-color: var(--middlegray);
+                        max-width: 150px;
+                        margin-top: 20px;
+                        width: 100%;
+                        min-width: 30px;
+                        height: 18px;
+                        border-radius: 5px;
+                    }
+
+                    .price:nth-child(2) {
+                        border-bottom: var(--middlegray) 1px solid;
+                        padding: 0 0 10px 0;
+                    }
+
+                    .price:nth-child(3) {
+                        margin-bottom: 15px;
+
+                        p {
+                            font-size: x-large;
+                        }
+
+                        .total-span {
+                            font-size: x-large;
+                            font-weight: 600;
+                        }
+                    }
+
+                    .price {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+
+                        p {
+                            font-size: large;
+                            color: var(--dark-purple);
+                            font-weight: 500;
+                        }
+
+                        .total-span {
+                            font-size: large;
+                            font-weight: 600;
+                        }
+                    }
+                }
             }
 
-            .date-span {
-                width: 100%;
-                border: 1px solid var(--middlegray);
-                padding: 5px 10px;
-                border-radius: 7px;
-                color: var(--middlegray);
-                height: 37px;
-                transition: all .2s ease-in-out;
-                font-size: large;
-                position: relative;
+            //** Other Steps Reservation **//
+            #reservation-form-container {
+                .direction-btn {
+                    display: flex;
+                    width: 100%;
+                    justify-content: space-between;
 
-                &::after {
-                    content: url(../img/icons/Calendar.png);
-                    height: 20px;
+
+
+
+                    span {
+                        display: flex;
+                        align-items: center;
+                        text-align: center;
+
+                        img {
+                            height: 36px;
+                            width: 36px;
+                        }
+                    }
+                }
+
+                .res-infos {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 20px;
+                    margin: 0 0 25px 0;
+
+                    .res-info {
+                        display: flex;
+                        gap: 10px;
+                        flex-direction: column;
+
+                        input {
+                            height: 36px;
+                            border-width: 0px 0px 1px 0px;
+                            border-style: solid;
+                            border-color: #705aff56;
+                            outline: none;
+                            font-size: large;
+                            padding: 10px;
+                            margin-bottom: 35px;
+
+                            &:focus {
+                                border-color: #705aff;
+                            }
+                        }
+
+                        label {
+                            display: block;
+                            font-size: larger;
+                            color: #1A1884;
+                        }
+                    }
+                }
+
+
+
+                // #step-2{
+                // }
+                // #step-3{
+
+                // }
+                #step-4 {
+
+                    //** Reservation btn **//
+                    .l-btn {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        background: var(--gradient-p-b);
+                        border-radius: 10px;
+                        width: 100%;
+                        height: 46px;
+                        border: none;
+                        position: relative;
+                        color: white;
+                        font-size: large;
+                        text-decoration: none;
+                        cursor: pointer;
+                        transition: all .2s ease-in-out;
+
+                        &:hover {
+                            transform: scale(1.02);
+                        }
+                    }
                 }
             }
         }
     }
 
-
-    .datepicker .datepicker-switch:hover,
-    .datepicker tfoot tr th:hover {
-        background: transparent !important;
-    }
-
-    td.today.day:hover {
-        background-color: transparent !important;
-    }
-
-    .datepicker-switch {
-        width: max-content !important;
-    }
-
-    .datepicker th.prev,
-    .datepicker th.next {
-        border: none;
-        color: transparent;
-        position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .datepicker th.prev:hover,
-    .datepicker th.next:hover {
-        background-color: var(--lightgray);
-    }
-
-    .datepicker th.prev:before {
-        content: "";
-        position: absolute;
-        width: 16px;
-        height: 16px;
-        background: url('../img/icons/chevron-left-solid.svg') no-repeat center;
-    }
-
-    .datepicker th.next:before {
-        content: "";
-        position: absolute;
-        width: 16px;
-        height: 16px;
-        background: url('../img/icons/chevron-right-solid.svg') no-repeat center;
-    }
-
-    .range .day {
-        background-color: var(--lightgray);
-        cursor: not-allowed;
-        border-radius: 4px;
-
-    }
-
-    table {
-        font-family: 'Inter', sans-serif;
-    }
-
-    td {
-        font-size: large;
-        font-weight: 500;
-    }
-
-    #calendar {
-        width: 100%;
-        height: max-content;
-        display: flex;
-        justify-content: center;
-        margin: 20px 0;
-    }
-
-    .shadow-emp-cal {
-        background-color: var(--middlegray);
-        margin-top: 20px;
-        width: 100%;
-        min-width: 30px;
-        height: 300px;
-        border-radius: 5px;
-    }
-
-    .datepicker-inline {
-        width: 100% !important;
-        height: 100%;
-        border: 1px solid var(--lightgray);
-        box-shadow: var(--boxshadow) 0 0 10px;
-        border-radius: 7px;
-        padding: 15px 20px;
-        transition: all .2s ease-in-out;
-
-        &:hover {
-            transform: scale(1.01);
-            box-shadow: var(--boxshadow) 0 0 15px;
-        }
-    }
-
-    .datepicker-days {
-        width: 100%;
-        height: 100%;
-    }
-
-    table.table-condensed {
-        width: 100%;
-        height: 100%;
-    }
-
-    td.active.day.range {
-        border-radius: 4px;
-    }
-
-    .datepicker td,
-    .datepicker th {
-        text-align: center;
-        width: 30px !important;
-        max-height: 40px !important;
-        min-height: auto;
-        height: 40px;
-        -webkit-border-radius: 4px;
-        -moz-border-radius: 4px;
-        border-radius: 4px;
-        border: none;
-    }
-
-    .disabled-date {
-        cursor: not-allowed;
-        text-decoration: line-through !important;
-    }
-
-    .datepicker table tr td.today,
-    .datepicker table tr td.today.disabled,
-    .datepicker table tr td.today.disabled:hover,
-    .datepicker table tr td.today:hover {
-        background-color: var(--white);
-        border: var(--black) 2px dashed;
-        background-image: none !important;
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fdd49a', endColorstr='#fdf59a', GradientType=0);
-        filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
-        color: #000;
-        border-radius: 7px;
-        box-shadow: var(--boxshadow) 0 0 10px;
-    }
-
-    .datepicker table tr td.highlighted {
-        background: transparent !important;
-        border-radius: 4px;
-        color: var(--light-purple);
-
-        &:hover {
-            border-radius: 4px;
-            background-color: var(--lightgray) !important;
-        }
-    }
-
-    .datepicker table tr td.range,
-    .datepicker table tr td.range.disabled,
-    .datepicker table tr td.range.disabled:hover {
-        background: var(--lightgray) !important;
-        -webkit-border-radius: 0;
-        -moz-border-radius: 0;
-        border-radius: 4px;
-    }
-
-    .datepicker table tr td.active,
-    .datepicker table tr td.active.disabled,
-    .datepicker table tr td.active.disabled:hover,
-    .datepicker table tr td.active:hover {
-        background-color: var(--black) !important;
-        background-repeat: repeat-x;
-        color: #fff;
-        text-shadow: 0 -1px 0 rgba(0, 0, 0, .25);
-    }
-
-    .datepicker table tr td.range,
-    .datepicker table tr td.range.disabled,
-    .datepicker table tr td.range.disabled:hover,
-    .datepicker table tr td.range:hover {
-        background: var(--lightgray);
-        -webkit-border-radius: 0;
-        -moz-border-radius: 0;
-        border-radius: 4px !important;
-    }
-
-    .datepicker table tr td.active,
-    .datepicker table tr td.active.disabled,
-    .datepicker table tr td.active.disabled:hover,
-    .datepicker table tr td.active:hover {
-        background-color: var(--black);
-        background-image: none !important;
-        background-image: none !important;
-        background-image: none !important;
-        background-image: none !important;
-        background-image: none !important;
-        background-image: none !important;
-        background-repeat: repeat-x;
-        border-color: rgba(0, 0, 0, .1) rgba(0, 0, 0, .1) rgba(0, 0, 0, .25);
-        filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
-        color: #fff;
-        text-shadow: 0 -1px 0 rgba(0, 0, 0, .25);
-    }
-
-
-    .datepicker table tr td.active.active,
-    .datepicker table tr td.active.disabled.active,
-    .datepicker table tr td.active.disabled:active,
-    .datepicker table tr td.active.disabled:hover.active,
-    .datepicker table tr td.active.disabled:hover:active,
-    .datepicker table tr td.active:active,
-    .datepicker table tr td.active:hover.active,
-    .datepicker table tr td.active:hover:active {
-        border-radius: 4px !important;
-    }
-
-    .datepicker table tr td.disabled,
-    .datepicker table tr td.disabled:hover {
-        background: transparent !important;
-        color: var(--middlegray) !important;
-        opacity: 50%;
-        cursor: default;
-    }
-
-    .datepicker table tr td.new,
-    .datepicker table tr td.old {
-        opacity: 50% !important;
-    }
-
-    .l-btn {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background: var(--gradient-p-b);
-        border-radius: 10px;
-        width: 100%;
-        height: 46px;
-        border: none;
-        position: relative;
-        color: white;
-        font-size: large;
-        text-decoration: none;
-        cursor: pointer;
-        transition: all .2s ease-in-out;
-
-        &:hover {
-            transform: scale(1.02);
-        }
-    }
-
-    //****** Price ******//
-    .price-details {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-
-        .shadow-emp {
-            background-color: var(--middlegray);
-            max-width: 30px;
-            margin-top: 20px;
-            width: 100%;
-            min-width: 50px;
-            height: 18px;
-            border-radius: 5px;
-        }
-
-        .shadow-emp-p {
-            background-color: var(--middlegray);
-            max-width: 150px;
-            margin-top: 20px;
-            width: 100%;
-            min-width: 30px;
-            height: 18px;
-            border-radius: 5px;
-        }
-
-        .price:nth-child(2) {
-            border-bottom: var(--middlegray) 1px solid;
-            padding: 0 0 10px 0;
-        }
-
-        .price:nth-child(3) {
-            margin-bottom: 15px;
-
-            p {
-                font-size: x-large;
-            }
-
-            .total-span {
-                font-size: x-large;
-                font-weight: 600;
-            }
-        }
-
-        .price {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-
-            p {
-                font-size: large;
-                color: var(--dark-purple);
-                font-weight: 500;
-            }
-
-            .total-span {
-                font-size: large;
-                font-weight: 600;
-            }
-        }
-    }
 }
 
 
 //****** Form Content For Add Advert ******//
-
 .wrapper-detail {
     .input {
         height: 45px;
@@ -1535,8 +1633,111 @@ header {
 }
 
 
-//****** My Advert******//
+//************** Content **************//
+#grid {
+    height: 100%;
+    width: 50%;
+    display: grid;
+    justify-items: center;
+    grid-gap: 20px;
+    grid-auto-rows: max-content;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 
+    .clickable-card-parent {
+        position: relative;
+        max-width: 350px;
+    }
+
+    .clickable-card {
+        text-decoration: none;
+        color: var(--black);
+    }
+
+    .advert-card {
+        overflow: hidden;
+        background: var(--white);
+        border-radius: 10px;
+        position: relative;
+        width: 100%;
+        max-width: 350px;
+        height: 350px;
+
+        &:hover {
+            box-shadow: var(--boxshadow) 0 10px 20px;
+        }
+
+        figure {
+            height: 70%;
+            overflow: hidden;
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+    }
+
+    .slide-in {
+        opacity: 0;
+        transform: translateY(25px);
+        filter: blur(4px);
+        transition: all .4s ease-in-out;
+    }
+
+    .slide-in-active {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+    }
+
+    .card-content {
+        padding: 15px 20px 20px;
+        width: 100%;
+    }
+
+    .advert-card h3 {
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+
+    .card-text {
+        color: var(--darkgray);
+        text-overflow: ellipsis;
+        width: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+
+    .price-card {
+        font-weight: 700;
+        font-size: larger;
+        color: var(--black);
+    }
+
+    .modif-icons {
+        display: flex;
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        padding: 5px;
+        border-radius: 5px;
+        background: var(--white);
+        z-index: 3;
+        line-height: 0;
+    }
+
+    .modif {
+        color: var(--black);
+        display: flex;
+        align-items: center;
+    }
+}
+
+
+//****** My Advert******//
 .wrapper-my-advert {
     width: 100%;
     height: 100%;
@@ -1552,142 +1753,12 @@ header {
 }
 
 
-//************** Content **************//
-
-#grid {
-    height: 100%;
-    width: 50%;
-    display: grid;
-    justify-items: center;
-    grid-gap: 20px;
-    grid-auto-rows: max-content;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-}
-
-.clickable-card-parent {
-    position: relative;
-    max-width: 350px;
-}
-
-.clickable-card {
-    text-decoration: none;
-    color: var(--black);
-}
-
-.advert-card {
-    overflow: hidden;
-    background: var(--white);
-    border-radius: 10px;
-    position: relative;
-    width: 100%;
-    max-width: 350px;
-    height: 350px;
-
-    &:hover {
-        box-shadow: var(--boxshadow) 0 10px 20px;
-    }
-
-    figure {
-        height: 70%;
-        overflow: hidden;
-    }
-
-    img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        border-radius: 5px;
-    }
-}
-
-.slide-in {
-    opacity: 0;
-    transform: translateY(25px);
-    filter: blur(4px);
-    transition: all .4s ease-in-out;
-}
-
-.slide-in-active {
-    opacity: 1;
-    transform: translateY(0);
-    filter: blur(0);
-}
-
-.text-editor {
-    border: 1px solid #ccc;
-    padding: 10px;
-    font-family: Arial, sans-serif;
-}
-
-.toolbar {
-    margin-bottom: 5px;
-}
-
-button {
-    font-weight: bold;
-    background: none;
-    border: none;
-    cursor: pointer;
-    margin-right: 10px;
-}
-
-#editor {
-    border: 1px solid #ccc;
-    min-height: 100px;
-    padding: 5px;
-}
-
-.card-content {
-    padding: 15px 20px 20px;
-    width: 100%;
-}
-
-.advert-card h3 {
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-}
-
-.card-text {
-    color: var(--darkgray);
-    text-overflow: ellipsis;
-    width: 100%;
-    white-space: nowrap;
-    overflow: hidden;
-}
-
-.price-card {
-    font-weight: 700;
-    font-size: larger;
-    color: var(--black);
-}
-
-.modif-icons {
-    display: flex;
-    position: absolute;
-    right: 10px;
-    top: 10px;
-    padding: 5px;
-    border-radius: 5px;
-    background: var(--white);
-    z-index: 3;
-    line-height: 0;
-}
-
-.modif {
-    color: var(--black);
-    display: flex;
-    align-items: center;
-}
-
-
 //************** Footer *************//
-
 // footer {
 
 // }
 
-//? ************* Responsive Design *************//
+//! ************* Responsive Design *************//
 
 @media only screen and (max-width: 770px) {
 
