@@ -144,10 +144,18 @@
                 <input class="date-span" type="date" id="departureDate" name="reservation[departureDate]" disabled />
               </div>
             </div>
-
+            
             <div id="calendar" data-advert-id="{{ advert.id }}" data-advert-id="{{ advert.id }}"
               data-reserved-dates="{{ reservedDates|json_encode|e('html_attr') }}"></div>
-
+            <div id="alert-dates" style="display: none;">
+                <div class="popup-container">
+                  <div class="popup-card">
+                    <h2>Alerte</h2>
+                    <p>Vous ne pouvez pas mettre de date antiérieur ou égale à la date d'arrivée</p>
+                    <button id="close-popup">Close</button>
+                  </div>
+                </div>
+            </div>
             <div class="price-details">
               <div class="price">
                 <p><span id="pricePerNight">{{advert.price}}</span> x <span id="numNights">0</span> nuits = </p><span
@@ -161,7 +169,8 @@
               </div>
             </div>
             <div class="log">
-              <button class="l-btn" id="start-button" disabled>Réservation</button>            </div>
+              <button class="l-btn" id="start-button" disabled>Réservation</button>
+            </div>
           </div>
         </div>
         <div id="reservation-form-container">
@@ -280,13 +289,18 @@
     });
 
     // Fonction pour mettre à jour l'état du bouton de réservation
-  function updateReservationButton() {
-    if (arrivalDateInput && departureDateInput) {
-      $('#start-button').prop('disabled', false); // Activer le bouton de réservation
-    } else {
-      $('#start-button').prop('disabled', true); // Désactiver le bouton de réservation
+    function updateReservationButton() {
+      if (arrivalDateInput && departureDateInput) {
+        $('#start-button').prop('disabled', false); // Activer le bouton de réservation
+      } else {
+        $('#start-button').prop('disabled', true); // Désactiver le bouton de réservation
+      }
     }
-  }
+
+    document.getElementById('close-popup').addEventListener('click', function() {
+      // Masquer l'alerte #alert-dates
+      $('#alert-dates').hide();
+    });
 
     $('#calendar').on('changeDate', function (e) {
       let selectedDates = e.dates;
@@ -294,6 +308,12 @@
       if (selectedDates.length === 2) {
         arrivalDateInput = selectedDates[0];
         departureDateInput = selectedDates[1];
+        if (departureDateInput <= arrivalDateInput) {
+          $('#alert-dates').show();
+          // Réinitialisez les champs de date et annulez la sélection
+          $('#calendar').datepicker('clearDates');
+          return;
+        }
 
         // Vérifier si arrivalDate est définie avant de l'utiliser
         if (arrivalDateInput) {

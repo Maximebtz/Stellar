@@ -15,6 +15,7 @@
   --lightgray: #DCDCDC;
   --boxshadow: rgba(0, 0, 0, 0.025);
   --gradient-p-b: linear-gradient(20deg, var(--light-purple) -15%, var(--dark-blue) 150%);
+  --gradient-p-b-2: linear-gradient(200deg, var(--light-purple) -15%, var(--dark-blue) 150%);
   --gradient-b-b: linear-gradient(50deg, var(--dark-blue) 7.56%, #0000ff 61.06%);
 }
 
@@ -1005,6 +1006,70 @@ header .signup:hover {
 .wrapper-detail-main .wrapper-detail-right #calendar-and-detail #calendar .datepicker table tr td.new,
 .wrapper-detail-main .wrapper-detail-right #calendar-and-detail #calendar .datepicker table tr td.old {
   opacity: 50% !important;
+}
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail #alert-dates {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: transparent;
+  -webkit-backdrop-filter: blur(5px);
+          backdrop-filter: blur(5px);
+  border-radius: 7px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail #alert-dates .popup-container {
+  background: var(--gradient-p-b);
+  border-radius: 8px;
+  box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  width: 80%;
+  transform: scale(0.8);
+  transition: all 0.3s ease-in-out;
+}
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail #alert-dates .popup-card {
+  margin: 2px;
+  padding: 20px;
+  text-align: center;
+  background: var(--white);
+  border-radius: 6px;
+}
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail #alert-dates h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: var(--light-purple);
+}
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail #alert-dates p {
+  font-size: 18px;
+  margin-bottom: 1.2rem;
+  color: var(--darkgray);
+  font-weight: 400;
+}
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail #alert-dates #close-popup {
+  background: var(--gradient-p-b);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 18px;
+  transition: all 0.3s ease-in-out;
+}
+.wrapper-detail-main .wrapper-detail-right #calendar-and-detail #alert-dates #close-popup:hover {
+  transition: all 0.3s ease-in-out;
+  animation: gradientRotation 3s linear infinite alternate both;
+}
+@keyframes gradientRotation {
+  0%, 100% {
+    background: var(--light-purple);
+  }
+  50% {
+    background: var(--dark-blue);
+  }
 }
 .wrapper-detail-main .wrapper-detail-right #calendar-and-detail .shadow-emp-cal {
   background-color: var(--middlegray);
