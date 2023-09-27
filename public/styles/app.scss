@@ -952,79 +952,6 @@ header {
             //** First Step Reservation **//
             #calendar-and-detail {
 
-                //** Night Price **//
-                .night-price {
-                    border-bottom: 1px solid var(--middlegray);
-                    padding-bottom: 10px;
-                    margin: 0 0 20px 0;
-                    display: flex;
-                    align-items: baseline;
-
-                    b {
-                        font-size: xx-large;
-                    }
-
-                    input {
-                        font-size: xx-large;
-                        width: 100px;
-                        font-weight: 600;
-                    }
-
-                    .span {
-                        span {
-                            font-size: xx-large;
-                            font-weight: 600;
-                        }
-
-                        color: var(--darkgray);
-                    }
-                }
-
-                //** Dates **//
-                .dates {
-                    display: flex;
-                    flex-direction: column;
-                    gap: 15px;
-
-                    .shadow-emp {
-                        background-color: var(--middlegray);
-                        width: 100%;
-                        min-width: 30px;
-                        height: 30px;
-                        border-radius: 5px;
-                    }
-
-                    .date {
-                        display: flex;
-                        flex-direction: column;
-                        justify-content: space-between;
-                        gap: 7px;
-
-                        p {
-                            font-size: larger;
-                            font-weight: 500;
-                            color: var(--darkgray);
-                        }
-
-                        .date-span {
-                            width: 100%;
-                            border: 1px solid var(--middlegray);
-                            padding: 5px 10px;
-                            border-radius: 7px;
-                            color: var(--middlegray);
-                            height: 37px;
-                            transition: all .2s ease-in-out;
-                            font-size: large;
-                            position: relative;
-
-                            &::after {
-                                content: url(../img/icons/Calendar.png);
-                                height: 20px;
-                            }
-                        }
-                    }
-                }
-
                 //** Calendar **//
                 #calendar {
                     width: 100%;
@@ -1312,16 +1239,6 @@ header {
                     }
                 }
 
-                //** Shadow emplacement calendar **//
-                .shadow-emp-cal {
-                    background-color: var(--middlegray);
-                    margin-top: 20px;
-                    width: 100%;
-                    min-width: 30px;
-                    height: 300px;
-                    border-radius: 5px;
-                }
-
                 //** Reservation btn **//
                 .l-btn {
                     display: flex;
@@ -1354,67 +1271,149 @@ header {
                         }
                     }
                 }
+            }
 
+            //** Night Price **//
+            .night-price {
+                border-bottom: 1px solid var(--middlegray);
+                padding-bottom: 10px;
+                margin: 0 0 20px 0;
+                display: flex;
+                align-items: baseline;
 
-                //** Prices **//
-                .price-details {
+                b {
+                    font-size: xx-large;
+                }
+
+                input {
+                    font-size: xx-large;
+                    width: 100px;
+                    font-weight: 600;
+                }
+
+                .span {
+                    span {
+                        font-size: xx-large;
+                        font-weight: 600;
+                    }
+
+                    color: var(--darkgray);
+                }
+            }
+
+            //** Dates **//
+            .dates {
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+
+                .shadow-emp {
+                    background-color: var(--middlegray);
+                    width: 100%;
+                    min-width: 30px;
+                    height: 30px;
+                    border-radius: 5px;
+                }
+
+                .date {
                     display: flex;
                     flex-direction: column;
-                    gap: 10px;
+                    justify-content: space-between;
+                    gap: 7px;
 
-                    .shadow-emp {
-                        background-color: var(--middlegray);
-                        max-width: 30px;
-                        margin-top: 20px;
+                    p {
+                        font-size: larger;
+                        font-weight: 500;
+                        color: var(--darkgray);
+                    }
+
+                    .date-span {
                         width: 100%;
-                        min-width: 50px;
-                        height: 18px;
-                        border-radius: 5px;
-                    }
+                        border: 1px solid var(--middlegray);
+                        padding: 5px 10px;
+                        border-radius: 7px;
+                        color: var(--middlegray);
+                        height: 37px;
+                        transition: all .2s ease-in-out;
+                        font-size: large;
+                        position: relative;
 
-                    .shadow-emp-p {
-                        background-color: var(--middlegray);
-                        max-width: 150px;
-                        margin-top: 20px;
-                        width: 100%;
-                        min-width: 30px;
-                        height: 18px;
-                        border-radius: 5px;
-                    }
-
-                    .price:nth-child(2) {
-                        border-bottom: var(--middlegray) 1px solid;
-                        padding: 0 0 10px 0;
-                    }
-
-                    .price:nth-child(3) {
-                        margin-bottom: 15px;
-
-                        p {
-                            font-size: x-large;
-                        }
-
-                        .total-span {
-                            font-size: x-large;
-                            font-weight: 600;
+                        &::after {
+                            content: url(../img/icons/Calendar.png);
+                            height: 20px;
                         }
                     }
+                }
+            }
 
-                    .price {
-                        display: flex;
-                        justify-content: space-between;
-                        align-items: center;
+            //** Shadow emplacement calendar **//
+            .shadow-emp-cal {
+                background-color: var(--middlegray);
+                margin-top: 20px;
+                width: 100%;
+                min-width: 30px;
+                height: 300px;
+                border-radius: 5px;
+            }
 
-                        p {
-                            font-size: large;
-                            color: var(--dark-purple);
-                            font-weight: 500;
-                        }
+            //** Prices **//
+            .price-details {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
 
-                        .total-span {
-                            font-size: large;
-                            font-weight: 600;
-                        }
+                .shadow-emp {
+                    background-color: var(--middlegray);
+                    max-width: 30px;
+                    margin-top: 20px;
+                    width: 100%;
+                    min-width: 50px;
+                    height: 18px;
+                    border-radius: 5px;
+                }
+
+                .shadow-emp-p {
+                    background-color: var(--middlegray);
+                    max-width: 150px;
+                    margin-top: 20px;
+                    width: 100%;
+                    min-width: 30px;
+                    height: 18px;
+                    border-radius: 5px;
+                }
+
+                .price:nth-child(2) {
+                    border-bottom: var(--middlegray) 1px solid;
+                    padding: 0 0 10px 0;
+                }
+
+                .price:nth-child(3) {
+                    margin-bottom: 15px;
+
+                    p {
+                        font-size: x-large;
+                    }
+
+                    .total-span {
+                        font-size: x-large;
+                        font-weight: 600;
+                    }
+                }
+
+                .price {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+
+                    p {
+                        font-size: large;
+                        color: var(--dark-purple);
+                        font-weight: 500;
+                    }
+
+                    .total-span {
+                        font-size: large;
+                        font-weight: 600;
                     }
                 }
             }
