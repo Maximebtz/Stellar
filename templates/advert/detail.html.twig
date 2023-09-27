@@ -309,6 +309,7 @@
         arrivalDateInput = selectedDates[0];
         departureDateInput = selectedDates[1];
         if (departureDateInput <= arrivalDateInput) {
+          $('#alert-dates').fadeIn();
           $('#alert-dates').show();
           // Réinitialisez les champs de date et annulez la sélection
           $('#calendar').datepicker('clearDates');
