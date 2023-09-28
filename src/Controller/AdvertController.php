@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use DateTime;
 use App\Entity\User;
 use App\Entity\Advert;
 use App\Entity\Images;
@@ -14,8 +15,8 @@ use App\Repository\LodgeRepository;
 use App\Repository\ImagesRepository;
 use App\Repository\CategoryRepository;
 use App\Repository\AccessoryRepository;
-use App\Repository\ReservationRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\ReservationRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\HttpFoundation\Response;
@@ -53,9 +54,8 @@ class AdvertController extends AbstractController
         if (!$advert) {
             $advert = new Advert();
         }
-
-
-
+        
+    
         $form = $this->createForm(AdvertType::class, $advert);
 
         //Récupérer les catégories
@@ -95,6 +95,8 @@ class AdvertController extends AbstractController
             }
 
             $advert->setOwner($this->getUser());
+
+            $advert->setCreatedAt(new \DateTimeImmutable());
 
             $this->entityManager->persist($advert);
             $this->entityManager->flush();

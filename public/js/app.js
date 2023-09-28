@@ -81,29 +81,30 @@ checkboxContainers.forEach((container) => {
   });
 });
 
-const container = document.querySelector(".checkbox-wrapper-17");
+const verticalCheckboxContainer = document.querySelector(".checkbox-wrapper-17");
 let isMouseDown = false;
 let startY;
 let scrollTop;
 
-container.addEventListener("mousedown", (e) => {
+verticalCheckboxContainer.addEventListener("mousedown", (e) => {
   isMouseDown = true;
-  startY = e.pageY - container.offsetTop;
-  scrollTop = container.scrollTop;
+  startY = e.pageY - verticalCheckboxContainer.offsetTop;
+  scrollTop = verticalCheckboxContainer.scrollTop;
 });
 
-container.addEventListener("mouseup", () => {
+verticalCheckboxContainer.addEventListener("mouseup", () => {
   isMouseDown = false;
 });
 
-container.addEventListener("mouseleave", () => {
+verticalCheckboxContainer.addEventListener("mouseleave", () => {
   isMouseDown = false;
 });
 
-container.addEventListener("mousemove", (e) => {
+verticalCheckboxContainer.addEventListener("mousemove", (e) => {
   if (!isMouseDown) return;
   e.preventDefault();
-  const y = e.pageY - container.offsetTop;
+  const y = e.pageY - verticalCheckboxContainer.offsetTop;
   const walk = (y - startY) * 1.5;
-  container.scrollTop = scrollTop - walk;
+  verticalCheckboxContainer.scrollTop = scrollTop - walk;
 });
+

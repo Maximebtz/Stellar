@@ -2,11 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\AdvertRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use DateTime;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\AdvertRepository;
+use DateTimeImmutable;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: AdvertRepository::class)]
 class Advert
@@ -74,6 +76,7 @@ class Advert
         $this->images = new ArrayCollection();
         $this->categories = new ArrayCollection();
         $this->accessories = new ArrayCollection();
+        $this->createdAt = new DateTimeImmutable();
     }
 
     public function getId(): ?int

@@ -231,8 +231,6 @@ header .signup:hover {
 }
 .wrapper-home .map {
   width: 50%;
-  position: sticky;
-  top: 20px;
   height: calc(100vh - 40px);
   animation: scale-up-hor-left 0.6s ease-in-out 1s both;
 }
@@ -244,9 +242,6 @@ header .signup:hover {
   width: 100%;
   min-width: 500px;
   height: 100%;
-}
-.wrapper-home .map #map img {
-  display: none;
 }
 @keyframes scale-up-hor-left {
   0% {
@@ -557,13 +552,6 @@ header .signup:hover {
 .wrapper-detail-main .wrapper-detail-left-category .checkbox-wrapper-16 .checkbox-input:checked + .checkbox-tile .checkbox-label {
   color: var(--light-purple);
 }
-.wrapper-detail-main .wrapper-detail-left-category .checkbox-wrapper-16 .checkbox-input:focus + .checkbox-tile {
-  border-color: var(--light-purple);
-}
-.wrapper-detail-main .wrapper-detail-left-category .checkbox-wrapper-16 .checkbox-input:focus + .checkbox-tile:before {
-  transform: scale(1);
-  opacity: 1;
-}
 .wrapper-detail-main .wrapper-detail-left-category .checkbox-wrapper-16 .checkbox-tile {
   display: flex;
   flex-direction: column;
@@ -578,6 +566,7 @@ header .signup:hover {
   transition: 0.15s ease;
   cursor: pointer;
   position: relative;
+  transition: all 0.2s ease-in-out;
 }
 .wrapper-detail-main .wrapper-detail-left-category .checkbox-wrapper-16 .checkbox-tile:hover {
   border-color: var(--light-purple);
@@ -689,6 +678,10 @@ header .signup:hover {
   transition: 0.15s ease;
   cursor: pointer;
   position: relative;
+  transition: all 0.2s ease-in-out;
+}
+.wrapper-detail-main .wrapper-detail-left-commodite .checkbox-wrapper-17 .checkbox-tile-fit:hover {
+  border: var(--light-purple) 2px solid;
 }
 .wrapper-detail-main .wrapper-detail-left-commodite .checkbox-wrapper-17 .checkbox-tile-advert {
   display: flex;
@@ -726,12 +719,12 @@ header .signup:hover {
   white-space: nowrap;
   width: 1px;
 }
-.wrapper-detail-main .wrapper-detail-left-commodite .checkbox-wrapper-17 .checkbox-input:checked + .checkbox-tile {
+.wrapper-detail-main .wrapper-detail-left-commodite .checkbox-wrapper-17 .checkbox-input:checked + .checkbox-tile-fit {
   border-color: var(--light-purple);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
   color: var(--light-purple);
 }
-.wrapper-detail-main .wrapper-detail-left-commodite .checkbox-wrapper-17 .checkbox-input:checked + .checkbox-tile:before {
+.wrapper-detail-main .wrapper-detail-left-commodite .checkbox-wrapper-17 .checkbox-input:checked + .checkbox-tile-fit:before {
   transform: scale(1);
   opacity: 1;
   background-color: var(--light-purple);
@@ -768,66 +761,6 @@ header .signup:hover {
   display: flex;
   flex-direction: column;
   box-shadow: var(--boxshadow) 0 0 20px;
-}
-.wrapper-detail-main .wrapper-detail-right #calendar-and-detail .night-price {
-  border-bottom: 1px solid var(--middlegray);
-  padding-bottom: 10px;
-  margin: 0 0 20px 0;
-  display: flex;
-  align-items: baseline;
-}
-.wrapper-detail-main .wrapper-detail-right #calendar-and-detail .night-price b {
-  font-size: xx-large;
-}
-.wrapper-detail-main .wrapper-detail-right #calendar-and-detail .night-price input {
-  font-size: xx-large;
-  width: 100px;
-  font-weight: 600;
-}
-.wrapper-detail-main .wrapper-detail-right #calendar-and-detail .night-price .span {
-  color: var(--darkgray);
-}
-.wrapper-detail-main .wrapper-detail-right #calendar-and-detail .night-price .span span {
-  font-size: xx-large;
-  font-weight: 600;
-}
-.wrapper-detail-main .wrapper-detail-right #calendar-and-detail .dates {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-.wrapper-detail-main .wrapper-detail-right #calendar-and-detail .dates .shadow-emp {
-  background-color: var(--middlegray);
-  width: 100%;
-  min-width: 30px;
-  height: 30px;
-  border-radius: 5px;
-}
-.wrapper-detail-main .wrapper-detail-right #calendar-and-detail .dates .date {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 7px;
-}
-.wrapper-detail-main .wrapper-detail-right #calendar-and-detail .dates .date p {
-  font-size: larger;
-  font-weight: 500;
-  color: var(--darkgray);
-}
-.wrapper-detail-main .wrapper-detail-right #calendar-and-detail .dates .date .date-span {
-  width: 100%;
-  border: 1px solid var(--middlegray);
-  padding: 5px 10px;
-  border-radius: 7px;
-  color: var(--middlegray);
-  height: 37px;
-  transition: all 0.2s ease-in-out;
-  font-size: large;
-  position: relative;
-}
-.wrapper-detail-main .wrapper-detail-right #calendar-and-detail .dates .date .date-span::after {
-  content: url(../img/icons/Calendar.png);
-  height: 20px;
 }
 .wrapper-detail-main .wrapper-detail-right #calendar-and-detail #calendar {
   width: 100%;
@@ -1071,14 +1004,6 @@ header .signup:hover {
     background: var(--dark-blue);
   }
 }
-.wrapper-detail-main .wrapper-detail-right #calendar-and-detail .shadow-emp-cal {
-  background-color: var(--middlegray);
-  margin-top: 20px;
-  width: 100%;
-  min-width: 30px;
-  height: 300px;
-  border-radius: 5px;
-}
 .wrapper-detail-main .wrapper-detail-right #calendar-and-detail .l-btn {
   display: flex;
   justify-content: center;
@@ -1107,12 +1032,80 @@ header .signup:hover {
 .wrapper-detail-main .wrapper-detail-right #calendar-and-detail .l-btn[disabled]:hover {
   transform: scale(1);
 }
-.wrapper-detail-main .wrapper-detail-right #calendar-and-detail .price-details {
+.wrapper-detail-main .wrapper-detail-right .night-price {
+  border-bottom: 1px solid var(--middlegray);
+  padding-bottom: 10px;
+  margin: 0 0 20px 0;
+  display: flex;
+  align-items: baseline;
+}
+.wrapper-detail-main .wrapper-detail-right .night-price b {
+  font-size: xx-large;
+}
+.wrapper-detail-main .wrapper-detail-right .night-price input {
+  font-size: xx-large;
+  width: 100px;
+  font-weight: 600;
+}
+.wrapper-detail-main .wrapper-detail-right .night-price .span {
+  color: var(--darkgray);
+}
+.wrapper-detail-main .wrapper-detail-right .night-price .span span {
+  font-size: xx-large;
+  font-weight: 600;
+}
+.wrapper-detail-main .wrapper-detail-right .dates {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.wrapper-detail-main .wrapper-detail-right .dates .shadow-emp {
+  background-color: var(--middlegray);
+  width: 100%;
+  min-width: 30px;
+  height: 30px;
+  border-radius: 5px;
+}
+.wrapper-detail-main .wrapper-detail-right .dates .date {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 7px;
+}
+.wrapper-detail-main .wrapper-detail-right .dates .date p {
+  font-size: larger;
+  font-weight: 500;
+  color: var(--darkgray);
+}
+.wrapper-detail-main .wrapper-detail-right .dates .date .date-span {
+  width: 100%;
+  border: 1px solid var(--middlegray);
+  padding: 5px 10px;
+  border-radius: 7px;
+  color: var(--middlegray);
+  height: 37px;
+  transition: all 0.2s ease-in-out;
+  font-size: large;
+  position: relative;
+}
+.wrapper-detail-main .wrapper-detail-right .dates .date .date-span::after {
+  content: url(../img/icons/Calendar.png);
+  height: 20px;
+}
+.wrapper-detail-main .wrapper-detail-right .shadow-emp-cal {
+  background-color: var(--middlegray);
+  margin-top: 20px;
+  width: 100%;
+  min-width: 30px;
+  height: 300px;
+  border-radius: 5px;
+}
+.wrapper-detail-main .wrapper-detail-right .price-details {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
-.wrapper-detail-main .wrapper-detail-right #calendar-and-detail .price-details .shadow-emp {
+.wrapper-detail-main .wrapper-detail-right .price-details .shadow-emp {
   background-color: var(--middlegray);
   max-width: 30px;
   margin-top: 20px;
@@ -1121,7 +1114,7 @@ header .signup:hover {
   height: 18px;
   border-radius: 5px;
 }
-.wrapper-detail-main .wrapper-detail-right #calendar-and-detail .price-details .shadow-emp-p {
+.wrapper-detail-main .wrapper-detail-right .price-details .shadow-emp-p {
   background-color: var(--middlegray);
   max-width: 150px;
   margin-top: 20px;
@@ -1130,31 +1123,31 @@ header .signup:hover {
   height: 18px;
   border-radius: 5px;
 }
-.wrapper-detail-main .wrapper-detail-right #calendar-and-detail .price-details .price:nth-child(2) {
+.wrapper-detail-main .wrapper-detail-right .price-details .price:nth-child(2) {
   border-bottom: var(--middlegray) 1px solid;
   padding: 0 0 10px 0;
 }
-.wrapper-detail-main .wrapper-detail-right #calendar-and-detail .price-details .price:nth-child(3) {
+.wrapper-detail-main .wrapper-detail-right .price-details .price:nth-child(3) {
   margin-bottom: 15px;
 }
-.wrapper-detail-main .wrapper-detail-right #calendar-and-detail .price-details .price:nth-child(3) p {
+.wrapper-detail-main .wrapper-detail-right .price-details .price:nth-child(3) p {
   font-size: x-large;
 }
-.wrapper-detail-main .wrapper-detail-right #calendar-and-detail .price-details .price:nth-child(3) .total-span {
+.wrapper-detail-main .wrapper-detail-right .price-details .price:nth-child(3) .total-span {
   font-size: x-large;
   font-weight: 600;
 }
-.wrapper-detail-main .wrapper-detail-right #calendar-and-detail .price-details .price {
+.wrapper-detail-main .wrapper-detail-right .price-details .price {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.wrapper-detail-main .wrapper-detail-right #calendar-and-detail .price-details .price p {
+.wrapper-detail-main .wrapper-detail-right .price-details .price p {
   font-size: large;
   color: var(--dark-purple);
   font-weight: 500;
 }
-.wrapper-detail-main .wrapper-detail-right #calendar-and-detail .price-details .price .total-span {
+.wrapper-detail-main .wrapper-detail-right .price-details .price .total-span {
   font-size: large;
   font-weight: 600;
 }
@@ -1377,24 +1370,27 @@ header .signup:hover {
   }
 }
 
-#grid {
-  height: 100%;
-  width: 50%;
+.adverts-container {
+  width: 85%;
+}
+.adverts-container .advert-card-list {
+  height: -moz-max-content;
+  height: max-content;
   display: grid;
   justify-items: center;
   grid-gap: 20px;
   grid-auto-rows: max-content;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 }
-#grid .clickable-card-parent {
+.adverts-container .advert-card-list .clickable-card-parent {
   position: relative;
   max-width: 350px;
 }
-#grid .clickable-card {
+.adverts-container .advert-card-list .clickable-card {
   text-decoration: none;
   color: var(--black);
 }
-#grid .advert-card {
+.adverts-container .advert-card-list .advert-card {
   overflow: hidden;
   background: var(--white);
   border-radius: 10px;
@@ -1403,53 +1399,53 @@ header .signup:hover {
   max-width: 350px;
   height: 350px;
 }
-#grid .advert-card:hover {
+.adverts-container .advert-card-list .advert-card:hover {
   box-shadow: var(--boxshadow) 0 10px 20px;
 }
-#grid .advert-card figure {
+.adverts-container .advert-card-list .advert-card figure {
   height: 70%;
   overflow: hidden;
 }
-#grid .advert-card img {
+.adverts-container .advert-card-list .advert-card img {
   width: 100%;
   height: 100%;
   -o-object-fit: cover;
      object-fit: cover;
   border-radius: 5px;
 }
-#grid .slide-in {
+.adverts-container .advert-card-list .slide-in {
   opacity: 0;
   transform: translateY(25px);
   filter: blur(4px);
   transition: all 0.4s ease-in-out;
 }
-#grid .slide-in-active {
+.adverts-container .advert-card-list .slide-in-active {
   opacity: 1;
   transform: translateY(0);
   filter: blur(0);
 }
-#grid .card-content {
+.adverts-container .advert-card-list .card-content {
   padding: 15px 20px 20px;
   width: 100%;
 }
-#grid .advert-card h3 {
+.adverts-container .advert-card-list .advert-card h3 {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
 }
-#grid .card-text {
+.adverts-container .advert-card-list .card-text {
   color: var(--darkgray);
   text-overflow: ellipsis;
   width: 100%;
   white-space: nowrap;
   overflow: hidden;
 }
-#grid .price-card {
+.adverts-container .advert-card-list .price-card {
   font-weight: 700;
   font-size: larger;
   color: var(--black);
 }
-#grid .modif-icons {
+.adverts-container .advert-card-list .modif-icons {
   display: flex;
   position: absolute;
   right: 10px;
@@ -1460,10 +1456,46 @@ header .signup:hover {
   z-index: 3;
   line-height: 0;
 }
-#grid .modif {
+.adverts-container .advert-card-list .modif {
   color: var(--black);
   display: flex;
   align-items: center;
+}
+.adverts-container .pagination {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  margin-top: 25px;
+  justify-content: center;
+}
+.adverts-container .pagination .pages {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  border-radius: 5px;
+  padding: 5px;
+  width: 36px;
+  height: 36px;
+  color: var(--black);
+  transition: all 0.2s ease-in-out;
+}
+.adverts-container .pagination .pages:hover {
+  background-color: var(--middlegray);
+  color: var(--white);
+}
+.adverts-container .pagination .active {
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  border-radius: 7px;
+  padding: 5px;
+  width: 36px;
+  height: 36px;
+  background-color: var(--black);
+  color: var(--white);
 }
 
 .wrapper-my-advert {
@@ -1532,4 +1564,25 @@ header .signup:hover {
   #grid {
     width: 100%;
   }
+}
+.custom-price-label {
+  background-color: var(--black);
+  border-radius: 8px;
+  color: #FFFFFF !important;
+  font-size: 14px;
+  padding: 10px;
+  position: relative;
+}
+
+.custom-price-label::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  transform: translate(-50%, 0);
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 8px solid var(--black);
 }/*# sourceMappingURL=app.css.map */

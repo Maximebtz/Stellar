@@ -1,35 +1,54 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Stellar Accueil{% endblock %}
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('build/style.css') }}" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+<script src="https://cdn.rawgit.com/googlemaps/v3-utility-library/master/markerwithlabel/src/markerwithlabel.js"></script>
 
+{% endblock %}
 {% block body %}
 <div class="wrapper">
     <div class="wrapper-home">
-        <div id="grid" class="advert-card-list">
-            {% for advert in adverts %}
+        <div class="adverts-container">
+            <div id="grid" class="advert-card-list">
+                {% for advert in adverts %}
                 <div class="advert-card slide-in">
                     <a href="{{ path('detail_advert', {'id': advert.id})}}" class="clickable-card">
                         <figure>
                             {% if advert.images is not empty %}
-                                <img src="{{ asset('uploads/' ~ advert.images[0].url) }}" alt="{{ advert.title }} image">
+                            <img src="{{ asset('uploads/' ~ advert.images[0].url) }}" alt="{{ advert.title }} image">
                             {% endif %}
                         </figure>
                         <div class="card-content">
                             <h3 class="card-title">{{ advert.title}}</h3>
                             <p class="card-text">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
-                                    <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                                    <path
+                                        d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" />
                                 </svg>
-                                {{ advert.city }}, 
+                                {{ advert.city }},
                                 {{ advert.country }}
                             </p>
                             <p class="card-text">
-                                <span class="price-card">{{ advert.price }}€</span>/nuit   
+                                <span class="price-card">{{ advert.price }}€</span>/nuit
                             </p>
                         </div>
                     </a>
                 </div>
-            {% endfor %}
+                {% endfor %}
+            </div>
+            <div class="pagination">
+                {% set totalPages = (totalAdverts + perPage - 1) / perPage | round(0, 'ceil') %}
+                {% for pageNumber in range(1, totalPages) %}
+                <a href="{{ path(app.request.attributes.get('_route'), {'page': pageNumber}) }}" {% if pageNumber==page
+                    %}class="active" {% else %}class="pages" {% endif %}>{{ pageNumber }}</a>
+                {% endfor %}
+            </div>
         </div>
         <div class="map">
             <div id="map"></div>
@@ -37,3 +56,65 @@
     </div>
 </div>
 {% endblock %}
+{% block javascripts %}
+<script src="{{ asset('js/map.js') }}"></script>
+<script src="{{ asset('js/app.js') }}"></script>
+<script src="{{ asset('js/animations.js') }}"></script>
+<script>(g => { var h, a, k, p = "The Google Maps JavaScript API", c = "google", l = "importLibrary", q = "__ib__", m = document, b = window; b = b[c] || (b[c] = {}); var d = b.maps || (b.maps = {}), r = new Set, e = new URLSearchParams, u = () => h || (h = new Promise(async (f, n) => { await (a = m.createElement("script")); e.set("libraries", [...r] + ""); for (k in g) e.set(k.replace(/[A-Z]/g, t => "_" + t[0].toLowerCase()), g[k]); e.set("callback", c + ".maps." + q); a.src = `https://maps.${c}apis.com/maps/api/js?` + e; d[q] = f; a.onerror = () => h = n(Error(p + " could not load.")); a.nonce = m.querySelector("script[nonce]")?.nonce || ""; m.head.append(a) })); d[l] ? console.warn(p + " only loads once. Ignoring:", g) : d[l] = (f, ...n) => r.add(f) && u().then(() => d[l](f, ...n)) })
+        ({ key: "AIzaSyDKMfraFkzITgdFU4n3x1xu451mtxmGI8E", v: "beta" });</script>
+<script>
+    // Initialize and add the map
+    let map;
+
+    async function initMap() {
+        // The location of the init map
+        const position = { lat: 37.787994, lng: -122.407437 };
+        // Request needed libraries.
+        //@ts-ignore
+        const { Map } = await google.maps.importLibrary("maps");
+        const { AdvancedMarkerView } = await google.maps.importLibrary("marker");
+
+        // The map, centered at const position
+        map = new Map(document.getElementById("map"), {
+            zoom: 11,
+            center: position,
+            mapId: "DEMO_MAP_ID",
+        });
+
+        // Loop through your adverts and add markers for each one
+        {% for advert in adverts %}
+            var geocoder = new google.maps.Geocoder();
+            var address = "{{ advert.address }}, {{ advert.city }}, {{ advert.cp }}, {{ advert.country }}";
+
+            geocoder.geocode({ 'address': address }, function (results, status) {
+                if (status === 'OK') {
+                    var location = results[0].geometry.location;
+                    var lat = location.lat();
+                    var lng = location.lng();
+
+                    
+                    // Créez un marqueur pour cette annonce
+                    var marker = new google.maps.Marker({
+                        position: { lat: lat, lng: lng },
+                        map: map,
+                        title: "{{ advert.title }}",
+                        label: {
+                            text: "{{ advert.price }}€",
+                            className: "custom-price-label"
+                        },
+                        cursor: "pointer"
+                    });
+                } else {
+                    console.error('Erreur de géocodage pour l\'annonce "{{ advert.title }}": ' + status);
+                }
+            });
+        {% endfor %}
+
+        for (const marker of markers) {
+            marker.setMap(null);
+        }
+    }
+
+    initMap();
+</script>
+{% endblock javascripts %}
