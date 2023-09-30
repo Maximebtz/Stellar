@@ -14,6 +14,36 @@
 {% block body %}
 <div class="wrapper">
     <div class="wrapper-home">
+        <div class="search-btn-container">
+            <div id="searchButton">
+                <span>Click here for filters</span>
+                <img src="{{ asset('img/icons/Tune.svg')}}" alt="Filters Icon">
+            </div>
+
+            <div id="searchPopup" style="display:none;">
+                <h3>Filtres de recherche</h3>
+
+                <label>Villes:</label>
+                <input type="text" id="cityInput" placeholder="Tapez et appuyez sur Entrée">
+                <div id="cityTags"></div>
+
+                <label>Pays:</label>
+                <input type="text" id="countryInput" placeholder="Tapez et appuyez sur Entrée">
+                <div id="countryTags"></div>
+
+                <label>Prix:</label>
+                <input type="range" id="priceRange" min="0" max="1000">
+
+                <label>Date d'arrivée:</label>
+                <input type="date" id="startDate">
+
+                <label>Date de départ:</label>
+                <input type="date" id="endDate">
+
+                <button onclick="applyFilters()">Appliquer les filtres</button>
+            </div>
+        </div>
+
         <div class="map">
             <div id="map"></div>
         </div>
@@ -54,7 +84,9 @@
                 {% endfor %}
             </div>
         </div>
+        <div class="map-popup-container" id="map-popup-container">
 
+        </div>
     </div>
 </div>
 {% endblock %}
@@ -118,9 +150,11 @@
                     // Ouverture de l'InfoWindow lors du survol du marqueur
                     marker.addListener('mouseover', function () {
                         const contentString = `
-                            <img src="{{ asset('uploads/' ~ advert.images[0].url) }}" alt="{{ advert.title }}" width="50" height="50">
-                            <div id="infoWindowContent">
-                                <h4>{{ advert.title }}</h4>
+                            <div class="map-popup-container" id="map-popup-container">
+                                <img src="{{ asset('uploads/' ~ advert.images[0].url) }}" alt="{{ advert.title }}" width="50" height="50">
+                                <div id="infoWindowContent">
+                                    <h4>{{ advert.title }}</h4>
+                                </div>
                             </div>`;
                         infoWindow.setContent(contentString);
                         infoWindow.open(map, marker);
@@ -128,7 +162,7 @@
                         // Écouteur d'événements pour quand l'InfoWindow est prêt
                         google.maps.event.addListenerOnce(infoWindow, 'domready', function () {
                             // Récupérer l'élément DOM de l'InfoWindow
-                            const iwOuter = document.getElementById('infoWindowContent');
+                            const iwOuter = document.getElementById('map-popup-container');
 
                             // Empêcher la fermeture lorsqu'on survole l'InfoWindow
                             iwOuter.addEventListener('mouseover', function () {
@@ -174,6 +208,56 @@
 
     initMap();
 
+    
+    /****Filter Bar****/
 
+    document.getElementById("searchButton").addEventListener("click", function () {
+        const popup = document.getElementById("searchPopup");
+        popup.style.display = popup.style.display === "none" ? "block" : "none";
+      });
+      
+      // Fonction pour appliquer les filtres
+      function applyFilters() {
+        const cityCountry = document.getElementById("cityCountry").value;
+        const priceRange = document.getElementById("priceRange").value;
+        const startDate = document.getElementById("startDate").value;
+        const endDate = document.getElementById("endDate").value;
+      
+        // Envoie ces valeurs au serveur pour filtrer les résultats
+      }
+      
+      function addTag(inputId, tagContainerId) {
+        const input = document.getElementById(inputId);
+        const tagContainer = document.getElementById(tagContainerId);
+      
+        const tag = document.createElement("span");
+        tag.className = "tag";
+        tag.innerText = input.value;
+      
+        const closeBtn = document.createElement("span");
+        closeBtn.className = "tag-close";
+        closeBtn.innerText = "x";
+        closeBtn.onclick = function () {
+            tagContainer.removeChild(tag);
+        };
+      
+        tag.appendChild(closeBtn);
+        tagContainer.appendChild(tag);
+      
+        input.value = "";
+      }
+      
+      // Ajouter une étiquette lorsque l'utilisateur appuie sur Entrée
+      document.getElementById("cityInput").addEventListener("keyup", function (event) {
+        if (event.key === "Enter") {
+            addTag("cityInput", "cityTags");
+        }
+      });
+      
+      document.getElementById("countryInput").addEventListener("keyup", function (event) {
+        if (event.key === "Enter") {
+            addTag("countryInput", "countryTags");
+        }
+      });
 </script>
 {% endblock javascripts %}

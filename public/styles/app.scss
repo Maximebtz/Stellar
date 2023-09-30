@@ -273,8 +273,6 @@ header {
     min-height: calc(100vh - 120px);
     flex-direction: column;
     align-items: center;
-    position: relative;
-    overflow: hidden;
 
     .return-home {
         border: 1px solid var(--middlegray);
@@ -304,6 +302,94 @@ header {
     height: max-content;
     gap: 20px;
     flex-direction: column;
+
+    .search-btn-container {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        position: sticky;
+        top: 20px;
+        z-index: 2;
+
+        #searchPopup {
+            position: absolute;
+            z-index: 1;
+            top: 60px;
+            background: var(--white);
+            border: 2px solid var(--lightgray);
+            border-radius: 10px;
+            padding: 17px;
+            box-shadow: #00000036 0 0 25px;
+            -webkit-animation: fade-in-top 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+            animation: fade-in-top 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+
+            &::before {
+                content: "";
+                background-color: var(--white);
+                position: absolute;
+                left: 50%;
+                top: -10px;
+                border-left: 2px solid var(--lightgray);
+                border-top: 2px solid var(--lightgray);
+                width: 15px;
+                height: 15px;
+                transform: rotate(45deg);
+            }
+        }
+
+        #searchButton {
+            max-width: 550px;
+            min-width: 350px;
+            width: 100%;
+            height: 46px;
+            display: flex;
+            padding: 5px 10px;
+            align-items: center;
+            justify-content: space-between;
+            border: var(--lightgray) 2px solid;
+            border-radius: 7px;
+            box-shadow: #00000036 0 0 25px;
+            background-color: var(--white);
+
+            span {
+                font-size: large;
+                color: var(--darkgray);
+            }
+        }
+
+        @-webkit-keyframes fade-in-top {
+            0% {
+                -webkit-transform: translateY(-50px);
+                transform: translateY(-50px);
+                opacity: 0;
+                filter: blur(20px);
+            }
+
+            100% {
+                -webkit-transform: translateY(0);
+                transform: translateY(0);
+                opacity: 1;
+                filter: blur(0px);
+            }
+        }
+
+        @keyframes fade-in-top {
+            0% {
+                -webkit-transform: translateY(-50px);
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+
+            100% {
+                -webkit-transform: translateY(0);
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+    }
+
+
 
     .map {
         height: 350px;
@@ -356,6 +442,12 @@ header {
             }
 
             .gm-style {
+
+                .gm-style-iw-d {
+                    height: max-content !important;
+                    max-height: max-content !important;
+                    overflow: unset !important;
+                }
 
                 .gm-style-iw-c {
                     position: absolute;

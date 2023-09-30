@@ -201,8 +201,6 @@ header .signup:hover {
   min-height: calc(100vh - 120px);
   flex-direction: column;
   align-items: center;
-  position: relative;
-  overflow: hidden;
 }
 .wrapper .return-home {
   border: 1px solid var(--middlegray);
@@ -229,6 +227,66 @@ header .signup:hover {
   height: max-content;
   gap: 20px;
   flex-direction: column;
+}
+.wrapper-home .search-btn-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  position: sticky;
+  top: 20px;
+  z-index: 2;
+}
+.wrapper-home .search-btn-container #searchPopup {
+  position: absolute;
+  z-index: 1;
+  top: 60px;
+  background: var(--white);
+  border: 2px solid var(--lightgray);
+  border-radius: 10px;
+  padding: 17px;
+  box-shadow: rgba(0, 0, 0, 0.2117647059) 0 0 25px;
+  animation: fade-in-top 0.4s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+}
+.wrapper-home .search-btn-container #searchPopup::before {
+  content: "";
+  background-color: var(--white);
+  position: absolute;
+  left: 50%;
+  top: -10px;
+  border-left: 2px solid var(--lightgray);
+  border-top: 2px solid var(--lightgray);
+  width: 15px;
+  height: 15px;
+  transform: rotate(45deg);
+}
+.wrapper-home .search-btn-container #searchButton {
+  max-width: 550px;
+  min-width: 350px;
+  width: 100%;
+  height: 46px;
+  display: flex;
+  padding: 5px 10px;
+  align-items: center;
+  justify-content: space-between;
+  border: var(--lightgray) 2px solid;
+  border-radius: 7px;
+  box-shadow: rgba(0, 0, 0, 0.2117647059) 0 0 25px;
+  background-color: var(--white);
+}
+.wrapper-home .search-btn-container #searchButton span {
+  font-size: large;
+  color: var(--darkgray);
+}
+@keyframes fade-in-top {
+  0% {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 .wrapper-home .map {
   height: 350px;
@@ -272,6 +330,13 @@ header .signup:hover {
 .wrapper-home .map #map button.gm-ui-hover-effect {
   display: none !important;
   cursor: unset !important;
+}
+.wrapper-home .map #map .gm-style .gm-style-iw-d {
+  height: -moz-max-content !important;
+  height: max-content !important;
+  max-height: -moz-max-content !important;
+  max-height: max-content !important;
+  overflow: unset !important;
 }
 .wrapper-home .map #map .gm-style .gm-style-iw-c {
   position: absolute;
