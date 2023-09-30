@@ -32,6 +32,7 @@
         "jquery": "^3.7.1",
         "leaflet": "^1.9.4",
         "leaflet-styleeditor": "^0.1.21",
+        "markerwithlabel": "^2.0.2",
         "pikaday": "^1.8.2",
         "prop-types": "^15.8.1"
     }

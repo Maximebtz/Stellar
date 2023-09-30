@@ -228,14 +228,11 @@ header .signup:hover {
   height: -moz-max-content;
   height: max-content;
   gap: 20px;
+  flex-direction: column;
 }
 .wrapper-home .map {
-  width: 50%;
-  height: calc(100vh - 40px);
-  animation: scale-up-hor-left 0.6s ease-in-out 1s both;
-}
-.wrapper-home .map .leaflet-control-attribution.leaflet-control {
-  display: none;
+  height: 350px;
+  animation: scale-up-hor-left 0.6s ease-in-out both;
 }
 .wrapper-home .map #map {
   border-radius: 10px;
@@ -243,11 +240,66 @@ header .signup:hover {
   min-width: 500px;
   height: 100%;
 }
+.wrapper-home .map #map .custom-price-label {
+  background-color: var(--black);
+  border-radius: 8px;
+  color: #FFFFFF !important;
+  font-size: 14px;
+  padding: 10px;
+  position: relative;
+}
+.wrapper-home .map #map .custom-price-label::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  transform: translate(-50%, 0);
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 8px solid var(--black);
+}
+.wrapper-home .map #map #infoWindowContent {
+  padding: 12px;
+  text-align: center;
+  font-size: medium;
+  max-width: 200px;
+}
+.wrapper-home .map #map .gm-ui-hover-effect > span {
+  background-color: transparent;
+}
+.wrapper-home .map #map button.gm-ui-hover-effect {
+  display: none !important;
+  cursor: unset !important;
+}
+.wrapper-home .map #map .gm-style .gm-style-iw-c {
+  position: absolute;
+  box-sizing: border-box;
+  overflow: hidden;
+  height: -moz-max-content;
+  height: max-content;
+  width: -moz-max-content;
+  width: max-content;
+  top: 0;
+  left: 0;
+  transform: translate3d(-50%, -100%, 0);
+  background-color: var(--white);
+  border-radius: 8px;
+  padding: 0 !important;
+  -webkit-box-shadow: 0 2px 7px 1px rgba(0, 0, 0, 0.3);
+}
+.wrapper-home .map #map .gm-style img {
+  width: 200px;
+  height: 120px;
+  -o-object-fit: cover;
+  object-fit: cover;
+  border-radius: 5px;
+}
 @keyframes scale-up-hor-left {
   0% {
-    transform: scale(0.6);
+    transform: scale(0.8);
     opacity: 0;
-    transform-origin: 0% 0%;
   }
   50% {
     opacity: 10%;
@@ -255,7 +307,6 @@ header .signup:hover {
   100% {
     transform: scale(1);
     opacity: 1;
-    transform-origin: 0% 0%;
   }
 }
 
@@ -1370,9 +1421,6 @@ header .signup:hover {
   }
 }
 
-.adverts-container {
-  width: 85%;
-}
 .adverts-container .advert-card-list {
   height: -moz-max-content;
   height: max-content;
@@ -1380,7 +1428,7 @@ header .signup:hover {
   justify-items: center;
   grid-gap: 20px;
   grid-auto-rows: max-content;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 }
 .adverts-container .advert-card-list .clickable-card-parent {
   position: relative;
@@ -1558,31 +1606,7 @@ header .signup:hover {
   }
 }
 @media only screen and (max-width: 1100px) {
-  .map {
-    display: none;
-  }
   #grid {
     width: 100%;
   }
-}
-.custom-price-label {
-  background-color: var(--black);
-  border-radius: 8px;
-  color: #FFFFFF !important;
-  font-size: 14px;
-  padding: 10px;
-  position: relative;
-}
-
-.custom-price-label::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: 100%;
-  transform: translate(-50%, 0);
-  width: 0;
-  height: 0;
-  border-left: 8px solid transparent;
-  border-right: 8px solid transparent;
-  border-top: 8px solid var(--black);
 }/*# sourceMappingURL=app.css.map */

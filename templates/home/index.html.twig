@@ -7,12 +7,16 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-<script src="https://cdn.rawgit.com/googlemaps/v3-utility-library/master/markerwithlabel/src/markerwithlabel.js"></script>
+<script
+    src="https://cdn.rawgit.com/googlemaps/v3-utility-library/master/markerwithlabel/src/markerwithlabel.js"></script>
 
 {% endblock %}
 {% block body %}
 <div class="wrapper">
     <div class="wrapper-home">
+        <div class="map">
+            <div id="map"></div>
+        </div>
         <div class="adverts-container">
             <div id="grid" class="advert-card-list">
                 {% for advert in adverts %}
@@ -44,23 +48,20 @@
             </div>
             <div class="pagination">
                 {% set totalPages = (totalAdverts + perPage - 1) / perPage | round(0, 'ceil') %}
-                {% for pageNumber in range(1, totalPages) %}
+                {% for pageNumber in range(1, totalPages + 1) %}
                 <a href="{{ path(app.request.attributes.get('_route'), {'page': pageNumber}) }}" {% if pageNumber==page
                     %}class="active" {% else %}class="pages" {% endif %}>{{ pageNumber }}</a>
                 {% endfor %}
             </div>
         </div>
-        <div class="map">
-            <div id="map"></div>
-        </div>
+
     </div>
 </div>
 {% endblock %}
 {% block javascripts %}
-<script src="{{ asset('js/map.js') }}"></script>
 <script src="{{ asset('js/app.js') }}"></script>
 <script src="{{ asset('js/animations.js') }}"></script>
-<script>(g => { var h, a, k, p = "The Google Maps JavaScript API", c = "google", l = "importLibrary", q = "__ib__", m = document, b = window; b = b[c] || (b[c] = {}); var d = b.maps || (b.maps = {}), r = new Set, e = new URLSearchParams, u = () => h || (h = new Promise(async (f, n) => { await (a = m.createElement("script")); e.set("libraries", [...r] + ""); for (k in g) e.set(k.replace(/[A-Z]/g, t => "_" + t[0].toLowerCase()), g[k]); e.set("callback", c + ".maps." + q); a.src = `https://maps.${c}apis.com/maps/api/js?` + e; d[q] = f; a.onerror = () => h = n(Error(p + " could not load.")); a.nonce = m.querySelector("script[nonce]")?.nonce || ""; m.head.append(a) })); d[l] ? console.warn(p + " only loads once. Ignoring:", g) : d[l] = (f, ...n) => r.add(f) && u().then(() => d[l](f, ...n)) })
+<script>(g => { let h, a, k, p = "The Google Maps JavaScript API", c = "google", l = "importLibrary", q = "__ib__", m = document, b = window; b = b[c] || (b[c] = {}); let d = b.maps || (b.maps = {}), r = new Set, e = new URLSearchParams, u = () => h || (h = new Promise(async (f, n) => { await (a = m.createElement("script")); e.set("libraries", [...r] + ""); for (k in g) e.set(k.replace(/[A-Z]/g, t => "_" + t[0].toLowerCase()), g[k]); e.set("callback", c + ".maps." + q); a.src = `https://maps.${c}apis.com/maps/api/js?` + e; d[q] = f; a.onerror = () => h = n(Error(p + " could not load.")); a.nonce = m.querySelector("script[nonce]")?.nonce || ""; m.head.append(a) })); d[l] ? console.warn(p + " only loads once. Ignoring:", g) : d[l] = (f, ...n) => r.add(f) && u().then(() => d[l](f, ...n)) })
         ({ key: "AIzaSyDKMfraFkzITgdFU4n3x1xu451mtxmGI8E", v: "beta" });</script>
 <script>
     // Initialize and add the map
@@ -73,41 +74,97 @@
         //@ts-ignore
         const { Map } = await google.maps.importLibrary("maps");
         const { AdvancedMarkerView } = await google.maps.importLibrary("marker");
+        const infoWindow = new google.maps.InfoWindow();
 
         // The map, centered at const position
         map = new Map(document.getElementById("map"), {
             zoom: 11,
+            minZoom: 3,
             center: position,
             mapId: "DEMO_MAP_ID",
+            gestureHandling: "greedy",
         });
 
         // Loop through your adverts and add markers for each one
         {% for advert in adverts %}
-            var geocoder = new google.maps.Geocoder();
-            var address = "{{ advert.address }}, {{ advert.city }}, {{ advert.cp }}, {{ advert.country }}";
+        (function () {
+            let geocoder = new google.maps.Geocoder();
+            let address = "{{ advert.address }}, {{ advert.city }}, {{ advert.cp }}, {{ advert.country }}";
+            let title = "{{ advert.title }}";
+            let imgSrc = "{{ asset('uploads/' ~ advert.images[0].url) }}";
+            let detailURL = "{{ path('detail_advert', {'id': advert.id}) }}";
+            let price = "{{ advert.price }}";
 
             geocoder.geocode({ 'address': address }, function (results, status) {
                 if (status === 'OK') {
-                    var location = results[0].geometry.location;
-                    var lat = location.lat();
-                    var lng = location.lng();
+                    let location = results[0].geometry.location;
+                    let lat = location.lat();
+                    let lng = location.lng();
 
-                    
                     // Créez un marqueur pour cette annonce
-                    var marker = new google.maps.Marker({
+                    let marker = new google.maps.Marker({
                         position: { lat: lat, lng: lng },
                         map: map,
-                        title: "{{ advert.title }}",
+                        title: title,
                         label: {
-                            text: "{{ advert.price }}€",
+                            text: price + "€",
                             className: "custom-price-label"
                         },
                         cursor: "pointer"
                     });
+
+                    let closeInfoWindowTimer;
+
+                    // Ouverture de l'InfoWindow lors du survol du marqueur
+                    marker.addListener('mouseover', function () {
+                        const contentString = `
+                            <img src="{{ asset('uploads/' ~ advert.images[0].url) }}" alt="{{ advert.title }}" width="50" height="50">
+                            <div id="infoWindowContent">
+                                <h4>{{ advert.title }}</h4>
+                            </div>`;
+                        infoWindow.setContent(contentString);
+                        infoWindow.open(map, marker);
+
+                        // Écouteur d'événements pour quand l'InfoWindow est prêt
+                        google.maps.event.addListenerOnce(infoWindow, 'domready', function () {
+                            // Récupérer l'élément DOM de l'InfoWindow
+                            const iwOuter = document.getElementById('infoWindowContent');
+
+                            // Empêcher la fermeture lorsqu'on survole l'InfoWindow
+                            iwOuter.addEventListener('mouseover', function () {
+                                clearTimeout(closeInfoWindowTimer);
+                            });
+
+                            // Activer la fermeture lorsqu'on quitte l'InfoWindow
+                            iwOuter.addEventListener('mouseout', function () {
+                                closeInfoWindowTimer = setTimeout(() => {
+                                    infoWindow.close();
+                                }, 100); // fermer après 100 ms, à ajuster selon vos besoins
+                            });
+                        });
+                    });
+
+                    // Programmation de la fermeture de l'InfoWindow lorsqu'on quitte le marqueur
+                    marker.addListener('mouseout', function () {
+                        closeInfoWindowTimer = setTimeout(() => {
+                            infoWindow.close();
+                        }, 100); // fermer après 100 ms, à ajuster selon vos besoins
+                    });
+
+                    // Annulation de la fermeture de l'InfoWindow lorsqu'on survole à nouveau le marqueur
+                    marker.addListener('mouseover', function () {
+                        clearTimeout(closeInfoWindowTimer);
+                    });
+
+                    // Rendez le marqueur cliquable
+                    marker.addListener('click', function () {
+                        window.location.href = detailURL;
+                    });
                 } else {
-                    console.error('Erreur de géocodage pour l\'annonce "{{ advert.title }}": ' + status);
+                    console.error('Erreur de géocodage pour l\'annonce "' + title + '": ' + status);
                 }
             });
+        })();
         {% endfor %}
 
         for (const marker of markers) {
@@ -116,5 +173,7 @@
     }
 
     initMap();
+
+
 </script>
 {% endblock javascripts %}
