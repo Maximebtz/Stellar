@@ -312,6 +312,25 @@ header {
         top: 20px;
         z-index: 2;
 
+        #searchButton {
+            max-width: 550px;
+            width: 100%;
+            height: 46px;
+            display: flex;
+            padding: 5px 10px;
+            align-items: center;
+            justify-content: space-between;
+            border: var(--lightgray) 2px solid;
+            border-radius: 7px;
+            box-shadow: #00000036 0 0 25px;
+            background-color: var(--white);
+
+            span {
+                font-size: large;
+                color: var(--darkgray);
+            }
+        }
+
         #searchPopup {
             position: absolute;
             z-index: 1;
@@ -338,25 +357,6 @@ header {
             }
         }
 
-        #searchButton {
-            max-width: 550px;
-            min-width: 350px;
-            width: 100%;
-            height: 46px;
-            display: flex;
-            padding: 5px 10px;
-            align-items: center;
-            justify-content: space-between;
-            border: var(--lightgray) 2px solid;
-            border-radius: 7px;
-            box-shadow: #00000036 0 0 25px;
-            background-color: var(--white);
-
-            span {
-                font-size: large;
-                color: var(--darkgray);
-            }
-        }
 
         @-webkit-keyframes fade-in-top {
             0% {
@@ -400,7 +400,6 @@ header {
         #map {
             border-radius: 10px;
             width: 100%;
-            min-width: 500px;
             height: 100%;
 
             .custom-price-label {
@@ -1860,7 +1859,7 @@ header {
         justify-items: center;
         grid-gap: 20px;
         grid-auto-rows: max-content;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 
         .clickable-card-parent {
             position: relative;
@@ -2075,8 +2074,8 @@ header {
             a {
                 .fig-logo {
                     .icon-logo {
-                        width: 55px;
-                        height: 55px;
+                        width: 50px;
+                        height: 50px;
                     }
                 }
             }
@@ -2087,11 +2086,15 @@ header {
         }
 
         .log {
+            position: relative;
+            top: -10px;
             #profil-picture {
-                width: 55px;
-                height: 55px;
+                width: 50px;
+                height: 50px;
             }
         }
+
+        
     }
 
 
@@ -2099,6 +2102,12 @@ header {
 
     .wrapper {
         padding: 25px 0;
+
+        .return-home {
+            
+            top: 20px;
+            left: 20px;
+        }
     }
 }
 

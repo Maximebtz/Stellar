@@ -7,9 +7,6 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-<script
-    src="https://cdn.rawgit.com/googlemaps/v3-utility-library/master/markerwithlabel/src/markerwithlabel.js"></script>
-
 {% endblock %}
 {% block body %}
 <div class="wrapper">
@@ -194,6 +191,7 @@
                     marker.addListener('click', function () {
                         window.location.href = detailURL;
                     });
+
                 } else {
                     console.error('Erreur de géocodage pour l\'annonce "' + title + '": ' + status);
                 }
@@ -208,56 +206,107 @@
 
     initMap();
 
-    
+
     /****Filter Bar****/
 
     document.getElementById("searchButton").addEventListener("click", function () {
         const popup = document.getElementById("searchPopup");
         popup.style.display = popup.style.display === "none" ? "block" : "none";
-      });
-      
-      // Fonction pour appliquer les filtres
-      function applyFilters() {
-        const cityCountry = document.getElementById("cityCountry").value;
+    });
+
+    // Fonction pour appliquer les filtres
+     // Fonction pour appliquer les filtres
+     function applyFilters() {
+        const cityTags = Array.from(document.querySelectorAll("#cityTags .tag")).map(tag => tag.innerText);
+        const countryTags = Array.from(document.querySelectorAll("#countryTags .tag")).map(tag => tag.innerText);
         const priceRange = document.getElementById("priceRange").value;
         const startDate = document.getElementById("startDate").value;
         const endDate = document.getElementById("endDate").value;
-      
-        // Envoie ces valeurs au serveur pour filtrer les résultats
-      }
-      
-      function addTag(inputId, tagContainerId) {
+
+        fetch('/home/filter-adverts', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                cities: cityTags,
+                countries: countryTags,
+                priceRange: priceRange,
+                startDate: startDate,
+                endDate: endDate
+            })
+        })
+            .then(response => response.json())
+            .then(data => {
+                const grid = document.getElementById("grid");
+
+                // Vider le conteneur actuel
+                grid.innerHTML = "";
+
+                // Remplir avec les nouvelles annonces
+                data.forEach(advert => {
+                    const advertCard = document.createElement("div");
+                    advertCard.className = "advert-card slide-in";
+
+                    const advertHTML = `
+            <a href="${advert.detailURL}" class="clickable-card">
+              <figure>
+                <img src="${advert.imageURL}" alt="${advert.title} image">
+              </figure>
+              <div class="card-content">
+                <h3 class="card-title">${advert.title}</h3>
+                <p class="card-text">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                    <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" />
+                  </svg>
+                  ${advert.city}, ${advert.country}
+                </p>
+                <p class="card-text">
+                  <span class="price-card">${advert.price}€</span>/nuit
+                </p>
+              </div>
+            </a>`;
+
+                    advertCard.innerHTML = advertHTML;
+                    grid.appendChild(advertCard);
+                });
+            });
+    }
+
+    function addTag(inputId, tagContainerId) {
         const input = document.getElementById(inputId);
         const tagContainer = document.getElementById(tagContainerId);
-      
+
         const tag = document.createElement("span");
         tag.className = "tag";
         tag.innerText = input.value;
-      
+
         const closeBtn = document.createElement("span");
         closeBtn.className = "tag-close";
         closeBtn.innerText = "x";
         closeBtn.onclick = function () {
             tagContainer.removeChild(tag);
         };
-      
+
         tag.appendChild(closeBtn);
         tagContainer.appendChild(tag);
-      
+
         input.value = "";
-      }
-      
-      // Ajouter une étiquette lorsque l'utilisateur appuie sur Entrée
-      document.getElementById("cityInput").addEventListener("keyup", function (event) {
+    }
+
+    // Ajouter une étiquette lorsque l'utilisateur appuie sur Entrée
+    document.getElementById("cityInput").addEventListener("keyup", function (event) {
         if (event.key === "Enter") {
             addTag("cityInput", "cityTags");
         }
-      });
-      
-      document.getElementById("countryInput").addEventListener("keyup", function (event) {
+    });
+
+    document.getElementById("countryInput").addEventListener("keyup", function (event) {
         if (event.key === "Enter") {
             addTag("countryInput", "countryTags");
         }
-      });
+    });
+
+   
 </script>
 {% endblock javascripts %}

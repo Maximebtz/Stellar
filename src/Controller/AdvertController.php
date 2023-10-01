@@ -54,8 +54,8 @@ class AdvertController extends AbstractController
         if (!$advert) {
             $advert = new Advert();
         }
-        
-    
+
+
         $form = $this->createForm(AdvertType::class, $advert);
 
         //Récupérer les catégories
@@ -173,33 +173,52 @@ class AdvertController extends AbstractController
     }
 
 
-    #[Route('/get-adverts-json', name: 'get-adverts-json')]
-    public function getAdvertsJson(EntityManagerInterface $entityManager)
+    #[Route('/home/filter-adverts', name: 'filter_adverts', methods: 'POST')]
+    public function filterAdverts(Request $request, EntityManagerInterface $entityManager): Response
     {
-        // Remplacez ceci par votre logique pour récupérer les annonces depuis la base de données
-        $adverts = $entityManager->getRepository(YourAdvertEntity::class)->findAll();
+        $data = json_decode($request->getContent(), true);
 
-        // Transformez les annonces en format JSON
-        $jsonAdverts = $this->serializeAdverts($adverts);
+        // Récupère les paramètres des filtres
+        $cities = $data['cities'];
+        $countries = $data['countries'];
+        $priceRange = $data['priceRange'];
+        $startDate = new \DateTime($data['startDate']);
+        $endDate = new \DateTime($data['endDate']);
 
-        // Retournez une réponse JSON
-        return new JsonResponse($jsonAdverts);
-    }
+        // Création de la requête SQL avec jointure
+        $queryBuilder = $entityManager->createQueryBuilder();
+        $queryBuilder->select('a')
+            ->from('App\Entity\Advert', 'a')
+            ->leftJoin('a.reservations', 'r');  // Assume une relation "reservations" dans Advert
 
-    private function serializeAdverts(array $adverts)
-    {
-        // Vous pouvez personnaliser la sérialisation ici en fonction de vos besoins
-        // Par exemple, utilisez la bibliothèque Symfony Serializer
-
-        $data = [];
-        foreach ($adverts as $advert) {
-            $data[] = [
-                'id' => $advert->getId(),
-                'title' => $advert->getTitle(),
-                // Ajoutez d'autres propriétés d'annonce ici
-            ];
+        if (!empty($cities)) {
+            $queryBuilder->andWhere('a.city IN (:cities)')
+                ->setParameter('cities', $cities);
         }
 
-        return $data;
+        if (!empty($countries)) {
+            $queryBuilder->andWhere('a.country IN (:countries)')
+                ->setParameter('countries', $countries);
+        }
+
+        if (!empty($priceRange)) {
+            $queryBuilder->andWhere('a.price <= :price')
+                ->setParameter('price', $priceRange);
+        }
+
+        if ($startDate) {
+            $queryBuilder->andWhere('r.startDate >= :startDate')  // Utilise 'r' pour la table Reservation
+                ->setParameter('startDate', $startDate);
+        }
+
+        if ($endDate) {
+            $queryBuilder->andWhere('r.endDate <= :endDate')  // Utilise 'r' pour la table Reservation
+                ->setParameter('endDate', $endDate);
+        }
+
+        $query = $queryBuilder->getQuery();
+        $filteredAdverts = $query->getResult();
+        // Renvoie les annonces filtrées
+        return $this->json($filteredAdverts);
     }
 }

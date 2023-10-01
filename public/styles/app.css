@@ -237,6 +237,23 @@ header .signup:hover {
   top: 20px;
   z-index: 2;
 }
+.wrapper-home .search-btn-container #searchButton {
+  max-width: 550px;
+  width: 100%;
+  height: 46px;
+  display: flex;
+  padding: 5px 10px;
+  align-items: center;
+  justify-content: space-between;
+  border: var(--lightgray) 2px solid;
+  border-radius: 7px;
+  box-shadow: rgba(0, 0, 0, 0.2117647059) 0 0 25px;
+  background-color: var(--white);
+}
+.wrapper-home .search-btn-container #searchButton span {
+  font-size: large;
+  color: var(--darkgray);
+}
 .wrapper-home .search-btn-container #searchPopup {
   position: absolute;
   z-index: 1;
@@ -260,24 +277,6 @@ header .signup:hover {
   height: 15px;
   transform: rotate(45deg);
 }
-.wrapper-home .search-btn-container #searchButton {
-  max-width: 550px;
-  min-width: 350px;
-  width: 100%;
-  height: 46px;
-  display: flex;
-  padding: 5px 10px;
-  align-items: center;
-  justify-content: space-between;
-  border: var(--lightgray) 2px solid;
-  border-radius: 7px;
-  box-shadow: rgba(0, 0, 0, 0.2117647059) 0 0 25px;
-  background-color: var(--white);
-}
-.wrapper-home .search-btn-container #searchButton span {
-  font-size: large;
-  color: var(--darkgray);
-}
 @keyframes fade-in-top {
   0% {
     transform: translateY(-50px);
@@ -295,7 +294,6 @@ header .signup:hover {
 .wrapper-home .map #map {
   border-radius: 10px;
   width: 100%;
-  min-width: 500px;
   height: 100%;
 }
 .wrapper-home .map #map .custom-price-label {
@@ -1493,7 +1491,7 @@ header .signup:hover {
   justify-items: center;
   grid-gap: 20px;
   grid-auto-rows: max-content;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 }
 .adverts-container .advert-card-list .clickable-card-parent {
   position: relative;
@@ -1656,18 +1654,26 @@ header .signup:hover {
     height: max-content;
   }
   header .logo a .fig-logo .icon-logo {
-    width: 55px;
-    height: 55px;
+    width: 50px;
+    height: 50px;
   }
   header .title {
     display: none;
   }
+  header .log {
+    position: relative;
+    top: -10px;
+  }
   header .log #profil-picture {
-    width: 55px;
-    height: 55px;
+    width: 50px;
+    height: 50px;
   }
   .wrapper {
     padding: 25px 0;
+  }
+  .wrapper .return-home {
+    top: 20px;
+    left: 20px;
   }
 }
 @media only screen and (max-width: 1100px) {
