@@ -10,7 +10,7 @@
 
 {% block body %}
 <div class="wrapper">
-  <a href="{{ path("app_home") }}" class="return-home">
+  <a href="{{ path(" app_home") }}" class="return-home">
     <img src="{{ asset('img/icons/Left Arrow.svg') }}" alt="Icon return home">
   </a>
   <div class="wrapper-detail">
@@ -131,9 +131,12 @@
         <div id="calendar-and-detail">
           <div id="step-1">
 
+            {# Prix de la nuit #}
             <p class="night-price">
               <b>{{ advert.price }}€</b>/Nuits
             </p>
+
+            {# Aperçu des dates choisies #}
             <div class="dates">
               <div class="date">
                 <p>Arrivée :</p>
@@ -144,18 +147,21 @@
                 <input class="date-span" type="date" id="departureDate" name="reservation[departureDate]" disabled />
               </div>
             </div>
-            
+
+            {# Calendrier #}
             <div id="calendar" data-advert-id="{{ advert.id }}" data-advert-id="{{ advert.id }}"
               data-reserved-dates="{{ reservedDates|json_encode|e('html_attr') }}"></div>
             <div id="alert-dates" style="display: none;">
-                <div class="popup-container">
-                  <div class="popup-card">
-                    <h2>Alerte</h2>
-                    <p>Vous ne pouvez pas mettre de date antiérieur ou égale à la date d'arrivée</p>
-                    <button id="close-popup">Close</button>
-                  </div>
+              <div class="popup-container">
+                <div class="popup-card">
+                  <h2>Alerte</h2>
+                  <p>Vous ne pouvez pas mettre de date antiérieur ou égale à la date d'arrivée</p>
+                  <button id="close-popup">Close</button>
                 </div>
+              </div>
             </div>
+
+            {# Détail des prix #}
             <div class="price-details">
               <div class="price">
                 <p><span id="pricePerNight">{{advert.price}}</span> x <span id="numNights">0</span> nuits = </p><span
@@ -241,21 +247,25 @@
 {% block javascripts %}
 <script src="{{ asset('js/app.js') }}"></script>
 <script src="{{ asset('js/upload.js') }}"></script>
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js">
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js">
+</script>
 <script>
 
   /*******Calendar*******/
   $(document).ready(function () {
 
-    var arrivalDateInput = $('[name="reservation[arrivalDate]"]');
-    var departureDateInput = $('[name="reservation[departureDate]"]');
-    var advertId = $('#calendar').data('advert-id');
-    var reservedDates = $('#calendar').data('reserved-dates');
+    let arrivalDateInput = $('[name="reservation[arrivalDate]"]');
+    let departureDateInput = $('[name="reservation[departureDate]"]');
+    let advertId = $('#calendar').data('advert-id');
+    let reservedDates = $('#calendar').data('reserved-dates');
 
     $('#calendar').datepicker({
+      // Paramétrer les différentes options de Bootstrap Datepicker
       maxViewMode: 0,
       language: "fr",
       multidate: 2,
@@ -263,12 +273,12 @@
       startDate: 'today',
       todayHighlight: true,
       beforeShowDay: function (date) {
-        var formattedDate = $.datepicker.formatDate('yy-mm-dd', date);
+        let formattedDate = $.datepicker.formatDate('yy-mm-dd', date);
 
         // Parcourir les dates réservées pour l'annonce
-        for (var i = 0; i < reservedDates.length; i++) {
-          var reservedStartDate = reservedDates[i][0];
-          var reservedEndDate = reservedDates[i][1];
+        for (let i = 0; i < reservedDates.length; i++) {
+          let reservedStartDate = reservedDates[i][0];
+          let reservedEndDate = reservedDates[i][1];
 
           // Comparer la date actuelle avec les dates réservées
           if (formattedDate >= reservedStartDate && formattedDate <= reservedEndDate) {
@@ -288,7 +298,8 @@
       }
     });
 
-    // Fonction pour mettre à jour l'état du bouton de réservation
+    // Fonction pour mettre à jour l'état du bouton de réservation 
+    // (Utilisable si les dates sont choisis et inversement pour le cas contraire)
     function updateReservationButton() {
       if (arrivalDateInput && departureDateInput) {
         $('#start-button').prop('disabled', false); // Activer le bouton de réservation
@@ -297,7 +308,7 @@
       }
     }
 
-    document.getElementById('close-popup').addEventListener('click', function() {
+    document.getElementById('close-popup').addEventListener('click', function () {
       // Masquer l'alerte #alert-dates
       $('#alert-dates').hide();
     });
@@ -311,7 +322,7 @@
         if (departureDateInput <= arrivalDateInput) {
           $('#alert-dates').fadeIn();
           $('#alert-dates').show();
-          // Réinitialisez les champs de date et annulez la sélection
+          // Réinitialiser les champs de date et annuler la sélection
           $('#calendar').datepicker('clearDates');
           return;
         }
@@ -319,14 +330,18 @@
         // Vérifier si arrivalDate est définie avant de l'utiliser
         if (arrivalDateInput) {
           // Formatage de la date au format "yyyy-MM-dd"
-          let formattedDate = arrivalDateInput.getFullYear() + '-' + (arrivalDateInput.getMonth() + 1).toString().padStart(2, '0') + '-' + arrivalDateInput.getDate().toString().padStart(2, '0');
-          $('[name="reservation[arrivalDate]"]').val(formattedDate); // Mettez à jour la valeur du champ d'arrivée
+          let formattedDate = arrivalDateInput.getFullYear() + '-' +
+            (arrivalDateInput.getMonth() + 1).toString().padStart(2, '0') + '-' +
+            arrivalDateInput.getDate().toString().padStart(2, '0');
+          $('[name="reservation[arrivalDate]"]').val(formattedDate); // Mettre à jour la valeur du champ d'arrivée
         }
         // Vérifier si departureDate est définie avant de l'utiliser
         if (departureDateInput) {
           // Formatage de la date au format "yyyy-MM-dd"
-          let formattedDate = departureDateInput.getFullYear() + '-' + (departureDateInput.getMonth() + 1).toString().padStart(2, '0') + '-' + departureDateInput.getDate().toString().padStart(2, '0');
-          $('[name="reservation[departureDate]"]').val(formattedDate); // Mettez à jour la valeur du champ de départ
+          let formattedDate = departureDateInput.getFullYear() + '-' +
+            (departureDateInput.getMonth() + 1).toString().padStart(2, '0') + '-' +
+            departureDateInput.getDate().toString().padStart(2, '0');
+          $('[name="reservation[departureDate]"]').val(formattedDate); // Mettre à jour la valeur du champ de départ
         }
 
         $('#calendar').find('.day').each(function () {
@@ -371,6 +386,7 @@
       updateReservationButton();
     });
 
+
     function formatDate(date) {
       let day = date.getDate();
       let month = date.getMonth() + 1;
@@ -389,7 +405,7 @@
 
 
   /*******Form MultiStep*******/
-  // Variables for tracking the current step
+  // letiables for tracking the current step
   let currentStep = 1;
   const totalSteps = 4;
 
@@ -441,6 +457,22 @@
 
   // Initialize the display to the first step
   updateStepDisplay();
+
+
+
+  // Grisage des dates déjà réservées
+  $('#datepicker').datepicker({
+    beforeShowDay: function (date) {
+      // Logique pour griser les dates
+    }
+  });
+
+  // Calcul dynamique des prix
+  $('#datepicker').on('changeDate', function () {
+    // Logique de calcul du prix
+  });
+
+
 
 </script>
 {% endblock javascripts %}
