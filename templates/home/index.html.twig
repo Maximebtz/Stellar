@@ -227,6 +227,7 @@
 
         // Fonction pour appliquer les filtres
         function applyFilters() {
+            console.log("applyFilters function called");
             const cityTags = Array.from(document.querySelectorAll("#cityTags .tag")).map(tag => tag.innerText);
             const countryTags = Array.from(document.querySelectorAll("#countryTags .tag")).map(tag => tag.innerText);
             const priceRange = document.getElementById("priceRange").value;
@@ -252,6 +253,19 @@
                     endDate: endDate
                 })
             })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log("Data received from server:", data);
+                    // Le reste du code pour remplir les annonces
+                })
+                .catch(error => {
+                    console.error('Fetch error:', error);
+                })
                 .then(response => response.json())
                 .then(data => {
                     const grid = document.getElementById("grid");

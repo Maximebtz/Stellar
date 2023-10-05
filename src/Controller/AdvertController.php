@@ -176,6 +176,7 @@ class AdvertController extends AbstractController
     #[Route('/home', name: 'filter_adverts', methods: 'POST')]
     public function filterAdverts(Request $request, EntityManagerInterface $entityManager): Response
     {
+        
         $data = json_decode($request->getContent(), true);
 
         // Initialize filter parameters
@@ -214,6 +215,7 @@ class AdvertController extends AbstractController
         $query = $entityManager->createQuery($dql);
         $query->setParameters($params);
         $filteredAdverts = $query->getResult();
+
 
         return $this->json($filteredAdverts);
     }
