@@ -41,6 +41,7 @@ pre {
   margin: 0;
   box-sizing: border-box;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  scroll-behavior: smooth;
 }
 
 *::-webkit-scrollbar {
@@ -49,6 +50,36 @@ pre {
 
 input:-webkit-autofill {
   background-color: red !important;
+}
+
+/***** btn *****/
+.l-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--gradient-p-b);
+  border-radius: 10px;
+  width: 100%;
+  height: 46px;
+  border: none;
+  position: relative;
+  color: white;
+  font-size: large;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+.l-btn:hover {
+  transform: scale(1.02);
+}
+.l-btn[disabled] {
+  transition: all 0.2s ease-in-out;
+  background: var(--middlegray);
+  color: var(--white);
+  cursor: default;
+}
+.l-btn[disabled]:hover {
+  transform: scale(1);
 }
 
 body {
@@ -212,8 +243,8 @@ header .signup:hover {
   justify-content: center;
   box-shadow: var(--lightgray) 0 0 15px;
   position: absolute;
-  left: 4.5%;
-  top: 30px;
+  left: 4%;
+  top: 130px;
   transition: all 0.2s ease-in-out;
 }
 .wrapper .return-home:hover {
@@ -249,6 +280,10 @@ header .signup:hover {
   border-radius: 7px;
   box-shadow: rgba(0, 0, 0, 0.2117647059) 0 0 25px;
   background-color: var(--white);
+  transition: all 0.2s ease-in-out;
+}
+.wrapper-home .search-btn-container #searchButton:hover {
+  transform: scale(1.02);
 }
 .wrapper-home .search-btn-container #searchButton span {
   font-size: large;
@@ -258,12 +293,16 @@ header .signup:hover {
   position: absolute;
   z-index: 1;
   top: 60px;
+  max-width: 600px;
+  width: 100%;
   background: var(--white);
   border: 2px solid var(--lightgray);
   border-radius: 10px;
-  padding: 17px;
+  padding: 20px;
   box-shadow: rgba(0, 0, 0, 0.2117647059) 0 0 25px;
   animation: fade-in-top 0.4s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+  flex-direction: column;
+  gap: 25px;
 }
 .wrapper-home .search-btn-container #searchPopup::before {
   content: "";
@@ -276,6 +315,76 @@ header .signup:hover {
   width: 15px;
   height: 15px;
   transform: rotate(45deg);
+}
+.wrapper-home .search-btn-container #searchPopup h3 {
+  text-align: center;
+  color: var(--darkgray);
+  font-size: 2.5vh;
+  font-family: "Inter";
+}
+.wrapper-home .search-btn-container #searchPopup input#priceRange {
+  box-shadow: none !important;
+}
+.wrapper-home .search-btn-container #searchPopup .filters-container {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+.wrapper-home .search-btn-container #searchPopup .filters-container .filters {
+  display: flex;
+  gap: 20px;
+}
+.wrapper-home .search-btn-container #searchPopup .filters-container .filters .filter {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+}
+.wrapper-home .search-btn-container #searchPopup .filters-container .filters .filter .labels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+.wrapper-home .search-btn-container #searchPopup .filters-container .filters .filter .tag {
+  background: var(--darkgray);
+  padding: 3px 3px 3px 9px;
+  border-radius: 25px;
+  color: var(--white);
+  font-size: smaller;
+  letter-spacing: 1px;
+  display: flex;
+  gap: 3px;
+  align-items: center;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  width: -moz-max-content;
+  width: max-content;
+}
+.wrapper-home .search-btn-container #searchPopup .filters-container .filters .filter .tag-close {
+  font-family: cursive;
+  cursor: pointer;
+  height: -moz-fit-content;
+  height: fit-content;
+  display: flex;
+}
+.wrapper-home .search-btn-container #searchPopup .filters-container .filters .filter label {
+  font-size: larger;
+  font-family: "Poppins";
+  font-weight: 500;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.wrapper-home .search-btn-container #searchPopup .filters-container .filters .filter input {
+  height: 36px;
+  max-width: 300px;
+  width: 100%;
+  border-radius: 7px;
+  outline: none;
+  border: var(--middlegray) solid 1px;
+  box-shadow: var(--lightgray) 0 0 15px;
+  padding: 10px;
 }
 @keyframes fade-in-top {
   0% {
@@ -1117,34 +1226,6 @@ header .signup:hover {
   50% {
     background: var(--dark-blue);
   }
-}
-.wrapper-detail-main .wrapper-detail-right #calendar-and-detail .l-btn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: var(--gradient-p-b);
-  border-radius: 10px;
-  width: 100%;
-  height: 46px;
-  border: none;
-  position: relative;
-  color: white;
-  font-size: large;
-  text-decoration: none;
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
-}
-.wrapper-detail-main .wrapper-detail-right #calendar-and-detail .l-btn:hover {
-  transform: scale(1.02);
-}
-.wrapper-detail-main .wrapper-detail-right #calendar-and-detail .l-btn[disabled] {
-  transition: all 0.2s ease-in-out;
-  background: var(--middlegray);
-  color: var(--white);
-  cursor: default;
-}
-.wrapper-detail-main .wrapper-detail-right #calendar-and-detail .l-btn[disabled]:hover {
-  transform: scale(1);
 }
 .wrapper-detail-main .wrapper-detail-right .night-price {
   border-bottom: 1px solid var(--middlegray);

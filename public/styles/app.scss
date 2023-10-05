@@ -82,6 +82,39 @@ input:-webkit-autofill {
     background-color: red !important;
 }
 
+/***** btn *****/
+.l-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--gradient-p-b);
+    border-radius: 10px;
+    width: 100%;
+    height: 46px;
+    border: none;
+    position: relative;
+    color: white;
+    font-size: large;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all .2s ease-in-out;
+
+    &:hover {
+        transform: scale(1.02);
+    }
+
+    &[disabled] {
+        transition: all .2s ease-in-out;
+        background: var(--middlegray);
+        color: var(--white);
+        cursor: default;
+
+        &:hover {
+            transform: scale(1);
+        }
+    }
+}
+
 
 //************** Body **************//
 
@@ -285,8 +318,8 @@ header {
         justify-content: center;
         box-shadow: var(--lightgray) 0 0 15px;
         position: absolute;
-        left: 4.5%;
-        top: 30px;
+        left: 4%;
+        top: 130px;
         transition: all .2s ease-in-out;
 
         &:hover {
@@ -325,6 +358,11 @@ header {
             border-radius: 7px;
             box-shadow: #00000036 0 0 25px;
             background-color: var(--white);
+            transition: all .2s ease-in-out;
+
+            &:hover {
+                transform: scale(1.02);
+            }
 
             span {
                 font-size: large;
@@ -336,13 +374,17 @@ header {
             position: absolute;
             z-index: 1;
             top: 60px;
+            max-width: 600px;
+            width: 100%;
             background: var(--white);
             border: 2px solid var(--lightgray);
             border-radius: 10px;
-            padding: 17px;
+            padding: 20px;
             box-shadow: #00000036 0 0 25px;
-            -webkit-animation: fade-in-top 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
-            animation: fade-in-top 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+            -webkit-animation: fade-in-top 0.4s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+            animation: fade-in-top 0.4s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+            flex-direction: column;
+            gap: 25px;
 
             &::before {
                 content: "";
@@ -355,6 +397,82 @@ header {
                 width: 15px;
                 height: 15px;
                 transform: rotate(45deg);
+            }
+
+            h3 {
+                text-align: center;
+                color: var(--darkgray);
+                font-size: 2.5vh;
+                font-family: 'Inter';
+            }
+
+            input#priceRange {
+                box-shadow: none !important;
+            }
+
+            .filters-container {
+                display: flex;
+                flex-direction: column;
+                gap: 25px;
+
+                .filters {
+                    display: flex;
+                    gap: 20px;
+
+                    .filter {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 15px;
+                        width: 100%;
+
+                        .labels {
+                            display: flex;
+                            flex-wrap: wrap;
+                            gap: 7px;
+                        }
+
+                        .tag {
+                            background: var(--darkgray);
+                            padding: 3px 3px 3px 9px;
+                            border-radius: 25px;
+                            color: var(--white);
+                            font-size: smaller;
+                            letter-spacing: 1px;
+                            display: flex;
+                            gap: 3px;
+                            align-items: center;
+                            user-select: none;
+                            width: max-content;
+                        }
+
+                        .tag-close {
+                            font-family: cursive;
+                            cursor: pointer;
+                            height: fit-content;
+                            display: flex;
+                        }
+
+                        label {
+                            font-size: larger;
+                            font-family: 'Poppins';
+                            font-weight: 500;
+                            display: flex;
+                            flex-direction: column;
+                            gap: 15px;
+                        }
+
+                        input {
+                            height: 36px;
+                            max-width: 300px;
+                            width: 100%;
+                            border-radius: 7px;
+                            outline: none;
+                            border: var(--middlegray) solid 1px;
+                            box-shadow: var(--lightgray) 0 0 15px;
+                            padding: 10px;
+                        }
+                    }
+                }
             }
         }
 
@@ -1377,39 +1495,6 @@ header {
 
                         50% {
                             background: var(--dark-blue);
-                        }
-                    }
-                }
-
-                //** Reservation btn **//
-                .l-btn {
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    background: var(--gradient-p-b);
-                    border-radius: 10px;
-                    width: 100%;
-                    height: 46px;
-                    border: none;
-                    position: relative;
-                    color: white;
-                    font-size: large;
-                    text-decoration: none;
-                    cursor: pointer;
-                    transition: all .2s ease-in-out;
-
-                    &:hover {
-                        transform: scale(1.02);
-                    }
-
-                    &[disabled] {
-                        transition: all .2s ease-in-out;
-                        background: var(--middlegray);
-                        color: var(--white);
-                        cursor: default;
-
-                        &:hover {
-                            transform: scale(1);
                         }
                     }
                 }

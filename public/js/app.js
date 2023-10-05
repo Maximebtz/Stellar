@@ -108,10 +108,4 @@ verticalCheckboxContainer.addEventListener("mousemove", (e) => {
   verticalCheckboxContainer.scrollTop = scrollTop - walk;
 });
 
-/****Checkbox Slide****/
-
-document.getElementById("searchButton").addEventListener("click", function () {
-  const popup = document.getElementById("searchPopup");
-  popup.style.display = popup.style.display === "none" ? "block" : "none";
-});
 

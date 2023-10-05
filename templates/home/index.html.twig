@@ -19,28 +19,39 @@
 
             <div id="searchPopup" style="display:none;">
                 <h3>Filtres de recherche</h3>
-
-                <label>Villes:</label>
-                <input type="text" id="cityInput" placeholder="Tapez et appuyez sur Entrée">
-                <div id="cityTags"></div>
-
-                <label>Pays:</label>
-                <input type="text" id="countryInput" placeholder="Tapez et appuyez sur Entrée">
-                <div id="countryTags"></div>
-
-                <label>Prix:</label>
-                <input type="range" id="priceRange" min="0" max="1000">
-
-                <label>Date d'arrivée:</label>
-                <input type="date" id="startDate">
-
-                <label>Date de départ:</label>
-                <input type="date" id="endDate">
-
-                <button onclick="applyFilters()">Appliquer les filtres</button>
+                <div class="filters-container">
+                    <div class="filters">
+                        <div class="filter">
+                            <label>Villes:</label>
+                            <input type="text" id="cityInput" placeholder="Tapez et appuyez sur Entrée">
+                            <div id="cityTags" class="labels"></div>
+                        </div>
+                        <div class="filter">
+                            <label>Pays:</label>
+                            <input type="text" id="countryInput" placeholder="Tapez et appuyez sur Entrée">
+                            <div id="countryTags" class="labels"></div>
+                        </div>
+                    </div>
+                    <div class="filters">
+                        <div class="filter">
+                            <label>Prix:</label>
+                            <input type="range" id="priceRange" min="0" max="300">
+                        </div>
+                    </div>
+                    <div class="filters">
+                        <div class="filter">
+                            <label>Date d'arrivée:</label>
+                            <input type="date" id="startDate">
+                        </div>
+                        <div class="filter">
+                            <label>Date de départ:</label>
+                            <input type="date" id="endDate">
+                        </div>
+                    </div>
+                </div>
+                <button id="apply-filter-btn" class="l-btn">Appliquer les filtres</button>
             </div>
         </div>
-
         <div class="map">
             <div id="map"></div>
         </div>
@@ -208,47 +219,52 @@
 
 
     /****Filter Bar****/
+    document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("searchButton").addEventListener("click", function () {
+            const popup = document.getElementById("searchPopup");
+            popup.style.display = popup.style.display === "none" ? "flex" : "none";
+        });
 
-    document.getElementById("searchButton").addEventListener("click", function () {
-        const popup = document.getElementById("searchPopup");
-        popup.style.display = popup.style.display === "none" ? "block" : "none";
-    });
-
-    // Fonction pour appliquer les filtres
-     // Fonction pour appliquer les filtres
-     function applyFilters() {
-        const cityTags = Array.from(document.querySelectorAll("#cityTags .tag")).map(tag => tag.innerText);
-        const countryTags = Array.from(document.querySelectorAll("#countryTags .tag")).map(tag => tag.innerText);
-        const priceRange = document.getElementById("priceRange").value;
-        const startDate = document.getElementById("startDate").value;
-        const endDate = document.getElementById("endDate").value;
-
-        fetch('/home/filter-adverts', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
+        // Fonction pour appliquer les filtres
+        function applyFilters() {
+            const cityTags = Array.from(document.querySelectorAll("#cityTags .tag")).map(tag => tag.innerText);
+            const countryTags = Array.from(document.querySelectorAll("#countryTags .tag")).map(tag => tag.innerText);
+            const priceRange = document.getElementById("priceRange").value;
+            const startDate = document.getElementById("startDate").value;
+            const endDate = document.getElementById("endDate").value;
+            console.log({
                 cities: cityTags,
                 countries: countryTags,
                 priceRange: priceRange,
                 startDate: startDate,
                 endDate: endDate
+            });
+            fetch('/home', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    cities: cityTags,
+                    countries: countryTags,
+                    priceRange: priceRange,
+                    startDate: startDate,
+                    endDate: endDate
+                })
             })
-        })
-            .then(response => response.json())
-            .then(data => {
-                const grid = document.getElementById("grid");
+                .then(response => response.json())
+                .then(data => {
+                    const grid = document.getElementById("grid");
 
-                // Vider le conteneur actuel
-                grid.innerHTML = "";
+                    // Vider le conteneur actuel
+                    grid.innerHTML = "";
 
-                // Remplir avec les nouvelles annonces
-                data.forEach(advert => {
-                    const advertCard = document.createElement("div");
-                    advertCard.className = "advert-card slide-in";
+                    // Remplir avec les nouvelles annonces
+                    data.forEach(advert => {
+                        const advertCard = document.createElement("div");
+                        advertCard.className = "advert-card slide-in";
 
-                    const advertHTML = `
+                        const advertHTML = `
             <a href="${advert.detailURL}" class="clickable-card">
               <figure>
                 <img src="${advert.imageURL}" alt="${advert.title} image">
@@ -267,46 +283,55 @@
               </div>
             </a>`;
 
-                    advertCard.innerHTML = advertHTML;
-                    grid.appendChild(advertCard);
+                        advertCard.innerHTML = advertHTML;
+                        grid.appendChild(advertCard);
+                    });
                 });
-            });
-    }
-
-    function addTag(inputId, tagContainerId) {
-        const input = document.getElementById(inputId);
-        const tagContainer = document.getElementById(tagContainerId);
-
-        const tag = document.createElement("span");
-        tag.className = "tag";
-        tag.innerText = input.value;
-
-        const closeBtn = document.createElement("span");
-        closeBtn.className = "tag-close";
-        closeBtn.innerText = "x";
-        closeBtn.onclick = function () {
-            tagContainer.removeChild(tag);
-        };
-
-        tag.appendChild(closeBtn);
-        tagContainer.appendChild(tag);
-
-        input.value = "";
-    }
-
-    // Ajouter une étiquette lorsque l'utilisateur appuie sur Entrée
-    document.getElementById("cityInput").addEventListener("keyup", function (event) {
-        if (event.key === "Enter") {
-            addTag("cityInput", "cityTags");
         }
+
+        function addTag(inputId, tagContainerId) {
+            const input = document.getElementById(inputId);
+            const tagContainer = document.getElementById(tagContainerId);
+
+            const tag = document.createElement("span");
+            tag.className = "tag";
+            tag.innerText = input.value;
+
+            const closeBtn = document.createElement("span");
+            closeBtn.className = "tag-close";
+            closeBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor"
+                                    class="bi bi-x" viewBox="0 0 16 16">
+                                    <path
+                                        d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 
+                                                8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                                </svg>`;
+            closeBtn.onclick = function () {
+                tagContainer.removeChild(tag);
+            };
+
+            tag.appendChild(closeBtn);
+            tagContainer.appendChild(tag);
+
+            input.value = "";
+        }
+
+        document.getElementById("apply-filter-btn").addEventListener("click", function () {
+            applyFilters();
+        })
+
+        // Ajouter une étiquette lorsque l'utilisateur appuie sur Entrée
+        document.getElementById("cityInput").addEventListener("keyup", function (event) {
+            if (event.key === "Enter") {
+                addTag("cityInput", "cityTags");
+            }
+        });
+
+        document.getElementById("countryInput").addEventListener("keyup", function (event) {
+            if (event.key === "Enter") {
+                addTag("countryInput", "countryTags");
+            }
+        });
     });
 
-    document.getElementById("countryInput").addEventListener("keyup", function (event) {
-        if (event.key === "Enter") {
-            addTag("countryInput", "countryTags");
-        }
-    });
-
-   
 </script>
 {% endblock javascripts %}

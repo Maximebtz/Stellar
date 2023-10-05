@@ -173,52 +173,48 @@ class AdvertController extends AbstractController
     }
 
 
-    #[Route('/home/filter-adverts', name: 'filter_adverts', methods: 'POST')]
+    #[Route('/home', name: 'filter_adverts', methods: 'POST')]
     public function filterAdverts(Request $request, EntityManagerInterface $entityManager): Response
     {
         $data = json_decode($request->getContent(), true);
 
-        // Récupère les paramètres des filtres
-        $cities = $data['cities'];
-        $countries = $data['countries'];
-        $priceRange = $data['priceRange'];
-        $startDate = new \DateTime($data['startDate']);
-        $endDate = new \DateTime($data['endDate']);
+        // Initialize filter parameters
+        $params = [];
 
-        // Création de la requête SQL avec jointure
-        $queryBuilder = $entityManager->createQueryBuilder();
-        $queryBuilder->select('a')
-            ->from('App\Entity\Advert', 'a')
-            ->leftJoin('a.reservations', 'r');  // Assume une relation "reservations" dans Advert
+        // Base DQL query
+        $dql = "SELECT a FROM App\Entity\Advert a LEFT JOIN a.reservations r WHERE 1=1";
 
-        if (!empty($cities)) {
-            $queryBuilder->andWhere('a.city IN (:cities)')
-                ->setParameter('cities', $cities);
+        // Add conditions based on available filters
+        if (!empty($data['cities'])) {
+            $dql .= " AND a.city IN (:cities)";
+            $params['cities'] = $data['cities'];
         }
 
-        if (!empty($countries)) {
-            $queryBuilder->andWhere('a.country IN (:countries)')
-                ->setParameter('countries', $countries);
+        if (!empty($data['countries'])) {
+            $dql .= " AND a.country IN (:countries)";
+            $params['countries'] = $data['countries'];
         }
 
-        if (!empty($priceRange)) {
-            $queryBuilder->andWhere('a.price <= :price')
-                ->setParameter('price', $priceRange);
+        if (!empty($data['priceRange'])) {
+            $dql .= " AND a.price <= :priceRange";
+            $params['priceRange'] = $data['priceRange'];
         }
 
-        if ($startDate) {
-            $queryBuilder->andWhere('r.startDate >= :startDate')  // Utilise 'r' pour la table Reservation
-                ->setParameter('startDate', $startDate);
+        if (!empty($data['startDate'])) {
+            $dql .= " AND r.startDate >= :startDate";
+            $params['startDate'] = new \DateTime($data['startDate']);
         }
 
-        if ($endDate) {
-            $queryBuilder->andWhere('r.endDate <= :endDate')  // Utilise 'r' pour la table Reservation
-                ->setParameter('endDate', $endDate);
+        if (!empty($data['endDate'])) {
+            $dql .= " AND r.endDate <= :endDate";
+            $params['endDate'] = new \DateTime($data['endDate']);
         }
 
-        $query = $queryBuilder->getQuery();
+        // Create and execute query
+        $query = $entityManager->createQuery($dql);
+        $query->setParameters($params);
         $filteredAdverts = $query->getResult();
-        // Renvoie les annonces filtrées
+
         return $this->json($filteredAdverts);
     }
 }
