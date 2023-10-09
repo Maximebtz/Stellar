@@ -51,11 +51,9 @@ document.addEventListener('DOMContentLoaded', function () {
         e.preventDefault();
         dropArea.classList.add('dragover');
     });
-
     dropArea.addEventListener('dragleave', function () {
         dropArea.classList.remove('dragover');
     });
-
     dropArea.addEventListener('drop', function (e) {
         e.preventDefault();
         dropArea.classList.remove('dragover');

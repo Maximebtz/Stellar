@@ -113,10 +113,14 @@
         // Request needed libraries.
         //@ts-ignore
         const { Map } = await google.maps.importLibrary("maps");
+
+        // Librairie pour modifier les marqueurs
         const { AdvancedMarkerView } = await google.maps.importLibrary("marker");
+
+
         const infoWindow = new google.maps.InfoWindow();
 
-        // The map, centered at const position
+        // Nouvelle map est ses spécificités
         map = new Map(document.getElementById("map"), {
             zoom: 11,
             minZoom: 3,
@@ -128,8 +132,12 @@
         // Loop through your adverts and add markers for each one
         {% for advert in adverts %}
         (function () {
+
+        
             let geocoder = new google.maps.Geocoder();
+            // Déclaration de l'adresse 
             let address = "{{ advert.address }}, {{ advert.city }}, {{ advert.cp }}, {{ advert.country }}";
+
             let title = "{{ advert.title }}";
             let imgSrc = "{{ asset('uploads/' ~ advert.images[0].url) }}";
             let detailURL = "{{ path('detail_advert', {'id': advert.id}) }}";
@@ -141,7 +149,7 @@
                     let lat = location.lat();
                     let lng = location.lng();
 
-                    // Créez un marqueur pour cette annonce
+                    // Créez un marqueur pour chaque annonce
                     let marker = new google.maps.Marker({
                         position: { lat: lat, lng: lng },
                         map: map,
@@ -149,6 +157,7 @@
                         label: {
                             text: price + "€",
                             className: "custom-price-label"
+
                         },
                         cursor: "pointer"
                     });
@@ -185,20 +194,18 @@
                             });
                         });
                     });
-
                     // Programmation de la fermeture de l'InfoWindow lorsqu'on quitte le marqueur
                     marker.addListener('mouseout', function () {
                         closeInfoWindowTimer = setTimeout(() => {
                             infoWindow.close();
-                        }, 100); // fermer après 100 ms, à ajuster selon vos besoins
+                        }, 100); 
                     });
-
                     // Annulation de la fermeture de l'InfoWindow lorsqu'on survole à nouveau le marqueur
                     marker.addListener('mouseover', function () {
                         clearTimeout(closeInfoWindowTimer);
                     });
 
-                    // Rendez le marqueur cliquable
+                    // Rendre le marqueur cliquable
                     marker.addListener('click', function () {
                         window.location.href = detailURL;
                     });
@@ -208,6 +215,7 @@
                 }
             });
         })();
+
         {% endfor %}
 
         for (const marker of markers) {

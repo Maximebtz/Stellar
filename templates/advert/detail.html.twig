@@ -140,11 +140,13 @@
             <div class="dates">
               <div class="date">
                 <p>Arrivée :</p>
-                <input class="date-span" type="date" id="arrivalDate" name="reservation[arrivalDate]" disabled />
+                <input class="date-span" type="date" id="arrivalDate" 
+                name="reservation[arrivalDate]" disabled />
               </div>
               <div class="date">
                 <p>Départ :</p>
-                <input class="date-span" type="date" id="departureDate" name="reservation[departureDate]" disabled />
+                <input class="date-span" type="date" id="departureDate" 
+                name="reservation[departureDate]" disabled />
               </div>
             </div>
 
@@ -319,6 +321,7 @@
       if (selectedDates.length === 2) {
         arrivalDateInput = selectedDates[0];
         departureDateInput = selectedDates[1];
+        
         if (departureDateInput <= arrivalDateInput) {
           $('#alert-dates').fadeIn();
           $('#alert-dates').show();

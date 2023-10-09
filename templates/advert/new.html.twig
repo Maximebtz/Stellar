@@ -77,7 +77,14 @@
             {% endfor %}
           </div>
 
+          {{ form_start(formAddAdvert) }}
+          {{ form_row(formAddAdvert.title) }}
+          {{ form_row(formAddAdvert.address) }}
+          ...
+          {{ form_end(formAddAdvert) }}
+
           <h2>Catégories</h2>
+
           <div class="checkbox-wrapper-16">
             {% for category in categories %}
             <label class="checkbox-wrapper">
@@ -88,13 +95,15 @@
               }}
               <span class="checkbox-tile">
                 <span class="checkbox-icon">
-                  <img src="{{ asset('img/icons/categories/' ~ category.icon) }}" alt="{{ category.name }}" />
+                  <img src="{{ asset('img/icons/categories/' ~ category.icon) }}" 
+                  alt="{{ category.name }}" />
                 </span>
                 <span class="checkbox-label">{{ category.name }}</span>
               </span>
             </label>
             {% endfor %}
           </div>
+
         </div>
         <div class="wrapper-detail-left-owner">
           <div class="wrapper-detail-left-owner-info">

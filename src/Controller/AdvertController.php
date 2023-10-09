@@ -125,9 +125,10 @@ class AdvertController extends AbstractController
 
 
 
-        // Create a new Reservation associated with the Advert
+        // Créer une nouvelle réservation en lien avec l'annonce
         $reservation = new Reservation();
-        $reservation->setAdvert($advert); // Associate the reservation with the advert
+        $reservation->setAdvert($advert); // Associer l'annonce en cours
+        $reservation->setUser($user); // Associer le user en cours
 
         // Create the form using the Reservation entity
         $reservationForm = $this->createForm(ReservationType::class, $reservation);
@@ -141,7 +142,6 @@ class AdvertController extends AbstractController
         if (!$user) {
             throw new \RuntimeException('L\'utilisateur n\'est pas connecté.');
         }
-        $reservation->setUser($user);
 
         // Gérez la soumission du formulaire de réservation
         $reservationForm->handleRequest($request);
