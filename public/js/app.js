@@ -38,17 +38,17 @@ horizontalCheckboxContainers.forEach((container) => {
     isHorizontalMouseDown = true;
     startX = e.pageX - container.offsetLeft;
     scrollLeft = container.scrollLeft;
-    container.style.scrollBehavior = "unset"; // Désactiver le scroll en douceur
+    container.style.scrollBehavior = "unset";
   });
 
   container.addEventListener("mouseup", () => {
     isHorizontalMouseDown = false;
-    container.style.scrollBehavior = "smooth"; // Réactiver le scroll en douceur
+    container.style.scrollBehavior = "smooth"; 
   });
 
   container.addEventListener("mouseleave", () => {
     isHorizontalMouseDown = false;
-    container.style.scrollBehavior = "smooth"; // Réactiver le scroll en douceur
+    container.style.scrollBehavior = "smooth"; 
   });
 
   container.addEventListener("mousemove", (e) => {
@@ -74,12 +74,12 @@ verticalCheckboxContainer.addEventListener("mousedown", (e) => {
 
 verticalCheckboxContainer.addEventListener("mouseup", () => {
   isVerticalMouseDown = false;
-  verticalCheckboxContainer.style.scrollBehavior = "smooth"; // Réactiver le scroll en douceur
+  verticalCheckboxContainer.style.scrollBehavior = "smooth"; 
 });
 
 verticalCheckboxContainer.addEventListener("mouseleave", () => {
   isVerticalMouseDown = false;
-  verticalCheckboxContainer.style.scrollBehavior = "smooth"; // Réactiver le scroll en douceur
+  verticalCheckboxContainer.style.scrollBehavior = "smooth"; 
 });
 
 verticalCheckboxContainer.addEventListener("mousemove", (e) => {
