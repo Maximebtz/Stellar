@@ -26,6 +26,7 @@ document.addEventListener("click", function (event) {
 });
 
 
+
 /****Checkbox Slide****/
 const horizontalCheckboxContainers = document.querySelectorAll(".checkbox-wrapper-16");
 
