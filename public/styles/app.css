@@ -710,6 +710,7 @@ header .signup:hover {
   min-width: 460px;
   width: 100%;
   margin: 0 60px 0 0;
+  overflow: hidden;
 }
 .wrapper-detail-main .wrapper-detail-left h2 {
   font-size: 2em;

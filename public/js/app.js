@@ -27,30 +27,32 @@ document.addEventListener("click", function (event) {
 
 
 /****Checkbox Slide****/
+const horizontalCheckboxContainers = document.querySelectorAll(".checkbox-wrapper-16");
 
-const checkboxContainers = document.querySelectorAll(".checkbox-wrapper-16");
-
-checkboxContainers.forEach((container) => {
-  let isMouseDown = false;
+horizontalCheckboxContainers.forEach((container) => {
+  let isHorizontalMouseDown = false;
   let startX;
   let scrollLeft;
 
   container.addEventListener("mousedown", (e) => {
-    isMouseDown = true;
+    isHorizontalMouseDown = true;
     startX = e.pageX - container.offsetLeft;
     scrollLeft = container.scrollLeft;
+    container.style.scrollBehavior = "unset"; // Désactiver le scroll en douceur
   });
 
   container.addEventListener("mouseup", () => {
-    isMouseDown = false;
+    isHorizontalMouseDown = false;
+    container.style.scrollBehavior = "smooth"; // Réactiver le scroll en douceur
   });
 
   container.addEventListener("mouseleave", () => {
-    isMouseDown = false;
+    isHorizontalMouseDown = false;
+    container.style.scrollBehavior = "smooth"; // Réactiver le scroll en douceur
   });
 
   container.addEventListener("mousemove", (e) => {
-    if (!isMouseDown) return;
+    if (!isHorizontalMouseDown) return;
     e.preventDefault();
     const x = e.pageX - container.offsetLeft;
     const walk = (x - startX) * 1.5;
@@ -59,30 +61,34 @@ checkboxContainers.forEach((container) => {
 });
 
 const verticalCheckboxContainer = document.querySelector(".checkbox-wrapper-17");
-let isMouseDown = false;
+let isVerticalMouseDown = false;
 let startY;
 let scrollTop;
 
 verticalCheckboxContainer.addEventListener("mousedown", (e) => {
-  isMouseDown = true;
+  isVerticalMouseDown = true;
   startY = e.pageY - verticalCheckboxContainer.offsetTop;
   scrollTop = verticalCheckboxContainer.scrollTop;
+  verticalCheckboxContainer.style.scrollBehavior = "unset"; // Désactiver le scroll en douceur
 });
 
 verticalCheckboxContainer.addEventListener("mouseup", () => {
-  isMouseDown = false;
+  isVerticalMouseDown = false;
+  verticalCheckboxContainer.style.scrollBehavior = "smooth"; // Réactiver le scroll en douceur
 });
 
 verticalCheckboxContainer.addEventListener("mouseleave", () => {
-  isMouseDown = false;
+  isVerticalMouseDown = false;
+  verticalCheckboxContainer.style.scrollBehavior = "smooth"; // Réactiver le scroll en douceur
 });
 
 verticalCheckboxContainer.addEventListener("mousemove", (e) => {
-  if (!isMouseDown) return;
+  if (!isVerticalMouseDown) return;
   e.preventDefault();
   const y = e.pageY - verticalCheckboxContainer.offsetTop;
   const walk = (y - startY) * 1.5;
   verticalCheckboxContainer.scrollTop = scrollTop - walk;
 });
+
 
 
