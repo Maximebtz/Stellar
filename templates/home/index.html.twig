@@ -133,11 +133,10 @@
         {% for advert in adverts %}
         (function () {
 
-        
+
             let geocoder = new google.maps.Geocoder();
             // Déclaration de l'adresse 
             let address = "{{ advert.address }}, {{ advert.city }}, {{ advert.cp }}, {{ advert.country }}";
-
             let title = "{{ advert.title }}";
             let imgSrc = "{{ asset('uploads/' ~ advert.images[0].url) }}";
             let detailURL = "{{ path('detail_advert', {'id': advert.id}) }}";
@@ -198,7 +197,7 @@
                     marker.addListener('mouseout', function () {
                         closeInfoWindowTimer = setTimeout(() => {
                             infoWindow.close();
-                        }, 100); 
+                        }, 100);
                     });
                     // Annulation de la fermeture de l'InfoWindow lorsqu'on survole à nouveau le marqueur
                     marker.addListener('mouseover', function () {
@@ -241,14 +240,16 @@
             const priceRange = document.getElementById("priceRange").value;
             const startDate = document.getElementById("startDate").value;
             const endDate = document.getElementById("endDate").value;
-            console.log({
+            const url = '/filter';
+
+            console.log(`Sending POST request to ${url} with body:`, JSON.stringify({
                 cities: cityTags,
                 countries: countryTags,
                 priceRange: priceRange,
                 startDate: startDate,
                 endDate: endDate
-            });
-            fetch('/home', {
+              }));
+            fetch(url, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -269,46 +270,54 @@
                 })
                 .then(data => {
                     console.log("Data received from server:", data);
-                    // Le reste du code pour remplir les annonces
+                    console.log(url)
+
+                    // Appeler la fonction pour mettre à jour les annonces sur la page
+                    updateAdverts(data);
                 })
                 .catch(error => {
                     console.error('Fetch error:', error);
-                })
-                .then(response => response.json())
-                .then(data => {
-                    const grid = document.getElementById("grid");
-
-                    // Vider le conteneur actuel
-                    grid.innerHTML = "";
-
-                    // Remplir avec les nouvelles annonces
-                    data.forEach(advert => {
-                        const advertCard = document.createElement("div");
-                        advertCard.className = "advert-card slide-in";
-
-                        const advertHTML = `
-            <a href="${advert.detailURL}" class="clickable-card">
-              <figure>
-                <img src="${advert.imageURL}" alt="${advert.title} image">
-              </figure>
-              <div class="card-content">
-                <h3 class="card-title">${advert.title}</h3>
-                <p class="card-text">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
-                    <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" />
-                  </svg>
-                  ${advert.city}, ${advert.country}
-                </p>
-                <p class="card-text">
-                  <span class="price-card">${advert.price}€</span>/nuit
-                </p>
-              </div>
-            </a>`;
-
-                        advertCard.innerHTML = advertHTML;
-                        grid.appendChild(advertCard);
-                    });
                 });
+        }
+
+        // Fonction pour mettre à jour les annonces sur la page
+        function updateAdverts(data) {
+            const grid = document.getElementById("grid");
+
+            // Vider le conteneur actuel
+            while (grid.firstChild) {
+                grid.removeChild(grid.firstChild);
+            }
+
+
+            // Remplir avec les nouvelles annonces
+            data.forEach(advert => {
+                
+                const advertCard = document.createElement("div");
+                advertCard.className = "advert-card";
+
+                const advertHTML = `
+                <a href="${advert.detailURL}" class="clickable-card">
+                  <figure>
+                    <img src="${advert.imgSrc}" alt="${advert.title} image">
+                  </figure>
+                  <div class="card-content">
+                    <h3 class="card-title">${advert.title}</h3>
+                    <p class="card-text">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                        <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" />
+                      </svg>
+                      ${advert.city}, ${advert.country}
+                    </p>
+                    <p class="card-text">
+                      <span class="price-card">${advert.price}€</span>/nuit
+                    </p>
+                  </div>
+                </a>`;
+
+                advertCard.innerHTML = advertHTML;
+                grid.appendChild(advertCard);
+            });
         }
 
         function addTag(inputId, tagContainerId) {
