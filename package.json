@@ -26,6 +26,7 @@
         "build": "encore production --progress"
     },
     "dependencies": {
+        "ckeditor4": "^4.13.0",
         "eslint": "^8.47.0",
         "eslint-plugin-react": "^7.33.2",
         "fullcalendar": "^6.1.8",

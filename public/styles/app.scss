@@ -1802,7 +1802,14 @@ header {
     }
 
 }
+.slider-container {
+    display: flex;
+    justify-content: space-between;
+}
 
+input[type="range"] {
+    width: 45%;
+}
 
 //****** Form Content For Add Advert ******//
 .wrapper-detail {

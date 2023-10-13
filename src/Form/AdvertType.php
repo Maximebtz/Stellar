@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Lodge;
 use App\Entity\Advert;
 use App\Entity\Accessory;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use PhpParser\Parser\Multiple;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -151,7 +152,7 @@ class AdvertType extends AbstractType
                     'class' => 'label',  // Class for the label
                 ],
             ])
-            ->add('description', TextareaType::class, [
+            ->add('description', CKEditorType::class, [
                 'required' => true,
                 'label' => false,
                 'attr' => [

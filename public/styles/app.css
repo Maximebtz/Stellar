@@ -1468,6 +1468,15 @@ header .signup:hover {
   transform: scale(1.02);
 }
 
+.slider-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+input[type=range] {
+  width: 45%;
+}
+
 .wrapper-detail .input {
   height: 45px;
   font-size: x-large;

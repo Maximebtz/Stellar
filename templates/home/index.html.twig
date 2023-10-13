@@ -3,10 +3,12 @@
 {% block title %}Stellar Accueil{% endblock %}
 {% block stylesheets %}
 <link rel="stylesheet" href="{{ asset('build/style.css') }}" />
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css" type="text/css" media="all" />
 {% endblock %}
 {% block body %}
 <div class="wrapper">
@@ -34,8 +36,15 @@
                     </div>
                     <div class="filters">
                         <div class="filter">
-                            <label>Prix:</label>
-                            <input type="range" id="priceRange" min="0" max="300">
+                            <div class="price-filter-input">
+                                <label for="priceMin">Prix Min :</label>
+                                <input type="number" min=0 max="9900" oninput="validity.valid||(value='0');"
+                                id="min_price" name="priceMin" class="price-range-field" />
+                                <label for="priceMax">Prix Max :</label>
+                                <input type="number" min=0 max="10000" oninput="validity.valid||(value='10000');"
+                                    id="max_price" name="priceMax" class="price-range-field" />
+                            </div>
+                            <div id="slider-range" class="price-filter-range" name="rangeInput"></div>
                         </div>
                     </div>
                     <div class="filters">
@@ -87,7 +96,7 @@
             <div class="pagination">
                 {% set totalPages = (totalAdverts + perPage - 1) / perPage | round(0, 'ceil') %}
                 {% for pageNumber in range(1, totalPages + 1) %}
-                <a href="{{ path(app.request.attributes.get('_route'), {'page': pageNumber}) }}" {% if pageNumber==page
+                    <a href="{{ path(app.request.attributes.get('_route'), {'page': pageNumber}) }}" {% if pageNumber==page
                     %}class="active" {% else %}class="pages" {% endif %}>{{ pageNumber }}</a>
                 {% endfor %}
             </div>
@@ -99,6 +108,11 @@
 </div>
 {% endblock %}
 {% block javascripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" type="text/javascript"></script>
+<script defer src="{{ asset('js/filter.js') }}"></script>
 <script src="{{ asset('js/app.js') }}"></script>
 <script src="{{ asset('js/animations.js') }}"></script>
 <script>(g => { let h, a, k, p = "The Google Maps JavaScript API", c = "google", l = "importLibrary", q = "__ib__", m = document, b = window; b = b[c] || (b[c] = {}); let d = b.maps || (b.maps = {}), r = new Set, e = new URLSearchParams, u = () => h || (h = new Promise(async (f, n) => { await (a = m.createElement("script")); e.set("libraries", [...r] + ""); for (k in g) e.set(k.replace(/[A-Z]/g, t => "_" + t[0].toLowerCase()), g[k]); e.set("callback", c + ".maps." + q); a.src = `https://maps.${c}apis.com/maps/api/js?` + e; d[q] = f; a.onerror = () => h = n(Error(p + " could not load.")); a.nonce = m.querySelector("script[nonce]")?.nonce || ""; m.head.append(a) })); d[l] ? console.warn(p + " only loads once. Ignoring:", g) : d[l] = (f, ...n) => r.add(f) && u().then(() => d[l](f, ...n)) })
@@ -223,146 +237,5 @@
     }
 
     initMap();
-
-
-    /****Filter Bar****/
-    document.addEventListener("DOMContentLoaded", function () {
-        document.getElementById("searchButton").addEventListener("click", function () {
-            const popup = document.getElementById("searchPopup");
-            popup.style.display = popup.style.display === "none" ? "flex" : "none";
-        });
-
-        // Fonction pour appliquer les filtres
-        function applyFilters() {
-            console.log("applyFilters function called");
-            const cityTags = Array.from(document.querySelectorAll("#cityTags .tag")).map(tag => tag.innerText);
-            const countryTags = Array.from(document.querySelectorAll("#countryTags .tag")).map(tag => tag.innerText);
-            const priceRange = document.getElementById("priceRange").value;
-            const startDate = document.getElementById("startDate").value;
-            const endDate = document.getElementById("endDate").value;
-            const url = '/filter';
-
-            console.log(`Sending POST request to ${url} with body:`, JSON.stringify({
-                cities: cityTags,
-                countries: countryTags,
-                priceRange: priceRange,
-                startDate: startDate,
-                endDate: endDate
-              }));
-            fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    cities: cityTags,
-                    countries: countryTags,
-                    priceRange: priceRange,
-                    startDate: startDate,
-                    endDate: endDate
-                })
-            })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    console.log("Data received from server:", data);
-                    console.log(url)
-
-                    // Appeler la fonction pour mettre à jour les annonces sur la page
-                    updateAdverts(data);
-                })
-                .catch(error => {
-                    console.error('Fetch error:', error);
-                });
-        }
-
-        // Fonction pour mettre à jour les annonces sur la page
-        function updateAdverts(data) {
-            const grid = document.getElementById("grid");
-
-            // Vider le conteneur actuel
-            while (grid.firstChild) {
-                grid.removeChild(grid.firstChild);
-            }
-
-
-            // Remplir avec les nouvelles annonces
-            data.forEach(advert => {
-                
-                const advertCard = document.createElement("div");
-                advertCard.className = "advert-card";
-
-                const advertHTML = `
-                <a href="${advert.detailURL}" class="clickable-card">
-                  <figure>
-                    <img src="${advert.imgSrc}" alt="${advert.title} image">
-                  </figure>
-                  <div class="card-content">
-                    <h3 class="card-title">${advert.title}</h3>
-                    <p class="card-text">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
-                        <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" />
-                      </svg>
-                      ${advert.city}, ${advert.country}
-                    </p>
-                    <p class="card-text">
-                      <span class="price-card">${advert.price}€</span>/nuit
-                    </p>
-                  </div>
-                </a>`;
-
-                advertCard.innerHTML = advertHTML;
-                grid.appendChild(advertCard);
-            });
-        }
-
-        function addTag(inputId, tagContainerId) {
-            const input = document.getElementById(inputId);
-            const tagContainer = document.getElementById(tagContainerId);
-
-            const tag = document.createElement("span");
-            tag.className = "tag";
-            tag.innerText = input.value;
-
-            const closeBtn = document.createElement("span");
-            closeBtn.className = "tag-close";
-            closeBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor"
-                                    class="bi bi-x" viewBox="0 0 16 16">
-                                    <path
-                                        d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 
-                                                8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
-                                </svg>`;
-            closeBtn.onclick = function () {
-                tagContainer.removeChild(tag);
-            };
-
-            tag.appendChild(closeBtn);
-            tagContainer.appendChild(tag);
-
-            input.value = "";
-        }
-
-        document.getElementById("apply-filter-btn").addEventListener("click", function () {
-            applyFilters();
-        })
-
-        // Ajouter une étiquette lorsque l'utilisateur appuie sur Entrée
-        document.getElementById("cityInput").addEventListener("keyup", function (event) {
-            if (event.key === "Enter") {
-                addTag("cityInput", "cityTags");
-            }
-        });
-
-        document.getElementById("countryInput").addEventListener("keyup", function (event) {
-            if (event.key === "Enter") {
-                addTag("countryInput", "countryTags");
-            }
-        });
-    });
-
 </script>
 {% endblock javascripts %}

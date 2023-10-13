@@ -96,15 +96,17 @@ class HomeController extends AbstractController
         // Convert the results to an array
         $result = [];
         foreach ($filteredAdverts as $advert) {
+            $firstImage = $advert->getImages()[0] ?? null;
             $result[] = [
                 'id' => $advert->getId(),
                 'title' => $advert->getTitle(),
                 'city' => $advert->getCity(),
                 'country' => $advert->getCountry(),
                 'price' => $advert->getPrice(),
+                'imgSrc' => $firstImage ? '/uploads/' . $firstImage->getUrl() : '',
+                'detailURL' => $this->generateUrl('detail_advert', ['id' => $advert->getId()])
             ];
         }
-
         return new JsonResponse($result);
     }
 }

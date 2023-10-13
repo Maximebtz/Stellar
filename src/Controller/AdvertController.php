@@ -64,7 +64,11 @@ class AdvertController extends AbstractController
         $categories = $categoryRepository->findAll();
         $lodges = $lodgeRepository->findAll();
 
+        // Nettoyage de la description
         $form->handleRequest($request);
+        $description = $form->get('description')->getData();
+        $cleanDescription = strip_tags($description);
+        $advert->setDescription($cleanDescription);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $images = $form->get('images')->getData();

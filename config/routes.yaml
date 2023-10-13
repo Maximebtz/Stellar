@@ -12,3 +12,4 @@ get_adverts_json:
 index:
   path: /
   controller: App\Controller\HomeController::index
+
