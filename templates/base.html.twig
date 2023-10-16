@@ -4,6 +4,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% block metatag %}
+  <meta name="description"
+    content="Stellar est une application de réservation de logements atypiques, le but principal est de faire des voyages avec du piquant et de l'aventure au lieux de simplement partir dans des endroits basics">
+  {% endblock metatag %}
   <title>{% block title %}Welcome!{% endblock %}</title>
   <link rel="icon" href="{{ asset('img/icons/logo.png') }}" />
   {% block stylesheets %}
@@ -70,7 +74,69 @@
     {% endblock %}
   </main>
   <footer>
-
+    <!-- Top Footer Area Start -->
+    <div class="container">
+      <div class="row">
+        <div class="logo">
+          <img src="{{ asset("img/icons/logo.png")}}" alt="stellar logo">
+        </div>
+        <div class="right-content">
+        <div class="about">
+          <h5>About Us</h5>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim sit est, ad tenetur
+            expedita, minus cupiditate aspernatur eaque magnam quia veritatis maiores sequi
+            recusandae, incidunt repellat ab fugit quos quae.</p>
+        </div>
+          <div class="links">
+            <div class="links-ul">
+              <h5>Social Links</h5>
+              <ul>
+                <li><a href="#"> Facebook</a>
+                </li>
+                <li><a href="#"> Twitter</a>
+                </li>
+                <li><a href="#"> Pinterest</a>
+                </li>
+                <li><a href="#"> YouTube</a>
+                </li>
+                <li><a href="#"> Linkedin</a>
+                </li>
+              </ul>
+            </div>
+            <div class="links-ul">
+              <h5>Important Links</h5>
+              <ul>
+                <li><a href="#">Terms &
+                    Conditions</a></li>
+                <li><a href="#">About
+                    Licences</a></li>
+                <li><a href="#">Help &
+                    Support</a></li>
+                <li><a href="#">Privacy
+                    Policy</a></li>
+                <li><a href="#">Community &
+                    Forum</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="contact">
+            <h5>Quick Contact</h5>
+            <div class="phone">
+              <h5>Phone:</h5>
+              <p><a href="#">06.80.06.43.99</a></p>
+            </div>
+            <div class="mail">
+              <h5>Email:</h5>
+              <p><a href="#">stellar@gmail.com</a> <br><a href="#">support@gmail.com</a> </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Footer Bottom Area Start -->
+    <div class="small">
+      <small>© All Rights Reserved by &nbsp; <a href="#">Stellar.<i class="fa fa-love"></i></a></small>
+    </div>
   </footer>
 </body>
 {% block javascripts %}

@@ -19,8 +19,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const priceRange = document.getElementById("drag");
     const startDate = document.getElementById("startDate").value;
     const endDate = document.getElementById("endDate").value;
-    const minPrice = $("#min_price").val();
-    const maxPrice = $("#max_price").val();
+    const minPrice = document.getElementById("min_price").value;
+    const maxPrice = document.getElementById("max_price").value;
     const url = "/filter";
 
     console.log(

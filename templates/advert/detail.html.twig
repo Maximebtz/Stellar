@@ -48,474 +48,252 @@
         </div>
         <div class="sm-img">
           {% if advert.images | length > 1 %}
-            <!-- Contenu pour la première petite image ici -->
-            <div class="ltl-img">
-              <img src="{{ asset('uploads/' ~ advert.images[1].url) }}" alt="{{ advert.title }}" />
-            </div>
-            <!-- Contenu pour la deuxième petite image ici -->
-            <div class="ltl-img">
-              <img src="{{ asset('uploads/' ~ advert.images[2].url) }}" alt="{{ advert.title }}" />
-              {% if advert.images | length > 3 %}
-                <!-- Bouton "Afficher plus" dans sm-img -->
-                <button id="showMoreBtn">Afficher plus</button>
-              {% endif %}
-            </div>
+          <div class="ltl-img">
+            <img src="{{ asset('uploads/' ~ advert.images[1].url) }}" alt="{{ advert.title }}" />
+          </div>
+          <div class="ltl-img">
+            <img src="{{ asset('uploads/' ~ advert.images[2].url) }}" alt="{{ advert.title }}" />
+            {% if advert.images | length > 3 %}
+            <button id="showMoreBtn">Afficher plus</button>
+            {% endif %}
+          </div>
           {% endif %}
         </div>
-      {% else %}
-      <div class="single-img">
-        {% if advert.images | length > 0 %}
-        <img src="{{ asset('uploads/' ~ advert.images[0].url) }}" alt="{{ advert.title }}" />
+        {% else %}
+        <div class="single-img">
+          {% if advert.images | length > 0 %}
+          <img src="{{ asset('uploads/' ~ advert.images[0].url) }}" alt="{{ advert.title }}" />
+          {% endif %}
+        </div>
         {% endif %}
       </div>
-      {% endif %}
-    </div>
-    <div class="show-more-img" id="showMoreImg">
-      <span class="close-btn" id="closeBtn">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
-          <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
-        </svg>
-      </span>
-      <div class="imgs-container">
-        {% for image in advert.images %}
-        <div class="img">
-          <img src="{{ asset('uploads/' ~ image.url) }}" alt="{{ advert.title }}" />
-        </div>
-        {% endfor %}
-      </div>
-    </div>
-    <div class="wrapper-detail-main">
-      <div class="wrapper-detail-left">
-        <div class="wrapper-detail-left-category">
-          <div class="checkbox-wrapper-16">
-            {% if advert.lodge %}
-            <div class="checkbox-wrapper">
-              <span class="checkbox-tile">
-                <span class="checkbox-icon">
-                  <img src="{{ asset('img/icons/types/' ~ advert.lodge.icon) }}" alt="{{ advert.lodge.type }}" />
-                </span>
-                <span class="checkbox-label">{{ advert.lodge.type }}</span>
-              </span>
-            </div>
-            {% endif %}
+      <div class="show-more-img" id="showMoreImg">
+        <span class="close-btn" id="closeBtn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x"
+            viewBox="0 0 16 16">
+            <path
+              d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+          </svg>
+        </span>
+        <div class="imgs-container">
+          {% for image in advert.images %}
+          <div class="img">
+            <img src="{{ asset('uploads/' ~ image.url) }}" alt="{{ advert.title }}" />
           </div>
-          <div class="checkbox-wrapper-16">
-            {% for category in advert.categories %}
-            <div class="checkbox-wrapper">
-              <span class="checkbox-tile">
-                <span class="checkbox-icon">
-                  <img src="{{ asset('img/icons/categories/' ~ category.icon)}}" alt="{{ category.name }}" />
-                </span>
-                <span class="checkbox-label">{{ category.name }}</span>
-              </span>
-            </div>
-            {% endfor %}
-          </div>
-        </div>
-        <div class="wrapper-detail-left-owner">
-          <div class="wrapper-detail-left-owner-info">
-            {% if advert.owner.avatar is not null %}
-            <p>Propriétaire - </p><img class="profil-picture" src="{{ asset('uploads/avatars/' ~ advert.owner.avatar)}}"
-              alt=""><span>{{advert.owner.username}}</span>
-            {% else %}
-            <p>Propriétaire - <span class="profil-picture"></span><span>{{advert.owner.username}}</span></p>
-            {% endif %}
-          </div>
-          <a href="#" class="wrapper-detail-left-owner-contact">
-            Contacter
-          </a>
-        </div>
-        <div class="wrapper-detail-left-description">
-          <p>
-            {{ advert.description|nl2br|raw }}
-          </p>
-        </div>
-        <div class="wrapper-detail-left-commodite">
-          <h2>Commodités</h2>
-          <div class="checkbox-wrapper-17">
-            {% for accessory in advert.accessories %}
-            <div class="checkbox-wrapper">
-              <span class="checkbox-tile-fit">
-                <span class="checkbox-icon">
-                  <img src="{{ asset('img/icons/accessories/' ~ accessory.icon)}}" alt="{{ accessory.name }}" />
-                </span>
-                <span class="checkbox-label">{{ accessory.name }}</span>
-              </span>
-            </div>
-            {% endfor %}
-          </div>
+          {% endfor %}
         </div>
       </div>
-      <div class="wrapper-detail-right">
-        <div id="calendar-and-detail">
-          <div id="step-1">
-
-            {# Prix de la nuit #}
-            <p class="night-price">
-              <b>{{ advert.price }}€</b>/Nuits
+      <div class="wrapper-detail-main">
+        <div class="wrapper-detail-left">
+          <div class="wrapper-detail-left-category">
+            <div class="checkbox-wrapper-16">
+              {% if advert.lodge %}
+              <div class="checkbox-wrapper">
+                <span class="checkbox-tile">
+                  <span class="checkbox-icon">
+                    <img src="{{ asset('img/icons/types/' ~ advert.lodge.icon) }}" alt="{{ advert.lodge.type }}" />
+                  </span>
+                  <span class="checkbox-label">{{ advert.lodge.type }}</span>
+                </span>
+              </div>
+              {% endif %}
+            </div>
+            <div class="checkbox-wrapper-16">
+              {% for category in advert.categories %}
+              <div class="checkbox-wrapper">
+                <span class="checkbox-tile">
+                  <span class="checkbox-icon">
+                    <img src="{{ asset('img/icons/categories/' ~ category.icon)}}" alt="{{ category.name }}" />
+                  </span>
+                  <span class="checkbox-label">{{ category.name }}</span>
+                </span>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+          <div class="wrapper-detail-left-owner">
+            <div class="wrapper-detail-left-owner-info">
+              {% if advert.owner.avatar is not null %}
+              <p>Propriétaire - </p><img class="profil-picture"
+                src="{{ asset('uploads/avatars/' ~ advert.owner.avatar)}}" alt=""><span>{{advert.owner.username}}</span>
+              {% else %}
+              <p>Propriétaire - <span class="profil-picture"></span><span>{{advert.owner.username}}</span></p>
+              {% endif %}
+            </div>
+            <a href="#" class="wrapper-detail-left-owner-contact">
+              Contacter
+            </a>
+          </div>
+          <div class="wrapper-detail-left-description">
+            <p>
+              {{ advert.description|nl2br|raw }}
             </p>
-
-            {# Aperçu des dates choisies #}
-            <div class="dates">
-              <div class="date">
-                <p>Arrivée :</p>
-                <input class="date-span" type="date" id="arrivalDate" 
-                name="reservation[arrivalDate]" disabled />
+          </div>
+          <div class="wrapper-detail-left-commodite">
+            <h2>Commodités</h2>
+            <div class="checkbox-wrapper-17">
+              {% for accessory in advert.accessories %}
+              <div class="checkbox-wrapper">
+                <span class="checkbox-tile-fit">
+                  <span class="checkbox-icon">
+                    <img src="{{ asset('img/icons/accessories/' ~ accessory.icon)}}" alt="{{ accessory.name }}" />
+                  </span>
+                  <span class="checkbox-label">{{ accessory.name }}</span>
+                </span>
               </div>
-              <div class="date">
-                <p>Départ :</p>
-                <input class="date-span" type="date" id="departureDate" 
-                name="reservation[departureDate]" disabled />
-              </div>
+              {% endfor %}
             </div>
+          </div>
+        </div>
+        <div class="wrapper-detail-right">
+          <div id="calendar-and-detail">
+            <div id="step-1">
 
-            {# Calendrier #}
-            <div id="calendar" data-advert-id="{{ advert.id }}" data-advert-id="{{ advert.id }}"
-              data-reserved-dates="{{ reservedDates|json_encode|e('html_attr') }}"></div>
-            <div id="alert-dates" style="display: none;">
-              <div class="popup-container">
-                <div class="popup-card">
-                  <h2>Alerte</h2>
-                  <p>Vous ne pouvez pas mettre de date antiérieur ou égale à la date d'arrivée</p>
-                  <button id="close-popup">Close</button>
+              {# Prix de la nuit #}
+              <p class="night-price">
+                <b>{{ advert.price }}€</b>/Nuits
+              </p>
+
+              {# Aperçu des dates choisies #}
+              <div class="dates">
+                <div class="date">
+                  <p>Arrivée :</p>
+                  <input class="date-span" type="date" id="arrivalDate" name="reservation[arrivalDate]" disabled />
+                </div>
+                <div class="date">
+                  <p>Départ :</p>
+                  <input class="date-span" type="date" id="departureDate" name="reservation[departureDate]" disabled />
                 </div>
               </div>
-            </div>
 
-            {# Détail des prix #}
-            <div class="price-details">
-              <div class="price">
-                <p><span id="pricePerNight">{{advert.price}}</span> x <span id="numNights">0</span> nuits = </p><span
-                  class="total-span" id="totalNightPrice">0€</span>
+              {# Calendrier #}
+              <div id="calendar" data-advert-id="{{ advert.id }}" data-advert-id="{{ advert.id }}"
+                data-reserved-dates="{{ reservedDates|json_encode|e('html_attr') }}"></div>
+              <div id="alert-dates" style="display: none;">
+                <div class="popup-container">
+                  <div class="popup-card">
+                    <h2>Alerte</h2>
+                    <p>Vous ne pouvez pas mettre de date antiérieur ou égale à la date d'arrivée</p>
+                    <button id="close-popup">Close</button>
+                  </div>
+                </div>
               </div>
-              <div class="price">
-                <p>Frais Stellar 5%:</p><span class="total-span" id="stellarFees">0€</span>
+
+              {# Détail des prix #}
+              <div class="price-details">
+                <div class="price">
+                  <p><span id="pricePerNight">{{advert.price}}</span> x <span id="numNights">0</span> nuits = </p><span
+                    class="total-span" id="totalNightPrice">0€</span>
+                </div>
+                <div class="price">
+                  <p>Frais Stellar 5%:</p><span class="total-span" id="stellarFees">0€</span>
+                </div>
+                <div class="price">
+                  <p>Total:</p><span class="total-span" id="totalPrice">0€</span>
+                </div>
               </div>
-              <div class="price">
-                <p>Total:</p><span class="total-span" id="totalPrice">0€</span>
+              <div class="log">
+                <button class="l-btn" id="start-button" disabled>Réservation</button>
               </div>
-            </div>
-            <div class="log">
-              <button class="l-btn" id="start-button" disabled>Réservation</button>
             </div>
           </div>
-        </div>
-        <div id="reservation-form-container">
-          {{ form_start(formAddReservation) }}
-          <div id="step-2" style="display: none;">
-            <div class="res-infos">
+          <div id="reservation-form-container">
+            {{ form_start(formAddReservation) }}
+            <div id="step-2" style="display: none;">
+              <div class="res-infos">
 
-              <div class="res-info">
-                <label for="firstname">Nom</label>
-                {{ form_widget(formAddReservation.firstname) }}
+                <div class="res-info">
+                  <label for="firstname">Nom</label>
+                  {{ form_widget(formAddReservation.firstname) }}
+                </div>
+                <div class="res-info">
+                  <label for="surname">Prénom</label>
+                  {{ form_widget(formAddReservation.surname) }}
+                </div>
+                <div class="res-info">
+                  <label for="dateOfBirth">Date de naissance</label>
+                  {{ form_widget(formAddReservation.dateOfBirth) }}
+                </div>
               </div>
-              <div class="res-info">
-                <label for="surname">Prénom</label>
-                {{ form_widget(formAddReservation.surname) }}
-              </div>
-              <div class="res-info">
-                <label for="dateOfBirth">Date de naissance</label>
-                {{ form_widget(formAddReservation.dateOfBirth) }}
+              <div class="direction-btn">
+                <span id="prev-button-step-2"><img src="{{ asset('img/icons/chevron-left-solid.svg')}}"
+                    alt="icone retour"></span>
+                <span id="next-button-step-2"><img src="{{ asset('img/icons/chevron-right-solid.svg')}}"
+                    alt="icone suivant"></span>
               </div>
             </div>
-            <div class="direction-btn">
-              <span id="prev-button-step-2"><img src="{{ asset('img/icons/chevron-left-solid.svg')}}"
-                  alt="icone retour"></span>
-              <span id="next-button-step-2"><img src="{{ asset('img/icons/chevron-right-solid.svg')}}"
-                  alt="icone suivant"></span>
-            </div>
-          </div>
-          <div id="step-3" style="display: none;">
-            <div class="res-infos">
+            <div id="step-3" style="display: none;">
+              <div class="res-infos">
 
-              <div class="res-info">
-                <label for="address">Adresse</label>
-                {{ form_widget(formAddReservation.address) }}
+                <div class="res-info">
+                  <label for="address">Adresse</label>
+                  {{ form_widget(formAddReservation.address) }}
+                </div>
+                <div class="res-info">
+                  <label for="cp">Code Postal</label>
+                  {{ form_widget(formAddReservation.cp) }}
+                </div>
+                <div class="res-info">
+                  <label for="city">Ville</label>
+                  {{ form_widget(formAddReservation.city) }}
+                </div>
+                <div class="res-info">
+                  <label for="country">Pays</label>
+                  {{ form_widget(formAddReservation.country) }}
+                </div>
               </div>
-              <div class="res-info">
-                <label for="cp">Code Postal</label>
-                {{ form_widget(formAddReservation.cp) }}
-              </div>
-              <div class="res-info">
-                <label for="city">Ville</label>
-                {{ form_widget(formAddReservation.city) }}
-              </div>
-              <div class="res-info">
-                <label for="country">Pays</label>
-                {{ form_widget(formAddReservation.country) }}
+              <div class="direction-btn">
+                <span id="prev-button-step-3"><img src="{{ asset('img/icons/chevron-left-solid.svg')}}"
+                    alt="icone retour"></span>
+                <span id="next-button-step-3"><img src="{{ asset('img/icons/chevron-right-solid.svg')}}"
+                    alt="icone suivant"></span>
               </div>
             </div>
-            <div class="direction-btn">
-              <span id="prev-button-step-3"><img src="{{ asset('img/icons/chevron-left-solid.svg')}}"
-                  alt="icone retour"></span>
-              <span id="next-button-step-3"><img src="{{ asset('img/icons/chevron-right-solid.svg')}}"
-                  alt="icone suivant"></span>
+            <div id="step-4" style="display: none;">
+              <div class="direction-btn last-dir-btn">
+                <span id="prev-button-step-4"><img src="{{ asset('img/icons/chevron-left-solid.svg')}}"
+                    alt="icone retour"></span>
+              </div>
+              {{ form_end(formAddReservation) }}
             </div>
-          </div>
-          <div id="step-4" style="display: none;">
-            <div class="direction-btn last-dir-btn">
-              <span id="prev-button-step-4"><img src="{{ asset('img/icons/chevron-left-solid.svg')}}"
-                  alt="icone retour"></span>
-            </div>
-            {{ form_end(formAddReservation) }}
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-{% endblock %}
-{% block javascripts %}
-<script src="{{ asset('js/app.js') }}"></script>
-<script src="{{ asset('js/upload.js') }}"></script>
+  {% endblock %}
+  {% block javascripts %}
+  <script src="{{ asset('js/app.js') }}"></script>
+  <script src="{{ asset('js/upload.js') }}"></script>
+  <script src="{{ asset('js/calendar.js') }}"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js">
+  </script>
+  <script>
+    /****Show More Images****/
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-{# <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> #}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js">
-</script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js">
-</script>
-<script>
+    // Cacher initialement la div showMoreImg
+    $("#showMoreImg").hide();
 
-  /*******Calendar*******/
-  $(document).ready(function () {
+    // Gérer l'affichage des images supplémentaires lorsque le bouton showMoreBtn est cliqué
+    $("#showMoreBtn").click(function () {
+      // Ajouter la classe popup-open pour désactiver le défilement
+      $("body").addClass("popup-open");
 
-    let arrivalDateInput = $('[name="reservation[arrivalDate]"]');
-    let departureDateInput = $('[name="reservation[departureDate]"]');
-    let advertId = $('#calendar').data('advert-id');
-    let reservedDates = $('#calendar').data('reserved-dates');
-
-    $('#calendar').datepicker({
-      // Paramétrer les différentes options de Bootstrap Datepicker
-      maxViewMode: 0,
-      language: "fr",
-      multidate: 2,
-      daysOfWeekHighlighted: "0,6",
-      startDate: 'today',
-      todayHighlight: true,
-      beforeShowDay: function (date) {
-        let formattedDate = $.datepicker.formatDate('yy-mm-dd', date);
-
-        // Parcourir les dates réservées pour l'annonce
-        for (let i = 0; i < reservedDates.length; i++) {
-          let reservedStartDate = reservedDates[i][0];
-          let reservedEndDate = reservedDates[i][1];
-
-          // Comparer la date actuelle avec les dates réservées
-          if (formattedDate >= reservedStartDate && formattedDate <= reservedEndDate) {
-            // Render la date non cliquable (désactivée) la griser
-            return {
-              enabled: false,
-              classes: 'disabled-date'
-            };
-          }
-        }
-
-        // Les dates non réservées resteront activées et ne seront pas grises
-        return {
-          enabled: true,
-          classes: ''
-        };
-      }
+      // Afficher la div showMoreImg
+      $("#showMoreImg").fadeIn(300);
+      $("#showMoreImg").show();
     });
 
-    // Fonction pour mettre à jour l'état du bouton de réservation 
-    // (Utilisable si les dates sont choisis et inversement pour le cas contraire)
-    function updateReservationButton() {
-      if (arrivalDateInput && departureDateInput) {
-        $('#start-button').prop('disabled', false); // Activer le bouton de réservation
-      } else {
-        $('#start-button').prop('disabled', true); // Désactiver le bouton de réservation
-      }
-    }
+    // Cacher la div showMoreImg lorsque le bouton closeBtn (croix) est cliqué
+    $("#closeBtn").click(function () {
+      // Enlever la classe popup-open pour réactiver le défilement
+      $("body").removeClass("popup-open");
 
-    document.getElementById('close-popup').addEventListener('click', function () {
-      // Masquer l'alerte #alert-dates
-      $('#alert-dates').hide();
+      $("#showMoreImg").fadeOut(300);
     });
-
-    $('#calendar').on('changeDate', function (e) {
-      let selectedDates = e.dates;
-
-      if (selectedDates.length === 2) {
-        arrivalDateInput = selectedDates[0];
-        departureDateInput = selectedDates[1];
-        
-        if (departureDateInput <= arrivalDateInput) {
-          $('#alert-dates').fadeIn();
-          $('#alert-dates').show();
-          // Réinitialiser les champs de date et annuler la sélection
-          $('#calendar').datepicker('clearDates');
-          return;
-        }
-
-        // Vérifier si arrivalDate est définie avant de l'utiliser
-        if (arrivalDateInput) {
-          // Formatage de la date au format "yyyy-MM-dd"
-          let formattedDate = arrivalDateInput.getFullYear() + '-' +
-            (arrivalDateInput.getMonth() + 1).toString().padStart(2, '0') + '-' +
-            arrivalDateInput.getDate().toString().padStart(2, '0');
-          $('[name="reservation[arrivalDate]"]').val(formattedDate); // Mettre à jour la valeur du champ d'arrivée
-        }
-        // Vérifier si departureDate est définie avant de l'utiliser
-        if (departureDateInput) {
-          // Formatage de la date au format "yyyy-MM-dd"
-          let formattedDate = departureDateInput.getFullYear() + '-' +
-            (departureDateInput.getMonth() + 1).toString().padStart(2, '0') + '-' +
-            departureDateInput.getDate().toString().padStart(2, '0');
-          $('[name="reservation[departureDate]"]').val(formattedDate); // Mettre à jour la valeur du champ de départ
-        }
-
-        $('#calendar').find('.day').each(function () {
-          let currentDate = new Date($(this).data('date'));
-          if (currentDate > arrivalDateInput && currentDate < departureDateInput) {
-            $(this).addClass('range');
-          } else {
-            $(this).removeClass('range');
-          }
-        });
-
-        // Calcul du nombre de nuits
-        let numNights = Math.floor((departureDateInput - arrivalDateInput) / (1000 * 60 * 60 * 24));
-        $('#numNights').text(numNights);
-
-        // Calcul du montant total des nuits
-        let pricePerNight = parseFloat($('#pricePerNight').text());
-        let totalNightPrice = (pricePerNight * numNights).toFixed(2);
-        $('#totalNightPrice').text(totalNightPrice + '€');
-
-        // Calcul du montant des frais Stellar (5%)
-        let stellarFees = (totalNightPrice * 0.05).toFixed(2);
-        $('#stellarFees').text(stellarFees + '€');
-
-        // Calcul du total (nuits + frais)
-        let totalPrice = (parseFloat(totalNightPrice) + parseFloat(stellarFees)).toFixed(2);
-        $('#totalPrice').text(totalPrice + '€');
-
-        updateReservationButton();
-      } else {
-        arrivalDateInput = null;
-        departureDateInput = null;
-        $('#calendar').find('.day').removeClass('range');
-        $('[name="reservation[arrivalDate]"]').val('');
-        $('[name="reservation[departureDate]"]').val('');
-        $('#numNights').text('0');
-        $('#totalNightPrice').text('0€');
-        $('#stellarFees').text('0€');
-        $('#totalPrice').text('0€');
-      }
-
-      updateReservationButton();
-    });
-
-
-    function formatDate(date) {
-      let day = date.getDate();
-      let month = date.getMonth() + 1;
-      let year = date.getFullYear();
-
-      if (day < 10) {
-        day = '0' + day;
-      }
-      if (month < 10) {
-        month = '0' + month;
-      }
-
-      return day + '/' + month + '/' + year;
-    }
-  });
-
-
-  /*******Form MultiStep*******/
-  // letiables for tracking the current step
-  let currentStep = 1;
-  const totalSteps = 4;
-
-  // Function to show the next step
-  function showNextStep() {
-    if (currentStep < totalSteps) {
-      currentStep++;
-      updateStepDisplay();
-    }
-  }
-
-  // Function to show the previous step
-  function showPreviousStep() {
-    if (currentStep > 1) {
-      currentStep--;
-      updateStepDisplay();
-    }
-  }
-
-  // Function to update the display based on the current step
-  function updateStepDisplay() {
-    // Masquer toutes les étapes
-    for (let i = 1; i <= totalSteps; i++) {
-      $(`#step-${i}`).hide(); // Masquer l'étape
-    }
-
-    // Afficher la nouvelle étape avec une animation de fondu enchaîné
-    $(`#step-${currentStep}`).fadeOut(800); // Vous pouvez ajuster la durée de l'animation ici (300 ms dans cet exemple)
-    $(`#step-${currentStep}`).fadeIn(800); // Vous pouvez ajuster la durée de l'animation ici (300 ms dans cet exemple)
-    $(`#step-${currentStep}`).show(); // Vous pouvez ajuster la durée de l'animation ici (300 ms dans cet exemple)
-
-    // Pour afficher un élément
-  }
-
-  // Event listener for the "start-button" element (Step 1)
-  document.getElementById('start-button').addEventListener('click', function (event) {
-    event.preventDefault(); // Prevent the default link behavior (don't navigate)
-    showNextStep(); // Transition to the next step
-  });
-
-  // Event listeners for the Next and Previous buttons
-  document.getElementById('next-button-step-2').addEventListener('click', showNextStep);
-  document.getElementById('prev-button-step-2').addEventListener('click', showPreviousStep);
-
-  document.getElementById('next-button-step-3').addEventListener('click', showNextStep);
-  document.getElementById('prev-button-step-3').addEventListener('click', showPreviousStep);
-
-  document.getElementById('prev-button-step-4').addEventListener('click', showPreviousStep);
-
-  // Initialize the display to the first step
-  updateStepDisplay();
-
-
-
-  // Grisage des dates déjà réservées
-  $('#datepicker').datepicker({
-    beforeShowDay: function (date) {
-      // Logique pour griser les dates
-    }
-  });
-
-  // Calcul dynamique des prix
-  $('#datepicker').on('changeDate', function () {
-    // Logique de calcul du prix
-  });
-
-
-// Cacher initialement la div showMoreImg
-$("#showMoreImg").hide();
-
-// Gérer l'affichage des images supplémentaires lorsque le bouton showMoreBtn est cliqué
-$("#showMoreBtn").click(function() {
-  // Ajouter la classe popup-open pour désactiver le défilement
-  $("body").addClass("popup-open");
-
-  // Afficher la div showMoreImg
-  $("#showMoreImg").fadeIn(300);
-  $("#showMoreImg").show();
-});
-
-// Cacher la div showMoreImg lorsque le bouton closeBtn (croix) est cliqué
-$("#closeBtn").click(function() {
-  // Enlever la classe popup-open pour réactiver le défilement
-  $("body").removeClass("popup-open");
-
-  $("#showMoreImg").fadeOut(300);
-});
-
-</script>
-{% endblock javascripts %}
+  </script>
+  {% endblock javascripts %}

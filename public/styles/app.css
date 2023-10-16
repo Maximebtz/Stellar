@@ -681,6 +681,7 @@ header .signup:hover {
 .wrapper-detail-grid-img .sm-img {
   display: flex;
   flex-direction: column;
+  height: 500px;
   position: relative;
   gap: 5px;
 }
@@ -1769,6 +1770,54 @@ input[type=range] {
   font-style: italic;
   letter-spacing: -4px;
   padding-bottom: 20px;
+}
+
+footer {
+  width: 100%;
+  color: var(--white);
+  background-color: var(--black);
+}
+footer .row {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 40px;
+  margin-top: 40px;
+  padding: 60px 80px;
+  justify-content: space-around;
+  align-items: center;
+}
+footer .row .logo {
+  height: 50px;
+  width: 50px;
+  position: relative;
+}
+footer .row .logo img {
+  width: 100%;
+  height: 100%;
+}
+footer .row .right-content {
+  display: flex;
+  gap: 60px;
+  width: 100%;
+  justify-content: space-between;
+}
+footer .row .right-content .about {
+  max-width: 350px;
+  text-align: justify;
+}
+footer .row .right-content li {
+  list-style-type: none;
+}
+footer .row .right-content .links {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+footer .small {
+  display: flex;
+  justify-content: center;
+  font-size: medium;
 }
 
 @media only screen and (max-width: 770px) {
