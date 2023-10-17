@@ -2213,10 +2213,10 @@ footer {
             display: flex;
             gap: 40px;
             width: 100%;
-            justify-content: space-between;
+            justify-content: space-evenly;
 
             .about {
-                max-width: 350px;
+                max-width: 400px;
                 text-align: justify;
             }
 

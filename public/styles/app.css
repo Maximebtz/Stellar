@@ -1806,10 +1806,10 @@ footer .row .right-content {
   display: flex;
   gap: 40px;
   width: 100%;
-  justify-content: space-between;
+  justify-content: space-evenly;
 }
 footer .row .right-content .about {
-  max-width: 350px;
+  max-width: 400px;
   text-align: justify;
 }
 footer .row .right-content .links-ul ul {

@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Advert;
 use App\Repository\AdvertRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\ReservationRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
@@ -61,13 +62,24 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/owner/my-property/{id}/delete', name: 'delete_advert')] // Définition de la route avec un paramètre 'id' et du nom de la route
-    public function delete(AdvertRepository $advertRepository, EntityManagerInterface $entityManager, $id)
-    {   
-        $advert = $advertRepository->find(($id));
+    #[Route('/owner/my-property/{id}/delete', name: 'delete_advert')]
+    #[IsGranted('ROLE_USER')]
+    public function delete(Advert $advert, AdvertRepository $advertRepository, ReservationRepository $reservationRepository, EntityManagerInterface $entityManager)
+    {
+        // Vérifier si il y a des réservations associée à cette annonce
+        $reservations = $reservationRepository->findBy(['advert' => $advert]);
+
+        // Si des réservations existent, empêcher la suppression
+        if (!empty($reservations)) {
+            $this->addFlash('danger', 'Impossible de supprimer cette annonce car des réservations y sont associées.');
+            return $this->redirectToRoute('user_adverts'); // Rediriger l'utilisateur où on le souhaite
+        }
+
+        // Si aucune réservation n'est associée, on peut supprimer l'annonce
         $entityManager->remove($advert);
         $entityManager->flush();
 
+        $this->addFlash('success', 'L\'annonce a été supprimée avec succès.');
         return $this->redirectToRoute('user_adverts');
     }
 }
