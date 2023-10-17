@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="{{ asset('build/style.css') }}" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css"
     rel="stylesheet">
+  <link rel="stylesheet" href="{{ asset('css/tarteaucitron.css') }}" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -78,14 +79,14 @@
     <div class="container">
       <div class="row">
         <div class="logo">
-          <img src="{{ asset("img/icons/logo.png")}}" alt="stellar logo">
+          <img src="{{ asset(" img/icons/logo.png")}}" alt="stellar logo">
         </div>
         <div class="right-content">
-        <div class="about">
-          <h5>About Us</h5>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim sit est, ad tenetur
-            expedita, minus cupiditate aspernatur eaque magnam quia veritatis maiores sequi
-            recusandae, incidunt repellat ab fugit quos quae.</p>
+          <div class="about">
+            <h5>About Us</h5>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim sit est, ad tenetur
+              expedita, minus cupiditate aspernatur eaque magnam quia veritatis maiores sequi
+              recusandae, incidunt repellat ab fugit quos quae.</p>
             <div class="links-ul">
               <h5>Social Links</h5>
               <ul>
@@ -99,7 +100,7 @@
                 </li>
               </ul>
             </div>
-        </div>
+          </div>
           <div class="links">
             <div class="links-ul-2">
               <h5>Important Links</h5>
@@ -139,6 +140,54 @@
 <script src="{{ asset('js/app.js') }}"></script>
 <script src="{{ asset('js/animations.js') }}"></script>
 <script src="{{ asset('js/upload.js') }}"></script>
+<script src="{{ asset(' tarteaucitron/tarteaucitron.js')}}"></script>
+<script type="text/javascript">
+  tarteaucitron.init({
+    "privacyUrl": "", /* Privacy policy url */
+    "bodyPosition": "bottom", /* or top to bring it as first element for accessibility */
+
+    "hashtag": "#tarteaucitron", /* Open the panel with this hashtag */
+    "cookieName": "tarteaucitron", /* Cookie name */
+
+    "orientation": "middle", /* Banner position (top - bottom) */
+
+    "groupServices": false, /* Group services by category */
+    "showDetailsOnClick": true, /* Click to expand the description */
+    "serviceDefaultState": "wait", /* Default state (true - wait - false) */
+
+    "showAlertSmall": false, /* Show the small banner on bottom right */
+    "cookieslist": false, /* Show the cookie list */
+
+    "closePopup": false, /* Show a close X on the banner */
+
+    "showIcon": true, /* Show cookie icon to manage cookies */
+    //"iconSrc": "", /* Optionnal: URL or base64 encoded image */
+    "iconPosition": "BottomRight", /* BottomRight, BottomLeft, TopRight and TopLeft */
+
+    "adblocker": false, /* Show a Warning if an adblocker is detected */
+
+    "DenyAllCta": true, /* Show the deny all button */
+    "AcceptAllCta": true, /* Show the accept all button when highPrivacy on */
+    "highPrivacy": true, /* HIGHLY RECOMMANDED Disable auto consent */
+
+    "handleBrowserDNTRequest": false, /* If Do Not Track == 1, disallow all */
+
+    "removeCredit": false, /* Remove credit link */
+    "moreInfoLink": true, /* Show more info link */
+
+    "useExternalCss": false, /* If false, the tarteaucitron.css file will be loaded */
+    "useExternalJs": false, /* If false, the tarteaucitron.js file will be loaded */
+
+    //"cookieDomain": ".my-multisite-domaine.fr", /* Shared cookie for multisite */
+
+    "readmoreLink": "", /* Change the default readmore link */
+
+    "mandatory": true, /* Show a message about mandatory cookies */
+    "mandatoryCta": true, /* Show the disabled accept button when mandatory on */
+
+    //"customCloserId": "" /* Optional a11y: Custom element ID used to open the panel */
+  });
+</script>
 {% endblock %}
 
 </html>
