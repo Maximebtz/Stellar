@@ -119,49 +119,54 @@ class AdvertController extends AbstractController
 
     #[Route('/user/advert/detail/{id}', name: 'detail_advert')]
     #[IsGranted('ROLE_USER')]
-    public function showDetailAdvert($id, CategoryRepository $categoryRepository, EntityManagerInterface $entityManager, AccessoryRepository $accessoryRepository, LodgeRepository $lodgeRepository, Request $request, ReservationRepository $reservationRepository, Security $security): Response
-    {
+    public function showDetailAdvert(
+        $id,
+        CategoryRepository $categoryRepository,
+        EntityManagerInterface $entityManager,
+        AccessoryRepository $accessoryRepository,
+        LodgeRepository $lodgeRepository,
+        Request $request,
+        ReservationRepository $reservationRepository,
+        Security $security
+    ): Response {
         // Récupérer l'annonce à partir de l'ID dans l'URL
-        $repository = $this->entityManager->getRepository(Advert::class);
-        $userRepository = $this->entityManager->getRepository(User::class);
-        $advert = $repository->find($id);
-        $user = $userRepository->find($id);
-
-
-
-        // Create a new Reservation associated with the Advert
-        $reservation = new Reservation();
-        $reservation->setAdvert($advert); // Associate the reservation with the advert
-
-        // Create the form using the Reservation entity
-        $reservationForm = $this->createForm(ReservationType::class, $reservation);
+        $advert = $entityManager->getRepository(Advert::class)->find($id);
 
         // Vérifier si l'annonce existe
         if (!$advert) {
             throw $this->createNotFoundException('L\'annonce n\'existe pas.');
         }
 
+        $owner = $advert->getOwner();
+
+        // Récupérer les annonces du propriétaire
+        $ownerAdverts = $entityManager->getRepository(Advert::class)->findBy(['owner' => $owner], ['createdAt' => 'DESC']);
+
+        // Récupérer l'utilisateur connecté
         $user = $security->getUser();
+
         if (!$user) {
             throw new \RuntimeException('L\'utilisateur n\'est pas connecté.');
         }
-        $reservation->setUser($user);
 
-        // Gérez la soumission du formulaire de réservation
+        // Créer une nouvelle réservation associée à l'annonce
+        $reservation = new Reservation();
+        $reservation->setAdvert($advert)->setUser($user);
+
+        // Créer le formulaire de réservation
+        $reservationForm = $this->createForm(ReservationType::class, $reservation);
+
         $reservationForm->handleRequest($request);
 
         if ($reservationForm->isSubmitted() && $reservationForm->isValid()) {
-            // Enregistrer la réservation en base de données
             $entityManager->persist($reservation);
             $entityManager->flush();
-
-            // Rediriger l'utilisateur vers une page de confirmation ou ailleurs si nécessaire
             return $this->redirectToRoute('app_home');
         }
-        $reservedDates = $reservationRepository->findReservedDatesForAdvert($advert->getId());
 
+        $reservedDates = $reservationRepository->findReservedDatesForAdvert($id);
 
-        // Récupérer les catégories, les accessoires et les lodges
+        // Récupérer les catégories, accessoires et lodges
         $categories = $categoryRepository->findAll();
         $accessories = $accessoryRepository->findAll();
         $lodges = $lodgeRepository->findAll();
@@ -173,6 +178,7 @@ class AdvertController extends AbstractController
             'lodges' => $lodges,
             'formAddReservation' => $reservationForm->createView(),
             'reservedDates' => $reservedDates,
+            'ownerAdverts' => $ownerAdverts,
         ]);
     }
 }
