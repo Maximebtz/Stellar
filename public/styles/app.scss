@@ -426,7 +426,7 @@ header {
                     .filter {
                         display: flex;
                         flex-direction: column;
-                        gap: 15px;
+                        gap: 7px;
                         width: 100%;
 
                         .labels {
@@ -475,6 +475,52 @@ header {
                             box-shadow: var(--lightgray) 0 0 15px;
                             padding: 10px;
                         }
+                    }
+                }
+
+                .filters:nth-child(2) {
+                    border: 1px solid var(--lightgray);
+                    padding: 15px;
+                    border-radius: 7px;
+                    box-shadow: var(--lightgray) 0 0 15px;
+
+                    .price-filter-input {
+                        display: flex;
+                        justify-content: space-between;
+
+                        .price-filter-input-content {
+                            text-align: center;
+
+                            input[type='number']::-webkit-inner-spin-button,
+                            input[type='number']::-webkit-outer-spin-button {
+                                -webkit-appearance: none;
+                                margin: 0;
+                            }
+
+                            label {
+                                padding-bottom: 7px;
+                            }
+
+                            input {
+                                color: var(--light-purple);
+                                text-align: center;
+                                margin-bottom: 10px;
+                            }
+
+                        }
+                    }
+
+                    .ui-state-default,
+                    .ui-widget-content .ui-state-default,
+                    .ui-widget-header .ui-state-default,
+                    .ui-button {
+                        border: none !important;
+                        background: var(--gradient-p-b) !important;
+                        outline: none !important;
+                    }
+
+                    span.ui-slider-handle.ui-corner-all.ui-state-default:hover {
+                        transform: scale(1.1);
                     }
                 }
             }
@@ -1348,7 +1394,7 @@ header {
 
             }
         }
-        
+
 
         //****** Wrapper-detail-right ******//
         .wrapper-detail-right {

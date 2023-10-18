@@ -24,12 +24,12 @@
                 <div class="filters-container">
                     <div class="filters">
                         <div class="filter">
-                            <label>Villes:</label>
+                            <label>Villes</label>
                             <input type="text" id="cityInput" placeholder="Tapez et appuyez sur Entrée">
                             <div id="cityTags" class="labels"></div>
                         </div>
                         <div class="filter">
-                            <label>Pays:</label>
+                            <label>Pays</label>
                             <input type="text" id="countryInput" placeholder="Tapez et appuyez sur Entrée">
                             <div id="countryTags" class="labels"></div>
                         </div>
@@ -37,23 +37,27 @@
                     <div class="filters">
                         <div class="filter">
                             <div class="price-filter-input">
-                                <label for="minPrice">Prix Min :</label>
-                                <input type="number" min="0" max="9900" oninput="validity.valid||(value='0');"
-                                    id="minPrice" name="minPrice" class="price-range-field" />
-                                <label for="maxPrice">Prix Max :</label>
-                                <input type="number" min="0" max="10000" oninput="validity.valid||(value='10000');"
-                                    id="maxPrice" name="maxPrice" class="price-range-field" />
+                                <div class="price-filter-input-content">
+                                    <label for="minPrice">Prix Min</label>
+                                    <input type="number" min="0" max="9900" oninput="validity.valid||(value='0');"
+                                        id="minPrice" name="minPrice" class="price-range-field" />
+                                </div>
+                                <div class="price-filter-input-content">
+                                    <label for="maxPrice">Prix Max</label>
+                                    <input type="number" min="0" max="10000" oninput="validity.valid||(value='10000');"
+                                        id="maxPrice" name="maxPrice" class="price-range-field" />
+                                </div>
                             </div>
                             <div id="rangePrice" class="price-filter-range" name="rangePrice"></div>
                         </div>
                     </div>
                     <div class="filters">
                         <div class="filter">
-                            <label>Date d'arrivée:</label>
+                            <label>Date d'arrivée</label>
                             <input type="date" id="startDate">
                         </div>
                         <div class="filter">
-                            <label>Date de départ:</label>
+                            <label>Date de départ</label>
                             <input type="date" id="endDate">
                         </div>
                     </div>

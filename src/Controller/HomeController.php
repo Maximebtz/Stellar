@@ -81,13 +81,14 @@ class HomeController extends AbstractController
             $params['maxPrice'] = $data['maxPrice'];
         }
 
-        if (!empty($data['startDate'])) {
-            $dql .= " AND r.startDate >= :startDate";
+        if (!empty($data['startDate']) && !empty($data['endDate'])) {
+            $dql .= " AND NOT EXISTS (
+                        SELECT r FROM App\Entity\Reservation r 
+                        WHERE r.advert = a AND 
+                        r.startDate <= :endDate AND 
+                        r.endDate >= :startDate
+                    )";
             $params['startDate'] = new \DateTime($data['startDate']);
-        }
-
-        if (!empty($data['endDate'])) {
-            $dql .= " AND r.endDate <= :endDate";
             $params['endDate'] = new \DateTime($data['endDate']);
         }
 

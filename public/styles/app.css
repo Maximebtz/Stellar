@@ -341,7 +341,7 @@ header .signup:hover {
 .wrapper-home .search-btn-container #searchPopup .filters-container .filters .filter {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 7px;
   width: 100%;
 }
 .wrapper-home .search-btn-container #searchPopup .filters-container .filters .filter .labels {
@@ -389,6 +389,43 @@ header .signup:hover {
   border: var(--middlegray) solid 1px;
   box-shadow: var(--lightgray) 0 0 15px;
   padding: 10px;
+}
+.wrapper-home .search-btn-container #searchPopup .filters-container .filters:nth-child(2) {
+  border: 1px solid var(--lightgray);
+  padding: 15px;
+  border-radius: 7px;
+  box-shadow: var(--lightgray) 0 0 15px;
+}
+.wrapper-home .search-btn-container #searchPopup .filters-container .filters:nth-child(2) .price-filter-input {
+  display: flex;
+  justify-content: space-between;
+}
+.wrapper-home .search-btn-container #searchPopup .filters-container .filters:nth-child(2) .price-filter-input .price-filter-input-content {
+  text-align: center;
+}
+.wrapper-home .search-btn-container #searchPopup .filters-container .filters:nth-child(2) .price-filter-input .price-filter-input-content input[type=number]::-webkit-inner-spin-button,
+.wrapper-home .search-btn-container #searchPopup .filters-container .filters:nth-child(2) .price-filter-input .price-filter-input-content input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.wrapper-home .search-btn-container #searchPopup .filters-container .filters:nth-child(2) .price-filter-input .price-filter-input-content label {
+  padding-bottom: 7px;
+}
+.wrapper-home .search-btn-container #searchPopup .filters-container .filters:nth-child(2) .price-filter-input .price-filter-input-content input {
+  color: var(--light-purple);
+  text-align: center;
+  margin-bottom: 10px;
+}
+.wrapper-home .search-btn-container #searchPopup .filters-container .filters:nth-child(2) .ui-state-default,
+.wrapper-home .search-btn-container #searchPopup .filters-container .filters:nth-child(2) .ui-widget-content .ui-state-default,
+.wrapper-home .search-btn-container #searchPopup .filters-container .filters:nth-child(2) .ui-widget-header .ui-state-default,
+.wrapper-home .search-btn-container #searchPopup .filters-container .filters:nth-child(2) .ui-button {
+  border: none !important;
+  background: var(--gradient-p-b) !important;
+  outline: none !important;
+}
+.wrapper-home .search-btn-container #searchPopup .filters-container .filters:nth-child(2) span.ui-slider-handle.ui-corner-all.ui-state-default:hover {
+  transform: scale(1.1);
 }
 @keyframes fade-in-top {
   0% {
