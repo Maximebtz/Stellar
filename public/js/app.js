@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
+  // document ready function (JQuery)
   /****ProfilMenu****/
   function displayProfilMenu() {
     const menu = document.getElementById("profil-menu");
@@ -27,11 +28,10 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   /****Checkbox Slide****/
-  const horizontalCheckboxContainers = document.querySelectorAll(
-    ".checkbox-wrapper-16"
-  );
 
-  horizontalCheckboxContainers.forEach((container) => {
+  function enableCheckboxSlideByContainerId(idContainer) {
+    const container = document.getElementById(idContainer);
+
     let isHorizontalMouseDown = false;
     let startX;
     let scrollLeft;
@@ -60,7 +60,10 @@ document.addEventListener("DOMContentLoaded", function () {
       const walk = (x - startX) * 1.5;
       container.scrollLeft = scrollLeft - walk;
     });
-  });
+  }
+
+  enableCheckboxSlideByContainerId("checkbox-wrapper-type");
+  enableCheckboxSlideByContainerId("checkbox-wrapper-categories");
 
   const verticalCheckboxContainer = document.querySelector(
     ".checkbox-wrapper-17"
@@ -73,7 +76,7 @@ document.addEventListener("DOMContentLoaded", function () {
     isVerticalMouseDown = true;
     startY = e.pageY - verticalCheckboxContainer.offsetTop;
     scrollTop = verticalCheckboxContainer.scrollTop;
-    verticalCheckboxContainer.style.scrollBehavior = "unset"; // Désactiver le scroll en douceur
+    verticalCheckboxContainer.style.scrollBehavior = "unset";
   });
 
   verticalCheckboxContainer.addEventListener("mouseup", () => {
@@ -92,5 +95,5 @@ document.addEventListener("DOMContentLoaded", function () {
     const y = e.pageY - verticalCheckboxContainer.offsetTop;
     const walk = (y - startY) * 1.5;
     verticalCheckboxContainer.scrollTop = scrollTop - walk;
-  }); 
+  });
 });

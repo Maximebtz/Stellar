@@ -1,8 +1,8 @@
-{% extends 'base.html.twig' %} 
-{% block title %}Ajouter une annonce{% endblock %} 
+{% extends 'base.html.twig' %}
+{% block title %}Ajouter une annonce{% endblock %}
 {% block body %}
 <div class="wrapper">
-  <a href="{{ path("app_home") }}" class="return-home">
+  <a href="{{ path('app_home') }}" class="return-home">
     <img src="{{ asset('img/icons/Left Arrow.svg') }}" alt="Icon return home">
   </a>
   <div class="wrapper-detail">
@@ -52,7 +52,7 @@
       <div class="wrapper-detail-left">
         <div class="wrapper-detail-left-category">
           <h2>Type</h2>
-          <div class="checkbox-wrapper-16">
+          <div id="checkbox-wrapper-type" class="checkbox-wrapper-16">
             {% for lodge in lodges %}
             <label class="checkbox-wrapper">
               {{
@@ -72,7 +72,7 @@
 
           <h2>Catégories</h2>
 
-          <div class="checkbox-wrapper-16">
+          <div id="checkbox-wrapper-categories" class="checkbox-wrapper-16">
             {% for category in categories %}
             <label class="checkbox-wrapper">
               {{
@@ -82,8 +82,7 @@
               }}
               <span class="checkbox-tile">
                 <span class="checkbox-icon">
-                  <img src="{{ asset('img/icons/categories/' ~ category.icon) }}" 
-                  alt="{{ category.name }}" />
+                  <img src="{{ asset('img/icons/categories/' ~ category.icon) }}" alt="{{ category.name }}" />
                 </span>
                 <span class="checkbox-label">{{ category.name }}</span>
               </span>
@@ -159,4 +158,3 @@
   </div>
 </div>
 {% endblock %}
-

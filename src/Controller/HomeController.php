@@ -71,9 +71,14 @@ class HomeController extends AbstractController
             $params['countries'] = $data['countries'];
         }
 
-        if (!empty($data['priceRange'])) {
-            $dql .= " AND a.price <= :priceRange";
-            $params['priceRange'] = $data['priceRange'];
+        if (!empty($data['minPrice'])) {
+            $dql .= " AND a.price >= :minPrice";
+            $params['minPrice'] = $data['minPrice'];
+        }
+        
+        if (!empty($data['maxPrice'])) {
+            $dql .= " AND a.price <= :maxPrice";
+            $params['maxPrice'] = $data['maxPrice'];
         }
 
         if (!empty($data['startDate'])) {
