@@ -1052,14 +1052,9 @@ header {
                     user-select: none;
 
                     .checkbox-input {
-                        clip: rect(0 0 0 0);
-                        -webkit-clip-path: inset(100%);
-                        clip-path: inset(100%);
                         height: 1px;
-                        overflow: hidden;
-                        position: absolute;
-                        white-space: nowrap;
                         width: 1px;
+                        opacity: 0;
                     }
 
                     .checkbox-input:checked+.checkbox-tile {
@@ -1093,7 +1088,7 @@ header {
                         box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
                         transition: 0.15s ease;
                         cursor: pointer;
-                        position: relative;
+                        // position: relative;
                         transition: all .2s ease-in-out;
                     }
 
