@@ -83,7 +83,7 @@
             d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
         </svg>
       </span>
-      <li class="breadcrumb-item active" aria-current="page">Nouvelle </li>
+      <li class="breadcrumb-item active" aria-current="page">Détail</li>
     </ul>
   </nav>
   <div class="wrapper-detail">
@@ -222,6 +222,13 @@
           </div>
         </div>
         <div class="wrapper-detail-right">
+          <span class="close-reservation-btn" id="closeReservationBtn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x"
+              viewBox="0 0 16 16">
+              <path
+                d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+            </svg>
+          </span>
           <div id="calendar-and-detail">
             <div id="step-1">
 
@@ -367,6 +374,9 @@
       </div>
     </div>
   </div>
+  <div class="reservation-btn">
+    <button class="l-btn fullsize-btn" id="reservation-btn">Réservation</button>
+  </div>
   {% endblock %}
   {% block javascripts %}
   <script src="{{ asset('js/app.js') }}"></script>
@@ -378,26 +388,41 @@
   </script>
   <script>
     /****Show More Images****/
-
+  
     // Cacher initialement la div showMoreImg
     $("#showMoreImg").hide();
-
+  
     // Gérer l'affichage des images supplémentaires lorsque le bouton showMoreBtn est cliqué
     $("#showMoreBtn").click(function () {
       // Ajouter la classe popup-open pour désactiver le défilement
       $("body").addClass("popup-open");
-
+  
       // Afficher la div showMoreImg
       $("#showMoreImg").fadeIn(300);
       $("#showMoreImg").show();
     });
-
+  
     // Cacher la div showMoreImg lorsque le bouton closeBtn (croix) est cliqué
     $("#closeBtn").click(function () {
       // Enlever la classe popup-open pour réactiver le défilement
       $("body").removeClass("popup-open");
-
+  
       $("#showMoreImg").fadeOut(300);
     });
+
+    
+      if (window.innerWidth < 450) {  
+        const reservationBtn = document.getElementById("reservation-btn");
+        const closeReservationBtn = document.getElementById("closeReservationBtn");
+        const wrapperDetail = document.querySelector(".wrapper-detail-right");
+    
+        reservationBtn.addEventListener("click", function() {
+          wrapperDetail.style.display = "block";
+        });
+
+        closeReservationBtn.addEventListener("click", function() {
+          wrapperDetail.style.display = "none";
+        });
+      }
   </script>
   {% endblock javascripts %}

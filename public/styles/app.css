@@ -82,6 +82,10 @@ input:-webkit-autofill {
   transform: scale(1);
 }
 
+.reservation-btn {
+  display: none;
+}
+
 body.popup-open {
   overflow: hidden;
 }
@@ -649,7 +653,7 @@ header .signup:hover {
   min-height: 100vh;
   max-width: 1150px;
   width: 100%;
-  padding-top: 80px;
+  padding-top: 40px;
 }
 .wrapper-detail-title {
   display: flex;
@@ -1180,6 +1184,9 @@ header .signup:hover {
   display: flex;
   flex-direction: column;
   box-shadow: var(--boxshadow) 0 0 20px;
+}
+.wrapper-detail-main .wrapper-detail-right .close-reservation-btn {
+  display: none;
 }
 .wrapper-detail-main .wrapper-detail-right #calendar-and-detail #calendar {
   width: 100%;
@@ -2048,11 +2055,50 @@ footer .small a:hover {
     border: none;
   }
   header .log #profil-picture {
-    width: 42px;
-    height: 42px;
+    width: 46px;
+    height: 46px;
   }
   header .title {
     display: none;
+  }
+  .reservation-btn {
+    display: block;
+    position: fixed;
+    bottom: 0;
+    padding: 10px;
+    width: 100%;
+    z-index: 3;
+  }
+  .location {
+    padding-top: 12px;
+  }
+  .wrapper-detail-main .wrapper-detail-right {
+    display: none;
+    position: fixed !important;
+    background-color: var(--white);
+    top: 0 !important;
+    left: 0;
+    z-index: 4;
+    max-height: 100vh;
+    min-height: 100vh;
+    margin: 0 !important;
+    border-radius: 0;
+    overflow-y: scroll;
+  }
+  .wrapper-detail-main .wrapper-detail-right .close-reservation-btn {
+    display: flex;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+  }
+  .wrapper-detail-main .wrapper-detail-right .close-reservation-btn svg.bi.bi-x {
+    height: 32px;
+    width: 32px;
+  }
+  .wrapper-detail-main #alert-dates {
+    position: fixed;
+    height: 100%;
+    z-index: 5;
   }
 }
 @media only screen and (max-width: 850px) {
@@ -2061,53 +2107,6 @@ footer .small a:hover {
   }
   .wrapper .wrapper-detail {
     padding-top: 40px;
-  }
-  .wrapper .wrapper-detail-title {
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-  }
-  .wrapper .wrapper-detail-title .advert-title {
-    font-size: 2.5em;
-    line-height: 32px;
-    width: 450px;
-  }
-  .wrapper .wrapper-detail-title .advert-title input {
-    font-size: 40px;
-    line-height: 32px;
-    border-bottom: var(--darkgray) 1px solid;
-  }
-  .wrapper .wrapper-detail-title .location {
-    font-family: "Inter", sans-serif;
-    color: var(--middlegray);
-    font-weight: 400;
-    font-size: 1.02em;
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-  }
-  .wrapper .wrapper-detail-title .location input {
-    max-width: 200px;
-    min-width: 150px;
-    border-bottom: var(--darkgray) 1px solid;
-    padding: 0 10px;
-    font-size: medium;
-    height: 36px;
-    text-align: center;
-  }
-  .wrapper .wrapper-detail-title .address-wrap {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    padding: 20px 0 55px 0;
-  }
-  .wrapper .wrapper-detail-title .shadow-emp {
-    background-color: var(--middlegray);
-    max-width: 100px;
-    width: 100%;
-    min-width: 30px;
-    height: 18px;
-    border-radius: 5px;
   }
   .wrapper .wrapper-detail-grid-img {
     grid-template-columns: 1fr;
@@ -2141,6 +2140,7 @@ footer .small a:hover {
   }
   .wrapper .wrapper-detail-main .wrapper-detail-left {
     width: 100%;
+    min-width: 0 !important;
     margin: 0;
     overflow: hidden;
     max-width: none;
@@ -2148,6 +2148,8 @@ footer .small a:hover {
   .wrapper .wrapper-detail-main .wrapper-detail-left .checkbox-wrapper-17 {
     gap: 10px 10px;
     max-width: 100%;
+    min-width: 0px;
+    justify-content: flex-start;
   }
   .wrapper .wrapper-detail-main .wrapper-detail-left .checkbox-wrapper-16 {
     max-width: 100%;

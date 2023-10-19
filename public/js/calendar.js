@@ -230,4 +230,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Initialize the display to the first step
   updateStepDisplay();
+
+  
 });
