@@ -55,7 +55,6 @@ class AdvertController extends AbstractController
             $advert = new Advert();
         }
 
-
         $form = $this->createForm(AdvertType::class, $advert);
 
         //Récupérer les catégories

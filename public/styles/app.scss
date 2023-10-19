@@ -306,28 +306,63 @@ header {
 //************** Wrapper **************//
 .wrapper {
     display: flex;
-    padding: 20px;
+    padding: 20px !important;
     width: 100%;
     min-height: calc(100vh - 120px);
     flex-direction: column;
     align-items: center;
 
-    .return-home {
-        border: 1px solid var(--middlegray);
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
+    .breadcrumb-nav {
+
         display: flex;
         align-items: center;
-        justify-content: center;
-        box-shadow: var(--lightgray) 0 0 15px;
-        position: absolute;
-        left: 4%;
-        top: 130px;
-        transition: all .2s ease-in-out;
+        max-width: 1150px;
+        width: 100%;
+        padding-top: 60px;
 
-        &:hover {
-            transform: scale(1.05);
+        .breadcrumb {
+            display: flex;
+            gap: 5px;
+
+            .breadcrumb-item {
+                list-style-type: none;
+                display: flex;
+                align-items: end;
+                line-height: 14px;
+                font-size: medium;
+
+                a {
+                    display: flex;
+                    height: 100%;
+                    align-items: center;
+                    text-decoration: underline;
+                }
+
+                svg.bi.bi-house-door-fill {
+                    height: 22px;
+                    width: 22px;
+                    color: var(--black);
+                    transition: all .2s ease-in-out;
+
+                    &:hover {
+                        color: var(--darkgray);
+                        transform: translateY(-2px);
+                    }
+                }
+
+            }
+
+            span {
+                display: flex;
+                align-items: end;
+            }
+
+            .active {
+                color: var(--darkgray);
+                font-family: 'poppins';
+                font-size: large;
+                font-weight: 500;
+            }
         }
     }
 }
@@ -2351,6 +2386,7 @@ footer {
             gap: 40px;
             width: 100%;
             justify-content: space-evenly;
+            flex-wrap: wrap;
 
             .about {
                 max-width: 400px;
@@ -2422,10 +2458,15 @@ footer {
                 gap: 20px;
             }
 
+            .responsive-wrap {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 20px;
+            }
+
             .contact {
                 display: flex;
                 flex-direction: column;
-                gap: 20px;
 
                 a {
                     color: var(--darkgray);
@@ -2466,100 +2507,202 @@ footer {
 
 //! ************* Responsive Design *************//
 
-@media only screen and (max-width: 770px) {
 
-
-    //************ Wrapper *************//
-
-    .wrapper-detail {
-        .img-advert-detail {
-            grid-template-columns: 1fr;
-            grid-template-areas:
-                "l-img"
-                "sm-img";
-            grid-gap: 0;
-            max-height: max-content;
-
-            .l-img {
-                height: auto;
-            }
-
-            .sm-img {
-                grid-area: sm-img;
-                display: flex;
-                flex-direction: row;
-                gap: 5px;
-
-                img {
-                    max-width: 50%;
-                    height: auto;
-                }
-            }
-        }
-    }
-}
 
 @media only screen and (max-width: 450px) {
-
-
-    //************** Body **************//
-
-    body {
-        padding: 25px;
-    }
-
 
     //************** Header **************//
 
     header {
-        padding: 0;
+        padding: 20px 20px 0 20px ;
         height: max-content;
+        border: none;
 
-        .logo {
-            a {
-                .fig-logo {
-                    .icon-logo {
-                        width: 50px;
-                        height: 50px;
-                    }
+       
+            .log {
+                #profil-picture {
+                    width: 42px;
+                    height: 42px;
                 }
-            }
         }
 
         .title {
             display: none;
         }
-
-        .log {
-            position: relative;
-            top: -10px;
-
-            #profil-picture {
-                width: 50px;
-                height: 50px;
-            }
-        }
-
-
     }
 
 
     //************** wrapper **************//
 
-    .wrapper {
-        padding: 25px 0;
 
-        .return-home {
-
-            top: 20px;
-            left: 20px;
-        }
-    }
 }
 
-@media only screen and (max-width: 1100px) {
+@media only screen and (max-width: 850px) {
 
-    #grid {
-        width: 100%;
+
+    //************ Wrapper *************//
+
+    .wrapper {
+
+        .breadcrumb-nav {
+            padding-top: 20px;
+        }
+
+        .wrapper-detail {
+
+            padding-top: 40px;
+
+            &-title {
+                display: flex;
+                width: 100%;
+                justify-content: space-between;
+
+                .advert-title {
+                    font-size: 2.5em;
+                    line-height: 32px;
+                    width: 450px;
+
+                    input {
+                        font-size: 40px;
+                        line-height: 32px;
+                        border-bottom: var(--darkgray) 1px solid;
+                    }
+                }
+
+                .location {
+                    font-family: 'Inter', sans-serif;
+                    color: var(--middlegray);
+                    font-weight: 400;
+                    font-size: 1.02em;
+                    display: flex;
+                    justify-content: center;
+                    gap: 10px;
+
+                    input {
+                        max-width: 200px;
+                        min-width: 150px;
+                        border-bottom: var(--darkgray) 1px solid;
+                        padding: 0 10px;
+                        font-size: medium;
+                        height: 36px;
+                        text-align: center;
+                    }
+                }
+
+                .address-wrap {
+                    display: flex;
+                    align-items: center;
+                    gap: 5px;
+                    padding: 20px 0 55px 0;
+                }
+
+                .shadow-emp {
+                    background-color: var(--middlegray);
+                    max-width: 100px;
+                    width: 100%;
+                    min-width: 30px;
+                    height: 18px;
+                    border-radius: 5px;
+                }
+            }
+
+            &-grid-img {
+                grid-template-columns: 1fr;
+                grid-template-areas:
+                    "l-img"
+                    "sm-img";
+                grid-gap: 0;
+                max-height: 505px;
+                gap: 5px;
+
+                .l-img {
+                    height: 250px;
+                }
+
+                .sm-img {
+                    grid-area: sm-img;
+                    display: flex;
+                    flex-direction: row;
+                    gap: 5px;
+
+                    .ltl-img {
+                        height: 50%;
+                    }
+
+                    img {
+                        max-width: 100%;
+                        height: 100%;
+                    }
+                }
+            }
+
+            &-main {
+                display: flex;
+                flex-direction: column;
+                padding-top: 55px;
+                max-width: 100%;
+                position: relative;
+
+                //****** Wrapper-detail-left ******//
+                .wrapper-detail-left {
+                    width: 100%;
+                    margin: 0;
+                    overflow: hidden;
+                    max-width: none;
+
+                    .checkbox-wrapper-17 {
+                        gap: 10px 10px;
+                        max-width: 100%;
+                    }
+
+                    .checkbox-wrapper-16 {
+                        max-width: 100%;
+                    }
+                }
+            }
+
+
+            //****** Wrapper-detail-right ******//
+            .wrapper-detail-right {
+                margin-top: 20px;
+                max-width: 100%;
+                width: 100%;
+
+                //** First Step Reservation **//
+                #calendar-and-detail {
+                    .datepicker-inline {
+                        max-width: 380px;
+                    }
+                }
+
+            }
+        }
+    }
+
+    .wrapper-home {
+        .map {
+            height: 250px;
+        }
+
+        .adverts-container .advert-card-list .advert-card figure {
+            height: 60%;
+        }
+
+        .advert-card {
+            height: 300px !important;
+        }
+    }
+
+    footer {
+        .row {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            gap: 30px;
+            margin-top: 40px;
+            padding: 30px 40px;
+            justify-content: center;
+            align-items: center;
+        }
     }
 }
