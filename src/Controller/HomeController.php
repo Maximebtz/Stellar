@@ -47,6 +47,21 @@ class HomeController extends AbstractController
         ]);
     }
 
+
+    #[Route('/home/présentation', name: 'first_home')]
+    public function home(Request $request, EntityManagerInterface $entityManager): Response
+    {
+
+        $lowPriceAdverts = $entityManager->getRepository(Advert::class)->findBy([], ['price' => 'ASC']);
+        $adverts = $entityManager->getRepository(Advert::class)->findAll();
+
+        return $this->render('home/home.html.twig', [
+            'controller_name' => 'HomeController',
+            'lowPriceAdverts' => $lowPriceAdverts,
+            'adverts' => $adverts,
+        ]);
+    }
+
     #[Route('/filter', name: 'filter_adverts', methods: 'POST')]
     public function filterAdverts(Request $request, EntityManagerInterface $entityManager): JsonResponse
     {

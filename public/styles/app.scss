@@ -64,6 +64,25 @@ pre {
     }
 }
 
+#loading-screen {
+    transition: opacity 0.4s ease-in-out;
+    background-color: #333333;
+    object#my-svg {
+        height: 100%;
+        width: 100%;
+        transform: scale(2);
+    }
+}
+
+#loading-screen.hide {
+    opacity: 0;
+    pointer-events: none;
+}
+
+#my-svg.hidden {
+    display: none;
+}
+
 //************** All **************//
 
 * {
@@ -842,6 +861,147 @@ header {
     width: 100%;
     padding-top: 40px;
 
+    .wrapper-home-main {
+        .title {
+            transition: all 2s ease-in-out;
+
+            h1 {
+                text-align: center;
+            }
+
+            span {
+                font-family: 'pacifico';
+            }
+        }
+
+        display: flex;
+        flex-direction: column;
+        gap: 60px;
+
+        .home-articles-container {
+            display: flex;
+            gap: 15px;
+
+            .model-container {
+                width: 350%;
+                border-radius: 7px;
+                overflow: hidden;
+
+                #container {
+                    width: 100%;
+                    height: 100%;
+                    max-height: 400px !important;
+                    position: relative;
+                }
+            }
+
+            .articles {
+                transition: all .2s ease-in-out;
+                border-radius: 7px;
+                border: transparent;
+                padding: 15px;
+
+                article {
+                    text-align: justify;
+                    font-size: large;
+                    color: #606060;
+                }
+
+                h2 {
+                    padding: 0 0 20px;
+                }
+
+                &:hover {
+                    border-radius: 7px;
+                    box-shadow: var(--lightgray) 0 0 15px;
+                }
+            }
+
+            .wrapper-home-map {
+                width: 200%;
+                border-radius: 7px;
+                overflow: hidden;
+
+                .custom-price-label {
+                    background-color: var(--black);
+                    border-radius: 8px;
+                    color: #FFFFFF !important;
+                    font-size: 14px;
+                    padding: 10px;
+                    position: relative;
+                }
+
+                .custom-price-label::after {
+                    content: "";
+                    position: absolute;
+                    left: 50%;
+                    top: 100%;
+                    transform: translate(-50%, 0);
+                    width: 0;
+                    height: 0;
+                    border-left: 8px solid transparent;
+                    border-right: 8px solid transparent;
+                    border-top: 8px solid var(--black);
+                }
+
+                #infoWindowContent {
+                    padding: 12px;
+                    text-align: center;
+                    font-size: medium;
+                    max-width: 200px;
+                }
+
+                .gm-ui-hover-effect>span {
+                    background-color: transparent;
+                }
+
+                button.gm-ui-hover-effect {
+                    display: none !important;
+                    cursor: unset !important;
+                }
+
+                .gm-style {
+
+                    .gm-style-iw-d {
+                        height: max-content !important;
+                        max-height: max-content !important;
+                        overflow: unset !important;
+                    }
+
+                    .gm-style-iw-c {
+                        position: absolute;
+                        -webkit-box-sizing: border-box;
+                        box-sizing: border-box;
+                        overflow: hidden;
+                        height: max-content;
+                        width: max-content;
+                        top: 0;
+                        left: 0;
+                        -webkit-transform: translate3d(-50%, -100%, 0);
+                        transform: translate3d(-50%, -100%, 0);
+                        background-color: var(--white);
+                        border-radius: 8px;
+                        padding: 0 !important;
+                        -webkit-box-shadow: 0 2px 7px 1px rgba(0, 0, 0, .3);
+                    }
+
+                    img {
+                        width: 200px;
+                        height: 120px;
+                        -o-object-fit: cover;
+                        object-fit: cover;
+                        border-radius: 5px;
+                    }
+                }
+
+                #map {
+                    width: 100%;
+                    height: 300px;
+                }
+            }
+        }
+    }
+
     &-title {
         display: flex;
         width: 100%;
@@ -1179,11 +1339,13 @@ header {
                 &-info {
                     display: flex;
                     align-items: center;
+                    flex-wrap: wrap;
                     gap: 7px;
 
                     p {
                         color: var(--darkgray);
                         font-size: 1.02rem;
+                        min-width: max-content;
                     }
 
                     .profil-picture {
@@ -1193,8 +1355,11 @@ header {
                     }
 
                     span {
+                        display: flex;
                         text-decoration: underline;
                         font-weight: 600;
+                        align-items: center;
+                        gap: 7px;
                     }
                 }
 
@@ -1344,6 +1509,7 @@ header {
                 padding: 20px 0;
                 border-bottom: 1px solid var(--middlegray);
                 height: 300px;
+                width: 100%;
                 -webkit-animation: scale-up-hor-left 0.6s ease-in-out both;
                 animation: scale-up-hor-left 0.6s ease-in-out both;
 
@@ -2542,7 +2708,7 @@ footer {
         display: block;
         position: fixed;
         bottom: 0;
-        padding: 10px;
+        padding: 0 10px 20px;
         width: 100%;
         z-index: 3;
     }
@@ -2553,40 +2719,130 @@ footer {
 
     //************** wrapper **************//
 
-    .wrapper-detail {
 
-        &-main {
+    .wrapper {
+        .wrapper-detail {
 
-            .wrapper-detail-right {
-                display: none;
-                position: fixed !important;
-                background-color: var(--white);
-                top: 0 !important;
-                left: 0;
-                z-index: 4;
-                max-height: 100vh;
-                min-height: 100vh;
-                margin: 0 !important;
-                border-radius: 0;
-                overflow-y: scroll;
+            &-title {
+                width: 100%;
 
-                .close-reservation-btn {
+                .advert-title {
+                    width: 100% !important;
+                }
+
+                .location {
+                    flex-wrap: wrap !important;
+
+                    input {
+                        max-width: 100% !important;
+                        text-align: start;
+                    }
+                }
+
+                .address-wrap {
+                    svg {
+                        display: none;
+                    }
+                }
+
+                .shadow-emp {
+                    display: none !important;
+                }
+            }
+
+            &-title {
+                .address-wrap {
                     display: flex;
-                    position: absolute;
-                    right: 20px;
-                    top: 20px;
+                    align-items: center;
+                    gap: 5px;
+                    padding: 25px 0;
+                }
 
-                    svg.bi.bi-x {
-                        height: 32px;
-                        width: 32px;
+                .detail-title-right {
+                    min-width: max-content;
+                }
+            }
+
+            &-grid-img {
+
+                max-height: 405px !important;
+
+                .l-img {
+                    height: 200px !important;
+                }
+
+                .sm-img {
+                    .ltl-img {
+                        height: 40% !important;
                     }
                 }
             }
 
-            #alert-dates {
-                position: fixed;
-                height: 100%;
-                z-index: 5;
+            &-main {
+
+                padding-top: 30px !important;
+
+                h2 {
+                    padding: 20px 0 0 0 !important;
+                    font-size: x-large;
+                }
+
+                .wrapper-detail-left-category {
+                    .checkbox-wrapper-16 {
+                        .checkbox-tile {
+                            width: 5rem !important;
+                            min-height: 5rem !important;
+                        }
+
+                        img {
+                            width: 32px;
+                            height: 32px;
+                        }
+                    }
+                }
+
+                .wrapper-detail-left-commodite {
+                    .checkbox-wrapper-17 {
+                        .checkbox-tile-fit {
+                            min-width: 1rem !important;
+                        }
+                    }
+                }
+
+                .wrapper-detail-right {
+                    display: none;
+                    position: fixed !important;
+                    background-color: var(--white);
+                    top: 0 !important;
+                    left: 0;
+                    z-index: 4;
+                    max-height: 100vh;
+                    min-height: 100vh;
+                    min-width: 0 !important;
+                    margin: 0 !important;
+                    border-radius: 0;
+                    overflow: hidden;
+                    overflow-y: scroll;
+
+                    .close-reservation-btn {
+                        display: flex;
+                        position: absolute;
+                        right: 20px;
+                        top: 20px;
+
+                        svg.bi.bi-x {
+                            height: 32px;
+                            width: 32px;
+                        }
+                    }
+                }
+
+                #alert-dates {
+                    position: fixed !important;
+                    height: 100% !important;
+                    z-index: 5;
+                    overflow: hidden;
+                }
             }
         }
     }
@@ -2596,7 +2852,6 @@ footer {
 
     //************ Wrapper *************//
     .wrapper {
-
         .breadcrumb-nav {
             padding-top: 20px;
         }

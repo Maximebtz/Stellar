@@ -159,6 +159,7 @@
       <div class="wrapper-detail-main">
         <div class="wrapper-detail-left">
           <div class="wrapper-detail-left-category">
+            <h2>Type</h2>
             <div id="checkbox-wrapper-type" class="checkbox-wrapper-16">
               {% if advert.lodge %}
               <div class="checkbox-wrapper">
@@ -171,6 +172,7 @@
               </div>
               {% endif %}
             </div>
+            <h2>Catégories</h2>
             <div id="checkbox-wrapper-categories" class="checkbox-wrapper-16">
               {% for category in advert.categories %}
               <div class="checkbox-wrapper">
@@ -187,10 +189,10 @@
           <div class="wrapper-detail-left-owner">
             <div class="wrapper-detail-left-owner-info">
               {% if advert.owner.avatar is not null %}
-              <p>Propriétaire - </p><img class="profil-picture"
-                src="{{ asset('uploads/avatars/' ~ advert.owner.avatar)}}" alt=""><span>{{advert.owner.username}}</span>
+              <p>Propriétaire - </p><span><img class="profil-picture"
+                src="{{ asset('uploads/avatars/' ~ advert.owner.avatar)}}" alt="">{{advert.owner.username}}</span>
               {% else %}
-              <p>Propriétaire - <span class="profil-picture"></span><span>{{advert.owner.username}}</span></p>
+              <p>Propriétaire - <span>{{advert.owner.username}}</span></p>
               {% endif %}
             </div>
             <a href="#" class="wrapper-detail-left-owner-contact">

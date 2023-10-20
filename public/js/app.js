@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
+  
   // document ready function (JQuery)
   /****ProfilMenu****/
   function displayProfilMenu() {

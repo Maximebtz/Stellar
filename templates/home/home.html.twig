@@ -1,0 +1,244 @@
+{% extends 'base.html.twig' %}
+{% block title %}Stellar Home{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('build/style.css') }}" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css" type="text/css">
+<script>
+    // Initialize and add the map
+    let map;
+
+    async function initMap() {
+        // The location of the init map
+        const position = { lat: 37.787994, lng: -122.407437 };
+        // Request needed libraries.
+        //@ts-ignore
+        const { Map } = await google.maps.importLibrary("maps");
+
+        // Librairie pour modifier les marqueurs
+        const { AdvancedMarkerView } = await google.maps.importLibrary("marker");
+
+
+        const infoWindow = new google.maps.InfoWindow();
+
+        // Nouvelle map est ses spécificités
+        map = new Map(document.getElementById("map"), {
+            zoom: 11,
+            minZoom: 3,
+            center: position,
+            mapId: "DEMO_MAP_ID",
+            gestureHandling: "greedy",
+        });
+
+        // Loop through your adverts and add markers for each one
+        {% for advert in adverts %}
+        (function () {
+
+
+            let geocoder = new google.maps.Geocoder();
+            // Déclaration de l'adresse 
+            let address = "{{ advert.address }}, {{ advert.city }}, {{ advert.cp }}, {{ advert.country }}";
+            let title = "{{ advert.title }}";
+            let imgSrc = "{{ asset('uploads/' ~ advert.images[0].url) }}";
+            let detailURL = "{{ path('detail_advert', {'id': advert.id}) }}";
+            let price = "{{ advert.price }}";
+
+            geocoder.geocode({ 'address': address }, function (results, status) {
+                if (status === 'OK') {
+                    let location = results[0].geometry.location;
+                    let lat = location.lat();
+                    let lng = location.lng();
+
+                    // Créez un marqueur pour chaque annonce
+                    let marker = new google.maps.Marker({
+                        position: { lat: lat, lng: lng },
+                        map: map,
+                        title: title,
+                        label: {
+                            text: price + "€",
+                            className: "custom-price-label"
+
+                        },
+                        cursor: "pointer"
+                    });
+
+                    let closeInfoWindowTimer;
+
+                    // Ouverture de l'InfoWindow lors du survol du marqueur
+                    marker.addListener('mouseover', function () {
+                        const contentString = `
+                            <div class="map-popup-container" id="map-popup-container">
+                                <img src="{{ asset('uploads/' ~ advert.images[0].url) }}" alt="{{ advert.title }}" width="50" height="50">
+                                <div id="infoWindowContent">
+                                    <h4>{{ advert.title }}</h4>
+                                </div>
+                            </div>`;
+                        infoWindow.setContent(contentString);
+                        infoWindow.open(map, marker);
+
+                        // Écouteur d'événements pour quand l'InfoWindow est prêt
+                        google.maps.event.addListenerOnce(infoWindow, 'domready', function () {
+                            // Récupérer l'élément DOM de l'InfoWindow
+                            const iwOuter = document.getElementById('map-popup-container');
+
+                            // Empêcher la fermeture lorsqu'on survole l'InfoWindow
+                            iwOuter.addEventListener('mouseover', function () {
+                                clearTimeout(closeInfoWindowTimer);
+                            });
+
+                            // Activer la fermeture lorsqu'on quitte l'InfoWindow
+                            iwOuter.addEventListener('mouseout', function () {
+                                closeInfoWindowTimer = setTimeout(() => {
+                                    infoWindow.close();
+                                }, 100); // fermer après 100 ms, à ajuster selon vos besoins
+                            });
+                        });
+                    });
+                    // Programmation de la fermeture de l'InfoWindow lorsqu'on quitte le marqueur
+                    marker.addListener('mouseout', function () {
+                        closeInfoWindowTimer = setTimeout(() => {
+                            infoWindow.close();
+                        }, 100);
+                    });
+                    // Annulation de la fermeture de l'InfoWindow lorsqu'on survole à nouveau le marqueur
+                    marker.addListener('mouseover', function () {
+                        clearTimeout(closeInfoWindowTimer);
+                    });
+
+                    // Rendre le marqueur cliquable
+                    marker.addListener('click', function () {
+                        window.location.href = detailURL;
+                    });
+
+                } else {
+                    console.error('Erreur de géocodage pour l\'annonce "' + title + '": ' + status);
+                }
+            });
+        })();
+
+        {% endfor %}
+
+        for (const marker of markers) {
+            marker.setMap(null);
+        }
+    }
+
+</script>
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDKMfraFkzITgdFU4n3x1xu451mtxmGI8E&callback=initMap"></script>
+
+<script type="module" src="https://unpkg.com/@splinetool/viewer@0.9.485/build/spline-viewer.js"></script>
+{% endblock %}
+
+{% block body %}
+<div id="loading-screen" style="position: fixed; top: 0; width: 100%; height: 100%; z-index: 9999;">
+    <object id="my-svg" class="hidden" type="image/svg+xml" data="{{asset('img/Untitled.svg')}}"></object>
+</div>
+<div class="wrapper">
+    <div class="wrapper-detail">
+        <div class="wrapper-home-main">
+            <div class="title">
+                <h1>
+                    Bienvenue sur <span>Stellar !</span>
+                </h1>
+            </div>
+            <div class="home-articles-container">
+                <div class="articles">
+                    <h2>
+                        Qu’est ce que Stellar ?
+                    </h2>
+                    <article>
+                        Stellar n'est pas qu'un simple service de location d'hébergement, c'est une invitation à vivre
+                        des expériences de voyage authentiques et mémorables. Nous avons soigneusement sélectionné des
+                        logements atypiques qui sortent de l'ordinaire : des yourtes en pleine nature, des maisons dans
+                        les arbres, des igloos et bien plus encore. Stellar est fait pour les voyageurs qui cherchent
+                        plus qu'un simple endroit où dormir, mais une aventure qui marque. Oubliez les hôtels
+                        conventionnels, vivez le voyage comme il se doit avec Stellar.
+                    </article>
+                </div>
+                <div class="model-container">
+                    <spline-viewer url="https://prod.spline.design/V0h0maMiuOHHzvLU/scene.splinecode"></spline-viewer>
+                </div>
+            </div>
+            <div class="home-articles-container">
+                <div class="wrapper-home-map">
+                    <div id="map"></div>
+                </div>
+                <div class="articles">
+                    <h2>
+                        Exploration sur Map
+                    </h2>
+                    <article>
+                        Explorez le monde autrement avec notre carte interactive. D'un simple clic, découvrez des
+                        hébergements atypiques à proximité ou à l'autre bout du monde. Chaque point sur la carte
+                        représente une nouvelle aventure, un nouveau souvenir à créer. Naviguez, cliquez, et trouvez
+                        votre prochaine escapade unique avec Stellar.
+                    </article>
+                </div>
+            </div>
+        </div>
+        <div class="adverts-container">
+            <h2>Trouves les moins chères</h2>
+            <div id="grid" class="advert-card-list">
+                {% for advert in lowPriceAdverts|slice(0, 4) %}
+                <div class="advert-card slide-in">
+                    <a href="{{ path('detail_advert', {'id': advert.id})}}" class="clickable-card">
+                        <figure>
+                            {% if advert.images is not empty %}
+                            <img src="{{ asset('uploads/' ~ advert.images[0].url) }}" alt="{{ advert.title }} image">
+                            {% endif %}
+                        </figure>
+                        <div class="card-content">
+                            <h3 class="card-title">{{ advert.title}}</h3>
+                            <p class="card-text">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                                    <path
+                                        d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" />
+                                </svg>
+                                {{ advert.city }},
+                                {{ advert.country }}
+                            </p>
+                            <p class="card-text">
+                                <span class="price-card">{{ advert.price }}€</span>/nuit
+                            </p>
+                        </div>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block javascripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" type="text/javascript"></script>
+<script src="{{ asset('js/animations.js') }}"></script>
+<script>
+    /****page chargement****/
+    window.addEventListener('load', function () {
+        // Pour le SVG
+        setTimeout(() => {
+            const svgObject = document.getElementById('my-svg');
+            svgObject.classList.remove('hidden');
+            svgObject.style.display = 'block';
+        }, 100);
+    
+        // Pour l'écran de chargement
+        setTimeout(() => {
+            const loadingScreen = document.getElementById('loading-screen');
+            loadingScreen.classList.add('hide');
+            setTimeout(() => {
+                loadingScreen.style.display = 'none';
+            }, 3500);
+        }, 3500); 
+    });
+</script>
+{% endblock javascripts %}
