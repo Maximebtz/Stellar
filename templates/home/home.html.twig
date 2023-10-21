@@ -131,7 +131,8 @@
 <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDKMfraFkzITgdFU4n3x1xu451mtxmGI8E&callback=initMap"></script>
 
-<script type="module" src="https://unpkg.com/@splinetool/viewer@0.9.485/build/spline-viewer.js"></script>
+<script type="module" src="https://unpkg.com/@splinetool/viewer@0.9.486/build/spline-viewer.js"></script>
+
 {% endblock %}
 
 {% block body %}
@@ -230,7 +231,7 @@
             svgObject.classList.remove('hidden');
             svgObject.style.display = 'block';
         }, 100);
-    
+
         // Pour l'écran de chargement
         setTimeout(() => {
             const loadingScreen = document.getElementById('loading-screen');
@@ -238,7 +239,7 @@
             setTimeout(() => {
                 loadingScreen.style.display = 'none';
             }, 3500);
-        }, 3500); 
+        }, 3500);
     });
 </script>
 {% endblock javascripts %}
