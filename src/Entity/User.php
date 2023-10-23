@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
@@ -21,6 +22,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[ORM\Column(length: 180, unique: true)]
+    #[Assert\Email(
+        message: "L'adresse email '{{ value }}' n'est pas valide.",
+        mode: "strict"  // Utilise le standard RFC 5322
+    )]
     private ?string $email = null;
 
     #[ORM\Column]
@@ -33,6 +38,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $password = null;
 
     #[ORM\Column(length: 20, unique: true)]
+    #[Assert\Regex(
+        pattern: "/^(?=.*[A-Z])(?=.*[.-_]).*$/",
+        message: "Le nom d'utilisateur doit contenir au moins une majuscule et un caractère spécial."
+    )]
     private ?string $username = null;
 
     #[ORM\OneToMany(mappedBy: 'owner', targetEntity: Advert::class, orphanRemoval: true)]

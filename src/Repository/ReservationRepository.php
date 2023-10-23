@@ -49,4 +49,24 @@ class ReservationRepository extends ServiceEntityRepository
 
         return $reservedDates;
     }
+
+    public function findActiveReservationsForAdvert($advertId)
+    {
+        $qb = $this->createQueryBuilder('r')
+            ->where('r.advert = :advertId')
+            ->setParameter('advertId', $advertId);
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function countUniqueReservationsForOwner($ownerId)
+    {
+        return $this->createQueryBuilder('r')
+            ->select('COUNT(DISTINCT r.advert)')
+            ->innerJoin('r.advert', 'a') // Suppose que "advert" est le champ dans Reservation qui relie à Advert
+            ->where('a.owner = :ownerId')
+            ->setParameter('ownerId', $ownerId)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
 }

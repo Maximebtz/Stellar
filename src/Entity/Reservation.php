@@ -2,9 +2,10 @@
 
 namespace App\Entity;
 
-use App\Repository\ReservationRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ReservationRepository;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 #[ORM\Entity(repositoryClass: ReservationRepository::class)]
 class Reservation
@@ -184,5 +185,17 @@ class Reservation
         $this->country = $country;
 
         return $this;
+    }
+
+    /**
+     * @Assert\Callback
+     */
+    public function validate(ExecutionContextInterface $context, $payload)
+    {
+        if ($this->departureDate <= $this->arrivalDate) {
+            $context->buildViolation('La date de fin doit être postérieure à la date de début.')
+                ->atPath('endDate')
+                ->addViolation();
+        }
     }
 }

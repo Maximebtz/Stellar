@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
     let fileInput = document.querySelector('#advert_images');
-    let dropArea = document.querySelector('#drop-area');
+    let dropArea = document.querySelectorAll('.drop-area');
     let fileList = document.querySelector('.file-list');
 
     function addFileToList(file) {

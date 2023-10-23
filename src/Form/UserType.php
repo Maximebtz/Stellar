@@ -19,7 +19,7 @@ use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 
 
-class RegistrationFormType extends AbstractType
+class UserFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -49,12 +49,14 @@ class RegistrationFormType extends AbstractType
             ->add('email', EmailType::class, [
                 'attr' => [
                     'class' => 'input'
-                ]
+                ],
+                'require' => false,
             ])
             ->add('username', TextType::class, [
                 'attr' => [
                     'class' => 'input'
-                ]
+                ],
+                'require' => false,
             ])
             ->add('plainPassword', RepeatedType::class, [
                 'attr' => [
@@ -63,18 +65,10 @@ class RegistrationFormType extends AbstractType
                 'type' => PasswordType::class,
                 'invalid_message' => 'The password fields must match.',
                 'options' => ['attr' => ['class' => 'input']],
-                'required' => true,
+                'required' => false,
                 'first_options'  => ['label' => 'Password'],
                 'second_options' => ['label' => 'Repeat Password'],
                 'mapped' => false,
-            ])
-            ->add('agreeTerms', CheckboxType::class, [
-                'mapped' => false,
-                'constraints' => [
-                    new IsTrue([
-                        'message' => 'You should agree to our terms.',
-                    ]),
-                ],
             ]);
     }
 

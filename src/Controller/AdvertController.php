@@ -158,9 +158,27 @@ class AdvertController extends AbstractController
         $reservationForm->handleRequest($request);
 
         if ($reservationForm->isSubmitted() && $reservationForm->isValid()) {
-            $entityManager->persist($reservation);
-            $entityManager->flush();
-            return $this->redirectToRoute('app_home');
+            // Récupérer les réservations actives pour cette annonce
+            $activeReservations = $reservationRepository->findActiveReservationsForAdvert($id);
+            $newStartDate = $reservation->getArrivalDate();
+            $newEndDate = $reservation->getDepartureDate();
+
+            $hasConflict = false;
+            foreach ($activeReservations as $activeReservation) {
+                if ($newStartDate < $activeReservation->getEndDate() && $newEndDate > $activeReservation->getStartDate()) {
+                    $hasConflict = true;
+                    break;
+                }
+            }
+
+            if ($hasConflict) {
+                // Les dates chevauchent, donc on ne peut pas créer une nouvelle réservation
+                $this->addFlash('error', 'Ces dates ne sont pas disponibles.');
+            } else {
+                $entityManager->persist($reservation);
+                $entityManager->flush();
+                return $this->redirectToRoute('app_home');
+            }
         }
 
         $reservedDates = $reservationRepository->findReservedDatesForAdvert($id);

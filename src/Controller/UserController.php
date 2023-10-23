@@ -2,10 +2,13 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Entity\Advert;
+use App\Entity\Reservation;
 use App\Repository\AdvertRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\ReservationRepository;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
@@ -37,26 +40,46 @@ class UserController extends AbstractController
             'controller_name' => 'UserController',
         ]);
     }
-    
+
 
     #[Route('/user/my-property', name: 'user_adverts')]
     #[IsGranted('ROLE_USER')]
     public function userAdverts(): Response
     {
         $adverts = $this->entityManager->getRepository(Advert::class)->findAll();
-        
+
         return $this->render('user/userAdverts.html.twig', [
             'adverts' => $adverts
         ]);
     }
 
+    #[Route('/user/profil', name: 'user_profil')]
+    #[IsGranted('ROLE_USER')]
+    public function profilPage(Security $security, EntityManagerInterface $entityManager): Response
+    {
+        $user = $security->getUser();
+        $userId = $user->getId();
+
+        $numberOfAdverts = $entityManager->getRepository(Advert::class)->count(['owner' => $userId]);
+        $numberOfReservations = $entityManager->getRepository(Reservation::class)->count(['user' => $userId]);
+        $numberOfUniqueReservationsForOwner = $entityManager->getRepository(Reservation::class)->countUniqueReservationsForOwner($userId);
+
+
+        return $this->render('user/userProfil.html.twig', [
+            'user' => $user,
+            'numberOfAdverts' => $numberOfAdverts,
+            'numberOfReservations' => $numberOfReservations,
+            'numberOfUniqueReservationsForOwner' => $numberOfUniqueReservationsForOwner,
+        ]);
+    }
+
     #[Route('/owner/my-property/detail', name: 'user_advert_detail')]
     #[IsGranted('ROLE_USER')]
-    public function showDetailProperty($id): Response 
+    public function showDetailProperty($id): Response
     {
         $repository = $this->entityManager->getRepository(Advert::class);
         $advert = $repository->find($id);
-        
+
         return $this->render('user/userAdvertDetail.html.twig', [
             'advert' => $advert,
         ]);

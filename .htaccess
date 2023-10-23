@@ -1,0 +1,4 @@
+<FilesMatch "\.(glb|gltf|obj|mtl)$">
+    ExpiresActive On
+    ExpiresDefault "access plus 2 month"
+</FilesMatch>

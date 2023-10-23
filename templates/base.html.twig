@@ -31,22 +31,15 @@
     </div>
     {% if app.user %}
     <div class="log">
+      {% if app.user.avatar is not null %}
+      <img id="profil-picture" src="{{ asset('uploads/avatars/' ~ app.user.avatar)}}" alt="profil picture">
+      {% else %}
       <img id="profil-picture" src="{{ asset('img/unnamed.jpg') }}" alt="" />
+      {% endif %}
       <div id="profil-menu" class="active">
         <ul>
-          <h4>Hi, {{ app.user.username }}</h4>
-          <li><a href="">Mon profil</a></li>
-          {#
-          {{
-          path("app_profil")
-          }}
-          #}
-          <li><a href="">Modifier mon profil</a></li>
-          {#
-          {{
-          path("app_profil_edit")
-          }}
-          #}
+          <h4 id="greeting">Hi, {{ app.user.username }}</h4>
+          <li><a href="{{ path('user_profil') }}">Mon profil</a></li>
           <li><a href="{{ path('new_advert') }}">Créer mon annonce</a></li>
           {% if app.user.adverts is not empty %} {# si mon user a des annonces #}
           <li><a href="{{ path('user_adverts') }}">Mes annonces</a></li>

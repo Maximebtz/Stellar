@@ -1,0 +1,83 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profil{% endblock %}
+{% block metatag %}
+<meta name="description"
+    content="Sur cette page vous pourrez voir votre profil, le modifier et accéder à vos annonces et réservations !">
+{% endblock metatag %}
+{% block body %}
+<div class="wrapper">
+    <nav class="breadcrumb-nav">
+        <ul class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="{{ path('app_home') }}">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                class="bi bi-house-door-fill" viewBox="0 0 16 16">
+                <path
+                  d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5Z" />
+              </svg>
+            </a>
+          </li>
+          <span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+              class="bi bi-caret-right-fill" viewBox="0 0 16 16">
+              <path
+                d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
+            </svg>
+          </span>
+          <li class="breadcrumb-item active" aria-current="page">Profil</li>
+        </ul>
+      </nav>
+    <div class="wrapper-detail">
+        <div class="wrapper-detail-user">
+            <h1>Bienvenue sur votre profil, {{ user.username }}</h1>
+            <div class="profil-section">
+                <div class="profil-picture-container">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
+                        <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z"/>
+                      </svg>
+                    {% if user.avatar is not null %}
+                    <img id="profil-picture" src="{{ asset('uploads/avatars/' ~ user.avatar)}}" alt="profil picture">
+                    {% else %}
+                    <img id="profil-picture" src="{{ asset('img/unnamed.jpg') }}" alt="random profil image" />
+                    {% endif %}
+                </div>
+                <div class="personal-information">
+                    <h2>Informations Personnelles</h2>
+                    <p>Nom d'utilisateur : {{ user.username }}</p>
+                    <p>Email : {{ user.email }}</p>
+                </div>
+            </div>
+            <div class="stats-counter">
+                <div class="counter" id="showAdverts">
+                    <span id="advertCounter">{{ numberOfAdverts }}</span>
+                    <p>Annonces</p>
+                </div>
+                <div class="counter" id="showReservedAdverts">
+                    <span id="uniqueResaCounter">{{ numberOfUniqueReservationsForOwner }}</span>
+                    <p>Annonces réservées</p>
+                </div>
+                <div class="counter" id="showReservations">
+                    <span id="resaCounter">{{ numberOfReservations }}</span>
+                    <p>Vos réservations</p>
+                </div>
+            </div>
+            
+            <div id="advertsSection" style="display: none;" class="fade">
+                test1 niiice
+            </div>
+            <div id="reservedAdvertsSection" style="display: none;" class="fade">
+                test2 excelleeeent
+            </div>
+            <div id="reservationsSection" style="display: none;" class="fade">
+                test3 perfeeeect
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block javascripts %}
+  <script src="{{ asset('js/app.js') }}"></script>
+  <script src="{{ asset('js/profilPage.js') }}"></script>
+    
+{% endblock javascripts %}
