@@ -58,18 +58,23 @@ class UserController extends AbstractController
     public function profilPage(Security $security, EntityManagerInterface $entityManager): Response
     {
         $user = $security->getUser();
-        $userId = $user->getId();
 
-        $numberOfAdverts = $entityManager->getRepository(Advert::class)->count(['owner' => $userId]);
-        $numberOfReservations = $entityManager->getRepository(Reservation::class)->count(['user' => $userId]);
-        $numberOfUniqueReservationsForOwner = $entityManager->getRepository(Reservation::class)->countUniqueReservationsForOwner($userId);
+        $numberOfAdverts = $entityManager->getRepository(Advert::class)->count(['owner' => $user]);
+        $numberOfReservations = $entityManager->getRepository(Reservation::class)->count(['user' => $user]);
+        $numberOfOwnerReservations = $entityManager->getRepository(Reservation::class)->numberOfOwnerReservations($user);
+        $myReservations = $entityManager->getRepository(Reservation::class)->findBy(['user' => $user]);
+        $myAdvertsReservations = $entityManager->getRepository(Reservation::class)->myAdvertsReservations($user);
+        $myAdverts = $entityManager->getRepository(Advert::class)->findBy(['owner' => $user]);
 
 
         return $this->render('user/userProfil.html.twig', [
             'user' => $user,
             'numberOfAdverts' => $numberOfAdverts,
             'numberOfReservations' => $numberOfReservations,
-            'numberOfUniqueReservationsForOwner' => $numberOfUniqueReservationsForOwner,
+            'numberOfOwnerReservations' => $numberOfOwnerReservations,
+            'myReservations' => $myReservations,
+            'myAdverts' => $myAdverts,
+            'myAdvertsReservations' => $myAdvertsReservations
         ]);
     }
 

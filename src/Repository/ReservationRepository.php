@@ -58,12 +58,16 @@ class ReservationRepository extends ServiceEntityRepository
 
         return $qb->getQuery()->getResult();
     }
+    public function myAdvertsReservations($ownerId)
+    {
+    
+    }
 
-    public function countUniqueReservationsForOwner($ownerId)
+    public function numberOfOwnerReservations($ownerId)
     {
         return $this->createQueryBuilder('r')
             ->select('COUNT(DISTINCT r.advert)')
-            ->innerJoin('r.advert', 'a') // Suppose que "advert" est le champ dans Reservation qui relie à Advert
+            ->innerJoin('r.advert', 'a')
             ->where('a.owner = :ownerId')
             ->setParameter('ownerId', $ownerId)
             ->getQuery()

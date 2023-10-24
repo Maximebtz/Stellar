@@ -11,7 +11,9 @@
     media="all" />
 {% endblock %}
 {% block body %}
-
+<div id="loading-screen" style="position: fixed; top: 0; width: 100%; height: 100%; z-index: 9999;">
+    <object id="my-svg" class="hidden" type="image/svg+xml" data="{{asset('img/Untitled.svg')}}"></object>
+</div>
 <div class="wrapper">
     <div class="wrapper-home">
         <div class="search-btn-container">
@@ -100,7 +102,7 @@
             </div>
             <div class="pagination">
                 {% set totalPages = (totalAdverts + perPage - 1) / perPage | round(0, 'ceil') %}
-                {% for pageNumber in range(1, totalPages + 1) %}
+                {% for pageNumber in range(1, totalPages + 0) %}
                 <a href="{{ path(app.request.attributes.get('_route'), {'page': pageNumber}) }}" {% if pageNumber==page
                     %}class="active" {% else %}class="pages" {% endif %}>{{ pageNumber }}</a>
                 {% endfor %}
@@ -242,5 +244,22 @@
     }
 
     initMap();
+
+    /****page chargement****/
+    window.addEventListener('load', function () {
+        // Pour le SVG
+        const svgObject = document.getElementById('my-svg');
+        svgObject.classList.remove('hidden');
+            svgObject.style.display = 'block';
+
+        // Pour l'écran de chargement
+        setTimeout(() => {
+            const loadingScreen = document.getElementById('loading-screen');
+            loadingScreen.classList.add('hide');
+            setTimeout(() => {
+                loadingScreen.style.display = 'none';
+            }, 3500);
+        }, 3500);
+    });
 </script>
 {% endblock javascripts %}

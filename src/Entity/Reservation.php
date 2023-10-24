@@ -67,6 +67,11 @@ class Reservation
         return $this;
     }
 
+    public function getDepartureString(): ?string
+    {
+        return $this->departureDate->format('d/m/Y');
+    }
+
     public function getDepartureDate(): ?\DateTimeInterface
     {
         return $this->departureDate;
@@ -77,6 +82,11 @@ class Reservation
         $this->departureDate = $departureDate;
 
         return $this;
+    }
+
+    public function getArrivalString(): ?string
+    {
+        return $this->arrivalDate->format('d/m/Y');
     }
 
     public function getAdvert(): ?Advert
@@ -187,9 +197,14 @@ class Reservation
         return $this;
     }
 
-    /**
-     * @Assert\Callback
-     */
+    public function getPrice()
+    {
+        $price = $this->advert->getPrice();
+        $interval = $this->arrivalDate->diff($this->departureDate);
+        $interval = $interval->d;
+        return $price * floatval($interval);
+    }
+
     public function validate(ExecutionContextInterface $context, $payload)
     {
         if ($this->departureDate <= $this->arrivalDate) {

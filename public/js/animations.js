@@ -26,3 +26,6 @@ const observer = new IntersectionObserver((entries, observer) => {
 slideIn.forEach(object => {
     observer.observe(object);
 });
+
+
+

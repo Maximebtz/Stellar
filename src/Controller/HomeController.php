@@ -23,7 +23,7 @@ class HomeController extends AbstractController
     public function index(Request $request): Response
     {
 
-        $perPage = 24;
+        $perPage = 14;
         $totalAdverts = $this->entityManager->getRepository(Advert::class)
             ->getTotalAdvertsCount();
 
