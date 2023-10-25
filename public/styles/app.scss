@@ -2752,7 +2752,7 @@ input[type="range"] {
             filter: opacity(0.6) !important;
 
             &::after {
-                content: url(../build/images/eye.e99d7433.svg);
+                content: url('../img/icons/eye.svg');
                 color: black;
                 position: absolute;
                 display: flex;
