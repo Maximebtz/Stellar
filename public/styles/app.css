@@ -2249,9 +2249,9 @@ input[type=range] {
   height: -moz-max-content;
   height: max-content;
   background-color: var(--white);
-  border-radius: 6px;
+  border-radius: 7px;
   top: 5px;
-  right: 5px;
+  left: 5px;
   padding: 5px 7px 0;
 }
 .adverts-container .advert-card-list .advert-card {
