@@ -58,9 +58,17 @@ class ReservationRepository extends ServiceEntityRepository
 
         return $qb->getQuery()->getResult();
     }
-    public function myAdvertsReservations($ownerId)
-    {
     
+    public function findReservationsByOwner($ownerId)
+    {
+        return $this->createQueryBuilder('r')
+            ->innerJoin('r.advert', 'a')
+            ->innerJoin('r.user', 'u')
+            ->addSelect('u')  // pour récupérer également les données de l'utilisateur
+            ->where('a.owner = :ownerId')
+            ->setParameter('ownerId', $ownerId)
+            ->getQuery()
+            ->getResult();
     }
 
     public function numberOfOwnerReservations($ownerId)

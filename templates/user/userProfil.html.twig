@@ -44,29 +44,31 @@
           <img id="profil-picture" src="{{ asset('img/unnamed.jpg') }}" alt="random profil image" />
           {% endif %}
         </div>
+
         <div class="personal-information">
           <h2>Informations Personnelles</h2>
           <p>Nom d'utilisateur : {{ user.username }}</p>
           <p>Email : {{ user.email }}</p>
-          <a href="#">Supprimer mon compte</a>
-        </div>
-      </div>
-      <div class="stats-counter">
-        <div class="counter" id="showAdverts">
-          <span id="advertCounter">{{ numberOfAdverts }}</span>
-          <p>Annonces</p>
-        </div>
-        <div class="counter" id="showReservedAdverts">
-          <span id="uniqueResaCounter">{{ numberOfOwnerReservations }}</span>
-          <p>Annonces réservées</p>
-        </div>
-        <div class="counter" id="showReservations">
-          <span id="resaCounter">{{ numberOfReservations }}</span>
-          <p>Vos réservations</p>
+          <a href="{{ path('delete_user') }}">Supprimer mon compte</a>
         </div>
       </div>
 
-      <div id="advertsSection" style="display: none;" class="fade">
+      <div class="stats-counter">
+        <div class="counter" id="showAdverts">
+          <span id="advertCounter">{{ numberOfAdverts }}</span>
+          <p>Mes annonces</p>
+        </div>
+        <div class="counter" id="showReservedAdverts">
+          <span id="uniqueResaCounter">{{ numberOfOwnerReservations }}</span>
+          <p>Mes annonces réservées</p>
+        </div>
+        <div class="counter" id="showReservations">
+          <span id="resaCounter">{{ numberOfReservations }}</span>
+          <p>Mes réservations</p>
+        </div>
+      </div>
+
+      <div id="advertsSection" class="fade">
         <div class="adverts-container">
           <div id="grid" class="advert-card-list">
             {% for advert in myAdverts %}
@@ -116,12 +118,33 @@
           </div>
         </div>
       </div>
-      <div id="reservedAdvertsSection" style="display: none;" class="fade">
 
+      <div id="reservedAdvertsSection" style="display: none;" class="fade">
+        {% for reservation in myAdvertsReservations %}
+        {% set now = "now"|date("Y-m-d") %}
+        <div class="reservation {% if reservation.departureString < now %}grey-out{% endif %}">
+          <div class="left-content">
+            <h3>{{ reservation.advert.title }}</h3>
+            <p>Utilisateur: {{ reservation.user.username }}</p>
+            <p>Email: {{ reservation.user.email }}</p>
+            <p>Date d'arrivée : {{ reservation.arrivalString }}</p>
+            <p>Date de départ : {{ reservation.departureString }}</p>
+            <p>Prix total : {{ reservation.price }}€</p>
+          </div>
+          <div class="right-content">
+            {% if reservation.advert.images is not empty %}
+            <img src="{{ asset('uploads/' ~ reservation.advert.images[0].url) }}"
+              alt="{{ reservation.advert.title }} image">
+            {% endif %}
+          </div>
+        </div>
+        {% endfor %}
       </div>
+
       <div id="reservationsSection" style="display: none;" class="fade">
         {% for myReservation in myReservations %}
-        <div class="reservation">
+        {% set now = "now"|date("d/m/Y") %}
+        <div class="reservation {% if myReservation.departureString < now %}grey-out{% endif %}">
           <div class="left-content">
             <h3>{{myReservation.advert.title}}</h3>
             <p>Date d'arrivée : {{myReservation.arrivalString}}</p>
@@ -129,9 +152,10 @@
             <p>Prix total : {{myReservation.price}}€</p>
           </div>
           <div class="right-content">
-              {% if myReservation.advert.images is not empty %}
-              <img src="{{ asset('uploads/' ~ myReservation.advert.images[0].url) }}" alt="{{ myReservation.advert.title }} image">
-              {% endif %}
+            {% if myReservation.advert.images is not empty %}
+            <img src="{{ asset('uploads/' ~ myReservation.advert.images[0].url) }}"
+              alt="{{ myReservation.advert.title }} image">
+            {% endif %}
           </div>
         </div>
         {% endfor %}

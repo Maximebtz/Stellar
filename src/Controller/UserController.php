@@ -63,7 +63,7 @@ class UserController extends AbstractController
         $numberOfReservations = $entityManager->getRepository(Reservation::class)->count(['user' => $user]);
         $numberOfOwnerReservations = $entityManager->getRepository(Reservation::class)->numberOfOwnerReservations($user);
         $myReservations = $entityManager->getRepository(Reservation::class)->findBy(['user' => $user]);
-        $myAdvertsReservations = $entityManager->getRepository(Reservation::class)->myAdvertsReservations($user);
+        $myAdvertsReservations = $entityManager->getRepository(Reservation::class)->findReservationsByOwner($user);
         $myAdverts = $entityManager->getRepository(Advert::class)->findBy(['owner' => $user]);
 
 
@@ -100,7 +100,7 @@ class UserController extends AbstractController
         // Si des réservations existent, empêcher la suppression
         if (!empty($reservations)) {
             $this->addFlash('danger', 'Impossible de supprimer cette annonce car des réservations y sont associées.');
-            return $this->redirectToRoute('user_adverts'); // Rediriger l'utilisateur où on le souhaite
+            return $this->redirectToRoute('user_adverts');
         }
 
         // Si aucune réservation n'est associée, on peut supprimer l'annonce
@@ -109,5 +109,34 @@ class UserController extends AbstractController
 
         $this->addFlash('success', 'L\'annonce a été supprimée avec succès.');
         return $this->redirectToRoute('user_adverts');
+    }
+
+    #[Route('/user/delete', name: 'delete_user')]
+    #[IsGranted('ROLE_USER')]
+    public function deleteUser(Security $security, EntityManagerInterface $entityManager, ReservationRepository $reservationRepository): Response
+    {
+        $user = $security->getUser();
+
+        // Vérifier si l'utilisateur a des réservations en cours
+        $reservations = $reservationRepository->findBy(['user' => $user]);
+
+        if (!empty($reservations)) {
+            $this->addFlash('danger', 'Impossible de supprimer ce compte car des réservations sont en cours.');
+            return $this->redirectToRoute('user_profil');
+        }
+
+        // Anonymisation des données
+        // $user->setEmail('anonyme' . $user->getId() . '@anonyme.com');
+        // $user->setUsername('anonyme' . $user->getId());
+
+        $entityManager->persist($user);
+        $entityManager->flush();
+
+        // Suppression du compte
+        $entityManager->remove($user);
+        $entityManager->flush();
+
+        $this->addFlash('success', 'Le compte a été anonymisé et désactivé avec succès.');
+        return $this->redirectToRoute('app_home');
     }
 }

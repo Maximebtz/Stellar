@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-  // document ready function (JQuery)
+
   /****ProfilMenu****/
   function displayProfilMenu() {
     const menu = document.getElementById("profil-menu");
@@ -42,6 +42,27 @@ document.addEventListener("DOMContentLoaded", function () {
     const randomColor = colors[randomIndex];
     h4Element.style.backgroundColor = randomColor;
   }
+
+  
+  /****Annonces cliquées****/
+
+    const adverts = document.querySelectorAll('.advert-card');
+  
+    // Charger les états précédents depuis le localStorage
+    adverts.forEach((advert, index) => {
+      if (localStorage.getItem('advertClicked-' + index)) {
+        advert.classList.add('clicked');
+      }
+    });
+  
+    // Ajouter un écouteur d'événements pour chaque annonce
+    adverts.forEach((advert, index) => {
+      advert.addEventListener('click', function() {
+        this.classList.add('clicked');
+        localStorage.setItem('advertClicked-' + index, true);
+      });
+    });
+
 
   /****Checkbox Slide****/
 
@@ -113,5 +134,3 @@ document.addEventListener("DOMContentLoaded", function () {
     verticalCheckboxContainer.scrollTop = scrollTop - walk;
   });
 });
-
-/****Affichage reservation pour responsive mobile****/

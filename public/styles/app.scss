@@ -16,7 +16,7 @@
     --darkgray: #A9A9A9;
     --middlegray: #C0C0C0;
     --lightgray: #DCDCDC;
-    --boxshadow: rgba(0, 0, 0, 0.025);
+    --boxshadow: rgba(0, 0, 0, 0.1);
     --gradient-p-b: linear-gradient(20deg, var(--light-purple) -15%, var(--dark-blue) 150%);
     --gradient-p-b-2: linear-gradient(200deg, var(--light-purple) -15%, var(--dark-blue) 150%);
     --gradient-b-b: linear-gradient(50deg, var(--dark-blue) 7.56%, #0000ff 61.06%);
@@ -66,7 +66,6 @@ pre {
 
 #loading-screen {
     transition: opacity 0.4s ease-in-out;
-    background-color: #333333;
 
     object#my-svg {
         height: 100%;
@@ -420,7 +419,7 @@ header {
             justify-content: space-between;
             border: var(--lightgray) 2px solid;
             border-radius: 7px;
-            box-shadow: #00000036 0 0 25px;
+            box-shadow: var(--boxshadow) 0 0 25px;
             background-color: var(--white);
             transition: all .2s ease-in-out;
 
@@ -444,7 +443,7 @@ header {
             border: 2px solid var(--lightgray);
             border-radius: 10px;
             padding: 20px;
-            box-shadow: #00000036 0 0 25px;
+            box-shadow: var(--boxshadow) 0 0 25px;
             -webkit-animation: fade-in-top 0.4s cubic-bezier(0.39, 0.575, 0.565, 1) both;
             animation: fade-in-top 0.4s cubic-bezier(0.39, 0.575, 0.565, 1) both;
             flex-direction: column;
@@ -532,7 +531,7 @@ header {
                             border-radius: 7px;
                             outline: none;
                             border: var(--middlegray) solid 1px;
-                            box-shadow: var(--lightgray) 0 0 15px;
+                            box-shadow: var(--boxshadow) 0 0 15px;
                             padding: 10px;
                         }
                     }
@@ -542,7 +541,7 @@ header {
                     border: 1px solid var(--lightgray);
                     padding: 15px;
                     border-radius: 7px;
-                    box-shadow: var(--lightgray) 0 0 15px;
+                    box-shadow: var(--boxshadow) 0 0 15px;
 
                     .price-filter-input {
                         display: flex;
@@ -691,7 +690,7 @@ header {
                     background-color: var(--white);
                     border-radius: 8px;
                     padding: 0 !important;
-                    -webkit-box-shadow: 0 2px 7px 1px rgba(0, 0, 0, .3);
+                    -webkit-box-shadow: 0 2px 7px 1px var(--boxshadow);
                 }
 
                 img {
@@ -956,7 +955,7 @@ header {
                 border-radius: 7px;
                 outline: none;
                 border: var(--middlegray) solid 1px;
-                box-shadow: var(--lightgray) 0 0 15px;
+                box-shadow: var(--boxshadow) 0 0 15px;
                 padding: 10px;
 
                 &:focus {
@@ -1026,9 +1025,13 @@ header {
 
     .wrapper-detail-user {
         .fade {
-            transition: opacity 0.2s ease-in-out;
-            animation: fade-in .4s ease-in-out;
+            // transition: opacity .2s ease-in-out;
+            animation: fade-in .6s ease-in-out;
             padding: 60px 0;
+
+            .grey-out {
+                opacity: 60%;
+            }
 
             .reservation:first-child {
                 padding: 0 0 25px 0;
@@ -1037,7 +1040,7 @@ header {
 
             .reservation {
                 border-bottom: 1px solid var(--lightgray);
-                padding: 25px;
+                padding: 25px 0;
                 display: flex;
                 justify-content: space-between;
                 transition: all .4s ease-in-out;
@@ -1069,7 +1072,9 @@ header {
                     img {
                         object-fit: cover;
                         width: 100%;
-                        height: 100%;
+                        width: 100%;
+                        height: calc(100% - 5px);
+                        border-radius: 7px;
                     }
                 }
 
@@ -1264,7 +1269,7 @@ header {
 
                 &:hover {
                     border-radius: 7px;
-                    box-shadow: var(--lightgray) 0 0 15px;
+                    box-shadow: var(--boxshadow) 0 0 15px;
                 }
             }
 
@@ -1333,7 +1338,7 @@ header {
                         background-color: var(--white);
                         border-radius: 8px;
                         padding: 0 !important;
-                        -webkit-box-shadow: 0 2px 7px 1px rgba(0, 0, 0, .3);
+                        -webkit-box-shadow: 0 2px 7px 1px var(--boxshadow);
                     }
 
                     img {
@@ -1625,7 +1630,7 @@ header {
 
                     .checkbox-input:checked+.checkbox-tile {
                         border-color: var(--light-purple);
-                        box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
+                        box-shadow: 0 0 10px var(--boxshadow);
                         color: var(--light-purple);
                     }
 
@@ -1651,7 +1656,7 @@ header {
                         border-radius: 0.5rem;
                         border: 2px solid var(--lightgray);
                         background-color: var(--white);
-                        box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
+                        box-shadow: 0 0 5px var(--boxshadow);
                         transition: 0.15s ease;
                         cursor: pointer;
                         // position: relative;
@@ -1790,7 +1795,7 @@ header {
                         border-radius: 0.5rem;
                         border: 2px solid var(--lightgray);
                         background-color: var(--white);
-                        box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
+                        box-shadow: 0 0 5px var(--boxshadow);
                         transition: 0.15s ease;
                         cursor: pointer;
                         position: relative;
@@ -1814,7 +1819,7 @@ header {
                         border: 2px solid var(--darkgray);
                         color: var(--darkgray);
                         background-color: var(--white);
-                        box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
+                        box-shadow: 0 0 5px var(--boxshadow);
                         transition: 0.15s ease;
                         cursor: pointer;
                         position: relative;
@@ -1840,7 +1845,7 @@ header {
 
                     .checkbox-input:checked+.checkbox-tile-fit {
                         border-color: var(--light-purple);
-                        box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
+                        box-shadow: 0 0 10px var(--boxshadow);
                         color: var(--light-purple);
                     }
 
@@ -1946,7 +1951,7 @@ header {
                             background-color: var(--white);
                             border-radius: 8px;
                             padding: 0 !important;
-                            -webkit-box-shadow: 0 2px 7px 1px rgba(0, 0, 0, .3);
+                            -webkit-box-shadow: 0 2px 7px 1px var(--boxshadow);
                         }
 
                         img {
@@ -2215,7 +2220,7 @@ header {
                     .popup-container {
                         background: var(--gradient-p-b);
                         border-radius: 8px;
-                        box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.1);
+                        box-shadow: 0px 0px 40px var(--boxshadow);
                         overflow: hidden;
                         width: 80%;
                         transform: scale(0.8);
@@ -2742,6 +2747,26 @@ input[type="range"] {
         .clickable-card {
             text-decoration: none;
             color: var(--black);
+        }
+
+        .clicked {
+            filter: opacity(0.6) !important;
+
+            &::after {
+                content: url(../build/images/eye.e99d7433.svg);
+                color: black;
+                position: absolute;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: max-content;
+                height: max-content;
+                background-color: var(--white);
+                border-radius: 6px;
+                top: 5px;
+                right: 5px;
+                padding: 5px 7px 0;
+            }
         }
 
         .advert-card {
