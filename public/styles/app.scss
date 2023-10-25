@@ -243,7 +243,6 @@ header {
                 transition: all 0.2s ease-in-out;
 
                 &:hover {
-                    transform: scale(1.01);
                     font-weight: 500;
                     background-color: var(--lightgray);
                     border-radius: 5px;
