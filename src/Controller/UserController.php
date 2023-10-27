@@ -12,7 +12,9 @@ use Symfony\Component\Security\Core\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class UserController extends AbstractController
 {
@@ -113,7 +115,8 @@ class UserController extends AbstractController
 
     #[Route('/user/delete', name: 'delete_user')]
     #[IsGranted('ROLE_USER')]
-    public function deleteUser(Security $security, EntityManagerInterface $entityManager, ReservationRepository $reservationRepository): Response
+    public function deleteUser(Security $security, EntityManagerInterface $entityManager, ReservationRepository $reservationRepository, SessionInterface $session,
+    TokenStorageInterface $tokenStorage): Response
     {
         $user = $security->getUser();
 
@@ -121,7 +124,7 @@ class UserController extends AbstractController
         $reservations = $reservationRepository->findBy(['user' => $user]);
 
         if (!empty($reservations)) {
-            $this->addFlash('danger', 'Impossible de supprimer ce compte car des réservations sont en cours.');
+            $this->addFlash('danger_delete_user', 'Impossible de supprimer ce compte car des réservations sont en cours !');
             return $this->redirectToRoute('user_profil');
         }
 
@@ -129,14 +132,18 @@ class UserController extends AbstractController
         // $user->setEmail('anonyme' . $user->getId() . '@anonyme.com');
         // $user->setUsername('anonyme' . $user->getId());
 
-        $entityManager->persist($user);
-        $entityManager->flush();
+        // $entityManager->persist($user);
+        // $entityManager->flush();
+
+        // Déconnecter l'utilisateur
+        $tokenStorage->setToken(null);
+        $session->invalidate();
 
         // Suppression du compte
         $entityManager->remove($user);
         $entityManager->flush();
 
-        $this->addFlash('success', 'Le compte a été anonymisé et désactivé avec succès.');
+        $this->addFlash('success_user_delete', 'Le compte a été supprimé avec succès.');
         return $this->redirectToRoute('app_home');
     }
 }

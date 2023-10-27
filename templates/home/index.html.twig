@@ -7,7 +7,8 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css" type="text/css" media="all" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css" type="text/css"
+    media="all" />
 <script>
     // Initialize and add the map
     let map;
@@ -127,12 +128,27 @@
         }
     }
 </script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDKMfraFkzITgdFU4n3x1xu451mtxmGI8E&callback=initMap"></script>
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDKMfraFkzITgdFU4n3x1xu451mtxmGI8E&callback=initMap"></script>
 {% endblock %}
 {% block body %}
 <div id="loading-screen" style="position: fixed; top: 0; width: 100%; height: 100%; z-index: 9999;">
     <object id="my-svg" class="hidden" type="image/svg+xml" data="{{asset('img/Untitled.svg')}}"></object>
 </div>
+{# {% for flash_error in app.flashes('success_user_delete') %}
+<div class="success-alert">
+    <div class="success-user-delete" role="alert">
+        <span class="close">
+            <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor" class="bi bi-x"
+                viewBox="0 0 16 16">
+                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 
+                                    8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+            </svg>
+        </span>
+        {{ flash_error }}
+    </div>
+</div>
+{% endfor %} #}
 <div class="wrapper">
     <div class="wrapper-home">
         <div class="search-btn-container">
@@ -194,7 +210,7 @@
             <div id="grid" class="advert-card-list">
                 {% for advert in adverts %}
                 <div class="advert-card slide-in">
-                    <a href="{{ path('detail_advert', {'id': advert.id})}}" class="clickable-card">
+                    <a href="{{ path('detail_advert', {'id': advert.id})}}" class="clickable-card card-click">
                         <figure>
                             {% if advert.images is not empty %}
                             <img src="{{ asset('uploads/' ~ advert.images[0].url) }}" alt="{{ advert.title }} image">

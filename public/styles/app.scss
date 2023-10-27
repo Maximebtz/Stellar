@@ -60,7 +60,7 @@ pre {
 
     25%,
     75% {
-        opacity: 0;
+        opacity: 50%;
     }
 }
 
@@ -77,11 +77,64 @@ pre {
 #loading-screen.hide {
     opacity: 0;
     pointer-events: none;
+
+    #my-svg.hidden {
+        display: none;
+    }
 }
 
-#my-svg.hidden {
-    display: none;
+.danger-delete-user {
+    border: 1px red solid;
+    padding: 5px 10px;
+    border-radius: 7px;
+    color: red;
+    -webkit-animation: blink-1 4s linear infinite both;
+    animation: blink-1 4s linear infinite both;
 }
+
+.success-alert {
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    background: transparent;
+    z-index: 5;
+    position: fixed;
+    display: flex;
+    top: 0;
+    align-items: center;
+    justify-content: center;
+
+
+    .success-user-delete {
+        background-color: #ffffffe6;
+        border: limegreen 1px solid;
+        border-radius: 7px;
+        width: 50%;
+        height: 30%;
+        display: flex;
+        align-items: center;
+        padding: 15px;
+        justify-content: center;
+        text-align: center;
+        color: limegreen;
+        font-size: larger;
+        backdrop-filter: blur(10px);
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            height: 26px;
+            width: 26px;
+
+            svg {
+                height: 26px;
+                width: 26px;
+            }
+        }
+    }
+}
+
 
 //************** All **************//
 
@@ -218,7 +271,7 @@ header {
                 position: absolute;
                 top: 0;
                 left: 0;
-                // background-color: var(--light-purple);
+                background-color: var(--light-purple);
                 color: var(--white);
                 text-align: center;
                 height: 30px;
@@ -243,7 +296,6 @@ header {
                 transition: all 0.2s ease-in-out;
 
                 &:hover {
-                    font-weight: 500;
                     background-color: var(--lightgray);
                     border-radius: 5px;
                 }
@@ -2835,20 +2887,61 @@ input[type="range"] {
 
         .modif-icons {
             display: flex;
+            justify-content: space-between;
+            flex-direction: column-reverse;
             position: absolute;
-            right: 10px;
-            top: 10px;
-            padding: 5px;
-            border-radius: 5px;
-            background: var(--white);
+            gap: 7px;
+            padding: 7px;
             z-index: 3;
+            right: 0;
             line-height: 0;
+
+            .modif {
+                color: var(--black);
+                background-color: var(--white);
+                width: 26px;
+                height: 26px;
+                border-radius: 6px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+            }
         }
 
-        .modif {
-            color: var(--black);
-            display: flex;
+        .delete-conf {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: none;
             align-items: center;
+            flex-direction: column;
+            justify-content: center;
+            background: #c0c0c0e6;
+            z-index: 3;
+            backdrop-filter: blur(8px);
+            padding: 15px;
+            gap: 10px;
+
+            p {
+                text-align: center;
+                color: var(--white);
+                font-size: large;
+            }
+
+            a {
+                background-color: #E21818;
+                padding: 5px 10px;
+                border-radius: 7px;
+                color: var(--white);
+                text-decoration: none;
+                font-size: medium;
+            }
+
+            span {
+                cursor: pointer;
+                font-size: medium;
+            }
         }
     }
 
@@ -2949,7 +3042,7 @@ footer {
         .right-content {
             display: flex;
             gap: 40px;
-            width: 100%;
+            width: max-content;
             justify-content: space-evenly;
             flex-wrap: wrap;
 

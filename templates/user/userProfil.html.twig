@@ -50,6 +50,12 @@
           <p>Nom d'utilisateur : {{ user.username }}</p>
           <p>Email : {{ user.email }}</p>
           <a href="{{ path('delete_user') }}">Supprimer mon compte</a>
+          {% for flash_error in app.flashes('danger_delete_user') %}
+          <div class="danger-delete-user" role="alert">
+            
+            {{ flash_error }}
+          </div>
+          {% endfor %}
         </div>
       </div>
 
@@ -83,14 +89,19 @@
                                           3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z" />
                   </svg>
                 </a>
-                <a class="modif" href="{{ path('delete_advert', {'id': advert.id}) }}">
+                <span class="modif delete">
                   <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor" class="bi bi-x"
                     viewBox="0 0 16 16">
                     <path
                       d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 
                                           8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
                   </svg>
-                </a>
+                </span>
+              </div>
+              <div class="delete-conf">
+                <p>Êtes vous sur de vouloir supprimer cette annonce ?</p>
+                <a href="{{ path('delete_advert', {'id': advert.id}) }}">Supprimer</a>
+                <span>Retour</span>
               </div>
               <a class="clickable-card" href="{{ path('detail_advert', {'id': advert.id}) }}">
                 <figure>

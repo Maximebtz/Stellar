@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-  /****ProfilMenu****/
+  /****Profil Menu****/
   function displayProfilMenu() {
     const menu = document.getElementById("profil-menu");
     if (menu.style.display === "flex") {
@@ -20,52 +20,66 @@ document.addEventListener("DOMContentLoaded", function () {
     displayProfilMenu();
   });
 
-  // Écouteur de clics sur le document pour fermer le menu si nécessaire
-  document.addEventListener("click", function (event) {
-    if (menu.style.display === "flex" && !menu.contains(event.target)) {
-      menu.style.display = "none";
+  /****Annonces cliquées****/
+  const adverts = document.querySelectorAll(".card-click");
+
+  // Charger les états précédents depuis le localStorage
+  adverts.forEach((advert, index) => {
+    if (localStorage.getItem("advertClicked-" + index)) {
+      advert.classList.add("clicked");
     }
   });
 
-  const colors = [
-    "#A12DB4", // light-purple
-    "#6424a5", // dark-purple
-    "#1613cd", // middle-blue
-    "#1A1884", // dark-blue
-    "#333333", // black
-  ];
+  // Ajouter un écouteur d'événements pour chaque annonce
+  adverts.forEach((advert, index) => {
+    advert.addEventListener("click", function () {
+      setTimeout(() => {
+        this.classList.add("clicked");
+      }, 3500);
 
-  const h4Element = document.getElementById("greeting");
-
-  if (h4Element) {
-    const randomIndex = Math.floor(Math.random() * colors.length);
-    const randomColor = colors[randomIndex];
-    h4Element.style.backgroundColor = randomColor;
-  }
-
+      localStorage.setItem("advertClicked-" + index, true);
+    });
+  });
   
-  /****Annonces cliquées****/
 
-    const adverts = document.querySelectorAll('.advert-card');
-  
-    // Charger les états précédents depuis le localStorage
-    adverts.forEach((advert, index) => {
-      if (localStorage.getItem('advertClicked-' + index)) {
-        advert.classList.add('clicked');
+  /****Delete Confirmation****/
+  // Sélectionne tous les boutons "supprimer" ayant la classe .modif
+  const deleteButtons = document.querySelectorAll(".delete");
+
+  // Attache un événement click à chaque bouton "supprimer"
+  deleteButtons.forEach((button) => {
+    button.addEventListener("click", function (event) {
+      // Empêche le comportement par défaut (si c'est un lien ou un bouton de formulaire)
+      event.preventDefault();
+
+      // Trouve le parent le plus proche ayant la classe .advert-card
+      const advertCard = button.closest(".advert-card");
+
+      // Trouve le div .delete-conf dans ce .advert-card
+      const deleteConf = advertCard.querySelector(".delete-conf");
+
+      // Toggle la visibilité
+      if (deleteConf.style.display === "none" || !deleteConf.style.display) {
+        deleteConf.style.display = "flex";
+      } else {
+        deleteConf.style.display = "none";
       }
     });
-  
-    // Ajouter un écouteur d'événements pour chaque annonce
-    adverts.forEach((advert, index) => {
-      advert.addEventListener('click', function() {
-        this.classList.add('clicked');
-        localStorage.setItem('advertClicked-' + index, true);
-      });
+  });
+
+  // Même chose pour les boutons "Retour"
+  const retourButtons = document.querySelectorAll(".delete-conf span");
+
+  retourButtons.forEach((button) => {
+    button.addEventListener("click", function () {
+      const advertCard = button.closest(".advert-card");
+      const deleteConf = advertCard.querySelector(".delete-conf");
+      deleteConf.style.display = "none";
     });
+  });
 
-
+  
   /****Checkbox Slide****/
-
   function enableCheckboxSlideByContainerId(idContainer) {
     const container = document.getElementById(idContainer);
 
