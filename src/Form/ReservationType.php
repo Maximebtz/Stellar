@@ -15,7 +15,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class ReservationType extends AbstractType
 {
-    
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -36,30 +36,48 @@ class ReservationType extends AbstractType
                 ],
             ])
             ->add('firstname', TextType::class, [
-                'label' => 'Prénom',
+                'label' => false,
+                'attr' => [
+                    'placeholder' => 'Samuel',
+                ]
             ])
             ->add('surname', TextType::class, [
-                'label' => 'Nom',
+                'label' => false,
+                'attr' => [
+                    'placeholder' => 'DeLaForet',
+                ]
             ])
             ->add('dateOfBirth', DateType::class, [
                 'label' => 'Date de naissance',
                 'widget' => 'single_text',
             ])
             ->add('address', TextType::class, [
-                'label' => 'Adresse',
+                'label' => false,
+                'attr' => [
+                    'placeholder' => '24 route du paradis',
+                ]
             ])
             ->add('cp', TextType::class, [
-                'label' => 'Code postal',
+                'label' => false,
+                'attr' => [
+                    'placeholder' => '68000',
+                ]
             ])
             ->add('city', TextType::class, [
-                'label' => 'Ville',
+                'label' => false,
+                'attr' => [
+                    'placeholder' => 'Colmar',
+                ]
             ])
             ->add('country', TextType::class, [
-                'label' => 'Pays',
+                'label' => false,
+                'attr' => [
+                    'placeholder' => 'France',
+                ]
             ])
             ->add('Reserver', SubmitType::class, [
                 'attr' => [
-                    'class' => 'l-btn'
+                    'class' => 'next-btn'
                 ]
             ]);
 

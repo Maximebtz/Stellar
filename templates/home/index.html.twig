@@ -17,13 +17,9 @@
         // The location of the init map
         const position = { lat: 37.787994, lng: -122.407437 };
         // Request needed libraries.
-        //@ts-ignore
         const { Map } = await google.maps.importLibrary("maps");
-
         // Librairie pour modifier les marqueurs
         const { AdvancedMarkerView } = await google.maps.importLibrary("marker");
-
-
         const infoWindow = new google.maps.InfoWindow();
 
         // Nouvelle map est ses spécificités
@@ -258,4 +254,7 @@
 <script src="{{ asset('js/app.js') }}"></script>
 <script defer src="{{ asset('js/filter.js') }}"></script>
 <script src="{{ asset('js/animations.js') }}"></script>
+<script>
+    const userId = `{% if app.user %}'{{ app.user.id }}'{% else %}null{% endif %}`;  // Récupère l'ID de l'utilisateur connecté
+</script>
 {% endblock javascripts %}

@@ -25,7 +25,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class AdvertController extends AbstractController
 {
@@ -116,8 +116,7 @@ class AdvertController extends AbstractController
         ]);
     }
 
-    #[Route('/user/advert/detail/{id}', name: 'detail_advert')]
-    #[IsGranted('ROLE_USER')]
+    #[Route('/advert/detail/{id}', name: 'detail_advert')]
     public function showDetailAdvert(
         $id,
         CategoryRepository $categoryRepository,
@@ -126,7 +125,8 @@ class AdvertController extends AbstractController
         LodgeRepository $lodgeRepository,
         Request $request,
         ReservationRepository $reservationRepository,
-        Security $security
+        Security $security,
+        SessionInterface $session
     ): Response {
         // Récupérer l'annonce à partir de l'ID dans l'URL
         $advert = $entityManager->getRepository(Advert::class)->find($id);
@@ -143,9 +143,9 @@ class AdvertController extends AbstractController
 
         // Récupérer l'utilisateur connecté
         $user = $security->getUser();
-
+        $isLoggedIn = $user ? true : false;
         if (!$user) {
-            throw new \RuntimeException('L\'utilisateur n\'est pas connecté.');
+            $session->set('referer', $request->getRequestUri());
         }
 
         // Créer une nouvelle réservation associée à l'annonce
@@ -196,6 +196,7 @@ class AdvertController extends AbstractController
             'formAddReservation' => $reservationForm->createView(),
             'reservedDates' => $reservedDates,
             'ownerAdverts' => $ownerAdverts,
+            'isLoggedIn' => $isLoggedIn,
         ]);
     }
 }

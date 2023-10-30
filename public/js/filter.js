@@ -1,11 +1,30 @@
 /****Filter Bar****/
 document.addEventListener("DOMContentLoaded", function () {
-  document
-    .getElementById("searchButton")
-    .addEventListener("click", function () {
-      const popup = document.getElementById("searchPopup");
-      popup.style.display = popup.style.display === "none" ? "flex" : "none";
-    });
+  function toggleSearchPopup() {
+    const popup = document.getElementById("searchPopup");
+    if (popup.style.display === "flex") {
+      popup.style.display = "none";
+    } else {
+      popup.style.display = "flex";
+    }
+  }
+
+  const searchButton = document.getElementById("searchButton");
+  const searchPopup = document.getElementById("searchPopup");
+
+  searchButton.addEventListener("click", function (event) {
+    event.stopPropagation(); // Éviter que le clic ne se propage et ferme immédiatement la popup
+    toggleSearchPopup();
+  });
+
+  document.addEventListener("click", function (event) {
+    if (
+      !searchPopup.contains(event.target) &&
+      !searchButton.contains(event.target)
+    ) {
+      searchPopup.style.display = "none"; // Fermer la popup
+    }
+  });
 
   // Fonction pour appliquer les filtres
   function applyFilters() {

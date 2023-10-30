@@ -1,13 +1,10 @@
 document.addEventListener("DOMContentLoaded", function () {
-
   /****Profil Menu****/
   function displayProfilMenu() {
     const menu = document.getElementById("profil-menu");
     if (menu.style.display === "flex") {
-      // Si le menu est déjà ouvert, le fermer
       menu.style.display = "none";
     } else {
-      // Sinon, ouvrir le menu
       menu.style.display = "flex";
     }
   }
@@ -20,12 +17,18 @@ document.addEventListener("DOMContentLoaded", function () {
     displayProfilMenu();
   });
 
+  document.addEventListener("click", function (event) {
+    if (!menu.contains(event.target) && !profilPicture.contains(event.target)) {
+      menu.style.display = "none"; // Fermer le menu
+    }
+  });
+
   /****Annonces cliquées****/
   const adverts = document.querySelectorAll(".card-click");
 
-  // Charger les états précédents depuis le localStorage
+  // Charger les états précédents depuis le sessionStorage
   adverts.forEach((advert, index) => {
-    if (localStorage.getItem("advertClicked-" + index)) {
+    if (sessionStorage.getItem(userId + "-advertClicked-" + index)) {
       advert.classList.add("clicked");
     }
   });
@@ -37,12 +40,11 @@ document.addEventListener("DOMContentLoaded", function () {
         this.classList.add("clicked");
       }, 3500);
 
-      localStorage.setItem("advertClicked-" + index, true);
+      sessionStorage.setItem(userId + "-advertClicked-" + index, true);
     });
   });
-  
 
-  /****Delete Confirmation****/
+  /***Delete Confirmation****/
   // Sélectionne tous les boutons "supprimer" ayant la classe .modif
   const deleteButtons = document.querySelectorAll(".delete");
 
@@ -78,7 +80,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  
   /****Checkbox Slide****/
   function enableCheckboxSlideByContainerId(idContainer) {
     const container = document.getElementById(idContainer);
