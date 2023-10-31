@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4063b69066fe3d79c327545c71402764",
+    "content-hash": "312230e4e721465e6eba36ca8b454dd5",
     "packages": [
         {
             "name": "doctrine/cache",
@@ -1388,6 +1388,61 @@
             "time": "2023-01-14T14:17:03+00:00"
         },
         {
+            "name": "eo/honeypot-bundle",
+            "version": "v2.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/eymengunay/EoHoneypotBundle.git",
+                "reference": "b481daa975e4d547bb64b90b216ccf8d66511741"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/eymengunay/EoHoneypotBundle/zipball/b481daa975e4d547bb64b90b216ccf8d66511741",
+                "reference": "b481daa975e4d547bb64b90b216ccf8d66511741",
+                "shasum": ""
+            },
+            "require": {
+                "symfony/framework-bundle": "~5.0 | ~6.0"
+            },
+            "require-dev": {
+                "eo/symfony-test-edition": "~3.0"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Eo\\HoneypotBundle": ""
+                },
+                "psr-4": {
+                    "Eo\\HoneypotBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Eymen Gunay",
+                    "email": "eymen@egunay.com"
+                }
+            ],
+            "description": "Honeypot trap for Symfony3 forms.",
+            "keywords": [
+                "Honeypot",
+                "spam"
+            ],
+            "support": {
+                "issues": "https://github.com/eymengunay/EoHoneypotBundle/issues",
+                "source": "https://github.com/eymengunay/EoHoneypotBundle/tree/v2.1.0"
+            },
+            "time": "2023-10-11T07:18:59+00:00"
+        },
+        {
             "name": "friendsofsymfony/ckeditor-bundle",
             "version": "2.4.0",
             "source": {
@@ -1591,6 +1646,129 @@
                 "source": "https://github.com/geocoder-php/google-maps-provider/tree/4.7.1"
             },
             "time": "2023-04-14T11:13:20+00:00"
+        },
+        {
+            "name": "gregwar/captcha",
+            "version": "v1.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Gregwar/Captcha.git",
+                "reference": "229d3cdfe33d6f1349e0aec94a26e9205a6db08e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Gregwar/Captcha/zipball/229d3cdfe33d6f1349e0aec94a26e9205a6db08e",
+                "reference": "229d3cdfe33d6f1349e0aec94a26e9205a6db08e",
+                "shasum": ""
+            },
+            "require": {
+                "ext-gd": "*",
+                "ext-mbstring": "*",
+                "php": ">=5.3.0",
+                "symfony/finder": "*"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^6.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Gregwar\\": "src/Gregwar"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Grégoire Passault",
+                    "email": "g.passault@gmail.com",
+                    "homepage": "http://www.gregwar.com/"
+                },
+                {
+                    "name": "Jeremy Livingston",
+                    "email": "jeremy.j.livingston@gmail.com"
+                }
+            ],
+            "description": "Captcha generator",
+            "homepage": "https://github.com/Gregwar/Captcha",
+            "keywords": [
+                "bot",
+                "captcha",
+                "spam"
+            ],
+            "support": {
+                "issues": "https://github.com/Gregwar/Captcha/issues",
+                "source": "https://github.com/Gregwar/Captcha/tree/v1.2.1"
+            },
+            "time": "2023-09-26T13:45:37+00:00"
+        },
+        {
+            "name": "gregwar/captcha-bundle",
+            "version": "v2.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Gregwar/CaptchaBundle.git",
+                "reference": "2b55ba41fd890f1a94d30e53a530c344bf12d6a5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Gregwar/CaptchaBundle/zipball/2b55ba41fd890f1a94d30e53a530c344bf12d6a5",
+                "reference": "2b55ba41fd890f1a94d30e53a530c344bf12d6a5",
+                "shasum": ""
+            },
+            "require": {
+                "ext-gd": "*",
+                "gregwar/captcha": "^1.1.9",
+                "php": ">=7.1.3",
+                "symfony/form": "~5.0|~6.0",
+                "symfony/framework-bundle": "~5.0|~6.0",
+                "symfony/translation": "~5.0|^6.0",
+                "twig/twig": "^2.10|^3.0"
+            },
+            "require-dev": {
+                "phpstan/phpstan": "^0.12.66",
+                "symplify/easy-coding-standard": "^6.1"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "Gregwar\\CaptchaBundle\\": "/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Grégoire Passault",
+                    "email": "g.passault@gmail.com",
+                    "homepage": "http://www.gregwar.com/"
+                },
+                {
+                    "name": "Jeremy Livingston",
+                    "email": "jeremy.j.livingston@gmail.com"
+                }
+            ],
+            "description": "Captcha bundle",
+            "homepage": "https://github.com/Gregwar/CaptchaBundle",
+            "keywords": [
+                "Symfony2",
+                "bot",
+                "captcha",
+                "code",
+                "security",
+                "spam",
+                "symfony",
+                "visual"
+            ],
+            "support": {
+                "issues": "https://github.com/Gregwar/CaptchaBundle/issues",
+                "source": "https://github.com/Gregwar/CaptchaBundle/tree/v2.2.0"
+            },
+            "time": "2022-01-11T08:28:06+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -2701,16 +2879,16 @@
         },
         {
             "name": "stripe/stripe-php",
-            "version": "v12.4.0",
+            "version": "v13.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/stripe/stripe-php.git",
-                "reference": "7d0a90772fc1c179e370971264318208533324b9"
+                "reference": "8971caa149b4689e67c1123d3604e387c79ab543"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/stripe/stripe-php/zipball/7d0a90772fc1c179e370971264318208533324b9",
-                "reference": "7d0a90772fc1c179e370971264318208533324b9",
+                "url": "https://api.github.com/repos/stripe/stripe-php/zipball/8971caa149b4689e67c1123d3604e387c79ab543",
+                "reference": "8971caa149b4689e67c1123d3604e387c79ab543",
                 "shasum": ""
             },
             "require": {
@@ -2721,7 +2899,6 @@
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "3.5.0",
-                "php-coveralls/php-coveralls": "^2.5",
                 "phpstan/phpstan": "^1.2",
                 "phpunit/phpunit": "^5.7 || ^9.0"
             },
@@ -2755,9 +2932,9 @@
             ],
             "support": {
                 "issues": "https://github.com/stripe/stripe-php/issues",
-                "source": "https://github.com/stripe/stripe-php/tree/v12.4.0"
+                "source": "https://github.com/stripe/stripe-php/tree/v13.1.0"
             },
-            "time": "2023-09-21T22:55:47+00:00"
+            "time": "2023-10-26T17:36:08+00:00"
         },
         {
             "name": "symfony/asset",

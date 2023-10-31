@@ -26,6 +26,9 @@
             "./migrations/.gitignore"
         ]
     },
+    "eo/honeypot-bundle": {
+        "version": "v2.1.0"
+    },
     "friendsofsymfony/ckeditor-bundle": {
         "version": "2.4",
         "recipe": {
@@ -37,6 +40,9 @@
         "files": [
             "./config/packages/fos_ckeditor.yaml"
         ]
+    },
+    "gregwar/captcha-bundle": {
+        "version": "v2.2.0"
     },
     "php-http/discovery": {
         "version": "1.19",

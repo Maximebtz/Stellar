@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
+use Eo\HoneypotBundle\Form\Type\HoneypotType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\All;
 use Symfony\Component\Validator\Constraints\File;
@@ -68,6 +69,7 @@ class RegistrationFormType extends AbstractType
                 'second_options' => ['label' => 'Repeat Password'],
                 'mapped' => false,
             ])
+            ->add('SOME-FAKE-NAME', HoneypotType::class)
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
                 'label' => false,
