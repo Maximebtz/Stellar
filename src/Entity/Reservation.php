@@ -55,6 +55,16 @@ class Reservation
         return $this->id;
     }
 
+    public function getArrivalString(): ?string
+    {
+        return $this->arrivalDate->format('d/m/Y');
+    }
+
+    public function getArrivalStringForComparison(): ?string
+    {
+        return $this->arrivalDate->format('Y-m-d');
+    }
+
     public function getArrivalDate(): ?\DateTimeInterface
     {
         return $this->arrivalDate;
@@ -72,6 +82,11 @@ class Reservation
         return $this->departureDate->format('d/m/Y');
     }
 
+    public function getDepartureStringForComparison(): ?string
+    {
+        return $this->departureDate->format('Y-m-d');
+    }
+
     public function getDepartureDate(): ?\DateTimeInterface
     {
         return $this->departureDate;
@@ -82,11 +97,6 @@ class Reservation
         $this->departureDate = $departureDate;
 
         return $this;
-    }
-
-    public function getArrivalString(): ?string
-    {
-        return $this->arrivalDate->format('d/m/Y');
     }
 
     public function getAdvert(): ?Advert

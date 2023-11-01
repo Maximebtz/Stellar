@@ -52,7 +52,7 @@
           <a href="{{ path('delete_user') }}">Supprimer mon compte</a>
           {% for flash_error in app.flashes('danger_delete_user') %}
           <div class="danger-delete-user" role="alert">
-            
+
             {{ flash_error }}
           </div>
           {% endfor %}
@@ -132,44 +132,66 @@
 
       <div id="reservedAdvertsSection" style="display: none;" class="fade">
         {% for reservation in myAdvertsReservations %}
-        {% set now = "now"|date("Y-m-d") %}
-        <div class="reservation {% if reservation.departureString < now %}grey-out{% endif %}">
-          <div class="left-content">
-            <h3>{{ reservation.advert.title }}</h3>
-            <p>Utilisateur: {{ reservation.user.username }}</p>
-            <p>Email: {{ reservation.user.email }}</p>
-            <p>Date d'arrivée : {{ reservation.arrivalString }}</p>
-            <p>Date de départ : {{ reservation.departureString }}</p>
-            <p>Prix total : {{ reservation.price }}€</p>
+          {% set cssClass = '' %}
+          {% set now = "now"|date("Y-m-d") %}
+          {% if reservation.departureStringForComparison < now %} 
+            {% set cssClass='grey-out' %} 
+          {% endif %}
+          <div class="reservation {{ cssClass }}">
+            <div class="left-content">
+              <h3>{{ reservation.advert.title }}</h3>
+              {% if reservation.departureStringForComparison < now %} 
+                <span class="past">Terminé</span>
+                {% elseif reservation.arrivalStringForComparison > now %}
+                <span class="future">À venir</span>
+                {% else %}
+                <span class="current">En cours</span>
+              {% endif %}
+              <p>Utilisateur: {{ reservation.user.username }}</p>
+              <p>Email: {{ reservation.user.email }}</p>
+              <p>Date d'arrivée : {{ reservation.arrivalString }}</p>
+              <p>Date de départ : {{ reservation.departureString }}</p>
+              <p>Prix total : {{ reservation.price }}€</p>
+            </div>
+            <div class="right-content">
+              {% if reservation.advert.images is not empty %}
+              <img src="{{ asset('uploads/' ~ reservation.advert.images[0].url) }}"
+                alt="{{ reservation.advert.title }} image">
+              {% endif %}
+            </div>
           </div>
-          <div class="right-content">
-            {% if reservation.advert.images is not empty %}
-            <img src="{{ asset('uploads/' ~ reservation.advert.images[0].url) }}"
-              alt="{{ reservation.advert.title }} image">
-            {% endif %}
-          </div>
-        </div>
-        {% endfor %}
+          {% endfor %}
       </div>
 
       <div id="reservationsSection" style="display: none;" class="fade">
         {% for myReservation in myReservations %}
-        {% set now = "now"|date("d/m/Y") %}
-        <div class="reservation {% if myReservation.departureString < now %}grey-out{% endif %}">
-          <div class="left-content">
-            <h3>{{myReservation.advert.title}}</h3>
-            <p>Date d'arrivée : {{myReservation.arrivalString}}</p>
-            <p>Date de départ : {{myReservation.departureString}}</p>
-            <p>Prix total : {{myReservation.price}}€</p>
+          {% set cssClass = '' %}
+          {% set now = "now"|date("Y-m-d") %}
+          {% if myReservation.departureStringForComparison < now %} 
+            {% set cssClass='grey-out' %} 
+          {% endif %}
+          <div class="reservation {{ cssClass }}">
+            <div class="left-content">
+              <h3>{{myReservation.advert.title}}</h3>
+              {% if myReservation.departureStringForComparison < now %} 
+                <span class="past">Terminé</span>
+                {% elseif myReservation.arrivalStringForComparison > now %}
+                <span class="future">À venir</span>
+                {% else %}
+                <span class="current">En cours</span>
+              {% endif %}
+              <p>Date d'arrivée : {{myReservation.arrivalString}}</p>
+              <p>Date de départ : {{myReservation.departureString}}</p>
+              <p>Prix total : {{myReservation.price}}€</p>
+            </div>
+            <div class="right-content">
+              {% if myReservation.advert.images is not empty %}
+              <img src="{{ asset('uploads/' ~ myReservation.advert.images[0].url) }}"
+                alt="{{ myReservation.advert.title }} image">
+              {% endif %}
+            </div>
           </div>
-          <div class="right-content">
-            {% if myReservation.advert.images is not empty %}
-            <img src="{{ asset('uploads/' ~ myReservation.advert.images[0].url) }}"
-              alt="{{ myReservation.advert.title }} image">
-            {% endif %}
-          </div>
-        </div>
-        {% endfor %}
+          {% endfor %}
       </div>
     </div>
   </div>

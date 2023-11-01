@@ -206,6 +206,7 @@ document.addEventListener("DOMContentLoaded", function () {
   document
     .getElementById("start-button")
     .addEventListener("click", function (event) {
+      console.log("arrivalDateInput, departureDateInput")
       event.preventDefault();
       document.getElementById("reservationFormContainer").style.display =
         "flex";

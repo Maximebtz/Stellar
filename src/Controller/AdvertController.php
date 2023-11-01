@@ -124,9 +124,9 @@ class AdvertController extends AbstractController
         AccessoryRepository $accessoryRepository,
         LodgeRepository $lodgeRepository,
         Request $request,
+        SessionInterface $session,
         ReservationRepository $reservationRepository,
         Security $security,
-        SessionInterface $session
     ): Response {
         // Récupérer l'annonce à partir de l'ID dans l'URL
         $advert = $entityManager->getRepository(Advert::class)->find($id);
@@ -165,7 +165,7 @@ class AdvertController extends AbstractController
 
             $hasConflict = false;
             foreach ($activeReservations as $activeReservation) {
-                if ($newStartDate < $activeReservation->getEndDate() && $newEndDate > $activeReservation->getStartDate()) {
+                if ($newStartDate < $activeReservation->getDepartureDate() && $newEndDate > $activeReservation->getArrivalDate()) {
                     $hasConflict = true;
                     break;
                 }
@@ -177,7 +177,8 @@ class AdvertController extends AbstractController
             } else {
                 $entityManager->persist($reservation);
                 $entityManager->flush();
-                return $this->redirectToRoute('app_home');
+                // Redirige vers le paiement
+                return $this->redirectToRoute('payement_stripe', ['id' => $reservation->getId()]);
             }
         }
 

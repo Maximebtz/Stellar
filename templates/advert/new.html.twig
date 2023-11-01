@@ -54,11 +54,11 @@
     <div class="image-upload-wrapper" draggable="true">
       <div class="image-upload-card drop-area">
         <label for="advert_images" class="custom-file-upload">
-          Drag & Drop here<br />
-          or<br />
-          <span class="image-input-label-span">Click on the card</span>
+          Drag & Drop ici<br />
+          ou<br />
+          <span class="image-input-label-span">Cliquez sur la carte</span>
         </label>
-        <img src="{{ asset('img/imageupload.svg') }}" alt="animation upload" />
+        <img src="{{ asset('img/illustrations/imageupload.svg') }}" alt="animation upload" />
         {{ form_row(formAddAdvert.images) }}
       </div>
       <div class="scroll-files">
@@ -117,7 +117,35 @@
           </div>
         </div>
         <div class="wrapper-detail-left-description">
-          {{ form_row(formAddAdvert.description) }}
+          
+          {{ form_widget(formAddAdvert.description, {'attr': {'placeholder': "Écrivez ici votre description, par exemple :
+
+
+Bienvenue dans notre refuge perché dans les arbres ! 
+Évadez-vous de la vie quotidienne et venez vous ressourcer dans ce havre de paix.
+
+  ✨ Points forts :
+  - Nichez-vous dans une cabane en bois rustique entourée de la nature
+  - Observatoire d'étoiles avec télescope pour des nuits romantiques
+  - Cheminée écologique pour des soirées chaleureuses
+  - Accès privé à une cascade et un bassin naturel
+  - Panier de pique-nique gourmet fourni à l'arrivée
+
+  🌱 Durabilité :
+  - Énergie solaire et éolienne
+  - Produits de bain écologiques
+  - Programme de reforestation pour chaque réservation
+
+  🎨 Activités :
+  - Atelier de peinture en plein air
+  - Randonnées nocturnes guidées
+  - Yoga matinal sur la plateforme suspendue
+
+Venez vivre une expérience unique, alliant confort, aventure et respect de la nature. 
+Parfait pour les couples, les artistes et tous ceux qui cherchent à se reconnecter avec le monde naturel.
+
+❗ Note : Ce logement est déconseillé pour les personnes à mobilité réduite et les enfants de moins de 12 ans."}}) }}
+
         </div>
         <div class="wrapper-detail-left-commodite">
           <h2>Commodités</h2>
@@ -170,8 +198,6 @@
         </div>
       </div>
     </div>
-
-    {{ form_row(formAddAdvert.other) }}
     {{ form_end(formAddAdvert) }}
   </div>
 </div>

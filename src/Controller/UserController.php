@@ -68,6 +68,27 @@ class UserController extends AbstractController
         $myAdvertsReservations = $entityManager->getRepository(Reservation::class)->findReservationsByOwner($user);
         $myAdverts = $entityManager->getRepository(Advert::class)->findBy(['owner' => $user]);
 
+        // Fonction de tri
+        $sortFunction = function ($a, $b) {
+            $now = new \DateTime();
+            if ($a->getDepartureDate() < $now && $b->getDepartureDate() < $now) {
+                return $b->getDepartureDate() <=> $a->getDepartureDate();
+            }
+            if ($a->getArrivalDate() > $now && $b->getArrivalDate() > $now) {
+                return $a->getArrivalDate() <=> $b->getArrivalDate();
+            }
+            if ($a->getArrivalDate() <= $now && $a->getDepartureDate() >= $now) {
+                return -1;
+            }
+            if ($b->getArrivalDate() <= $now && $b->getDepartureDate() >= $now) {
+                return 1;
+            }
+            return 0;
+        };
+
+        // Trier les réservations
+        usort($myReservations, $sortFunction);
+        usort($myAdvertsReservations, $sortFunction);
 
         return $this->render('user/userProfil.html.twig', [
             'user' => $user,
@@ -115,9 +136,13 @@ class UserController extends AbstractController
 
     #[Route('/user/delete', name: 'delete_user')]
     #[IsGranted('ROLE_USER')]
-    public function deleteUser(Security $security, EntityManagerInterface $entityManager, ReservationRepository $reservationRepository, SessionInterface $session,
-    TokenStorageInterface $tokenStorage): Response
-    {
+    public function deleteUser(
+        Security $security,
+        EntityManagerInterface $entityManager,
+        ReservationRepository $reservationRepository,
+        SessionInterface $session,
+        TokenStorageInterface $tokenStorage
+    ): Response {
         $user = $security->getUser();
 
         // Vérifier si l'utilisateur a des réservations en cours

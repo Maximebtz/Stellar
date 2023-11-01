@@ -160,14 +160,6 @@ class AdvertType extends AbstractType
                     'placeholder' => 'Description *'
                 ]
             ])
-            ->add('other', TextareaType::class, [
-                'required' => false,
-                'label' => false,
-                'attr' => [
-                    'class' => 'textarea-description other',
-                    'placeholder' => 'Autres spécificités'
-                ]
-            ])
             ->add('Valider', SubmitType::class, [
                 'attr' => [
                     'class' => 'sub-btn'
