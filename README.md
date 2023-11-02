@@ -7,17 +7,21 @@ Stellar est mon projet de fin d'année, le projet n'étant pas terminé, les ima
 L'application consistera à louer des hébergements de vacances atypiques, type cabanes, yourt etc.
 
 
-# HomePage
-![Home](https://github.com/Maximebtz/Stellar/assets/120190748/b03337c5-9034-4de4-b3a8-47f602140d95)
+# Home Page
+![screencapture-127-0-0-1-8000-home-2023-11-02-17_21_27](https://github.com/Maximebtz/Stellar/assets/120190748/d861d6f5-50e2-4208-b017-b66b69bf6066)
 
-# LogIn
-![Log In](https://github.com/Maximebtz/Stellar/assets/120190748/bf4c8bfe-9b7a-493c-840a-2e98ddc10c74)
+# Log In
+![image](https://github.com/Maximebtz/Stellar/assets/120190748/b0ba0443-0a4b-4d94-ab05-fc6fb671bc31)
 
-# SignUp
-![Sign Up](https://github.com/Maximebtz/Stellar/assets/120190748/d91eec38-922d-40d4-b134-5398d7fe90d2)
+# Sign Up
+![image](https://github.com/Maximebtz/Stellar/assets/120190748/c3b2b5ee-9aec-4cb7-b010-5b98e7000120)
 
-# Advert-Detail
-![Advert-Detail](https://github.com/Maximebtz/Stellar/assets/120190748/59df6037-47fe-43fe-b075-678e3b993cbe)
+# Profil Page
+![screencapture-127-0-0-1-8000-user-profil-2023-11-02-17_28_35](https://github.com/Maximebtz/Stellar/assets/120190748/ee217908-7d65-4ebc-a0ad-e163f8aef801)
+![screencapture-127-0-0-1-8000-user-profil-2023-11-02-17_30_03](https://github.com/Maximebtz/Stellar/assets/120190748/76075615-ab22-4045-993b-600c99231c9d)
+
+# Advert-Detail Page
+![screencapture-127-0-0-1-8000-detail-annonce-Mountain-Cabins-41-2023-11-02-17_33_41](https://github.com/Maximebtz/Stellar/assets/120190748/9100968d-9be1-4026-89a2-6ded82370b4b)
 
 # Advert-Add
 ![Advert-Add](https://github.com/Maximebtz/Stellar/assets/120190748/9460a534-8270-4c08-9200-f2816c4505d8)
