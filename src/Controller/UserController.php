@@ -35,26 +35,6 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/user', name: 'app_user_advert')]
-    public function appMyAdvert(): Response
-    {
-        return $this->render('user/userAdvert.html.twig', [
-            'controller_name' => 'UserController',
-        ]);
-    }
-
-
-    #[Route('/user/my-property', name: 'user_adverts')]
-    #[IsGranted('ROLE_USER')]
-    public function userAdverts(): Response
-    {
-        $adverts = $this->entityManager->getRepository(Advert::class)->findAll();
-
-        return $this->render('user/userAdverts.html.twig', [
-            'adverts' => $adverts
-        ]);
-    }
-
     #[Route('/user/profil', name: 'user_profil')]
     #[IsGranted('ROLE_USER')]
     public function profilPage(Security $security, EntityManagerInterface $entityManager): Response
@@ -123,15 +103,15 @@ class UserController extends AbstractController
         // Si des réservations existent, empêcher la suppression
         if (!empty($reservations)) {
             $this->addFlash('danger', 'Impossible de supprimer cette annonce car des réservations y sont associées.');
-            return $this->redirectToRoute('user_adverts');
-        }
+            return $this->redirectToRoute('user_profil');
+        } 
 
         // Si aucune réservation n'est associée, on peut supprimer l'annonce
         $entityManager->remove($advert);
         $entityManager->flush();
 
-        $this->addFlash('success', 'L\'annonce a été supprimée avec succès.');
-        return $this->redirectToRoute('user_adverts');
+        $this->addFlash('success_supp_advert', 'L\'annonce a été supprimée avec succès.');
+        return $this->redirectToRoute('user_profil');
     }
 
     #[Route('/user/delete', name: 'delete_user')]

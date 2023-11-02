@@ -46,8 +46,8 @@ class AdvertController extends AbstractController
         ]);
     }
 
-    #[Route('/owner/add-property', name: 'new_advert')]
-    #[Route('/owner/edit-property/{id}', name: 'edit_advert')]
+    #[Route('/nouvelle-propriete', name: 'new_advert')]
+    #[Route('/modification/{slug}/{id}', name: 'edit_advert')]
     #[IsGranted('ROLE_USER')]
     public function new_edit(Advert $advert = null, Request $request, FileUploader $fileUploader, CategoryRepository $categoryRepository, AccessoryRepository $accessoryRepository, LodgeRepository $lodgeRepository): Response
     {
@@ -104,6 +104,9 @@ class AdvertController extends AbstractController
             $this->entityManager->persist($advert);
             $this->entityManager->flush();
 
+            $advert->updateSlug(); // Mettre à jour le slug
+            $this->entityManager->flush(); // Persister le slug mis à jour
+
             return $this->redirectToRoute('app_home');
         }
 
@@ -116,9 +119,10 @@ class AdvertController extends AbstractController
         ]);
     }
 
-    #[Route('/advert/detail/{id}', name: 'detail_advert')]
+    #[Route('/detail-annonce/{slug}/{id}', name: 'detail_advert')]
     public function showDetailAdvert(
         $id,
+        $slug,
         CategoryRepository $categoryRepository,
         EntityManagerInterface $entityManager,
         AccessoryRepository $accessoryRepository,

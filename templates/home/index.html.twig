@@ -41,7 +41,7 @@
             let address = "{{ advert.address }}, {{ advert.city }}, {{ advert.cp }}, {{ advert.country }}";
             let title = "{{ advert.title }}";
             let imgSrc = "{{ asset('uploads/' ~ advert.images[0].url) }}";
-            let detailURL = "{{ path('detail_advert', {'id': advert.id}) }}";
+            let detailURL = "{{ path('detail_advert', {'slug': advert.slug, 'id': advert.id}) }}";
             let price = "{{ advert.price }}";
 
             geocoder.geocode({ 'address': address }, function (results, status) {
@@ -203,7 +203,7 @@
             <div id="grid" class="advert-card-list">
                 {% for advert in adverts %}
                 <div class="advert-card slide-in">
-                    <a href="{{ path('detail_advert', {'id': advert.id})}}" class="clickable-card card-click">
+                    <a href="{{ path('detail_advert', {'slug': advert.slug, 'id': advert.id})}}" class="clickable-card card-click">
                         <figure>
                             {% if advert.images is not empty %}
                             <img src="{{ asset('uploads/' ~ advert.images[0].url) }}" alt="{{ advert.title }} image">
@@ -229,10 +229,9 @@
                 {% endfor %}
             </div>
             <div class="pagination">
-                {% set totalPages = (totalAdverts + perPage - 1) / perPage | round(0, 'ceil') %}
-                {% for pageNumber in range(1, totalPages + 0) %}
-                <a href="{{ path(app.request.attributes.get('_route'), {'page': pageNumber}) }}" {% if pageNumber==page
-                    %}class="active" {% else %}class="pages" {% endif %}>{{ pageNumber }}</a>
+                {% for pageNumber in 1..totalPages %}
+                    <a href="{{ path(app.request.attributes.get('_route'), {'page': pageNumber}) }}"
+                       class="{{ pageNumber == page ? 'active' : 'pages' }}">{{ pageNumber }}</a>
                 {% endfor %}
             </div>
         </div>

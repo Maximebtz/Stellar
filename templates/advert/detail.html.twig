@@ -378,7 +378,7 @@
         <div id="grid" class="advert-card-list">
           {% for advert in ownerAdverts|slice(0, 4) %}
           <div class="advert-card slide-in">
-            <a href="{{ path('detail_advert', {'id': advert.id})}}" class="clickable-card">
+            <a href="{{ path('detail_advert', {'id': advert.id, 'slug': advert.slug})}}" class="clickable-card">
               <figure>
                 {% if advert.images is not empty %}
                 <img src="{{ asset('uploads/' ~ advert.images[0].url) }}" alt="{{ advert.title }} image">

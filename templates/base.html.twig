@@ -41,9 +41,6 @@
           <h4 id="greeting">Hi, {{ app.user.username }}</h4>
           <li><a href="{{ path('user_profil') }}">Mon profil</a></li>
           <li><a href="{{ path('new_advert') }}">Créer mon annonce</a></li>
-          {% if app.user.adverts is not empty %} {# si mon user a des annonces #}
-          <li><a href="{{ path('user_adverts') }}">Mes annonces</a></li>
-          {% endif %}
           <hr />
           <li>
             <b><a href="{{ path('app_logout') }}">Se déconnecter</a></b>

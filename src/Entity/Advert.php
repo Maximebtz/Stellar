@@ -3,13 +3,17 @@
 namespace App\Entity;
 
 use DateTime;
+use ORM\PrePersist;
+use DateTimeImmutable;
+use Cocur\Slugify\Slugify;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\AdvertRepository;
-use DateTimeImmutable;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use ORM\PreUpdate;
 
+#[ORM\HasLifecycleCallbacks]
 #[ORM\Entity(repositoryClass: AdvertRepository::class)]
 class Advert
 {
@@ -30,7 +34,7 @@ class Advert
     #[ORM\Column(length: 500, nullable: true)]
     private ?string $other = null;
 
-    #[ORM\Column(length: 10)]
+    #[ORM\Column(length: 10, nullable: true)]
     private ?string $cp = null;
 
     #[ORM\Column(length: 255)]
@@ -51,7 +55,7 @@ class Advert
 
     #[ORM\OneToMany(mappedBy: 'advert', targetEntity: Notice::class, orphanRemoval: true)]
     private Collection $notices;
-    
+
     #[ORM\OneToMany(targetEntity: Images::class, mappedBy: "adverts", orphanRemoval: true, cascade: ['persist'])]
     private Collection $images;
 
@@ -68,7 +72,10 @@ class Advert
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
 
-    
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $slug = null;
+
+
     public function __construct()
     {
         $this->reservations = new ArrayCollection();
@@ -359,5 +366,29 @@ class Advert
     public function getCreatedAtString(): ?string
     {
         return $this->createdAt->format('d-m-Y');
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(?string $slug): static
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function updateSlug(): void
+    {
+        if ($this->title) {
+            $slugify = new Slugify();
+            $this->slug = $slugify->slugify($this->title);
+        }
     }
 }

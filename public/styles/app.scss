@@ -94,47 +94,46 @@ pre {
 }
 
 .success-alert {
-    position: absolute;
-    width: 100%;
-    height: 100vh;
-    background: transparent;
     z-index: 5;
     position: fixed;
     display: flex;
-    top: 0;
+    bottom: -30px;
     align-items: center;
     justify-content: center;
+    background-color: #ffffff;
+    border: limegreen 1px solid;
+    border-radius: 7px;
+    width: 100%;
+    max-width: 400px;
+    height: 100px;
+    padding: 15px;
+    text-align: center;
+    color: limegreen;
+    font-size: larger;
+    position: relative;
 
+    &::after {
+        content: url('../img/icons/coche.png');
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        height: max-content;
+    }
 
-    .success-user-delete {
-        background-color: #ffffffe6;
-        border: limegreen 1px solid;
-        border-radius: 7px;
-        width: 50%;
-        height: 30%;
-        display: flex;
-        align-items: center;
-        padding: 15px;
-        justify-content: center;
-        text-align: center;
-        color: limegreen;
-        font-size: larger;
-        backdrop-filter: blur(10px);
+    .close {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        height: 26px;
+        width: 26px;
 
-        .close {
-            position: absolute;
-            top: 15px;
-            right: 15px;
+        svg {
             height: 26px;
             width: 26px;
-
-            svg {
-                height: 26px;
-                width: 26px;
-            }
         }
     }
 }
+
 
 
 //************** All **************//
