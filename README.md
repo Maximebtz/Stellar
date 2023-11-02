@@ -1,5 +1,6 @@
 # Stellar
 ![image 1](https://github.com/Maximebtz/Stellar/assets/120190748/bc7fc26c-5566-45f6-9430-fc07c7cf5899)
+![image](https://github.com/Maximebtz/Stellar/assets/120190748/a60a0cd2-78e1-42d0-89cb-ec7a4d9c60e6)
 
 Stellar est mon projet de fin d'année, le projet n'étant pas terminé, les images suivantes sont provisoires.
 
