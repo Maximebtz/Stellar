@@ -195,12 +195,17 @@ class Reservation
         return $this;
     }
 
-    public function getPrice()
+    public function getTotalPrice()
     {
         $price = $this->advert->getPrice();
         $interval = $this->arrivalDate->diff($this->departureDate);
         $interval = $interval->d;
         return $price * floatval($interval);
+    }
+
+    public function getPrice(): ?float
+    {
+        return $this->price;
     }
 
     public function setPrice(float $price): static

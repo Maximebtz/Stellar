@@ -4,11 +4,7 @@ ajouter logo favoris sur vignette accueil
 
 picto category 
 
-pas de pagination page accueil 
-
-regex password
-
-x année de naissance à enlever
+pas de pagination page accueil
 
 pdf fcture
 

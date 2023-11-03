@@ -48,24 +48,49 @@ class UserController extends AbstractController
         $myAdvertsReservations = $entityManager->getRepository(Reservation::class)->findReservationsByOwner($user);
         $myAdverts = $entityManager->getRepository(Advert::class)->findBy(['owner' => $user]);
 
+
+        $now = new \DateTime();
         // Fonction de tri
-        $sortFunction = function ($a, $b) {
-            $now = new \DateTime();
-            if ($a->getDepartureDate() < $now && $b->getDepartureDate() < $now) {
-                return $b->getDepartureDate() <=> $a->getDepartureDate();
+        $sortFunction = function ($a, $b) use ($now) {
+            // Si les deux sont en cours, on trie par date d'arrivée croissante
+            if ($a->getArrivalDate() <= $now && $a->getDepartureDate() > $now &&
+                $b->getArrivalDate() <= $now && $b->getDepartureDate() > $now) {
+                return $a->getArrivalDate() <=> $b->getArrivalDate();
             }
+            
+            // Si A est en cours et pas B, A vient en premier
+            if ($a->getArrivalDate() <= $now && $a->getDepartureDate() > $now) {
+                return -1;
+            }
+            
+            // Si B est en cours et pas A, B vient en premier
+            if ($b->getArrivalDate() <= $now && $b->getDepartureDate() > $now) {
+                return 1;
+            }
+            
+            // Si les deux sont à venir, on trie par date d'arrivée croissante
             if ($a->getArrivalDate() > $now && $b->getArrivalDate() > $now) {
                 return $a->getArrivalDate() <=> $b->getArrivalDate();
             }
-            if ($a->getArrivalDate() <= $now && $a->getDepartureDate() >= $now) {
-                return -1;
+        
+            // Si les deux sont terminées, on trie par date de départ décroissante
+            if ($a->getDepartureDate() < $now && $b->getDepartureDate() < $now) {
+                return $b->getDepartureDate() <=> $a->getDepartureDate();
             }
-            if ($b->getArrivalDate() <= $now && $b->getDepartureDate() >= $now) {
+        
+            // Si A est terminée et B est à venir, B vient en premier
+            if ($a->getDepartureDate() < $now && $b->getArrivalDate() > $now) {
                 return 1;
             }
-            return 0;
+            
+            // Si B est terminée et A est à venir, A vient en premier
+            if ($b->getDepartureDate() < $now && $a->getArrivalDate() > $now) {
+                return -1;
+            }
+        
+            return 0; // Si toutes les autres conditions échouent, considérer qu'ils sont égaux
         };
-
+        
         // Trier les réservations
         usort($myReservations, $sortFunction);
         usort($myAdvertsReservations, $sortFunction);

@@ -162,6 +162,12 @@ class AdvertController extends AbstractController
         $reservationForm->handleRequest($request);
 
         if ($reservationForm->isSubmitted() && $reservationForm->isValid()) {
+
+            // Prix total de la réservation
+            $price = $reservation->getTotalPrice();
+            // Définir le prix pour qu'il soit sauvegardé
+            $reservation->setPrice($price);
+
             // Récupérer les réservations actives pour cette annonce
             $activeReservations = $reservationRepository->findActiveReservationsForAdvert($id);
             $newStartDate = $reservation->getArrivalDate();
