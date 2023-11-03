@@ -35,9 +35,6 @@ class Reservation
     #[ORM\Column(length: 25)]
     private ?string $surname = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $dateOfBirth = null;
-
     #[ORM\Column(length: 100)]
     private ?string $address = null;
 
@@ -49,6 +46,9 @@ class Reservation
 
     #[ORM\Column(length: 25)]
     private ?string $country = null;
+
+    #[ORM\Column]
+    private ?float $price = null;
 
     public function getId(): ?int
     {
@@ -147,18 +147,6 @@ class Reservation
         return $this;
     }
 
-    public function getDateOfBirth(): ?\DateTimeInterface
-    {
-        return $this->dateOfBirth;
-    }
-
-    public function setDateOfBirth(\DateTimeInterface $dateOfBirth): static
-    {
-        $this->dateOfBirth = $dateOfBirth;
-
-        return $this;
-    }
-
     public function getAddress(): ?string
     {
         return $this->address;
@@ -213,6 +201,13 @@ class Reservation
         $interval = $this->arrivalDate->diff($this->departureDate);
         $interval = $interval->d;
         return $price * floatval($interval);
+    }
+
+    public function setPrice(float $price): static
+    {
+        $this->price = $price;
+
+        return $this;
     }
 
     public function validate(ExecutionContextInterface $context, $payload)

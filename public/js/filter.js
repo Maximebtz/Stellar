@@ -53,6 +53,7 @@ document.addEventListener("DOMContentLoaded", function () {
         endDate: endDate,
       })
     );
+
     fetch(url, {
       method: "POST",
       headers: {
@@ -67,6 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
         endDate: endDate,
       }),
     })
+    
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");

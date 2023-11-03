@@ -1,1 +1,29 @@
-{\rtf1}
+
+A faire :
+
+- attention votre justification de texte fait que vous avez des trous entre certains mots, vous pouvez configurer   cela 
+
+- Pour le hashage j'aurais aimé que vous parliez du salt et de son rôle .
+
+- Des parties sontbien trop théoriques : vous n'avez pas mis en place une méthode SCRUM donc il ne faut pas en   parler par exemple 
+ 
+- Le MVC  est trop théorique : il faut aussi utiliser les mots client, serveur , requete htpp et le mettre en   pallication avec des captures d'écran 
+
+- Il manque des élèments dans le SEO (performance, balise meta ...) il faut aussi mettre une capture d'écran quand     c'est possible pour montrer ce que ça donne en application 
+
+- La sécurité est trop théorique 
+
+- Injection sql , j'attends une capture d'écran et une explication d'une resquete préparée
+ 
+- La xss , quel est le role de twig et des contraintes dans les formulaires 
+
+- CSRF, comment fonctionne le token? capture d'écran de sa valeur dans l'inspecteur par exemple
+
+
+Fait :
+
+x Avant de parler du code , il faut parler de la phase de développement (RGPD, SEO, maquettage, modelisation de   données  
+
+x Page 12 "le travail sérieux" . Enlevez ça , un de vos jury n'est pas back end 
+
+x Page d'accueil : ajoutez DWWM et novembre 2023

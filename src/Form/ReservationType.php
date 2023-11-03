@@ -47,10 +47,6 @@ class ReservationType extends AbstractType
                     'placeholder' => 'DeLaForet',
                 ]
             ])
-            ->add('dateOfBirth', DateType::class, [
-                'label' => 'Date de naissance',
-                'widget' => 'single_text',
-            ])
             ->add('address', TextType::class, [
                 'label' => false,
                 'attr' => [
