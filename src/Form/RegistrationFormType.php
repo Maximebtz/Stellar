@@ -18,6 +18,7 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Validator\Constraints\Regex;
 
 
 class RegistrationFormType extends AbstractType
@@ -68,6 +69,13 @@ class RegistrationFormType extends AbstractType
                 'first_options'  => ['label' => 'Password'],
                 'second_options' => ['label' => 'Repeat Password'],
                 'mapped' => false,
+                'constraints' => [
+                    new Regex([
+                        'pattern' => "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/",
+                        'match' => true,
+                        'message' => "Minimum 8 lettres, 1 lettre majuscule, 1 caractère spécial, 1 chiffre"
+                    ])
+                ],
             ])
             ->add('SOME-FAKE-NAME', HoneypotType::class)
             ->add('agreeTerms', CheckboxType::class, [

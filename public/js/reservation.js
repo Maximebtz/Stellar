@@ -167,7 +167,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   /*******Form MultiStep*******/
   let currentStep = 2;
-  
+
   // Fonction pour mettre à jour l'affichage
   function updateStepDisplay() {
     for (let i = 2; i <= 3; i++) {
@@ -206,7 +206,6 @@ document.addEventListener("DOMContentLoaded", function () {
   document
     .getElementById("start-button")
     .addEventListener("click", function (event) {
-      console.log("arrivalDateInput, departureDateInput")
       event.preventDefault();
       document.getElementById("reservationFormContainer").style.display =
         "flex";

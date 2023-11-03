@@ -688,6 +688,15 @@ header .signup:hover {
   display: flex;
   flex-direction: column;
 }
+.wrapper-form .log-content-form li {
+  list-style: none;
+  max-width: 300px;
+  margin: 10px 0;
+  color: red;
+  border-radius: 7px;
+  border: 1px red solid;
+  padding: 10px;
+}
 .wrapper-form .log-content-form input {
   margin-bottom: 20px;
 }

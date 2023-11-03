@@ -1,0 +1,21 @@
+systeme favoris 
+
+ajouter logo favoris sur vignette accueil
+
+picto category 
+
+pas de pagination page accueil 
+
+regex password
+
+x année de naissance à enlever
+
+pdf fcture
+
+prix total reservation qui ne doit pas evoluer en fonction du prix de l'annonce 
+
+signaler annonce 
+
+dashboard admin 
+
+avis APRES dates rservations

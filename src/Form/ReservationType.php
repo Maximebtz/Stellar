@@ -87,6 +87,14 @@ class ReservationType extends AbstractType
         $builder->add('user_id', HiddenType::class, [
             'mapped' => false,
         ]);
+
+        $builder->add('price', HiddenType::class, [
+            'mapped' => false,
+            'label' => false,
+            'attr' => [
+                'name' => 'reservation[price]',
+            ],
+        ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
