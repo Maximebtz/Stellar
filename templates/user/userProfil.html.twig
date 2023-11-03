@@ -154,6 +154,7 @@
               <p>Date d'arrivée : {{ reservation.arrivalString }}</p>
               <p>Date de départ : {{ reservation.departureString }}</p>
               <p>Prix total : {{ reservation.price }}€</p>
+              <a href="{{ path('download_pdf', {'id': reservation.id}) }}" class="btn btn-primary">Télécharger la facture</a>
           </div>
           <div class="right-content">
             {% if reservation.advert.images is not empty %}
@@ -182,6 +183,7 @@
             <p>Date d'arrivée : {{myReservation.arrivalString}}</p>
             <p>Date de départ : {{myReservation.departureString}}</p>
             <p>Prix total : {{myReservation.price}}€</p>
+            <a href="{{ path('download_pdf', {'id': myReservation.id}) }}" class="btn btn-primary">Télécharger la facture</a>
         </div>
         <div class="right-content">
           {% if myReservation.advert.images is not empty %}

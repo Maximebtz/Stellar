@@ -6,9 +6,7 @@ picto category
 
 pas de pagination page accueil
 
-pdf fcture
-
-prix total reservation qui ne doit pas evoluer en fonction du prix de l'annonce 
+pdf facture
 
 signaler annonce 
 

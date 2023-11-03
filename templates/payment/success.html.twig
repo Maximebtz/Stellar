@@ -8,6 +8,8 @@
 <div class="wrapper">
     <h1>Paiement validé !!</h1>
     <br>
+    <a href="{{ path('download_pdf', {'id': reservation.id}) }}" class="btn btn-success">Télécharger la facture</a>
+    <br>
     <a href="{{path('app_home')}}">Retour à la page d'accueil</a>
 </div>
 {% endblock %}

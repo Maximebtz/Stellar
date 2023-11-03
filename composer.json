@@ -11,6 +11,7 @@
         "doctrine/doctrine-bundle": "^2.10",
         "doctrine/doctrine-migrations-bundle": "^3.2",
         "doctrine/orm": "^2.16",
+        "dompdf/dompdf": "^2.0",
         "eo/honeypot-bundle": "^2.1",
         "friendsofsymfony/ckeditor-bundle": "^2.4",
         "geocoder-php/google-maps-provider": "^4.7",
