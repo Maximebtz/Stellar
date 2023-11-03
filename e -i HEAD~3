@@ -1,0 +1,256 @@
+[33mcommit 527902db7cd455ee5e41befad1b1b63cf27d98e6[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m
+Author: Maximebtz <120190748+Maximebtz@users.noreply.github.com>
+Date:   Mon Nov 6 15:41:13 2023 +0100
+
+    Update
+
+[33mcommit ca8808b250c945df3e5888eb8fdb2e6b7ed0596f[m
+Author: Maximebtz <120190748+Maximebtz@users.noreply.github.com>
+Date:   Mon Nov 6 15:38:45 2023 +0100
+
+    New : Section Home Page
+
+[33mcommit 1f62a5adf3facc1d85af0b9115e76d61b6a88657[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Maximebtz <120190748+Maximebtz@users.noreply.github.com>
+Date:   Fri Nov 3 20:16:57 2023 +0100
+
+    Update : PDF + style
+
+[33mcommit c037fdd3631696111f86378fd464fa008beb04d4[m
+Author: Maximebtz <120190748+Maximebtz@users.noreply.github.com>
+Date:   Fri Nov 3 18:56:09 2023 +0100
+
+    Update : Total Price Problem fix
+
+[33mcommit 3a81e54212de521af5791ca68b4530403c346e65[m
+Author: Maximebtz <120190748+Maximebtz@users.noreply.github.com>
+Date:   Fri Nov 3 16:02:00 2023 +0100
+
+    New : Regex Password
+
+[33mcommit 0980ee91021288eadcdc292ace625c5833f7c32d[m
+Author: Maximebtz <120190748+Maximebtz@users.noreply.github.com>
+Date:   Fri Nov 3 14:51:34 2023 +0100
+
+    Update : supp PaymentController.php
+
+[33mcommit aea38750839210c4c3559b4174dbc1bd164bb8ce[m
+Author: Maximebtz <120190748+Maximebtz@users.noreply.github.com>
+Date:   Fri Nov 3 14:05:01 2023 +0100
+
+    update
+
+[33mcommit edcb807f41187a3bbe3a3ac8031dab519abd78b3[m
+Author: Maximebtz <120190748+Maximebtz@users.noreply.github.com>
+Date:   Fri Nov 3 14:03:43 2023 +0100
+
+    Update
+
+[33mcommit d76b039c7853f395627b93b57d9791ce2e6e5b57[m
+Author: Maximebtz <120190748+Maximebtz@users.noreply.github.com>
+Date:   Fri Nov 3 14:02:36 2023 +0100
+
+    update
+
+[33mcommit 4fe826a564d1aff0a1da422dc099cca077220231[m
+Author: Maximebtz <120190748+Maximebtz@users.noreply.github.com>
+Date:   Fri Nov 3 13:59:33 2023 +0100
+
+    update
+
+[33mcommit 71664595c428fa154cc206e4cef8b1d44284709c[m
+Author: Maximebtz <120190748+Maximebtz@users.noreply.github.com>
+Date:   Fri Nov 3 13:56:56 2023 +0100
+
+    Update gitignore
+
+[33mcommit b505672d1d799e158028c214128a1649200ead4f[m
+Author: Maximebtz <120190748+Maximebtz@users.noreply.github.com>
+Date:   Fri Nov 3 13:56:00 2023 +0100
+
+    Update : gitignore
+
+[33mcommit 03d2bbe3faf0428a46240dc749c73bb5590e4e8a[m
+Author: Maximebtz <120190748+Maximebtz@users.noreply.github.com>
+Date:   Fri Nov 3 13:54:21 2023 +0100
+
+    Update : .gitignore
+
+[33mcommit e2dd7ca0b463cf9c5d8c5997123d71d06e5281f3[m
+Author: Maximebtz <120190748+Maximebtz@users.noreply.github.com>
+Date:   Fri Nov 3 13:47:58 2023 +0100
+
+    Update
+
+[33mcommit fbd086e517e80ca88eb437c2367d36026fb3a391[m
+Merge: 8ad5e42 a941799
+Author: Maximebtz <120190748+Maximebtz@users.noreply.github.com>
+Date:   Thu Nov 2 17:38:48 2023 +0100
+
+    Merge branch 'main' of https://github.com/Maximebtz/Stellar
+
+[33mcommit a941799c949d8f798520293faff27d7fba5d7729[m
+Author: Maximebtz <120190748+Maximebtz@users.noreply.github.com>
+Date:   Thu Nov 2 17:36:04 2023 +0100
+
+    Update README.md
+
+[33mcommit ee3c1002b762ef8ec829c026b02665dff3e36b7f[m
+Author: Maximebtz <120190748+Maximebtz@users.noreply.github.com>
+Date:   Thu Nov 2 17:14:50 2023 +0100
+
+    Update README.md
+
+[33mcommit 8ad5e4213c784b0535134c572c2718372cd6936a[m
+Author: Maximebtz <120190748+Maximebtz@users.noreply.github.com>
+Date:   Thu Nov 2 17:14:02 2023 +0100
+
+    Update
+
+[33mcommit 179988839868abae301014818862a1cf4656a34d[m
+Author: Maximebtz <120190748+Maximebtz@users.noreply.github.com>
+Date:   Wed Nov 1 13:23:35 2023 +0100
+
+    Update : Stripe ok & Profil page update
+
+[33mcommit 135c4c9bed931f5a4b8ab5a1cebe5e0604b3c3a0[m
+Author: Maximebtz <120190748+Maximebtz@users.noreply.github.com>
+Date:   Tue Oct 31 12:00:39 2023 +0100
+
+    Update cookies + starting stripe
+
+[33mcommit 32d8fc9348378dc34dd19ff926cb6ce8b232e333[m
+Author: Maximebtz <120190748+Maximebtz@users.noreply.github.com>
+Date:   Mon Oct 30 17:47:02 2023 +0100
+
+    New : Update Réservation formulaires
+
+[33mcommit 16a678ba0269734d45458b04ef79622a7efcd88b[m
+Author: Maximebtz <120190748+Maximebtz@users.noreply.github.com>
+Date:   Fri Oct 27 15:22:37 2023 +0200
+
+    New : flash for deleted account
+
+[33mcommit f746bf581b43febb2381e35ea46f7a30e4aa1f1c[m
+Author: Maximebtz <120190748+Maximebtz@users.noreply.github.com>
+Date:   Wed Oct 25 19:21:28 2023 +0200
+
+    Update
+
+[33mcommit 4c62049d6a57bdba559a0f986f2dc81931e5fa85[m
+Author: Maximebtz <120190748+Maximebtz@users.noreply.github.com>
+Date:   Wed Oct 25 19:15:11 2023 +0200
+
+    update
+
+[33mcommit 85e514ab922b1a739c639de4e790e9cf7f1d66b3[m
+Author: Maximebtz <120190748+Maximebtz@users.noreply.github.com>
+Date:   Wed Oct 25 19:07:53 2023 +0200
+
+    Update : Background login & signup
+
+[33mcommit c322d72e2c2c08bc0c2c61359777a7c31d23659d[m
+Author: Maximebtz <120190748+Maximebtz@users.noreply.github.com>
+Date:   Wed Oct 25 17:50:12 2023 +0200
+
+    New :  - Remove user
+    - Add seen advert
+    - Add my advert reservations
+
+[33mcommit 73d0b82b17c0b01b724260930d08995483564c4e[m
+Author: Maximebtz <120190748+Maximebtz@users.noreply.github.com>
+Date:   Tue Oct 24 16:47:22 2023 +0200
+
+    Update : Page de profil
+
+[33mcommit 78dc69846f8e2c4f3c2d071169705a4907ffd74c[m
+Author: Maximebtz <120190748+Maximebtz@users.noreply.github.com>
+Date:   Mon Oct 23 17:46:41 2023 +0200
+
+    New : ProfilPager
+
+[33mcommit 4ea7a105773ff8188bf2f1f23f7c19007bc86a24[m
+Author: Maximebtz <120190748+Maximebtz@users.noreply.github.com>
+Date:   Sat Oct 21 15:30:38 2023 +0200
+
+    New 3d Stuff in home page
+
+[33mcommit 13e6d5eedf44535938be47d33d0b317b535771b7[m
+Author: Maximebtz <120190748+Maximebtz@users.noreply.github.com>
+Date:   Fri Oct 20 18:26:08 2023 +0200
+
+    Page d’accueil ok
+
+[33mcommit 15dc2ccafb8babf6778d2d2d01027eeecde45d51[m
+Author: Maximebtz <120190748+Maximebtz@users.noreply.github.com>
+Date:   Thu Oct 19 17:04:40 2023 +0200
+
+    Update css
+
+[33mcommit c6d84d5a7100d26a272a26d113bc127a95f88376[m
+Author: Maximebtz <120190748+Maximebtz@users.noreply.github.com>
+Date:   Thu Oct 19 16:14:30 2023 +0200
+
+    Updade : Page Détail complètement responsive
+
+[33mcommit cdc7c798081ea0da5437c9f9cde3a5f434f44d76[m
+Author: Maximebtz <120190748+Maximebtz@users.noreply.github.com>
+Date:   Thu Oct 19 13:28:14 2023 +0200
+
+    Update Responsive
+
+[33mcommit d87c47b1116936ee07c3f13368fa6c2ef649b94b[m
+Author: Maximebtz <120190748+Maximebtz@users.noreply.github.com>
+Date:   Wed Oct 18 18:04:15 2023 +0200
+
+    Fixed : Bug pour l'edit
+
+[33mcommit be8905d8cb8c75ca16ee599ade98187fddfdf52c[m
+Author: Maximebtz <120190748+Maximebtz@users.noreply.github.com>
+Date:   Wed Oct 18 17:56:00 2023 +0200
+
+    Fixed : the checkbox problem been solved
+
+[33mcommit d82ea5196ed9153440e66d90ccc50fb23bde4f47[m
+Author: Maximebtz <120190748+Maximebtz@users.noreply.github.com>
+Date:   Wed Oct 18 17:43:07 2023 +0200
+
+    Style range price
+
+[33mcommit 293e01506178b5803aa37260a31cda72e3b44a01[m
+Author: Maximebtz <120190748+Maximebtz@users.noreply.github.com>
+Date:   Wed Oct 18 17:01:48 2023 +0200
+
+    Update : Maps, Calendar in detail page and filters in Home page OK
+
+[33mcommit f8aa140bc986226bcc366c17a1059ccd5bf783c6[m
+Author: Maximebtz <120190748+Maximebtz@users.noreply.github.com>
+Date:   Wed Oct 18 12:02:04 2023 +0200
+
+    New : map on detail page
+
+[33mcommit eb428a0601733749097032c540326d22502fb18f[m
+Author: Maximebtz <120190748+Maximebtz@users.noreply.github.com>
+Date:   Tue Oct 17 16:44:59 2023 +0200
+
+    New : Tart au citron not ok
+
+[33mcommit 5eb37ff95d098bc3241d5cd363a2a8e54465f230[m
+Author: Maximebtz <120190748+Maximebtz@users.noreply.github.com>
+Date:   Tue Oct 17 12:11:24 2023 +0200
+
+    Update : Je peux  pas supprimer d'annonces si il y a des résa.
+
+[33mcommit 35c2dbbd509faf4af5543e5d32e239bf2e54ef0a[m
+Author: Maximebtz <120190748+Maximebtz@users.noreply.github.com>
+Date:   Mon Oct 16 16:53:44 2023 +0200
+
+    Footer ok
+
+[33mcommit 22dc47413e2355093ab1b572abd4e65fa33683bb[m
+Author: Maximebtz <120190748+Maximebtz@users.noreply.github.com>
+Date:   Mon Oct 16 16:20:20 2023 +0200
+
+    Update : Calendar, footer & debug
+
+[33mcommit 315de
