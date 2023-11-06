@@ -15,7 +15,7 @@
 
     async function initMap() {
         // The location of the init map
-        const position = { lat: 37.787994, lng: -122.407437 };
+        const position = { lat: 40.7142700, lng: -74.0059700 };
         // Request needed libraries.
         const { Map } = await google.maps.importLibrary("maps");
         // Librairie pour modifier les marqueurs
@@ -24,7 +24,7 @@
 
         // Nouvelle map est ses spécificités
         map = new Map(document.getElementById("map"), {
-            zoom: 11,
+            zoom: 3,
             minZoom: 3,
             center: position,
             mapId: "DEMO_MAP_ID",
@@ -131,22 +131,67 @@
 <div id="loading-screen" style="position: fixed; top: 0; width: 100%; height: 100%; z-index: 9999;">
     <object id="my-svg" class="hidden" type="image/svg+xml" data="{{asset('img/Untitled.svg')}}"></object>
 </div>
-{# {% for flash_error in app.flashes('success_user_delete') %}
-<div class="success-alert">
-    <div class="success-user-delete" role="alert">
-        <span class="close">
-            <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor" class="bi bi-x"
-                viewBox="0 0 16 16">
-                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 
-                                    8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
-            </svg>
-        </span>
-        {{ flash_error }}
-    </div>
-</div>
-{% endfor %} #}
 <div class="wrapper">
     <div class="wrapper-home">
+        <section class="container">
+            <div class="title">
+                <h1>Stellar</h1>
+                <q>
+                    Trouvez un hébergement atypique avec <span>Stellar</span> ! <br>
+                    C'est ici que l'aventure commence !
+                </q>
+                <div class="avis-wrap">
+                    <div class="avis-container">
+                        <div class="avis">
+                            <h4>Caroline M.</h4>
+                            <span class="date-avis">12 Mars 2023</span>
+                            <q>Un service client au top, toujours disponible quand j'en ai besoin!</q>
+                        </div>
+                        <div class="avis">
+                            <h4>François G.</h4>
+                            <span class="date-avis">20 Avril 2023</span>
+                            <q>La réservation a été simple et rapide, expérience utilisateur impeccable.</q>
+                        </div>
+                        <div class="avis">
+                            <h4>Laura S.</h4>
+                            <span class="date-avis">5 Mai 2023</span>
+                            <q>J'ai adoré la facilité d'utilisation du site, tout est bien pensé et intuitif.</q>
+                        </div>
+                        <div class="avis">
+                            <h4>Caroline M.</h4>
+                            <span class="date-avis">12 Mars 2023</span>
+                            <q>Un service client au top, toujours disponible quand j'en ai besoin!</q>
+                        </div>
+                        <div class="avis">
+                            <h4>François G.</h4>
+                            <span class="date-avis">20 Avril 2023</span>
+                            <q>La réservation a été simple et rapide, expérience utilisateur impeccable.</q>
+                        </div>
+                        <div class="avis">
+                            <h4>Laura S.</h4>
+                            <span class="date-avis">5 Mai 2023</span>
+                            <q>J'ai adoré la facilité d'utilisation du site, tout est bien pensé et intuitif.</q>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <svg width="513" height="701" viewBox="0 0 513 701" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <clipPath id="shapeClip">
+                        <rect x="14.5537" y="189.038" width="266.81" height="177.873" rx="7"
+                            transform="rotate(-45 14.5537 189.038)" />
+                        <rect x="166.066" y="574.6" width="266.81" height="177.873" rx="7"
+                            transform="rotate(-45 166.066 574.6)" />
+                        <rect x="0.544922" y="471.584" width="266.81" height="177.873" rx="7"
+                            transform="rotate(-45 0.544922 471.584)" />
+                        <rect x="197.7" y="274.429" width="266.81" height="177.873" rx="7"
+                            transform="rotate(-45 197.7 274.429)" />
+                    </clipPath>
+                </defs>
+                <image xlink:href="{{asset('img/illustrations/loginbackground.png')}}" x="-500" height="701"
+                    clip-path="url(#shapeClip)" preserveAspectRatio="xMaxYMax slice" />
+            </svg>
+        </section>
         <div class="search-btn-container">
             <div id="searchButton">
                 <span>Click here for filters</span>
@@ -203,7 +248,8 @@
             <div id="grid" class="advert-card-list">
                 {% for advert in adverts %}
                 <div class="advert-card slide-in">
-                    <a href="{{ path('detail_advert', {'slug': advert.slug, 'id': advert.id})}}" class="clickable-card card-click">
+                    <a href="{{ path('detail_advert', {'slug': advert.slug, 'id': advert.id})}}"
+                        class="clickable-card card-click">
                         <figure>
                             {% if advert.images is not empty %}
                             <img src="{{ asset('uploads/' ~ advert.images[0].url) }}" alt="{{ advert.title }} image">
@@ -230,17 +276,18 @@
             </div>
             <div class="pagination">
                 {% for pageNumber in 1..totalPages %}
-                    <a href="{{ path(app.request.attributes.get('_route'), {'page': pageNumber}) }}"
-                       class="{{ pageNumber == page ? 'active' : 'pages' }}">{{ pageNumber }}</a>
+                <a href="{{ path(app.request.attributes.get('_route'), {'page': pageNumber}) }}"
+                    class="{{ pageNumber == page ? 'active' : 'pages' }}">{{ pageNumber }}</a>
                 {% endfor %}
             </div>
         </div>
+        </section>
         <div class="map-popup-container" id="map-popup-container">
 
         </div>
-        <div class="map">
+        {# <div class="map">
             <div id="map"></div>
-        </div>
+        </div> #}
     </div>
 </div>
 {% endblock %}

@@ -101,6 +101,30 @@ pre {
   width: 26px;
 }
 
+.pdf-btn {
+  margin-top: 10px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  width: -moz-max-content;
+  width: max-content;
+  padding: 0 10px 0 5px;
+  border-radius: 7px;
+  background: var(--gradient-p-b);
+  color: var(--white);
+  transition: all 0.2s ease-in-out;
+}
+.pdf-btn svg.bi.bi-file-earmark-pdf {
+  height: 22px;
+  width: 22px;
+}
+.pdf-btn:hover {
+  background: var(--very-light-purple);
+  color: var(--black);
+  border: 1px solid var(--black);
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -383,6 +407,120 @@ header .signup:hover {
   gap: 20px;
   flex-direction: column;
 }
+.wrapper-home .container {
+  position: relative;
+  height: 600px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+  min-height: calc(100vh - 117px);
+  height: -moz-max-content;
+  height: max-content;
+}
+.wrapper-home .container .title {
+  max-width: 500px;
+  overflow: hidden;
+}
+.wrapper-home .container .title .avis-wrap {
+  position: relative;
+  max-width: 500px;
+  width: 100%;
+  overflow: hidden;
+}
+.wrapper-home .container .title .avis-wrap .avis-container {
+  position: relative;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  animation: defilementAvis 20s linear infinite;
+  width: 1800px;
+}
+.wrapper-home .container .title .avis-wrap .avis-container .avis {
+  display: flex;
+  flex-direction: column;
+  margin: 50px 10px 0;
+  width: 300px;
+  box-sizing: border-box;
+  padding: 15px;
+  border: 1px solid var(--lightgray);
+  border-radius: 7px;
+}
+.wrapper-home .container .title .avis-wrap .avis-container .avis q {
+  font-size: medium;
+  font-style: italic;
+  font-weight: 300;
+  white-space: wrap;
+}
+.wrapper-home .container .title .avis-wrap .avis-container .avis .date-avis {
+  color: #777;
+  margin-bottom: 5px;
+  font-size: smaller;
+}
+.wrapper-home .container .title .avis-wrap::after {
+  content: "";
+  height: 100%;
+  width: 20px;
+  background-image: linear-gradient(to right, rgba(255, 0, 0, 0), var(--white));
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.wrapper-home .container .title .avis-wrap::before {
+  content: "";
+  height: 100%;
+  width: 20px;
+  background-image: linear-gradient(to left, rgba(255, 0, 0, 0), var(--white));
+  position: absolute;
+  left: 0;
+  z-index: 1;
+}
+.wrapper-home .container .title h1 {
+  font-size: 3.5em;
+  font-family: "Pacifico";
+  font-weight: 500;
+}
+.wrapper-home .container .title q {
+  font-size: larger;
+  font-weight: 500;
+  color: var(--darkgray);
+}
+.wrapper-home .container .title q span {
+  font-family: "Pacifico";
+  font-size: larger;
+}
+.wrapper-home .container svg rect {
+  animation: fadeIn 1s ease forwards;
+}
+.wrapper-home .container svg rect:nth-child(1) {
+  animation-delay: 0s;
+}
+.wrapper-home .container svg rect:nth-child(2) {
+  animation-delay: 2s;
+}
+.wrapper-home .container svg rect:nth-child(3) {
+  animation-delay: 1s;
+}
+.wrapper-home .container svg rect:nth-child(4) {
+  animation-delay: 3s;
+}
+@keyframes defilementAvis {
+  0% {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-750px);
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
 .wrapper-home .search-btn-container {
   width: 100%;
   display: flex;
@@ -401,10 +539,11 @@ header .signup:hover {
   align-items: center;
   justify-content: space-between;
   border: var(--lightgray) 2px solid;
-  border-radius: 7px;
+  border-radius: 25px;
   box-shadow: var(--boxshadow) 0 0 25px;
   background-color: var(--white);
   transition: all 0.2s ease-in-out;
+  margin-bottom: 20px;
 }
 .wrapper-home .search-btn-container #searchButton:hover {
   transform: scale(1.02);
@@ -887,7 +1026,7 @@ header .signup:hover {
   max-width: 250px;
   border-radius: 7px;
   transition: all 0.4s ease-in-out;
-  max-height: 181px;
+  max-height: 231px;
 }
 .wrapper-detail .wrapper-detail-user .fade .reservation .right-content img {
   -o-object-fit: cover;

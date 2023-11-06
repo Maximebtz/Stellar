@@ -1,46 +1,50 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <title>Facture Réservation</title>
-    <link rel='stylesheet' href='{{ asset('PDFStyle/pdf.css')}}'>
+    <link rel='stylesheet' href='{{ asset(' /styles/PDFStyle/pdf.css')}}'>
 </head>
+
 <body>
     <div class="container">
-        <div class="invoice-header">
-            <h1>Facture de Réservation</h1>
+        <div class="page-header">
+            <h1>Stellar</h1>
         </div>
-        <div class="invoice-details">
-            <table>
-                <tr>
-                    <th>Titre de l'annonce:</th>
-                    <td>{{ reservation.advert.title }}</td>
-                </tr>
-                <tr>
-                    <th>Nom de l'utilisateur:</th>
-                    <td>{{ reservation.user.username }}</td>
-                </tr>
-                <tr>
-                    <th>Email:</th>
-                    <td>{{ reservation.user.email }}</td>
-                </tr>
-                <tr>
-                    <th>Date d'arrivée:</th>
-                    <td>{{ reservation.arrivalDate|date('d/m/Y') }}</td>
-                </tr>
-                <tr>
-                    <th>Date de départ:</th>
-                    <td>{{ reservation.departureDate|date('d/m/Y') }}</td>
-                </tr>
-                <tr>
-                    <th>Prix total:</th>
-                    <td>{{ reservation.price }}€</td>
-                </tr>
+
+        <div class="facture">
+
+            <div class="invoice-header">
+                <h1>Facture de Réservation</h1>
+            </div>
+            <table class="customTable">
+                <thead>
+                    <tr>
+                        <th>Titre de l'annonce:</th>
+                        <th>Nom de l'utilisateur:</th>
+                        <th>Email:</th>
+                        <th>Date d'arrivée:</th>
+                        <th>Date de départ:</th>
+                        <th>Prix</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ reservation.advert.title }}</td>
+                        <td>{{ reservation.user.username }}</td>
+                        <td>{{ reservation.user.email }}</td>
+                        <td>{{ reservation.arrivalDate|date('d/m/Y') }}</td>
+                        <td>{{ reservation.departureDate|date('d/m/Y') }}</td>
+                        <td>{{ reservation.price }}€</td>
+                    </tr>
+                </tbody>
             </table>
-        </div>
-        <div class="invoice-footer">
-            <p>Merci pour votre confiance et à bientôt !</p>
+            <div class="invoice-footer">
+                <p>Merci pour votre confiance et à bientôt !</p>
+            </div>
         </div>
     </div>
 </body>
+
 </html>
