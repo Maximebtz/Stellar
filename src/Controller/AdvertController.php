@@ -46,8 +46,8 @@ class AdvertController extends AbstractController
         ]);
     }
 
-    #[Route('/nouvelle-propriete', name: 'new_advert')]
-    #[Route('/modification/{slug}/{id}', name: 'edit_advert')]
+    #[Route('/user/nouvelle-propriete', name: 'new_advert')]
+    #[Route('/owner/modification/{slug}/{id}', name: 'edit_advert')]
     #[IsGranted('ROLE_USER')]
     public function new_edit(Advert $advert = null, Request $request, FileUploader $fileUploader, CategoryRepository $categoryRepository, AccessoryRepository $accessoryRepository, LodgeRepository $lodgeRepository): Response
     {
@@ -148,6 +148,7 @@ class AdvertController extends AbstractController
         // Récupérer l'utilisateur connecté
         $user = $security->getUser();
         $isLoggedIn = $user ? true : false;
+
         if (!$user) {
             $session->set('referer', $request->getRequestUri());
         }
@@ -155,6 +156,7 @@ class AdvertController extends AbstractController
         // Créer une nouvelle réservation associée à l'annonce
         $reservation = new Reservation();
         $reservation->setAdvert($advert)->setUser($user);
+        $reservation->setStatus('pending');
 
         // Créer le formulaire de réservation
         $reservationForm = $this->createForm(ReservationType::class, $reservation);
@@ -187,8 +189,10 @@ class AdvertController extends AbstractController
             } else {
                 $entityManager->persist($reservation);
                 $entityManager->flush();
+                if ($reservation->getStatus() === 'pending') {
                 // Redirige vers le paiement
                 return $this->redirectToRoute('payement_stripe', ['id' => $reservation->getId()]);
+                }
             }
         }
 

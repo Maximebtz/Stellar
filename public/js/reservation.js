@@ -86,6 +86,7 @@ document.addEventListener("DOMContentLoaded", function () {
             arrivalDateInput.getDate().toString().padStart(2, "0");
           $('[name="reservation[arrivalDate]"]').val(formattedDate); // Mettre à jour la valeur du champ d'arrivée
         }
+        
         // Vérifier si departureDate est définie avant de l'utiliser
         if (departureDateInput) {
           // Formatage de la date au format "yyyy-MM-dd"

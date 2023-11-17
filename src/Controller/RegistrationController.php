@@ -35,7 +35,14 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // encode the plain password
+
+            // Condition, si le Honey pot n'est pas vide, juste rediriger vers l'accueil 
+            if (!empty($form->get('age')->getData())) {
+                // Rediriger comme si ça avait fonctionné pour leurrer le bot
+                return $this->redirectToRoute('app_home');
+            }
+
+            // Hasher le mot de passe 
             $user->setPassword(
                 $userPasswordHasher->hashPassword(
                     $user,
@@ -43,11 +50,33 @@ class RegistrationController extends AbstractController
                 )
             );
 
+            // Hasher un nouveau mot de passe pour un utilisateur
+            $password = 'user_password';
+            $hash = password_hash($password, PASSWORD_DEFAULT);
+
+            // Stocker ce hash dans la base de données à la place du mot de passe
+            // ...
+
+            // Au moment de la connexion de l'utilisateur, vérifier le mot de passe fourni avec le hash stocké
+            $userProvidedPassword = 'user_password'; // Le mot de passe que l'utilisateur a soumis via un formulaire
+
+            // Supposer que $storedHash est le hash que tu as récupéré de la base de données
+            $storedHash = $hash;
+
+            // Vérifier le mot de passe
+            if (password_verify($userProvidedPassword, $storedHash)) {
+                // Le mot de passe est correct
+            } else {
+                // Le mot de passe est incorrect
+            }
+
             $entityManager->persist($user);
             $entityManager->flush();
 
             // generate a signed url and email it to the user
-            $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
+            $this->emailVerifier->sendEmailConfirmation(
+                'app_verify_email',
+                $user,
                 (new TemplatedEmail())
                     ->from(new Address('stellar@gmail.com', 'Stellar'))
                     ->to($user->getEmail())

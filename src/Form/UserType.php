@@ -71,9 +71,7 @@ class UserFormType extends AbstractType
                 'second_options' => ['label' => 'Repeat Password'],
                 'mapped' => false,
             ])
-            ->add('fromage', HoneypotType::class, [
-                
-            ]);
+            ->add('age', HoneypotType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

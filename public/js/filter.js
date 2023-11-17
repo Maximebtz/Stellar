@@ -1,30 +1,11 @@
 /****Filter Bar****/
 document.addEventListener("DOMContentLoaded", function () {
-  function toggleSearchPopup() {
-    const popup = document.getElementById("searchPopup");
-    if (popup.style.display === "flex") {
-      popup.style.display = "none";
-    } else {
-      popup.style.display = "flex";
-    }
-  }
-
-  const searchButton = document.getElementById("searchButton");
-  const searchPopup = document.getElementById("searchPopup");
-
-  searchButton.addEventListener("click", function (event) {
-    event.stopPropagation(); // Éviter que le clic ne se propage et ferme immédiatement la popup
-    toggleSearchPopup();
-  });
-
-  document.addEventListener("click", function (event) {
-    if (
-      !searchPopup.contains(event.target) &&
-      !searchButton.contains(event.target)
-    ) {
-      searchPopup.style.display = "none"; // Fermer la popup
-    }
-  });
+  document
+    .getElementById("searchButton")
+    .addEventListener("click", function () {
+      const popup = document.getElementById("searchPopup");
+      popup.style.display = popup.style.display === "none" ? "flex" : "none";
+    });
 
   // Fonction pour appliquer les filtres
   function applyFilters() {
@@ -35,7 +16,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const countryTags = Array.from(
       document.querySelectorAll("#countryTags .tag")
     ).map((tag) => tag.innerText);
-    const priceRange = document.getElementById("drag");
     const startDate = document.getElementById("startDate").value;
     const endDate = document.getElementById("endDate").value;
     const minPrice = document.getElementById("minPrice").value;
@@ -68,7 +48,6 @@ document.addEventListener("DOMContentLoaded", function () {
         endDate: endDate,
       }),
     })
-    
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -78,7 +57,6 @@ document.addEventListener("DOMContentLoaded", function () {
       .then((data) => {
         console.log("Data received from server:", data);
         console.log(url);
-
         // Appeler la fonction pour mettre à jour les annonces sur la page
         updateAdverts(data);
       })

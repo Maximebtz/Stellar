@@ -1,10 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Anton&family=Pacifico&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 
 //************** Var **************//
+
 :root {
     --very-light-purple: #fffbff;
     --light-purple: #A12DB4;
@@ -289,10 +289,6 @@ header {
         align-items: center;
         position: relative;
 
-        a {
-            margin-right: 10px;
-        }
-
         #profil-picture {
             width: 56px;
             height: 56px;
@@ -337,6 +333,8 @@ header {
             a {
                 color: var(--black);
                 text-decoration: none;
+                width: 100%;
+                height: max-content;
             }
 
             li {
@@ -419,6 +417,7 @@ header {
         text-decoration: none;
         cursor: pointer;
         transition: all .2s ease-in-out;
+        margin-right: 10px;
 
         &:hover {
             transform: scale(1.02);
@@ -501,17 +500,17 @@ header {
 
     .container {
         position: relative;
-        height: 600px;
         display: flex;
-        justify-content: space-around;
+        justify-content: center;
         align-items: center;
         flex-wrap: wrap;
         width: 100%;
         min-height: calc(100vh - 117px);
         height: max-content;
+        user-select: none;
+        gap: 15%;
 
         .title {
-            max-width: 500px;
             overflow: hidden;
 
             .avis-wrap {
@@ -525,7 +524,7 @@ header {
                     white-space: nowrap;
                     display: flex;
                     align-items: center;
-                    animation: defilementAvis 20s linear infinite;
+                    animation: defilementAvis 50s linear infinite;
                     width: calc(300px * 6);
 
                     .avis {
@@ -542,7 +541,7 @@ header {
                             font-size: medium;
                             font-style: italic;
                             font-weight: 300;
-                            white-space: wrap;
+                            white-space: normal;
                         }
 
                         .date-avis {
@@ -576,15 +575,21 @@ header {
 
 
             h1 {
-                font-size: 3.5em;
+                font-size: 5em;
                 font-family: 'Pacifico';
                 font-weight: 500;
+
+                a {
+                    color: var(--black);
+                    text-decoration: none;
+                }
             }
 
             q {
-                font-size: larger;
+                font-size: 1.5em;
                 font-weight: 500;
                 color: var(--darkgray);
+
                 span {
                     font-family: 'Pacifico';
                     font-size: larger;
@@ -593,24 +598,41 @@ header {
         }
 
         svg {
-            rect {
-                animation: fadeIn 1s ease forwards;
+            width: 32%;
+
+            clipPath {
+                -webkit-transform-origin: center;
+                transform-origin: center;
+                -webkit-animation: scale-in-ver-center 2s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+                animation: scale-in-ver-center 2s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
             }
 
-            rect:nth-child(1) {
-                animation-delay: 0s;
+            @-webkit-keyframes scale-in-ver-center {
+                0% {
+                    -webkit-transform: rotate(-45deg);
+                    transform: rotate(-45deg);
+                    opacity: 0;
+                }
+
+                100% {
+                    -webkit-transform: rotate(0);
+                    transform: rotate(0);
+                    opacity: 1;
+                }
             }
 
-            rect:nth-child(2) {
-                animation-delay: 2s;
-            }
+            @keyframes scale-in-ver-center {
+                0% {
+                    -webkit-transform: rotate(-45deg);
+                    transform: rotate(-45deg);
+                    opacity: 0;
+                }
 
-            rect:nth-child(3) {
-                animation-delay: 1s;
-            }
-
-            rect:nth-child(4) {
-                animation-delay: 3s;
+                100% {
+                    -webkit-transform: rotate(0);
+                    transform: rotate(0);
+                    opacity: 1;
+                }
             }
         }
     }
@@ -624,17 +646,6 @@ header {
             transform: translateX(calc(-250px * 3));
         }
     }
-
-    @keyframes fadeIn {
-        from {
-            opacity: 0;
-        }
-
-        to {
-            opacity: 1;
-        }
-    }
-
 
     .search-btn-container {
         width: 100%;
@@ -3567,6 +3578,16 @@ footer {
 
     //************** wrapper **************//
     .wrapper {
+        .wrapper-home {
+            .container {
+                svg {
+                    width: 100%;
+                    height: 100%;
+                    padding: 40px 0 20px 0;
+                }
+            }
+        }
+
         .wrapper-detail {
             .wrapper-detail-user {
                 .profil-section {
@@ -3575,6 +3596,29 @@ footer {
                     align-items: center;
                     gap: 3em;
                     padding: 60px 0;
+                }
+
+                .stats-counter {
+                    transform: translateX(-9px);
+                }
+
+                .fade {
+                    .reservation {
+                        flex-direction: column-reverse;
+
+
+                        h3 {
+                            padding-top: 15px;
+                        }
+
+                        .right-content {
+                            max-width: none;
+
+                            img {
+                                width: 100% !important;
+                            }
+                        }
+                    }
                 }
             }
 

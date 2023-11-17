@@ -42,10 +42,15 @@ class UserController extends AbstractController
         $user = $security->getUser();
 
         $numberOfAdverts = $entityManager->getRepository(Advert::class)->count(['owner' => $user]);
-        $numberOfReservations = $entityManager->getRepository(Reservation::class)->count(['user' => $user]);
-        $numberOfOwnerReservations = $entityManager->getRepository(Reservation::class)->numberOfOwnerReservations($user);
         $myReservations = $entityManager->getRepository(Reservation::class)->findBy(['user' => $user]);
+        $numberOfReservations = $entityManager->getRepository(Reservation::class)->count(['user' => $user]);
+
+        // Chercher le nombre d'annonces d'un propriétaire qui sont reservée dans ReservationRepository
+        $numberOfOwnerAdvertReservations = $entityManager->getRepository(Reservation::class)->numberOfOwnerAdvertReservations($user);
+
         $myAdvertsReservations = $entityManager->getRepository(Reservation::class)->findReservationsByOwner($user);
+
+
         $myAdverts = $entityManager->getRepository(Advert::class)->findBy(['owner' => $user]);
 
 
@@ -99,7 +104,7 @@ class UserController extends AbstractController
             'user' => $user,
             'numberOfAdverts' => $numberOfAdverts,
             'numberOfReservations' => $numberOfReservations,
-            'numberOfOwnerReservations' => $numberOfOwnerReservations,
+            'numberOfOwnerAdvertReservations' => $numberOfOwnerAdvertReservations,
             'myReservations' => $myReservations,
             'myAdverts' => $myAdverts,
             'myAdvertsReservations' => $myAdvertsReservations

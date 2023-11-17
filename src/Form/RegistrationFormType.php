@@ -26,28 +26,7 @@ class RegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            // ->add('avatar', FileType::class, [
-            //     'multiple' => false,
-            //     'label' => "Photo de profil",
-            //     'attr' => [
-            //         'class' => 'image-input',
-            //     ],
-            //     'mapped' => false,
-            //     'required' => false,
-            //     'constraints' => [
-            //         new All([
-            //             new File([
-            //                 'mimeTypes' => [
-            //                     'image/jpeg',
-            //                     'image/jpg',
-            //                     'image/png',
-            //                     'image/webp',
-            //                 ],
-            //                 'mimeTypesMessage' => 'Please upload a valid image document',
-            //             ])
-            //         ])
-            //     ],
-            // ])
+
             ->add('email', EmailType::class, [
                 'attr' => [
                     'class' => 'input'
@@ -69,6 +48,7 @@ class RegistrationFormType extends AbstractType
                 'first_options'  => ['label' => 'Password'],
                 'second_options' => ['label' => 'Repeat Password'],
                 'mapped' => false,
+
                 'constraints' => [
                     new Regex([
                         'pattern' => "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/",
@@ -76,8 +56,9 @@ class RegistrationFormType extends AbstractType
                         'message' => "Minimum 8 lettres, 1 lettre majuscule, 1 caractère spécial, 1 chiffre"
                     ])
                 ],
+                
             ])
-            ->add('SOME-FAKE-NAME', HoneypotType::class)
+            ->add('age', HoneypotType::class)
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
                 'label' => false,
@@ -96,3 +77,4 @@ class RegistrationFormType extends AbstractType
         ]);
     }
 }
+

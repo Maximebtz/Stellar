@@ -71,14 +71,20 @@ class ReservationRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    public function numberOfOwnerReservations($ownerId)
+    // Nombre d'annonces réservées par un client d'un proriétaire
+    public function numberOfOwnerAdvertReservations($ownerId)
     {
         return $this->createQueryBuilder('r')
-            ->select('COUNT(DISTINCT r.advert)')
+            // Compter le nombre d'annonces
+            ->select('COUNT(r.advert)')
+            // Joindre la table Advert
             ->innerJoin('r.advert', 'a')
-            ->where('a.owner = :ownerId')
+            // Chercher les annonces où id du user est égal à l'id du propriétaire
+            ->where('a.owner = :ownerId') 
+            // Assigne $ownerId au paramètre :ownerId dans la condition ->where
             ->setParameter('ownerId', $ownerId)
             ->getQuery()
+            // Retourne un resultat unique
             ->getSingleScalarResult();
     }
 }

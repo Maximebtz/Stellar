@@ -233,51 +233,54 @@
           </span>
           <div id="calendar-and-detail">
             {% if isLoggedIn %}
-            {# Prix de la nuit #}
-            <p class="night-price">
-              <b>{{ advert.price }}€</b>/Nuits
-            </p>
-
-            {# Aperçu des dates choisies #}
-            <div class="dates">
-              <div class="date">
-                <p>Arrivée :</p>
-                <input class="date-span" type="date" id="arrivalDate" name="reservation[arrivalDate]" disabled />
-              </div>
-              <div class="date">
-                <p>Départ :</p>
-                <input class="date-span" type="date" id="departureDate" name="reservation[departureDate]" disabled />
-              </div>
-            </div>
-
-            {# Calendrier #}
-            <div id="calendar" data-advert-id="{{ advert.id }}" data-advert-id="{{ advert.id }}"
-              data-reserved-dates="{{ reservedDates|json_encode|e('html_attr') }}"></div>
-            <div id="alert-dates" style="display: none;">
-              <div class="popup-container">
-                <div class="popup-card">
-                  <h2>Alerte</h2>
-                  <p>Vous ne pouvez pas mettre de date antiérieur ou égale à la date d'arrivée</p>
-                  <button id="close-popup">Close</button>
+            <div class="reservation-first-step">
+              {# Prix de la nuit #}
+              <p class="night-price">
+                <b>{{ advert.price }}€</b>/Nuits
+              </p>
+  
+              {# Aperçu des dates choisies #}
+              <div class="dates">
+                <div class="date">
+                  <p>Arrivée :</p>
+                  <input class="date-span" type="date" id="arrivalDate" name="reservation[arrivalDate]" disabled />
+                </div>
+                <div class="date">
+                  <p>Départ :</p>
+                  <input class="date-span" type="date" id="departureDate" name="reservation[departureDate]" disabled />
                 </div>
               </div>
-            </div>
-
-            {# Détail des prix #}
-            <div class="price-details">
-              <div class="price">
-                <p><span id="pricePerNight">{{advert.price}}</span> x <span id="numNights">0</span> nuits = </p><span
-                  class="total-span" id="totalNightPrice">0€</span>
+  
+              {# Calendrier #}
+              <div id="calendar" data-advert-id="{{ advert.id }}"
+                data-reserved-dates="{{ reservedDates|json_encode|e('html_attr') }}"></div>
+              <div id="alert-dates" style="display: none;">
+                <div class="popup-container">
+                  <div class="popup-card">
+                    <h2>Alerte</h2>
+                    <p>Vous ne pouvez pas mettre de date antiérieur 
+                      ou égale à la date d'arrivée</p>
+                    <button id="close-popup">Close</button>
+                  </div>
+                </div>
               </div>
-              <div class="price">
-                <p>Frais Stellar 5%:</p><span class="total-span" id="stellarFees">0€</span>
+  
+              {# Détail des prix #}
+              <div class="price-details">
+                <div class="price">
+                  <p><span id="pricePerNight">{{advert.price}}</span> x <span id="numNights">0</span> nuits = </p><span
+                    class="total-span" id="totalNightPrice">0€</span>
+                </div>
+                <div class="price">
+                  <p>Frais Stellar 5%:</p><span class="total-span" id="stellarFees">0€</span>
+                </div>
+                <div class="price">
+                  <p>Total:</p><span class="total-span" id="totalPrice">0€</span>
+                </div>
               </div>
-              <div class="price">
-                <p>Total:</p><span class="total-span" id="totalPrice">0€</span>
+              <div class="log">
+                <button class="l-btn" id="start-button" disabled>Réservation</button>
               </div>
-            </div>
-            <div class="log">
-              <button class="l-btn" id="start-button" disabled>Réservation</button>
             </div>
             {% else %}
             <div class="connect">

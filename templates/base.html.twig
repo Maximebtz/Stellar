@@ -5,8 +5,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   {% block metatag %}
-  <meta name="description"
-    content="Stellar est une application de réservation de logements atypiques, le but principal est de faire des voyages avec du piquant et de l'aventure au lieux de simplement partir dans des endroits basics">
+
+    <meta name="description" content="Stellar est une application de 
+    réservation de logements atypiques de vacances, le but principal est de faire 
+    des voyages qui ont du sens et une dose d'aventure au lieux de simplement 
+    partir dans des endroits basics">
+    
   {% endblock metatag %}
   <title>{% block title %}Welcome!{% endblock %}</title>
   <link rel="icon" href="{{ asset('img/icons/logo.png') }}" />
@@ -39,12 +43,12 @@
       <div id="profil-menu" class="active">
         <ul>
           <h4 id="greeting">Hi, {{ app.user.username }}</h4>
-          <li><a href="{{ path('user_profil') }}">Mon profil</a></li>
-          <li><a href="{{ path('new_advert') }}">Créer mon annonce</a></li>
+          <a href="{{ path('user_profil') }}"><li>Mon profil</li></a>
+          <a href="{{ path('new_advert') }}"><li>Créer mon annonce</li></a>
           <hr />
-          <li>
-            <b><a href="{{ path('app_logout') }}">Se déconnecter</a></b>
-          </li>
+          <a href="{{ path('app_logout') }}"><li>
+            <b>Se déconnecter</b>
+          </li></a>
         </ul>
       </div>
     </div>

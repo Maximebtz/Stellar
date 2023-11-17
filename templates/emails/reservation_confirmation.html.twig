@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Facture Réservation</title>
+    <link rel='stylesheet' href='{{ asset('styles/PDFStyle/pdf.css')}}'>
+</head>
+
+<body>
+    <div class="container">
+        <div class="page-header">
+            <h1>Stellar</h1>
+        </div>
+
+        <div class="facture">
+            <h2>Confirmation de réservation</h2>
+            <div class="invoice-header">
+                <h1>Facture de Réservation</h1>
+            </div>
+            <table class="customTable">
+                <thead>
+                    <tr>
+                        <th>Titre de l'annonce:</th>
+                        <th>Nom de l'utilisateur:</th>
+                        <th>Email:</th>
+                        <th>Date d'arrivée:</th>
+                        <th>Date de départ:</th>
+                        <th>Prix</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ reservation.advert.title }}</td>
+                        <td>{{ reservation.user.username }}</td>
+                        <td>{{ reservation.user.email }}</td>
+                        <td>{{ reservation.arrivalDate|date('d/m/Y') }}</td>
+                        <td>{{ reservation.departureDate|date('d/m/Y') }}</td>
+                        <td>{{ reservation.price }}€</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="invoice-footer">
+                <p>Merci pour votre confiance et à bientôt !</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,6 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Anton&family=Pacifico&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
 :root {
   --very-light-purple: #fffbff;
@@ -241,9 +240,6 @@ header .log {
   align-items: center;
   position: relative;
 }
-header .log a {
-  margin-right: 10px;
-}
 header .log #profil-picture {
   width: 56px;
   height: 56px;
@@ -284,6 +280,9 @@ header .log #profil-menu hr {
 header .log #profil-menu a {
   color: var(--black);
   text-decoration: none;
+  width: 100%;
+  height: -moz-max-content;
+  height: max-content;
 }
 header .log #profil-menu li {
   list-style: none;
@@ -341,6 +340,7 @@ header .signup {
   text-decoration: none;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
+  margin-right: 10px;
 }
 header .signup:hover {
   transform: scale(1.02);
@@ -409,18 +409,20 @@ header .signup:hover {
 }
 .wrapper-home .container {
   position: relative;
-  height: 600px;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
   flex-wrap: wrap;
   width: 100%;
   min-height: calc(100vh - 117px);
   height: -moz-max-content;
   height: max-content;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  gap: 15%;
 }
 .wrapper-home .container .title {
-  max-width: 500px;
   overflow: hidden;
 }
 .wrapper-home .container .title .avis-wrap {
@@ -434,7 +436,7 @@ header .signup:hover {
   white-space: nowrap;
   display: flex;
   align-items: center;
-  animation: defilementAvis 20s linear infinite;
+  animation: defilementAvis 50s linear infinite;
   width: 1800px;
 }
 .wrapper-home .container .title .avis-wrap .avis-container .avis {
@@ -451,7 +453,7 @@ header .signup:hover {
   font-size: medium;
   font-style: italic;
   font-weight: 300;
-  white-space: wrap;
+  white-space: normal;
 }
 .wrapper-home .container .title .avis-wrap .avis-container .avis .date-avis {
   color: #777;
@@ -477,12 +479,16 @@ header .signup:hover {
   z-index: 1;
 }
 .wrapper-home .container .title h1 {
-  font-size: 3.5em;
+  font-size: 5em;
   font-family: "Pacifico";
   font-weight: 500;
 }
+.wrapper-home .container .title h1 a {
+  color: var(--black);
+  text-decoration: none;
+}
 .wrapper-home .container .title q {
-  font-size: larger;
+  font-size: 1.5em;
   font-weight: 500;
   color: var(--darkgray);
 }
@@ -490,20 +496,22 @@ header .signup:hover {
   font-family: "Pacifico";
   font-size: larger;
 }
-.wrapper-home .container svg rect {
-  animation: fadeIn 1s ease forwards;
+.wrapper-home .container svg {
+  width: 32%;
 }
-.wrapper-home .container svg rect:nth-child(1) {
-  animation-delay: 0s;
+.wrapper-home .container svg clipPath {
+  transform-origin: center;
+  animation: scale-in-ver-center 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
-.wrapper-home .container svg rect:nth-child(2) {
-  animation-delay: 2s;
-}
-.wrapper-home .container svg rect:nth-child(3) {
-  animation-delay: 1s;
-}
-.wrapper-home .container svg rect:nth-child(4) {
-  animation-delay: 3s;
+@keyframes scale-in-ver-center {
+  0% {
+    transform: rotate(-45deg);
+    opacity: 0;
+  }
+  100% {
+    transform: rotate(0);
+    opacity: 1;
+  }
 }
 @keyframes defilementAvis {
   0% {
@@ -511,14 +519,6 @@ header .signup:hover {
   }
   to {
     transform: translateX(-750px);
-  }
-}
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
   }
 }
 .wrapper-home .search-btn-container {
@@ -2962,12 +2962,32 @@ footer .small a:hover {
   .location {
     padding-top: 12px;
   }
+  .wrapper .wrapper-home .container svg {
+    width: 100%;
+    height: 100%;
+    padding: 40px 0 20px 0;
+  }
   .wrapper .wrapper-detail .wrapper-detail-user .profil-section {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 3em;
     padding: 60px 0;
+  }
+  .wrapper .wrapper-detail .wrapper-detail-user .stats-counter {
+    transform: translateX(-9px);
+  }
+  .wrapper .wrapper-detail .wrapper-detail-user .fade .reservation {
+    flex-direction: column-reverse;
+  }
+  .wrapper .wrapper-detail .wrapper-detail-user .fade .reservation h3 {
+    padding-top: 15px;
+  }
+  .wrapper .wrapper-detail .wrapper-detail-user .fade .reservation .right-content {
+    max-width: none;
+  }
+  .wrapper .wrapper-detail .wrapper-detail-user .fade .reservation .right-content img {
+    width: 100% !important;
   }
   .wrapper .wrapper-detail .wrapper-home-main .home-articles-container {
     flex-direction: column;
