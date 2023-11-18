@@ -45,6 +45,9 @@
           <h4 id="greeting">Hi, {{ app.user.username }}</h4>
           <a href="{{ path('user_profil') }}"><li>Mon profil</li></a>
           <a href="{{ path('new_advert') }}"><li>Créer mon annonce</li></a>
+          {% if is_granted('ROLE_ADMIN') %}
+          <a href="{{ path('admin_manage') }}"><li>Administrateur</li></a>
+          {% endif %}
           <hr />
           <a href="{{ path('app_logout') }}"><li>
             <b>Se déconnecter</b>

@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
@@ -953,6 +954,91 @@ header .signup:hover {
   max-width: 1150px;
   width: 100%;
   padding-top: 40px;
+}
+.wrapper-detail .admin-page {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.wrapper-detail .admin-page h1 {
+  margin-top: 50px;
+}
+.wrapper-detail .admin-page .admin-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+.wrapper-detail .admin-page .admin-content .add-content {
+  border: 1px var(--lightgray) solid;
+  border-radius: 7px;
+  padding: 20px;
+}
+.wrapper-detail .admin-page .admin-content .add-content h2 {
+  margin-bottom: 20px;
+}
+.wrapper-detail .admin-page .admin-content-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.wrapper-detail .admin-page .admin-content-form #accessory {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.wrapper-detail .admin-page .admin-content-form #category {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.wrapper-detail .admin-page .admin-content-form #lodge {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.wrapper-detail .admin-page .admin-content-form input[type=file i] {
+  border: none;
+  box-shadow: none;
+}
+.wrapper-detail .admin-page .admin-content-form input {
+  height: 36px;
+  max-width: 300px;
+  width: 100%;
+  border-radius: 7px;
+  outline: none;
+  border: var(--middlegray) solid 1px;
+  box-shadow: var(--boxshadow) 0 0 15px;
+  padding: 10px;
+}
+.wrapper-detail .admin-page .admin-content-form input:focus {
+  border-color: var(--black);
+}
+.wrapper-detail .admin-page .admin-content-form label {
+  display: block;
+  font-size: larger;
+  color: #1A1884;
+}
+.wrapper-detail .admin-page .admin-content-form .sub-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--gradient-p-b);
+  border-radius: 10px;
+  width: 100px;
+  height: 42px;
+  border: none;
+  position: relative;
+  color: white;
+  font-size: large;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.4s ease-in-out;
+}
+.wrapper-detail .admin-page .admin-content-form .sub-btn:hover {
+  background: var(--white);
+  border: var(--light-purple) 1px solid;
+  color: var(--light-purple);
 }
 .wrapper-detail .wrapper-detail-user .fade {
   animation: fade-in 0.6s ease-in-out;
@@ -2938,17 +3024,17 @@ footer .small a:hover {
 }
 
 @media only screen and (max-width: 450px) {
-  header {
+  ² header {
     padding: 20px 20px 0 20px;
     height: -moz-max-content;
     height: max-content;
     border: none;
   }
-  header .log #profil-picture {
+  ² header .log #profil-picture {
     width: 46px;
     height: 46px;
   }
-  header .title {
+  ² header .title {
     display: none;
   }
   .reservation-btn {

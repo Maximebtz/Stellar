@@ -1,13 +1,1 @@
 
-A faire :
-
-- seo Metadesc
-- seo Alt 
-- seo lien interne et externe
-- seo slug
-- secu requete preparée avec capture d'ecran
-- secu xss capture d'écran email type, echapement donnée en sortie twig ( dire aussi en php natif)
-- secu csrf mot session et hashé
-- secu attaque force brut honeypot
-- secu attaque par dico regex
-- secu salt, emprunte numérique

@@ -1,19 +1,92 @@
 <?php
-
+// src/Controller/AdminController.php
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\User;
+use App\Entity\Lodge;
+use App\Entity\Advert;
+use App\Form\LodgeType;
+use App\Entity\Category;
+use App\Entity\Accessory;
+use App\Form\CategoryType;
+use App\Form\AccessoryType;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-#[Route('/admin', name: 'admin_')]
 class AdminController extends AbstractController
 {
-    #[Route('/', name: 'index')]
-    public function index(): Response
+    private EntityManagerInterface $entityManager;
+
+    public function __construct(EntityManagerInterface $entityManager)
     {
-        return $this->render('admin/index.html.twig', [
-            'controller_name' => 'AdminController',
+        $this->entityManager = $entityManager;
+    }
+
+
+    #[Route('/admin/manage', name: 'admin_manage')]
+    #[IsGranted('ROLE_ADMIN')]
+    public function manage(Request $request): Response
+    {
+
+        $reportedAdverts = $this->entityManager->getRepository(Advert::class)->findBy(['isReported' => true]);
+
+        // Gérer l'ajout d'une catégorie
+        $category = new Category();
+        $categoryForm = $this->createForm(CategoryType::class, $category);
+        $categoryForm->handleRequest($request);
+
+        if ($categoryForm->isSubmitted() && $categoryForm->isValid()) {
+            $this->entityManager->persist($category);
+            $this->entityManager->flush();
+        }
+
+        // Gérer l'ajout d'un lodge
+        $lodge = new Lodge();
+        $lodgeForm = $this->createForm(LodgeType::class, $lodge);
+        $lodgeForm->handleRequest($request);
+
+        if ($lodgeForm->isSubmitted() && $lodgeForm->isValid()) {
+            $this->entityManager->persist($lodge);
+            $this->entityManager->flush();
+        }
+
+        // Gérer l'ajout d'un accessoire
+        $accessory = new Accessory();
+        $accessoryForm = $this->createForm(AccessoryType::class, $accessory);
+        $accessoryForm->handleRequest($request);
+
+        if ($accessoryForm->isSubmitted() && $accessoryForm->isValid()) {
+            $this->entityManager->persist($accessory);
+            $this->entityManager->flush();
+        }
+
+        return $this->render('admin/manage.html.twig', [
+            'categoryForm' => $categoryForm->createView(),
+            'lodgeForm' => $lodgeForm->createView(),
+            'accessoryForm' => $accessoryForm->createView(),
         ]);
+    }
+
+    #[Route('/advert/report/{id}', name: 'advert_report', methods: ['POST'])]
+    #[IsGranted('ROLE_USER')]
+    public function reportAdvert(int $id, EntityManagerInterface $entityManager): Response
+    {
+        $advert = $entityManager->getRepository(Advert::class)->find($id);
+        $user = $this->getUser();
+
+        if (!$advert || !$user) {
+            return new JsonResponse(['message' => 'Erreur lors du signalement de l\'annonce.'], Response::HTTP_NOT_FOUND);
+        }
+
+        $advert->setIsReported(true);
+        $advert->setReportedBy($user);
+        $entityManager->flush();
+
+        return new JsonResponse(['message' => 'L\'annonce a été signalée.']);
     }
 }

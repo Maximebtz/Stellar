@@ -75,6 +75,12 @@ class Advert
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $slug = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $isReported = false;
+
+    #[ORM\Column(length: 25, nullable: true)]
+    private ?string $ReportedBy = null;
+
 
     public function __construct()
     {
@@ -84,6 +90,7 @@ class Advert
         $this->categories = new ArrayCollection();
         $this->accessories = new ArrayCollection();
         $this->createdAt = new DateTimeImmutable();
+        $this->isReported = false;
     }
 
     public function getId(): ?int
@@ -390,5 +397,29 @@ class Advert
             $slugify = new Slugify();
             $this->slug = $slugify->slugify($this->title);
         }
+    }
+
+    public function isIsReported(): ?bool
+    {
+        return $this->isReported;
+    }
+
+    public function setIsReported(?bool $isReported): static
+    {
+        $this->isReported = $isReported;
+
+        return $this;
+    }
+
+    public function getReportedBy(): ?string
+    {
+        return $this->ReportedBy;
+    }
+
+    public function setReportedBy(?string $ReportedBy): static
+    {
+        $this->ReportedBy = $ReportedBy;
+
+        return $this;
     }
 }
