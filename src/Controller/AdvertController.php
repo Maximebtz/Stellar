@@ -190,8 +190,8 @@ class AdvertController extends AbstractController
                 $entityManager->persist($reservation);
                 $entityManager->flush();
                 if ($reservation->getStatus() === 'pending') {
-                // Redirige vers le paiement
-                return $this->redirectToRoute('payement_stripe', ['id' => $reservation->getId()]);
+                    // Redirige vers le paiement
+                    return $this->redirectToRoute('payement_stripe', ['id' => $reservation->getId()]);
                 }
             }
         }
@@ -214,4 +214,6 @@ class AdvertController extends AbstractController
             'isLoggedIn' => $isLoggedIn,
         ]);
     }
+
+
 }

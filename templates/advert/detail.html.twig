@@ -65,6 +65,11 @@
 
 {% block body %}
 <div class="wrapper">
+  {% if app.user %}
+  <form action="{{ path('user_report_advert', {'id': advert.id}) }}" method="post">
+    <button type="submit" class="btn btn-warning">Signaler cette annonce</button>
+  </form>
+  {% endif %}
   <nav class="breadcrumb-nav">
     <ul class="breadcrumb">
       <li class="breadcrumb-item">
@@ -238,7 +243,7 @@
               <p class="night-price">
                 <b>{{ advert.price }}€</b>/Nuits
               </p>
-  
+
               {# Aperçu des dates choisies #}
               <div class="dates">
                 <div class="date">
@@ -250,7 +255,7 @@
                   <input class="date-span" type="date" id="departureDate" name="reservation[departureDate]" disabled />
                 </div>
               </div>
-  
+
               {# Calendrier #}
               <div id="calendar" data-advert-id="{{ advert.id }}"
                 data-reserved-dates="{{ reservedDates|json_encode|e('html_attr') }}"></div>
@@ -258,13 +263,13 @@
                 <div class="popup-container">
                   <div class="popup-card">
                     <h2>Alerte</h2>
-                    <p>Vous ne pouvez pas mettre de date antiérieur 
+                    <p>Vous ne pouvez pas mettre de date antiérieur
                       ou égale à la date d'arrivée</p>
                     <button id="close-popup">Close</button>
                   </div>
                 </div>
               </div>
-  
+
               {# Détail des prix #}
               <div class="price-details">
                 <div class="price">

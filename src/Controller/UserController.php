@@ -58,44 +58,46 @@ class UserController extends AbstractController
         // Fonction de tri
         $sortFunction = function ($a, $b) use ($now) {
             // Si les deux sont en cours, on trie par date d'arrivée croissante
-            if ($a->getArrivalDate() <= $now && $a->getDepartureDate() > $now &&
-                $b->getArrivalDate() <= $now && $b->getDepartureDate() > $now) {
+            if (
+                $a->getArrivalDate() <= $now && $a->getDepartureDate() > $now &&
+                $b->getArrivalDate() <= $now && $b->getDepartureDate() > $now
+            ) {
                 return $a->getArrivalDate() <=> $b->getArrivalDate();
             }
-            
+
             // Si A est en cours et pas B, A vient en premier
             if ($a->getArrivalDate() <= $now && $a->getDepartureDate() > $now) {
                 return -1;
             }
-            
+
             // Si B est en cours et pas A, B vient en premier
             if ($b->getArrivalDate() <= $now && $b->getDepartureDate() > $now) {
                 return 1;
             }
-            
+
             // Si les deux sont à venir, on trie par date d'arrivée croissante
             if ($a->getArrivalDate() > $now && $b->getArrivalDate() > $now) {
                 return $a->getArrivalDate() <=> $b->getArrivalDate();
             }
-        
+
             // Si les deux sont terminées, on trie par date de départ décroissante
             if ($a->getDepartureDate() < $now && $b->getDepartureDate() < $now) {
                 return $b->getDepartureDate() <=> $a->getDepartureDate();
             }
-        
+
             // Si A est terminée et B est à venir, B vient en premier
             if ($a->getDepartureDate() < $now && $b->getArrivalDate() > $now) {
                 return 1;
             }
-            
+
             // Si B est terminée et A est à venir, A vient en premier
             if ($b->getDepartureDate() < $now && $a->getArrivalDate() > $now) {
                 return -1;
             }
-        
+
             return 0; // Si toutes les autres conditions échouent, considérer qu'ils sont égaux
         };
-        
+
         // Trier les réservations
         usort($myReservations, $sortFunction);
         usort($myAdvertsReservations, $sortFunction);
@@ -134,7 +136,7 @@ class UserController extends AbstractController
         if (!empty($reservations)) {
             $this->addFlash('danger', 'Impossible de supprimer cette annonce car des réservations y sont associées.');
             return $this->redirectToRoute('user_profil');
-        } 
+        }
 
         // Si aucune réservation n'est associée, on peut supprimer l'annonce
         $entityManager->remove($advert);
@@ -180,5 +182,24 @@ class UserController extends AbstractController
 
         $this->addFlash('success_user_delete', 'Le compte a été supprimé avec succès.');
         return $this->redirectToRoute('app_home');
+    }
+
+    #[Route('/user/report-advert/{id}', name: 'user_report_advert', methods: ['POST'])]
+    public function reportAdvert(int $id): Response
+    {
+        $advert = $this->entityManager->getRepository(Advert::class)->find($id);
+        $user = $this->getUser();
+        
+        if (!$advert) {
+            $this->addFlash('error', 'Annonce non trouvée.');
+            return $this->redirectToRoute('app_home');
+        }
+        
+        $advert->setIsReported(true);
+        $advert->setReportedBy($user->getEmail());
+        $this->entityManager->flush();
+
+        $this->addFlash('success', 'L\'annonce a été signalée.');
+        return $this->redirectToRoute('app_home'); 
     }
 }

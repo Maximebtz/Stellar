@@ -69,6 +69,7 @@ class AdminController extends AbstractController
             'categoryForm' => $categoryForm->createView(),
             'lodgeForm' => $lodgeForm->createView(),
             'accessoryForm' => $accessoryForm->createView(),
+            'reportedAdverts' => $reportedAdverts,
         ]);
     }
 
@@ -78,15 +79,49 @@ class AdminController extends AbstractController
     {
         $advert = $entityManager->getRepository(Advert::class)->find($id);
         $user = $this->getUser();
-
+        
         if (!$advert || !$user) {
             return new JsonResponse(['message' => 'Erreur lors du signalement de l\'annonce.'], Response::HTTP_NOT_FOUND);
         }
 
         $advert->setIsReported(true);
-        $advert->setReportedBy($user);
+        $advert->setReportedBy($user->getEmail());
         $entityManager->flush();
 
         return new JsonResponse(['message' => 'L\'annonce a été signalée.']);
+    }
+
+    #[Route('/admin/approve-report/{id}', name: 'admin_approve_report', methods: ['POST'])]
+    public function approveReport(int $id): Response
+    {
+        $advert = $this->entityManager->getRepository(Advert::class)->find($id);
+
+        if (!$advert) {
+            throw $this->createNotFoundException('Annonce non trouvée.');
+        }
+
+        // Supprimer l'annonce de la base de données
+        $this->entityManager->remove($advert);
+        $this->entityManager->flush();
+
+        $this->addFlash('success', 'Signalement approuvé et annonce supprimée.');
+        return $this->redirectToRoute('admin_manage');
+    }
+
+    #[Route('/admin/reject-report/{id}', name: 'admin_reject_report', methods: ['POST'])]
+    public function rejectReport(int $id): Response
+    {
+        $advert = $this->entityManager->getRepository(Advert::class)->find($id);
+
+        if (!$advert) {
+            throw $this->createNotFoundException('Annonce non trouvée.');
+        }
+
+        // Réinitialiser isReported à false
+        $advert->setIsReported(false);
+        $this->entityManager->flush();
+
+        $this->addFlash('success', 'Signalement rejeté. Annonce réactivée.');
+        return $this->redirectToRoute('admin_manage');
     }
 }

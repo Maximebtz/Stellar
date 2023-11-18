@@ -78,7 +78,7 @@ class Advert
     #[ORM\Column(nullable: true)]
     private ?bool $isReported = false;
 
-    #[ORM\Column(length: 25, nullable: true)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $ReportedBy = null;
 
 
