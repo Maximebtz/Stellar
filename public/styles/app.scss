@@ -3282,11 +3282,20 @@ input[type="range"] {
             padding: 25px 0;
             gap: 25px;
 
+            .user-reporter {
+                background-color: var(--black);
+                color: var(--white);
+                border-radius: 7px;
+                height: max-content;
+                padding: 5px 10px;
+            }
+
             .admin-response {
 
                 display: flex;
                 flex-direction: column;
-                gap: 7px;
+                justify-content: space-evenly;
+                gap: 25px;
                 width: 100%;
                 max-width: 450px;
                 .confirmation-btn {
@@ -3299,6 +3308,7 @@ input[type="range"] {
                     transition: all .2s ease-in-out;
                     font-size: medium;
                     font-family: 'Poppins';
+                    cursor: pointer;
     
                     &:hover {
                         background-color: #ffffff;
@@ -3318,10 +3328,11 @@ input[type="range"] {
                     font-family: 'Poppins';
                     background-color: #ffffff;
                     color: var(--darkgray);
+                    cursor: pointer;
                     
                     &:hover {
-                        background-color: var(--darkgray);
-                        color: #ffffff;
+
+                        color: var(--black);
                     }
                 }
             }

@@ -94,18 +94,20 @@
                     </div>
                   </a>
                 </div>
-                <div class="user-reporter">
-                  <p>Signalé par : {{ advert.reportedBy }}</p>
-                </div>
                 <div class="admin-response">
-                  <h3>Décision de l'administrateur</h3>
-                  <form action="{{ path('admin_approve_report', {'id': advert.id}) }}" method="post">
-                    <button type="submit" class="confirmation-btn">Approuver et
-                      Supprimer</button>
-                  </form>
-                  <form action="{{ path('admin_reject_report', {'id': advert.id}) }}" method="post">
-                    <button type="submit" class="reject-btn">Rejeter le Signalement</button>
-                  </form>
+                  <div class="user-reporter">
+                    <p>Signalé par : {{ advert.reportedBy }}</p>
+                  </div>
+                  <div class="form">
+                    <form action="{{ path('admin_approve_report', {'id': advert.id}) }}" method="post">
+                      <h3>Décision de l'administrateur</h3>
+                      <button type="submit" class="confirmation-btn">Approuver et
+                        Supprimer</button>
+                    </form>
+                    <form action="{{ path('admin_reject_report', {'id': advert.id}) }}" method="post">
+                      <button type="submit" class="reject-btn">Rejeter le Signalement</button>
+                    </form>
+                  </div>
                 </div>
               </div>
               {% endfor %}

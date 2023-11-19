@@ -2720,10 +2720,19 @@ input[type=range] {
   padding: 25px 0;
   gap: 25px;
 }
+.adverts-container .advert-card-list .reported-adverts .user-reporter {
+  background-color: var(--black);
+  color: var(--white);
+  border-radius: 7px;
+  height: -moz-max-content;
+  height: max-content;
+  padding: 5px 10px;
+}
 .adverts-container .advert-card-list .reported-adverts .admin-response {
   display: flex;
   flex-direction: column;
-  gap: 7px;
+  justify-content: space-evenly;
+  gap: 25px;
   width: 100%;
   max-width: 450px;
 }
@@ -2737,6 +2746,7 @@ input[type=range] {
   transition: all 0.2s ease-in-out;
   font-size: medium;
   font-family: "Poppins";
+  cursor: pointer;
 }
 .adverts-container .advert-card-list .reported-adverts .admin-response .confirmation-btn:hover {
   background-color: #ffffff;
@@ -2753,10 +2763,10 @@ input[type=range] {
   font-family: "Poppins";
   background-color: #ffffff;
   color: var(--darkgray);
+  cursor: pointer;
 }
 .adverts-container .advert-card-list .reported-adverts .admin-response .reject-btn:hover {
-  background-color: var(--darkgray);
-  color: #ffffff;
+  color: var(--black);
 }
 .adverts-container .advert-card-list .clickable-card-parent {
   position: relative;
