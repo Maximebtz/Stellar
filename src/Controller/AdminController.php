@@ -10,11 +10,13 @@ use App\Entity\Category;
 use App\Entity\Accessory;
 use App\Form\CategoryType;
 use App\Form\AccessoryType;
+use App\Service\FileUploader;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -30,7 +32,7 @@ class AdminController extends AbstractController
 
     #[Route('/admin/manage', name: 'admin_manage')]
     #[IsGranted('ROLE_ADMIN')]
-    public function manage(Request $request): Response
+    public function manage(Request $request, FileUploader $fileUploader): Response
     {
 
         $reportedAdverts = $this->entityManager->getRepository(Advert::class)->findBy(['isReported' => true]);
@@ -41,6 +43,13 @@ class AdminController extends AbstractController
         $categoryForm->handleRequest($request);
 
         if ($categoryForm->isSubmitted() && $categoryForm->isValid()) {
+            $lodge = $categoryForm->getData();
+            $iconFile = $categoryForm->get('icon')->getData();
+            if ($iconFile instanceof UploadedFile) {
+                $fileUploader->setTargetDirectory($this->getParameter('icons_category_directory'));
+                $iconFileName = $fileUploader->upload($iconFile);
+                $lodge->setIcon($iconFileName);
+            }
             $this->entityManager->persist($category);
             $this->entityManager->flush();
         }
@@ -51,6 +60,14 @@ class AdminController extends AbstractController
         $lodgeForm->handleRequest($request);
 
         if ($lodgeForm->isSubmitted() && $lodgeForm->isValid()) {
+            $lodge = $lodgeForm->getData();
+            $iconFile = $lodgeForm->get('icon')->getData();
+            if ($iconFile instanceof UploadedFile) {
+                $fileUploader->setTargetDirectory($this->getParameter('icons_lodge_directory'));
+                $iconFileName = $fileUploader->upload($iconFile);
+                $lodge->setIcon($iconFileName);
+            }
+
             $this->entityManager->persist($lodge);
             $this->entityManager->flush();
         }
@@ -61,6 +78,14 @@ class AdminController extends AbstractController
         $accessoryForm->handleRequest($request);
 
         if ($accessoryForm->isSubmitted() && $accessoryForm->isValid()) {
+            $lodge = $accessoryForm->getData();
+            $iconFile = $accessoryForm->get('icon')->getData();
+            if ($iconFile instanceof UploadedFile) {
+                $fileUploader->setTargetDirectory($this->getParameter('icons_accessory_directory'));
+                $iconFileName = $fileUploader->upload($iconFile);
+                $lodge->setIcon($iconFileName);
+            }
+
             $this->entityManager->persist($accessory);
             $this->entityManager->flush();
         }

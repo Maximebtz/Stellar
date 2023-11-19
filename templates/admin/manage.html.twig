@@ -67,41 +67,46 @@
         {% endfor %}
         <div id="advertsSection" class="fade">
           <div class="adverts-container">
-            <div id="grid" class="advert-card-list">
+            <div class="advert-card-list">
               {% for advert in reportedAdverts %}
-              <div class="advert-card slide-in">
-                <a class="clickable-card" href="{{ path('detail_advert', {'slug': advert.slug, 'id': advert.id}) }}">
-                  <figure>
-                    {% if advert.images is not empty %}
-                    <img src="{{ asset('uploads/' ~ advert.images[0].url) }}" alt="{{ advert.title }} image">
-                    {% endif %}
-                  </figure>
-                  <div class="card-content">
-                    <h3 class="card-title">{{ advert.title}}</h3>
-                    <p class="card-text">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                        class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
-                        <path
-                          d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" />
-                      </svg>
-                      {{ advert.city }},
-                      {{ advert.country }}
-                    </p>
-                    <p class="card-text">
-                      <span class="price-card">{{ advert.price }}€</span>/nuit
-                    </p>
-                  </div>
-                </a>
-              </div>
-              <div class="admin-response">
-                <p>Décision de l'administrateur</p>
-                <form action="{{ path('admin_approve_report', {'id': advert.id}) }}" method="post">
-                  <button type="submit" class="btn btn-warning">Approuver et
-                    Supprimer</button>
-                </form>
-                <form action="{{ path('admin_reject_report', {'id': advert.id}) }}" method="post">
-                  <button type="submit" class="btn btn-warning">Rejeter le Signalement</button>
-                </form>
+              <div class="reported-adverts">
+                <div class="advert-card slide-in">
+                  <a class="clickable-card" href="{{ path('detail_advert', {'slug': advert.slug, 'id': advert.id}) }}">
+                    <figure>
+                      {% if advert.images is not empty %}
+                      <img src="{{ asset('uploads/adverts/' ~ advert.images[0].url) }}" alt="{{ advert.title }} image">
+                      {% endif %}
+                    </figure>
+                    <div class="card-content">
+                      <h3 class="card-title">{{ advert.title}}</h3>
+                      <p class="card-text">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                          class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                          <path
+                            d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" />
+                        </svg>
+                        {{ advert.city }},
+                        {{ advert.country }}
+                      </p>
+                      <p class="card-text">
+                        <span class="price-card">{{ advert.price }}€</span>/nuit
+                      </p>
+                    </div>
+                  </a>
+                </div>
+                <div class="user-reporter">
+                  <p>Signalé par : {{ advert.reportedBy }}</p>
+                </div>
+                <div class="admin-response">
+                  <h3>Décision de l'administrateur</h3>
+                  <form action="{{ path('admin_approve_report', {'id': advert.id}) }}" method="post">
+                    <button type="submit" class="confirmation-btn">Approuver et
+                      Supprimer</button>
+                  </form>
+                  <form action="{{ path('admin_reject_report', {'id': advert.id}) }}" method="post">
+                    <button type="submit" class="reject-btn">Rejeter le Signalement</button>
+                  </form>
+                </div>
               </div>
               {% endfor %}
             </div>

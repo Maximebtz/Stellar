@@ -121,16 +121,16 @@
           {% if advert.images | length > 0 %} {% if app.user is same as
           advert.owner %}
           {% endif %}
-          <img src="{{ asset('uploads/' ~ advert.images[0].url) }}" alt="{{ advert.title }}" />
+          <img src="{{ asset('uploads/adverts/' ~ advert.images[0].url) }}" alt="{{ advert.title }}" />
           {% endif %}
         </div>
         <div class="sm-img">
           {% if advert.images | length > 1 %}
           <div class="ltl-img">
-            <img src="{{ asset('uploads/' ~ advert.images[1].url) }}" alt="{{ advert.title }}" />
+            <img src="{{ asset('uploads/adverts/' ~ advert.images[1].url) }}" alt="{{ advert.title }}" />
           </div>
           <div class="ltl-img">
-            <img src="{{ asset('uploads/' ~ advert.images[2].url) }}" alt="{{ advert.title }}" />
+            <img src="{{ asset('uploads/adverts/' ~ advert.images[2].url) }}" alt="{{ advert.title }}" />
             {% if advert.images | length > 3 %}
             <button id="showMoreBtn">Afficher plus</button>
             {% endif %}
@@ -140,7 +140,7 @@
         {% else %}
         <div class="single-img">
           {% if advert.images | length > 0 %}
-          <img src="{{ asset('uploads/' ~ advert.images[0].url) }}" alt="{{ advert.title }}" />
+          <img src="{{ asset('uploads/adverts/' ~ advert.images[0].url) }}" alt="{{ advert.title }}" />
           {% endif %}
         </div>
         {% endif %}
@@ -156,7 +156,7 @@
         <div class="imgs-container">
           {% for image in advert.images %}
           <div class="img">
-            <img src="{{ asset('uploads/' ~ image.url) }}" alt="{{ advert.title }}" />
+            <img src="{{ asset('uploads/adverts/' ~ image.url) }}" alt="{{ advert.title }}" />
           </div>
           {% endfor %}
         </div>

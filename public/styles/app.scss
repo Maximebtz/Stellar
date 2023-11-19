@@ -1210,6 +1210,7 @@ header {
                 border: 1px var(--lightgray) solid;
                 border-radius: 7px;
                 padding: 20px;
+
                 h2 {
                     margin-bottom: 20px;
                 }
@@ -1219,7 +1220,7 @@ header {
                 display: flex;
                 flex-direction: column;
                 gap: 10px;
-                
+
 
                 #accessory {
                     display: flex;
@@ -3271,6 +3272,62 @@ input[type="range"] {
         grid-gap: 20px;
         grid-auto-rows: max-content;
         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+
+        .reported-adverts {
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            border-bottom: 1px solid var(--lightgray);
+            padding: 25px 0;
+            gap: 25px;
+
+            .admin-response {
+
+                display: flex;
+                flex-direction: column;
+                gap: 7px;
+                width: 100%;
+                max-width: 450px;
+                .confirmation-btn {
+                    width: 100%;
+                    padding: 10px 5px;
+                    background-color: #ff0000;
+                    color: #ffffff;
+                    border-radius: 7px;
+                    border: none;
+                    transition: all .2s ease-in-out;
+                    font-size: medium;
+                    font-family: 'Poppins';
+    
+                    &:hover {
+                        background-color: #ffffff;
+                        color: #ff0000;
+                    }
+    
+                }
+    
+                .reject-btn {
+                    width: 100%;
+                    padding: 10px 5px;
+                    transition: all .2s ease-in-out;
+                    border-radius: 7px;
+                    border: none;
+                    transition: all .2s ease-in-out;
+                    font-size: medium;
+                    font-family: 'Poppins';
+                    background-color: #ffffff;
+                    color: var(--darkgray);
+                    
+                    &:hover {
+                        background-color: var(--darkgray);
+                        color: #ffffff;
+                    }
+                }
+            }
+
+
+        }
 
         .clickable-card-parent {
             position: relative;

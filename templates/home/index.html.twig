@@ -40,7 +40,7 @@
             // Déclaration de l'adresse 
             let address = "{{ advert.address }}, {{ advert.city }}, {{ advert.cp }}, {{ advert.country }}";
             let title = "{{ advert.title }}";
-            let imgSrc = "{{ asset('uploads/' ~ advert.images[0].url) }}";
+            let imgSrc = "{{ asset('uploads/adverts/' ~ advert.images[0].url) }}";
             let detailURL = "{{ path('detail_advert', {'slug': advert.slug, 'id': advert.id}) }}";
             let price = "{{ advert.price }}";
 
@@ -69,7 +69,7 @@
                     marker.addListener('mouseover', function () {
                         const contentString = `
                                 <div class="map-popup-container" id="map-popup-container">
-                                    <img src="{{ asset('uploads/' ~ advert.images[0].url) }}" alt="{{ advert.title }}" width="50" height="50">
+                                    <img src="{{ asset('uploads/adverts/' ~ advert.images[0].url) }}" alt="{{ advert.title }}" width="50" height="50">
                                     <div id="infoWindowContent">
                                         <h4>{{ advert.title }}</h4>
                                     </div>
@@ -256,7 +256,7 @@
 
                         <figure>
                             {% if advert.images is not empty %}
-                            <img src="{{ asset('uploads/' ~ advert.images[0].url) }}"
+                            <img src="{{ asset('uploads/adverts/' ~ advert.images[0].url) }}"
                                 alt="image de l'annonce : {{ advert.title }}">
                             {% endif %}
                         </figure>

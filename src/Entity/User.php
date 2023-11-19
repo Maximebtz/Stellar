@@ -71,6 +71,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $avatar = null;
 
+    #[ORM\OneToMany(mappedBy: 'reportedBy', targetEntity: Advert::class, orphanRemoval: true)]
+    private Collection $reportedAdverts;
+
     public function __construct()
     {
         $this->adverts = new ArrayCollection();
@@ -80,6 +83,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->reservations = new ArrayCollection();
         $this->sent = new ArrayCollection();
         $this->received = new ArrayCollection();
+        $this->reportedAdverts = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -336,6 +340,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setAvatar(string $avatar): static
     {
         $this->avatar = $avatar;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Advert>
+     */
+    public function getReportedAdverts(): Collection
+    {
+        return $this->reportedAdverts;
+    }
+
+    public function addReportedAdvert(Advert $reportedAdvert): static
+    {
+        if (!$this->reportedAdverts->contains($reportedAdvert)) {
+            $this->reportedAdverts->add($reportedAdvert);
+            $reportedAdvert->setReportedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReportedAdvert(Advert $reportedAdvert): static
+    {
+        if ($this->reportedAdverts->removeElement($reportedAdvert)) {
+            // set the owning side to null (unless already changed)
+            if ($reportedAdvert->getReportedBy() === $this) {
+                $reportedAdvert->setReportedBy(null);
+            }
+        }
 
         return $this;
     }

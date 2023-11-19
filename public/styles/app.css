@@ -2711,6 +2711,53 @@ input[type=range] {
   grid-auto-rows: max-content;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 }
+.adverts-container .advert-card-list .reported-adverts {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  border-bottom: 1px solid var(--lightgray);
+  padding: 25px 0;
+  gap: 25px;
+}
+.adverts-container .advert-card-list .reported-adverts .admin-response {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  width: 100%;
+  max-width: 450px;
+}
+.adverts-container .advert-card-list .reported-adverts .admin-response .confirmation-btn {
+  width: 100%;
+  padding: 10px 5px;
+  background-color: #ff0000;
+  color: #ffffff;
+  border-radius: 7px;
+  border: none;
+  transition: all 0.2s ease-in-out;
+  font-size: medium;
+  font-family: "Poppins";
+}
+.adverts-container .advert-card-list .reported-adverts .admin-response .confirmation-btn:hover {
+  background-color: #ffffff;
+  color: #ff0000;
+}
+.adverts-container .advert-card-list .reported-adverts .admin-response .reject-btn {
+  width: 100%;
+  padding: 10px 5px;
+  transition: all 0.2s ease-in-out;
+  border-radius: 7px;
+  border: none;
+  transition: all 0.2s ease-in-out;
+  font-size: medium;
+  font-family: "Poppins";
+  background-color: #ffffff;
+  color: var(--darkgray);
+}
+.adverts-container .advert-card-list .reported-adverts .admin-response .reject-btn:hover {
+  background-color: var(--darkgray);
+  color: #ffffff;
+}
 .adverts-container .advert-card-list .clickable-card-parent {
   position: relative;
   max-width: 350px;

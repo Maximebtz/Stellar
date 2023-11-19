@@ -5,10 +5,12 @@ namespace App\Controller;
 use App\Entity\Category;
 use App\Form\CategoryType;
 use App\Repository\CategoryRepository;
+use App\Service\FileUploader;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class CategoryController extends AbstractController
@@ -27,7 +29,7 @@ class CategoryController extends AbstractController
     // Méthode pour créer une nouvelle category
     #[Route('/admin/category/add/new', name: 'new_category')] // Définition de la route et du nom de la route
     #[Route('/category/{id}/edit', name: 'edit_category')] // Définition de la route et du nom de la route
-    public function new_edit(Category $category = null, Request $request, EntityManagerInterface $entityManager): Response
+    public function new_edit(Category $category = null, Request $request, EntityManagerInterface $entityManager, FileUploader $fileUploader): Response
     {
 
         if(!$category) {
@@ -45,6 +47,12 @@ class CategoryController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             // Récupère les données du formulaire
             $category = $form->getData();
+            $iconFile = $form->get('icon')->getData();
+            if ($iconFile instanceof UploadedFile) {
+                $fileUploader->setTargetDirectory($this->getParameter('icons_category_directory'));
+                $iconFileName = $fileUploader->upload($iconFile);
+                $category->setIcon($iconFileName);
+            }
 
             // Persiste les données dans la base de données via l'entityManager
             $entityManager->persist($category);
