@@ -1478,6 +1478,7 @@ header {
                 cursor: pointer;
                 transition: all .2s ease-in-out;
                 box-shadow: var(--boxshadow) 0 0 20px;
+                color: #111111;
 
                 span {
                     font-size: x-large;
@@ -3298,6 +3299,7 @@ input[type="range"] {
                 gap: 25px;
                 width: 100%;
                 max-width: 450px;
+
                 .confirmation-btn {
                     width: 100%;
                     padding: 10px 5px;
@@ -3309,30 +3311,28 @@ input[type="range"] {
                     font-size: medium;
                     font-family: 'Poppins';
                     cursor: pointer;
-    
+
                     &:hover {
                         background-color: #ffffff;
                         color: #ff0000;
                     }
-    
+
                 }
-    
+
                 .reject-btn {
                     width: 100%;
                     padding: 10px 5px;
-                    transition: all .2s ease-in-out;
                     border-radius: 7px;
                     border: none;
-                    transition: all .2s ease-in-out;
                     font-size: medium;
                     font-family: 'Poppins';
                     background-color: #ffffff;
-                    color: var(--darkgray);
+                    color: var(--black);
                     cursor: pointer;
-                    
-                    &:hover {
+                    transition: all .2s ease-in-out;
 
-                        color: var(--black);
+                    &:hover {
+                        color: var(--middlegray);
                     }
                 }
             }
@@ -3834,7 +3834,8 @@ footer {
                     flex-wrap: wrap !important;
 
                     input {
-                        max-width: 100% !important;
+                        min-width: 320px;
+                        width: 100% !important;
                         text-align: start;
                     }
                 }
@@ -3880,8 +3881,6 @@ footer {
 
             &-main {
 
-                padding: 30px !important;
-
                 h2 {
                     padding: 20px 0 0 0 !important;
                     font-size: x-large;
@@ -3889,9 +3888,15 @@ footer {
 
                 .wrapper-detail-left-category {
                     .checkbox-wrapper-16 {
+                        min-width: 100%;
+                        max-width: none !important;
+                        width: 100% !important;
+
                         .checkbox-tile {
-                            width: 5rem !important;
+                            width: max-content;
+                            min-width: 5rem;
                             min-height: 5rem !important;
+                            padding: 0 10px;
                         }
 
                         img {

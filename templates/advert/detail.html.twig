@@ -385,7 +385,7 @@
             <a href="{{ path('detail_advert', {'id': advert.id, 'slug': advert.slug})}}" class="clickable-card">
               <figure>
                 {% if advert.images is not empty %}
-                <img src="{{ asset('uploads/' ~ advert.images[0].url) }}" alt="{{ advert.title }} image">
+                <img src="{{ asset('uploads/adverts/' ~ advert.images[0].url) }}" alt="{{ advert.title }} image">
                 {% endif %}
               </figure>
               <div class="card-content">

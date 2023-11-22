@@ -39,7 +39,7 @@ class UserController extends AbstractController
     #[IsGranted('ROLE_USER')]
     public function profilPage(Security $security, EntityManagerInterface $entityManager): Response
     {
-        $user = $security->getUser();
+$user = $security->getUser();
 
         $numberOfAdverts = $entityManager->getRepository(Advert::class)->count(['owner' => $user]);
         $myReservations = $entityManager->getRepository(Reservation::class)->findBy(['user' => $user]);

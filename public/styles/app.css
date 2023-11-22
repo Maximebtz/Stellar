@@ -1191,6 +1191,7 @@ header .signup:hover {
   cursor: pointer;
   transition: all 0.2s ease-in-out;
   box-shadow: var(--boxshadow) 0 0 20px;
+  color: #111111;
 }
 .wrapper-detail .wrapper-detail-user .stats-counter .counter span {
   font-size: x-large;
@@ -2755,18 +2756,17 @@ input[type=range] {
 .adverts-container .advert-card-list .reported-adverts .admin-response .reject-btn {
   width: 100%;
   padding: 10px 5px;
-  transition: all 0.2s ease-in-out;
   border-radius: 7px;
   border: none;
-  transition: all 0.2s ease-in-out;
   font-size: medium;
   font-family: "Poppins";
   background-color: #ffffff;
-  color: var(--darkgray);
+  color: var(--black);
   cursor: pointer;
+  transition: all 0.2s ease-in-out;
 }
 .adverts-container .advert-card-list .reported-adverts .admin-response .reject-btn:hover {
-  color: var(--black);
+  color: var(--middlegray);
 }
 .adverts-container .advert-card-list .clickable-card-parent {
   position: relative;
@@ -3161,7 +3161,8 @@ footer .small a:hover {
     flex-wrap: wrap !important;
   }
   .wrapper .wrapper-detail-title .location input {
-    max-width: 100% !important;
+    min-width: 320px;
+    width: 100% !important;
     text-align: start;
   }
   .wrapper .wrapper-detail-title .address-wrap svg {
@@ -3189,16 +3190,21 @@ footer .small a:hover {
   .wrapper .wrapper-detail-grid-img .sm-img .ltl-img {
     height: 40% !important;
   }
-  .wrapper .wrapper-detail-main {
-    padding: 30px !important;
-  }
   .wrapper .wrapper-detail-main h2 {
     padding: 20px 0 0 0 !important;
     font-size: x-large;
   }
+  .wrapper .wrapper-detail-main .wrapper-detail-left-category .checkbox-wrapper-16 {
+    min-width: 100%;
+    max-width: none !important;
+    width: 100% !important;
+  }
   .wrapper .wrapper-detail-main .wrapper-detail-left-category .checkbox-wrapper-16 .checkbox-tile {
-    width: 5rem !important;
+    width: -moz-max-content;
+    width: max-content;
+    min-width: 5rem;
     min-height: 5rem !important;
+    padding: 0 10px;
   }
   .wrapper .wrapper-detail-main .wrapper-detail-left-category .checkbox-wrapper-16 img {
     width: 32px;

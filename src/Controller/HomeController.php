@@ -63,7 +63,7 @@ class HomeController extends AbstractController
                 'city' => $advert->getCity(),
                 'country' => $advert->getCountry(),
                 'price' => $advert->getPrice(),
-                'imgSrc' => $firstImage ? '/uploads/' . $firstImage->getUrl() : null,
+                'imgSrc' => $firstImage ? '/uploads/adverts/' . $firstImage->getUrl() : null,
                 'detailURL' => $this->generateUrl('detail_advert', ['slug' => $advert->getSlug(), 'id' => $advert->getId()]),
             ];
         }

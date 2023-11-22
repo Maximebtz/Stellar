@@ -82,6 +82,8 @@ class AdvertRepository extends ServiceEntityRepository
             ->setParameter('endDate', new \DateTime($filters['endDate']));
         }
 
+        $queryBuilder->orderBy('a.price', 'ASC');
+
         return $queryBuilder->getQuery()->getResult();
     }
 }
