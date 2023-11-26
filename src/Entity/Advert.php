@@ -31,9 +31,6 @@ class Advert
     #[ORM\Column]
     private ?float $price = null;
 
-    #[ORM\Column(length: 500, nullable: true)]
-    private ?string $other = null;
-
     #[ORM\Column(length: 10, nullable: true)]
     private ?string $cp = null;
 
@@ -130,18 +127,6 @@ class Advert
     public function setPrice(float $price): static
     {
         $this->price = $price;
-
-        return $this;
-    }
-
-    public function getOther(): ?string
-    {
-        return $this->other;
-    }
-
-    public function setOther(?string $other): static
-    {
-        $this->other = $other;
 
         return $this;
     }

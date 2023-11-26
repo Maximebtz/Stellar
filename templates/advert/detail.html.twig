@@ -65,11 +65,6 @@
 
 {% block body %}
 <div class="wrapper">
-  {% if app.user %}
-  <form action="{{ path('user_report_advert', {'id': advert.id}) }}" method="post">
-    <button type="submit" class="btn btn-warning">Signaler cette annonce</button>
-  </form>
-  {% endif %}
   <nav class="breadcrumb-nav">
     <ul class="breadcrumb">
       <li class="breadcrumb-item">
@@ -197,7 +192,8 @@
               <p>Propriétaire - </p><span><img class="profil-picture"
                   src="{{ asset('uploads/avatars/' ~ advert.owner.avatar)}}" alt="">{{advert.owner.username}}</span>
               {% else %}
-              <p>Propriétaire - <span>{{advert.owner.username}}</span></p>
+              <p>Propriétaire - </p><span><img id="profil-picture" src="{{ asset('img/profilpicture.webp') }}"
+                  alt="profil picture" />{{advert.owner.username}}</span>
               {% endif %}
             </div>
             <a href="#" class="wrapper-detail-left-owner-contact">
@@ -218,7 +214,9 @@
                   <span class="checkbox-icon">
                     <img src="{{ asset('img/icons/accessories/' ~ accessory.icon)}}" alt="{{ accessory.name }}" />
                   </span>
-                  <span class="checkbox-label">{{ accessory.name }}</span>
+                  <span class="checkbox-label">
+                    {{ accessory.name }}
+                  </span>
                 </span>
               </div>
               {% endfor %}
@@ -377,6 +375,11 @@
           </div>
         </div>
       </div>
+      {% if app.user %}
+      <form class="report-btn" action="{{ path('user_report_advert', {'id': advert.id}) }}" method="post">
+        <button type="submit" class="btn btn-warning">Signaler cette annonce</button>
+      </form>
+      {% endif %}
       <div class="adverts-container">
         <h2>Du même propriétaire</h2>
         <div id="grid" class="advert-card-list">
@@ -408,55 +411,56 @@
         </div>
       </div>
     </div>
-    <div class="reservation-btn">
-      <button class="l-btn fullsize-btn" id="reservation-btn">Réservation</button>
-    </div>
-    {% endblock %}
-    {% block javascripts %}
-    <script src="{{ asset('js/app.js') }}"></script>
-    <script src="{{ asset('js/animations.js') }}"></script>
-    <script src="{{ asset('js/reservation.js') }}"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js">
-    </script>
-    <script>
-      /****Show More Images****/
+  </div>
+  <div class="reservation-btn">
+    <button class="l-btn fullsize-btn" id="reservation-btn">Réservation</button>
+  </div>
+  {% endblock %}
+  {% block javascripts %}
+  <script src="{{ asset('js/app.js') }}"></script>
+  <script src="{{ asset('js/animations.js') }}"></script>
+  <script src="{{ asset('js/reservation.js') }}"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js">
+  </script>
+  <script>
+    /****Show More Images****/
 
-      // Cacher initialement la div showMoreImg
-      $("#showMoreImg").hide();
+    // Cacher initialement la div showMoreImg
+    $("#showMoreImg").hide();
 
-      // Gérer l'affichage des images supplémentaires lorsque le bouton showMoreBtn est cliqué
-      $("#showMoreBtn").click(function () {
-        // Ajouter la classe popup-open pour désactiver le défilement
-        $("body").addClass("popup-open");
+    // Gérer l'affichage des images supplémentaires lorsque le bouton showMoreBtn est cliqué
+    $("#showMoreBtn").click(function () {
+      // Ajouter la classe popup-open pour désactiver le défilement
+      $("body").addClass("popup-open");
 
-        // Afficher la div showMoreImg
-        $("#showMoreImg").fadeIn(300);
-        $("#showMoreImg").show();
+      // Afficher la div showMoreImg
+      $("#showMoreImg").fadeIn(300);
+      $("#showMoreImg").show();
+    });
+
+    // Cacher la div showMoreImg lorsque le bouton closeBtn (croix) est cliqué
+    $("#closeBtn").click(function () {
+      // Enlever la classe popup-open pour réactiver le défilement
+      $("body").removeClass("popup-open");
+
+      $("#showMoreImg").fadeOut(300);
+    });
+
+
+    if (window.innerWidth < 450) {
+      const reservationBtn = document.getElementById("reservation-btn");
+      const closeReservationBtn = document.getElementById("closeReservationBtn");
+      const wrapperDetail = document.querySelector(".wrapper-detail-right");
+
+      reservationBtn.addEventListener("click", function () {
+        wrapperDetail.style.display = "block";
       });
 
-      // Cacher la div showMoreImg lorsque le bouton closeBtn (croix) est cliqué
-      $("#closeBtn").click(function () {
-        // Enlever la classe popup-open pour réactiver le défilement
-        $("body").removeClass("popup-open");
-
-        $("#showMoreImg").fadeOut(300);
+      closeReservationBtn.addEventListener("click", function () {
+        wrapperDetail.style.display = "none";
       });
-
-
-      if (window.innerWidth < 450) {
-        const reservationBtn = document.getElementById("reservation-btn");
-        const closeReservationBtn = document.getElementById("closeReservationBtn");
-        const wrapperDetail = document.querySelector(".wrapper-detail-right");
-
-        reservationBtn.addEventListener("click", function () {
-          wrapperDetail.style.display = "block";
-        });
-
-        closeReservationBtn.addEventListener("click", function () {
-          wrapperDetail.style.display = "none";
-        });
-      }
-    </script>
-    {% endblock javascripts %}
+    }
+  </script>
+  {% endblock javascripts %}

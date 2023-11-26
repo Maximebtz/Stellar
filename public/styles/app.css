@@ -955,6 +955,32 @@ header .signup:hover {
   width: 100%;
   padding-top: 40px;
 }
+.wrapper-detail .report-btn {
+  display: flex;
+  justify-content: center;
+}
+.wrapper-detail .report-btn button {
+  background-color: var(--black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: var(--white);
+  border-radius: 7px;
+  transition: all 0.2s ease-in-out;
+  box-shadow: var(--boxshadow) 0 0 10px;
+  font-size: medium;
+  padding: 7px 20px;
+  border: none;
+  font-family: "Inter";
+}
+.wrapper-detail .report-btn button:focus {
+  outline: var(--light-purple);
+}
+.wrapper-detail .report-btn button:hover {
+  background-color: var(--darkgray);
+  box-shadow: var(--boxshadow) 0 0 25px;
+}
 .wrapper-detail .admin-page {
   width: 100%;
   display: flex;
@@ -1502,6 +1528,7 @@ header .signup:hover {
 .wrapper-detail #showMoreImg #closeBtn svg {
   width: 100%;
   height: 100%;
+  color: var(--dark-purple);
 }
 .wrapper-detail #showMoreImg .imgs-container {
   display: grid;
@@ -1692,7 +1719,8 @@ header .signup:hover {
   box-shadow: var(--boxshadow) 0 0 10px;
 }
 .wrapper-detail-main .wrapper-detail-left-owner-contact:hover {
-  transform: scale(1.02);
+  background-color: var(--darkgray);
+  box-shadow: var(--boxshadow) 0 0 25px;
 }
 .wrapper-detail-main .wrapper-detail-left-description {
   width: 100%;

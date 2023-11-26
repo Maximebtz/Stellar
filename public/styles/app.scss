@@ -1188,6 +1188,36 @@ header {
     width: 100%;
     padding-top: 40px;
 
+    //******* Report Button ********//
+    .report-btn {
+        display: flex;
+        justify-content: center;
+
+        button {
+            background-color: var(--black);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: var(--white);
+            border-radius: 7px;
+            transition: all .2s ease-in-out;
+            box-shadow: var(--boxshadow) 0 0 10px;
+            font-size: medium;
+            padding: 7px 20px;
+            border: none;
+            font-family: 'Inter';
+
+            &:focus {
+                outline: var(--light-purple);
+            }
+
+            &:hover {
+                background-color: var(--darkgray);
+                box-shadow: var(--boxshadow) 0 0 25px;
+            }
+        }
+    }
 
     //******* Admin Page ********//
     .admin-page {
@@ -1842,6 +1872,7 @@ header {
             svg {
                 width: 100%;
                 height: 100%;
+                color: var(--dark-purple);
             }
         }
 
@@ -2057,7 +2088,8 @@ header {
                     box-shadow: var(--boxshadow) 0 0 10px;
 
                     &:hover {
-                        transform: scale(1.02);
+                        background-color: var(--darkgray);
+                        box-shadow: var(--boxshadow) 0 0 25px;
                     }
                 }
             }
