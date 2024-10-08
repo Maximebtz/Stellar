@@ -2,89 +2,128 @@
 
 ## Description
 
-Stellar is my end-of-year project. As the project is not yet completed, the following images are provisional. The application will concern the rental of atypical vacation accommodations, such as cabins, yurts, etc.
+Stellar is my end-of-year project, focusing on the rental of atypical vacation accommodations such as cabins, yurts, and other unique lodgings. As the project is still in development, the images provided are provisional.
 
-This project uses Symfony, SCSS, NPM, Stripe, Google Maps API...
+This project leverages a robust tech stack including:
+
+- [Symfony](https://symfony.com/doc/current/index.html): A powerful PHP framework for building web applications
+- [SCSS](https://sass-lang.com/documentation/): A feature-rich extension of CSS for more maintainable stylesheets
+- [NPM](https://docs.npmjs.com/): The package manager for JavaScript, used for managing project dependencies
+- [Stripe](https://stripe.com/docs): A comprehensive platform for online payments
+- [Google Maps API](https://developers.google.com/maps/documentation): For integrating location-based features
 
 ## Getting Started
 
 ### Prerequisites
 
-#### PHP - v.8.2
-https://www.php.net/downloads
+#### [PHP](https://www.php.net/manual/en/) - v.8.2+
+PHP 8.2 or higher is required. You can download it from the [official PHP website](https://www.php.net/downloads).
 
-(For Windows, you can use [Laragon](https://laragon.org/), [XAMPP](https://www.apachefriends.org/index.html) or [WampServer](https://www.wampserver.com/) to install PHP, Apache and MySQL)
+For Windows users, consider using one of these all-in-one packages that include PHP, Apache, and MySQL:
+- [Laragon](https://laragon.org/docs/)
+- [XAMPP](https://www.apachefriends.org/faq_linux.html)
+- [WampServer](https://www.wampserver.com/en/documentation/)
 
-#### Composer
+#### [Composer](https://getcomposer.org/doc/)
+Composer is a dependency manager for PHP. It's essential for managing Symfony project dependencies.
 - For Linux/MacOS: [Installation Instructions](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-macos)
 - For Windows: [Installation Instructions](https://getcomposer.org/doc/00-intro.md#installation-windows)
 
-#### MySQL
+#### [MySQL](https://dev.mysql.com/doc/)
+MySQL is our chosen database management system.
 - For MacOS:
   ```
   brew install mysql
   ```
-- For Windows: [MySQL Download](https://www.mysql.com/downloads/)
+- For Windows: [MySQL Installer](https://dev.mysql.com/downloads/installer/)
+- For Linux: Refer to your distribution's package manager
 
-#### Symfony CLI
+After installation, make sure to start the MySQL service:
+- MacOS: `brew services start mysql`
+- Windows: It should start automatically, or you can use the MySQL Workbench
+- Linux: `sudo systemctl start mysql`
+
+#### [Symfony CLI](https://symfony.com/doc/current/setup/symfony_server.html)
+The Symfony CLI provides useful commands for Symfony development.
 - For Linux/MacOS:
   ```
   curl -sS https://get.symfony.com/cli/installer | bash
   sudo mv ~/.symfony*/bin/symfony /usr/local/bin/symfony
   ```
-- For Windows: [Symfony Download](https://symfony.com/download)
+- For Windows: [Symfony CLI Installer](https://symfony.com/download)
 
 ### Project Installation
 
 1. Clone the project
    ```
    git clone https://github.com/Maximebtz/Stellar.git
+   cd Stellar
    ```
 
 2. Install Composer dependencies
    ```
    composer install
    ```
+   This command reads the `composer.json` file and installs all required PHP packages.
 
 3. Install NPM dependencies
    ```
    npm install
    ```
+   This installs all JavaScript dependencies defined in `package.json`.
 
 4. Configure the database
+   First, ensure your database connection details are correct in the `.env` file.
+   Then run:
    ```
    symfony console doctrine:database:create
    symfony console doctrine:schema:update --dump-sql
    symfony console doctrine:schema:update --force
    ```
+   These commands create the database, show the SQL that would be executed to update the schema, and then actually update the schema.
 
-5. Start the Symfony server
+5. Start the Symfony development server
    ```
    symfony serve -d
    ```
+   The `-d` flag runs the server in the background. You can now access your project at `http://localhost:8000`.
 
    To stop the server:
    ```
    symfony serve:stop
    ```
 
-### SCSS
-This project uses SCSS as a CSS preprocessor. Knowledge of SCSS is necessary to work on the style.
+### [SCSS](https://sass-lang.com/documentation/)
+This project uses SCSS, a CSS preprocessor that allows for more maintainable and feature-rich stylesheets. To compile SCSS to CSS, you'll need to run:
 
-### Google maps API
-To use the [Google Maps API](https://developers.google.com/maps/documentation?hl=fr) in this project, you will need to create a Google Maps API key and configure it in the application.
-
-You can put your API key in your .env file like that :
 ```
-GOOGLE_MAPS_API_KEY=...
+npm run watch
 ```
 
-### Stripe
-To use [Stripe](https://docs.stripe.com/) in this project, you will need to create a Stripe API key and configure it in the application.
+This command watches for changes in your SCSS files and automatically compiles them to CSS.
 
-You can put your API key in your .env file like that :
+### [Google Maps API](https://developers.google.com/maps/documentation)
+To integrate Google Maps functionality:
+
+1. Visit the [Google Cloud Console](https://console.cloud.google.com/)
+2. Create a new project or select an existing one
+3. Enable the Google Maps JavaScript API
+4. Create an API key
+5. Add your API key to the `.env` file:
+
 ```
-STRIPE_API_KEY=sk_test_...
+GOOGLE_MAPS_API_KEY=your_api_key_here
+```
+
+### [Stripe](https://stripe.com/docs)
+To enable payment processing with Stripe:
+
+1. Sign up for a [Stripe account](https://dashboard.stripe.com/register)
+2. Retrieve your API keys from the Stripe dashboard
+3. Add your Stripe secret key to the `.env` file:
+
+```
+STRIPE_API_KEY=sk_test_your_secret_key_here
 ```
 
 ## Project Preview
@@ -107,3 +146,11 @@ STRIPE_API_KEY=sk_test_...
 
 ### Add Listing
 ![Add Listing](https://github.com/Maximebtz/Stellar/assets/120190748/9460a534-8270-4c08-9200-f2816c4505d8)
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+This project is open source and available under the [MIT License](LICENSE).
