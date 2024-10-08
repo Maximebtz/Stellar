@@ -8,7 +8,6 @@
         "@symfony/ux-autocomplete": "file:vendor/symfony/ux-autocomplete/assets",
         "@symfony/webpack-encore": "^4.0.0",
         "core-js": "^3.23.0",
-        "node-sass": "^9.0.0",
         "postcss-loader": "^7.0.0",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
@@ -38,6 +37,7 @@
         "markerwithlabel": "^2.0.2",
         "pikaday": "^1.8.2",
         "prop-types": "^15.8.1",
+        "sass": "^1.78.0",
         "tarteaucitronjs": "^1.14.0"
     }
 }

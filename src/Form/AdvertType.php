@@ -152,7 +152,7 @@ class AdvertType extends AbstractType
                     'class' => 'label',  // Class for the label
                 ],
             ])
-            ->add('description', CKEditorType::class, [
+            ->add('description', TextareaType::class, [
                 'required' => true,
                 'label' => false,
                 'attr' => [

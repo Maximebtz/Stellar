@@ -40,7 +40,11 @@
             // Déclaration de l'adresse 
             let address = "{{ advert.address }}, {{ advert.city }}, {{ advert.cp }}, {{ advert.country }}";
             let title = "{{ advert.title }}";
-            let imgSrc = "{{ asset('uploads/adverts/' ~ advert.images[0].url) }}";
+            {% if advert.images is not empty %}
+                let imgSrc = "{{ asset('uploads/adverts/' ~ advert.images[0].url ~ '') }}";
+            {% else %}
+                let imgSrc = "";
+            {% endif %}
             let detailURL = "{{ path('detail_advert', {'slug': advert.slug, 'id': advert.id}) }}";
             let price = "{{ advert.price }}";
 
@@ -69,7 +73,7 @@
                     marker.addListener('mouseover', function () {
                         const contentString = `
                                 <div class="map-popup-container" id="map-popup-container">
-                                    <img src="{{ asset('uploads/adverts/' ~ advert.images[0].url) }}" alt="{{ advert.title }}" width="50" height="50">
+                                    <img src="${imgSrc}" alt="{{ advert.title }}" width="50" height="50">
                                     <div id="infoWindowContent">
                                         <h4>{{ advert.title }}</h4>
                                     </div>
@@ -132,8 +136,19 @@
         <section class="container">
             <div class="title">
 
-                <h1><a href="https://www.jepense.org/ataraxie-definition-philosophique/" target="_blank">Stellar</a></h1>
+                <h1>
+                    <a href="https://www.jepense.org/ataraxie-definition-philosophique/" target="_blank">Stellar</a> 
+                    <svg width="74" height="87" viewBox="0 0 74 87" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M14.1512 65.2184C-9.08894 87.6165 15.8353 45.0096 27.7921 35.9156C24.4801 35.9156 15.3637 34.6694 5.39404 29.6846C-4.57564 24.6997 5.39404 23.4535 11.6251 23.4535C20.9997 24.5201 39.008 25.3397 36.0441 20.0854C32.3391 13.5175 36.8861 9.30733 44.8012 2.57106C52.7164 -4.16521 66.8625 7.96008 68.8834 20.0854C70.5001 29.7856 59.3404 30.5266 53.5584 29.6846L60.9683 40.4626C66.7503 47.9286 76.9333 63.3322 71.4095 65.2184C65.8858 67.1045 55.1863 53.879 50.5271 47.0305C49.7412 53.0931 46.4853 68.3171 39.749 80.7118C33.0128 93.1066 32.5637 82.1713 33.1812 75.1544C34.5846 64.3764 32.7433 47.2999 14.1512 65.2184Z" stroke="black"/>
+                        <line x1="46.9943" y1="7.16519" x2="49.0152" y2="15.2487" stroke="black"/>
+                        <line x1="43.3448" y1="11.7497" x2="51.4762" y2="9.93089" stroke="black"/>
+                        <line x1="58.446" y1="16.9328" x2="60.4669" y2="25.0163" stroke="black"/>
+                        <line x1="54.7965" y1="21.5172" x2="62.9279" y2="19.6985" stroke="black"/>
+                        <path d="M48.0062 22.7799C48.0062 23.1699 47.9104 23.4988 47.7815 23.7134C47.6467 23.9381 47.5302 23.9639 47.4958 23.9639C47.4614 23.9639 47.3448 23.9381 47.21 23.7134C47.0812 23.4988 46.9854 23.1699 46.9854 22.7799C46.9854 22.3899 47.0812 22.061 47.21 21.8463C47.3448 21.6217 47.4614 21.5958 47.4958 21.5958C47.5302 21.5958 47.6467 21.6217 47.7815 21.8463C47.9104 22.061 48.0062 22.3899 48.0062 22.7799Z" stroke="black"/>
+                    </svg>
+                </h1>
                 
+                    
                 <q>
                     Trouvez un hébergement atypique avec <span>Stellar</span> ! <br>
                     C'est ici que l'aventure commence !

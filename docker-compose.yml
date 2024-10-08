@@ -1,21 +1,49 @@
-version: '3'
-
 services:
-###> doctrine/doctrine-bundle ###
-  database:
-    image: postgres:${POSTGRES_VERSION:-15}-alpine
+  app: # Nom de la section pour l'application
+    build: # Build sert à construire l'image
+      context: . # Chemin du fichier Dockerfile
+      dockerfile: Dockerfile # Nom du fichier Dockerfile
+    container_name: symfony_app # Nom de la section pour l'application
+    user: "${UID}:${GID}" # Utilisateur et groupe pour l'application
+    environment: # Un environnement est un ensemble de variables d'environnement
+      - UID=${UID:-1000} # UID de l'utilisateur
+      - GID=${GID:-1000} # GID de l'utilisateur
+      - APP_ENV=dev # Environnement de l'application
+      - DATABASE_URL=mysql://root:maxime.68@db:3306/stellar # URL de la base de données
+      - MESSENGER_TRANSPORT_DSN=doctrine://default?auto_setup=0 # DSN de la base de données
+      - MAILER_DSN=smtp://mailhog:1025 # DSN du serveur de mail
+    volumes: # Un volume est un espace de stockage partagé entre le conteneur et le host
+      - ./public:/var/www/html/public:ro # Volume pour le dossier public
+      - ./src:/var/www/html/src:ro # Volume pour le dossier src
+      - ./config:/var/www/html/config:ro # Volume pour le dossier config
+      - ./templates:/var/www/html/templates:ro # Volume pour le dossier templates
+      - ./var:/var/www/html/var # Volume pour le dossier var
+      - ./public/.htaccess:/var/www/html/public/.htaccess:ro # Volume pour le fichier .htaccess
+      - ./docker/apache.conf:/etc/apache2/sites-available/000-default.conf # Volume pour le fichier apache.conf
+    ports:
+      - "8081:80" # Port pour accéder à l'application
+    depends_on:
+      - db # Dépend de la base de données
+      - mailhog # Dépend du serveur de mail
+    command: docker-entrypoint.sh # Commande à exécuter
+
+  db:
+    image: mysql:8.0 # Image de la base de données
+    platform: linux/arm64/v8 # Plateforme pour la base de données
+    container_name: symfony_db # Nom de la section pour la base de données
     environment:
-      POSTGRES_DB: ${POSTGRES_DB:-app}
-      # You should definitely change the password in production
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-!ChangeMe!}
-      POSTGRES_USER: ${POSTGRES_USER:-app}
+      MYSQL_ROOT_PASSWORD: maxime.68  # Mot de passe pour l'utilisateur root
+      MYSQL_DATABASE: stellar  # Nom de la base de données
     volumes:
-      - database_data:/var/lib/postgresql/data:rw
-      # You may use a bind-mounted host directory instead, so that it is harder to accidentally remove the volume and lose all your data!
-      # - ./docker/db/data:/var/lib/postgresql/data:rw
-###< doctrine/doctrine-bundle ###
+      - db_data:/var/lib/mysql  # Volume persistant pour les données de MySQL
+
+  mailhog:
+    image: mailhog/mailhog:latest # Image du serveur de mail
+    platform: linux/amd64 # Plateforme pour le serveur de mail
+    container_name: symfony_mailhog # Nom de la section pour le serveur de mail
+    ports:
+      - "8025:8025"  # Interface web pour consulter les emails capturés
+      - "1025:1025"  # Serveur SMTP pour capturer les emails envoyés par Symfony
 
 volumes:
-###> doctrine/doctrine-bundle ###
-  database_data:
-###< doctrine/doctrine-bundle ###
+  db_data:

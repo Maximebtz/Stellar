@@ -1,4 +1,19 @@
-<FilesMatch "\.(glb|gltf|obj|mtl)$">
-    ExpiresActive On
-    ExpiresDefault "access plus 2 month"
-</FilesMatch>
+# Utilisez le moteur de réécriture d'Apache
+# .htaccess sert à rediriger toutes les requêtes vers le fichier index.php
+<IfModule mod_rewrite.c>
+    Options -MultiViews # Permet de gérer les requêtes multi-vues
+    RewriteEngine On # Active le moteur de réécriture
+    
+    # Redirige toutes les requêtes vers le fichier index.php, sauf si le fichier ou le répertoire existe
+    RewriteCond %{REQUEST_FILENAME} !-f # Si le fichier n'existe pas
+    RewriteCond %{REQUEST_FILENAME} !-d # Si le répertoire n'existe pas
+    RewriteRule ^(.*)$ index.php [QSA,L] # Redirige toutes les requêtes vers le fichier index.php
+</IfModule>
+
+# Si le module mod_rewrite n'est pas disponible
+<IfModule !mod_rewrite.c>
+    <IfModule mod_alias.c>
+        # Quand mod_rewrite n'est pas disponible, on redirige tout vers index.php
+        RedirectMatch 302 ^/$ /index.php/
+    </IfModule>
+</IfModule>
