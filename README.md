@@ -71,6 +71,13 @@ https://www.php.net/downloads
 ### SCSS
 This project uses SCSS as a CSS preprocessor. Knowledge of SCSS is necessary to work on the style.
 
+### Google maps API
+To use the Google Maps API in this project, you will need to create a Google Maps API key and configure it in the application.
+
+### Stripe
+To use Stripe in this project, you will need to create a Stripe API key and configure it in the application.
+
+
 ## Project Preview
 
 ### Home Page
