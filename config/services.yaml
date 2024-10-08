@@ -8,6 +8,7 @@ parameters:
   icons_category_directory: "%kernel.project_dir%/public/img/icons/categories"
   icons_accessory_directory: "%kernel.project_dir%/public/img/icons/accessories"
   icons_lodge_directory: "%kernel.project_dir%/public/img/icons/types"
+  STRIPE_API_KEY: ~
 
 services:
   App\Service\PdfGenerator: ~

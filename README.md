@@ -72,11 +72,20 @@ https://www.php.net/downloads
 This project uses SCSS as a CSS preprocessor. Knowledge of SCSS is necessary to work on the style.
 
 ### Google maps API
-To use the Google Maps API in this project, you will need to create a Google Maps API key and configure it in the application.
+To use the [Google Maps API](https://developers.google.com/maps/documentation?hl=fr) in this project, you will need to create a Google Maps API key and configure it in the application.
+
+You can put your API key in your .env file like that :
+```
+GOOGLE_MAPS_API_KEY=...
+```
 
 ### Stripe
-To use Stripe in this project, you will need to create a Stripe API key and configure it in the application.
+To use [Stripe](https://docs.stripe.com/) in this project, you will need to create a Stripe API key and configure it in the application.
 
+You can put your API key in your .env file like that :
+```
+STRIPE_API_KEY=sk_test_...
+```
 
 ## Project Preview
 
