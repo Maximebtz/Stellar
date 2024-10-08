@@ -1,7 +1,5 @@
 # Stellar
 
-![image 1](https://github.com/Maximebtz/Stellar/assets/120190748/bc7fc26c-5566-45f6-9430-fc7c7cf5899)
-
 ## Description
 
 Stellar is my end-of-year project. As the project is not yet completed, the following images are provisional. The application will concern the rental of atypical vacation accommodations, such as cabins, yurts, etc.
